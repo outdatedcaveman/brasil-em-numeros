@@ -1174,5 +1174,576 @@ window.BR_DATA.CHARTS = [
       { label: 'Produção de Grãos (Índice 1990=100 | 312 Mt)', data: [100, 139, 144, 198, 258, 358, 443, 538], borderColor: '#059669', borderWidth: 3 },
       { label: 'Área Plantada (Índice 1990=100 | 78,8 Mha)', data: [100, 99, 99, 129, 125, 153, 174, 208], borderColor: '#d97706' }
     ]
+  },
+
+  // ==========================================================================
+  // NOVAS SÉRIES ADICIONAIS (5ª SÉRIE DOS PILARES 1–10 + PILARES 11 E 12 = 60 SÉRIES)
+  // ==========================================================================
+  {
+    id: 'c-migration',
+    pillar: 'demographics',
+    code: '1.5',
+    type: 'bar',
+    unit: 'Mil Pessoas (Saldo 5 anos)',
+    title: {
+      pt: 'Saldo Migratório Interno por Macrorregião (Censo IBGE: Quem Ganha e Quem Perde População)',
+      es: 'Saldo Migratorio Interno por Región (Censo IBGE: Regiones Receptoras y Expulsoras)',
+      en: 'Internal Net Migration by Macroregion (IBGE Census: Gaining vs. Losing Regions)'
+    },
+    takeaway: {
+      pt: 'Pela primeira vez na história censitária, o Sul (+385 mil) e o Centro-Oeste (+312 mil, puxado pelo agronegócio) lideram a atração migratória líquida, enquanto o Sudeste passou a ter saldo migratório próximo de zero e grandes capitais perderam moradores para cidades médias.',
+      es: 'El Sur (+385 mil) y el Centro-Oeste (+312 mil) lideran la atracción migratoria interna, mientras las metrópolis pierden población hacia ciudades medias.',
+      en: 'The South (+385k) and Center-West (+312k) now lead net domestic migration inflows, while historical inflows to the Southeast have plateaued.'
+    },
+    uk: {
+      pt: 'No Reino Unido, Londres também apresenta saldo migratório doméstico negativo (-110 mil/ano) para o Sudeste/Leste inglês, compensado por imigração internacional.',
+      es: 'En el Reino Unido, Londres tiene saldo migratorio interno negativo compensado por inmigración externa.',
+      en: 'Similarly, London experiences net domestic outflows to commuter belts, offset by international migration.'
+    },
+    source: 'IBGE (Censo Demográfico 2022 — Resultados de Migração e Deslocamento)',
+    labels: ['Sul (SC/PR)', 'Centro-Oeste (MT/GO)', 'Sudeste', 'Norte', 'Nordeste'],
+    datasets: [
+      { label: 'Saldo Migratório Líquido Quinquenal (Mil hab.)', data: [385, 312, -18, -142, -537], backgroundColor: ['#059669', '#10b981', '#64748b', '#f59e0b', '#e11d48'] }
+    ]
+  },
+  {
+    id: 'c-credit-spread',
+    pillar: 'economy',
+    code: '2.5',
+    type: 'line',
+    unit: '% a.a. / % da Renda',
+    title: {
+      pt: 'Custo do Crédito: Spread Bancário Médio (% a.a.) e Endividamento das Famílias (% Renda, 2011–2024)',
+      es: 'Costo del Crédito: Spread Bancario (% anual) y Endeudamiento de los Hogares (% Ingreso, 2011–2024)',
+      en: 'Credit Cost: Bank Lending Spread (% p.a.) & Household Debt-to-Income Ratio (%, 2011–2024)'
+    },
+    takeaway: {
+      pt: 'O spread bancário nos recursos livres (~28,4% a.a. entre captação e empréstimo) é um dos mais altos do mundo, fazendo com que o endividamento das famílias (48,2% da renda anual) comprometa 26,8% da renda mensal apenas com serviço da dívida.',
+      es: 'El spread bancario en crédito libre (~28,4% anual) lleva a que el servicio de deuda consuma el 26,8% del ingreso mensual familiar.',
+      en: 'With free-market bank spreads near 28.4% p.a., Brazilian households carry a 48.2% debt-to-income ratio yet spend 26.8% of monthly income servicing debt.'
+    },
+    uk: {
+      pt: 'No Reino Unido, as famílias devem 124% da renda anual (por conta de hipotecas longas), mas pagam juros médios 5x menores que no Brasil.',
+      es: 'En el Reino Unido, la deuda familiar es mayor (hipotecas), pero con tasas de interés 5 veces menores.',
+      en: 'UK households hold higher mortgage debt (124% of income) but pay ~5x lower average interest rates.'
+    },
+    source: 'Banco Central do Brasil (Relatório de Economia Bancária & SGS Séries 20783 / 29037)',
+    labels: ['2011', '2013', '2015', '2017', '2019', '2021', '2022', '2024'],
+    datasets: [
+      { label: 'Endividamento das Famílias (% Renda 12m)', data: [41.2, 44.8, 45.9, 41.5, 44.9, 51.2, 49.8, 48.2], borderColor: '#0284c7' },
+      { label: 'Spread Bancário Recursos Livres (% a.a.)', data: [27.4, 24.1, 31.8, 36.4, 30.2, 23.8, 29.5, 28.4], borderColor: '#dc2626' },
+      { label: 'Comprometimento Mensal da Renda c/ Dívidas (%)', data: [21.4, 22.1, 22.8, 20.5, 20.8, 25.4, 27.9, 26.8], borderColor: '#d97706', borderDash: [4, 4] }
+    ]
+  },
+  {
+    id: 'c-civil-service',
+    pillar: 'fiscal',
+    code: '3.5',
+    type: 'bar',
+    unit: 'R$ Mil / Mês (Média)',
+    title: {
+      pt: 'Hiato Salarial Público-Privado por Esfera de Governo (R$ Mensais Médios — Atlas do Estado IPEA)',
+      es: 'Brecha Salarial Público-Privada por Nivel de Gobierno (R$ Mensuales — Atlas del Estado IPEA)',
+      en: 'Public-Private Wage Premium by Government Tier (Average Monthly R$ — IPEA Atlas of the State)'
+    },
+    takeaway: {
+      pt: 'O Brasil não tem excesso de servidores (12,4% dos ocupados vs. 18,1% na OCDE), mas apresenta a maior desigualdade interna do mundo: a elite do Judiciário/Legislativo e Executivo Federal ganha 3x a 4x mais que o setor privado formal, enquanto professores e enfermeiros municipais ganham próximo à média.',
+      es: 'Brasil tiene menos empleados públicos (12,4%) que la OCDE (18,1%), pero el salario federal/judicial triplica al sector privado.',
+      en: 'Brazil’s public workforce share (12.4%) is below the OECD (18.1%), yet federal and judicial salaries are 3x–4x higher than formal private-sector pay.'
+    },
+    uk: {
+      pt: 'No Reino Unido (ONS) e na OCDE, o prêmio salarial controlado por escolaridade do setor público central é de apenas +4% a +9% (vs. +68% no nível federal brasileiro).',
+      es: 'En el Reino Unido y la OCDE, el premio salarial público controlado por educación es de solo +4% a +9%.',
+      en: 'In the UK and OECD, the education-adjusted central government wage premium is +4% to +9% (vs. +68% in Brazil’s federal tier).'
+    },
+    source: 'IPEA (Atlas do Estado Brasileiro) & Banco Mundial',
+    labels: ['Judiciário / MP', 'Executivo Federal', 'Estadual (Média)', 'Setor Privado Formal (CLT)', 'Municipal (Prof./Saúde)'],
+    datasets: [
+      { label: 'Remuneração Média Mensal (R$ de 2024)', data: [19450, 12840, 6420, 3980, 4120], backgroundColor: ['#be123c', '#4f46e5', '#0284c7', '#64748b', '#059669'] }
+    ]
+  },
+  {
+    id: 'c-race-gender',
+    pillar: 'inequality',
+    code: '4.5',
+    type: 'bar',
+    unit: 'R$ / Mês (Rendimento Médio)',
+    title: {
+      pt: 'Pirâmide de Desigualdade Salarial por Raça e Gênero no Mercado de Trabalho (R$/Mês, PNAD 2024)',
+      es: 'Desigualdad Salarial por Raza y Género en el Mercado Laboral (R$/Mes, PNAD 2024)',
+      en: 'Labor Income Hierarchy by Race & Gender (Average Monthly Earnings R$, PNAD 2024)'
+    },
+    takeaway: {
+      pt: 'Mulheres negras (pretas e pardas) recebem em média 48% do rendimento de homens brancos (R$ 2.140 vs. R$ 4.460/mês) e enfrentam o dobro da taxa de desocupação, refletindo barreiras cumulativas de escolaridade, ocupação informal e discriminação.',
+      es: 'Las mujeres negras reciben en promedio el 48% del ingreso de los hombres blancos (R$ 2.140 vs. R$ 4.460/mes).',
+      en: 'Black and brown women earn on average 48% of white men’s monthly labor income (R$ 2,140 vs. R$ 4,460) and face double the unemployment rate.'
+    },
+    uk: {
+      pt: 'No Reino Unido (ONS), o hiato salarial mediano de gênero (Gender Pay Gap) caiu para 13,1% em tempo integral/parcial combinados.',
+      es: 'En el Reino Unido, la brecha salarial mediana de género es del 13,1%.',
+      en: 'In the UK (ONS), the median gender pay gap across all employees stands at 13.1%.'
+    },
+    source: 'IBGE (Desigualdades Sociais por Cor ou Raça no Brasil — PNAD Contínua 2024)',
+    labels: ['Homem Branco', 'Mulher Branca', 'Média Nacional', 'Homem Preto/Pardo', 'Mulher Preta/Parda'],
+    datasets: [
+      { label: 'Rendimento Médio Habitual do Trabalho (R$/mês)', data: [4460, 3380, 3215, 2640, 2140], backgroundColor: ['#1e293b', '#0284c7', '#64748b', '#d97706', '#e11d48'] }
+    ]
+  },
+  {
+    id: 'c-dengue-icu',
+    pillar: 'health',
+    code: '5.5',
+    type: 'bar',
+    unit: 'Milhões de Casos / Leitos',
+    title: {
+      pt: 'Pressão Epidemiológica e Climática: Surtos Históricos de Dengue (Milhões de Casos, 2014–2024)',
+      es: 'Presión Epidemiológica y Climática: Brotes Históricos de Dengue (Millones de Casos, 2014–2024)',
+      en: 'Climate-Driven Arbovirus Surge: Annual Dengue Fever Cases in Brazil (Millions, 2014–2024)'
+    },
+    takeaway: {
+      pt: 'Impulsionada pelo aquecimento, El Niño e déficit de saneamento urbano, a epidemia de dengue atingiu recorde histórico de 6,56 milhões de casos prováveis e >5.800 óbitos em 2024 — quadruplicando o pico da década anterior.',
+      es: 'Impulsada por el clima y el déficit sanitario, la epidemia de dengue alcanzó un récord de 6,56 millones de casos en 2024.',
+      en: 'Fueled by warming temperatures and urban sanitation gaps, dengue fever hit an all-time record of 6.56 million cases in 2024.'
+    },
+    uk: {
+      pt: 'O Brasil iniciou em 2024 a primeira campanha pública mundial de vacinação contra a dengue no SUS (Qdenga / Butantan-DV em fase 3).',
+      es: 'Brasil lanzó en 2024 la primera campaña pública mundial de vacunación contra el dengue en el SUS.',
+      en: 'In 2024, Brazil launched the world’s first universal public dengue vaccination campaign through SUS.'
+    },
+    source: 'Ministério da Saúde (Painel de Monitoramento de Arboviroses / SINAN 2024)',
+    labels: ['2014', '2015', '2016', '2018', '2019', '2021', '2022', '2023', '2024 (Recorde)'],
+    datasets: [
+      { label: 'Casos Prováveis de Dengue (Milhões)', data: [0.59, 1.69, 1.48, 0.26, 1.54, 0.54, 1.45, 1.65, 6.56], backgroundColor: '#db2777' }
+    ]
+  },
+  {
+    id: 'c-ead-higher',
+    pillar: 'education',
+    code: '6.5',
+    type: 'line',
+    unit: '% das Matrículas',
+    title: {
+      pt: 'Inversão no Ensino Superior: Explosão da Educação a Distância (EAD) vs. Cursos Presenciais (%)',
+      es: 'Inversión en la Educación Superior: Explosión de la Educación a Distancia (EAD) vs. Presencial (%)',
+      en: 'Higher Education Inversion: Explosion of Online Degrees (EAD) vs. On-Campus Enrollment (%)'
+    },
+    takeaway: {
+      pt: 'O ensino a distância (EAD, 94% privado) saltou de 14,7% das matrículas universitárias em 2010 para 51,2% do total (4,9 milhões de alunos) e 77% dos novos ingressantes em 2023/2024, levando o MEC a restringir polos EAD em licenciaturas e saúde.',
+      es: 'La educación a distancia (EAD) pasó del 14,7% en 2010 al 51,2% de las matrículas universitarias totales.',
+      en: 'Distance learning (EAD, 94% private) surged from 14.7% of university enrollments in 2010 to 51.2% of total students (and 77% of freshmen) in 2023–2024.'
+    },
+    uk: {
+      pt: 'Na OCDE e no Reino Unido (HESA), menos de 14% dos cursos de graduação são integralmente remotos.',
+      es: 'En el Reino Unido y la OCDE, menos del 14% de las matrículas de grado son totalmente remotas.',
+      en: 'Across the UK (HESA) and OECD, fewer than 14% of undergraduate degrees are delivered fully online.'
+    },
+    source: 'INEP / MEC (Censo da Educação Superior 2023/2024)',
+    labels: ['2010', '2013', '2016', '2018', '2020', '2022', '2024'],
+    datasets: [
+      { label: 'Graduação Presencial (% das Matrículas)', data: [85.3, 84.2, 80.1, 75.7, 64.2, 54.1, 48.8], borderColor: '#0284c7' },
+      { label: 'Graduação a Distância - EAD (% das Matrículas)', data: [14.7, 15.8, 19.9, 24.3, 35.8, 45.9, 51.2], borderColor: '#d97706', borderWidth: 3 }
+    ]
+  },
+  {
+    id: 'c-biofuels-energy',
+    pillar: 'energy_climate',
+    code: '7.5',
+    type: 'bar',
+    unit: '% da Matriz Energética Total',
+    title: {
+      pt: 'Matriz Energética Total (Eletricidade + Transporte + Indústria): Brasil (49,1% Renovável) vs. Mundo',
+      es: 'Matriz Energética Total (Electricidad + Transporte + Industria): Brasil (49,1% Renovable) vs. Mundo',
+      en: 'Total Primary Energy Supply (Power + Transport + Industry): Brazil (49.1% Renewable) vs. World'
+    },
+    takeaway: {
+      pt: 'Somando transporte e indústria à eletricidade, 49,1% de toda a energia primária do Brasil é renovável (contra 14,2% no mundo e 12,8% na OCDE), graças aos derivados da cana/etanol (16,8%), hidrelétricas (12,1%), lenha/biomassa (9,1%) e biodiesel/eólica/solar.',
+      es: 'El 49,1% de toda la energía primaria de Brasil es renovable (frente al 14,2% mundial) gracias al etanol, hidroelectricidad y biomasa.',
+      en: '49.1% of Brazil’s total primary energy supply is renewable (vs. 14.2% globally and 12.8% in the OECD), powered by sugarcane ethanol, hydro, and biomass.'
+    },
+    uk: {
+      pt: 'No Reino Unido, embora a eletricidade seja 46,5% renovável, a matriz energética primária total (aquecimento a gás + transporte a derivados de petróleo) tem apenas ~14,8% de renováveis.',
+      es: 'En el Reino Unido, la matriz energética primaria total tiene solo ~14,8% de renovables por el uso de gas y petróleo.',
+      en: 'In the UK, while electricity is 46.5% renewable, total primary energy is only ~14.8% renewable due to natural gas heating and oil transport.'
+    },
+    source: 'EPE / MME (Balanço Energético Nacional 2024) & Agência Internacional de Energia (IEA)',
+    labels: ['Brasil (Total)', 'União Europeia', 'Reino Unido', 'Média Mundial', 'Média OCDE', 'Estados Unidos'],
+    datasets: [
+      { label: 'Participação de Fontes Renováveis na Energia Primária Total (%)', data: [49.1, 19.4, 14.8, 14.2, 12.8, 9.6], backgroundColor: ['#16a34a', '#0284c7', '#64748b', '#94a3b8', '#cbd5e1', '#475569'] }
+    ]
+  },
+  {
+    id: 'c-police-traffic',
+    pillar: 'security_justice',
+    code: '8.5',
+    type: 'line',
+    unit: 'Mil Mortes / Ano',
+    title: {
+      pt: 'Mortes no Trânsito (34,8 mil) e Mortes por Intervenção Policial (6,4 mil) por Ano (2013–2023)',
+      es: 'Muertes en Accidentes de Tráfico (34,8 mil) e Intervención Policial (6,4 mil) al Año (2013–2023)',
+      en: 'Road Traffic Fatalities (34.8k) & Police Intervention Deaths (6.4k) per Year (2013–2023)'
+    },
+    takeaway: {
+      pt: 'A letalidade policial triplicou entre 2013 (2.212 mortos) e 2020 (6.416), representando 13,8% de todas as mortes violentas intencionais do país. Paralelamente, os sinistros de trânsito matam ~34,8 mil brasileiros/ano (38% motociclistas).',
+      es: 'La letalidad policial se triplicó desde 2013 (13,8% de las muertes violentas), mientras el tránsito mata a 34,8 mil personas al año.',
+      en: 'Police use-of-force fatalities tripled since 2013 to ~6,393/year (13.8% of all violent deaths), while road crashes claim 34,800 lives annually (38% motorcyclists).'
+    },
+    uk: {
+      pt: 'No Reino Unido, ocorrem em média 2 a 4 mortes por intervenção policial ao ano e ~1.695 mortes no trânsito (taxa 7x menor por habitante).',
+      es: 'En el Reino Unido ocurren de 2 a 4 muertes por intervención policial al año y ~1.695 muertes viales.',
+      en: 'In the UK, police shootings result in 2–4 fatalities per year and road deaths stand at ~1,695 (a 7x lower per-capita rate).'
+    },
+    source: 'DataSUS (SIM / Ministério da Saúde) & Fórum Brasileiro de Segurança Pública (FBSP)',
+    labels: ['2013', '2015', '2017', '2019', '2020', '2021', '2022', '2023'],
+    datasets: [
+      { label: 'Óbitos em Sinistros de Trânsito (Mil)', data: [42.2, 38.6, 35.3, 31.9, 32.7, 33.8, 33.9, 34.8], borderColor: '#d97706' },
+      { label: 'Mortes por Intervenção Policial (Mil)', data: [2.21, 3.33, 5.17, 6.35, 6.41, 6.14, 6.43, 6.39], borderColor: '#dc2626', borderWidth: 3 }
+    ]
+  },
+  {
+    id: 'c-urban-mobility',
+    pillar: 'infrastructure',
+    code: '9.5',
+    type: 'line',
+    unit: 'Índice (2013=100)',
+    title: {
+      pt: 'Crise da Mobilidade Urbana: Evasão de Passageiros de Ônibus (-32%) vs. Explosão da Frota de Motos (+64%)',
+      es: 'Crisis de Movilidad Urbana: Caída de Pasajeros de Autobús (-32%) vs. Flota de Motocicletas (+64%)',
+      en: 'Urban Transit Crisis: Bus Ridership Collapse (-32%) vs. Motorcycle Fleet Surge (+64%)'
+    },
+    takeaway: {
+      pt: 'Desde 2013, os sistemas de ônibus urbanos perderam um terço dos passageiros pagantes (pelo círculo vicioso de tarifas caras, perda de velocidade comercial e aplicativos), enquanto a frota de motos saltou para 34 milhões de veículos.',
+      es: 'Los autobuses urbanos perdieron el 32% de sus pasajeros desde 2013 mientras la flota de motos llegó a 34 millones.',
+      en: 'Since 2013, urban bus systems lost 32% of fare-paying riders while Brazil’s motorcycle fleet surged to 34 million vehicles.'
+    },
+    uk: {
+      pt: 'Mais de 110 cidades brasileiras já adotaram Tarifa Zero (ônibus gratuito financiado pelo orçamento municipal) para reverter o colapso do transporte coletivo (NTU).',
+      es: 'Más de 110 municipios brasileños ya adoptaron Tarifa Cero en el transporte público.',
+      en: 'Over 110 Brazilian municipalities have adopted Zero-Fare public transit to reverse ridership collapse (NTU).'
+    },
+    source: 'NTU (Associação Nacional das Empresas de Transportes Urbanos) & Senatran',
+    labels: ['2013', '2015', '2017', '2019', '2020 (Pandemia)', '2022', '2024'],
+    datasets: [
+      { label: 'Frota Nacional de Motocicletas (2013=100 | 34M)', data: [100, 112, 121, 131, 136, 148, 164], borderColor: '#dc2626' },
+      { label: 'Passageiros Equivalentes em Ônibus Urbanos (2013=100)', data: [100, 91, 82, 78, 44, 64, 68], borderColor: '#0d9488', borderWidth: 3 }
+    ]
+  },
+  {
+    id: 'c-fdi-reserves',
+    pillar: 'trade_global',
+    code: '10.5',
+    type: 'bar',
+    unit: 'US$ Bilhões',
+    title: {
+      pt: 'Blindagem Externa: Investimento Direto no País (IDP) vs. Déficit em Transações Correntes (US$ Bi, 2010–2024)',
+      es: 'Blindaje Externo: Inversión Extranjera Directa (IED) vs. Cuenta Corriente (US$ Mil Millones, 2010–2024)',
+      en: 'External Buffer: Foreign Direct Investment (FDI) vs. Current Account Deficit (US$ Billions, 2010–2024)'
+    },
+    takeaway: {
+      pt: 'O Brasil é o 2º maior destino mundial de Investimento Estrangeiro Direto entre emergentes (~US$ 65 a 71 bi/ano), financiando integralmente seu déficit em transações correntes e mantendo US$ 355 bilhões em reservas internacionais.',
+      es: 'Brasil recibe ~US$ 68 mil millones anuales en IED, financiando su cuenta corriente y manteniendo US$ 355 mil millones en reservas.',
+      en: 'Brazil attracts ~$65–71B/year in FDI (top 5 globally), fully covering its current account deficit alongside a $355B foreign reserve cushion.'
+    },
+    uk: {
+      pt: 'As reservas internacionais líquidas do Brasil (US$ 355 bi) superam toda a dívida externa pública soberana em moeda estrangeira.',
+      es: 'Las reservas internacionales (US$ 355 mil millones) superan toda la deuda soberana externa brasileña.',
+      en: 'Brazil’s $355B international reserves exceed the federal government’s entire foreign-currency sovereign debt.'
+    },
+    source: 'Banco Central do Brasil (Estatísticas do Setor Externo) & UNCTAD World Investment Report',
+    labels: ['2010', '2013', '2016', '2019', '2021', '2022', '2023', '2024'],
+    datasets: [
+      { label: 'Investimento Direto no País - IDP (US$ Bi)', data: [82.4, 75.2, 74.3, 69.2, 46.4, 74.6, 64.2, 71.1], backgroundColor: '#7c3aed' },
+      { label: 'Déficit em Transações Correntes (US$ Bi, valor abs.)', data: [79.8, 79.8, 24.5, 68.0, 46.4, 48.3, 28.6, 51.4], backgroundColor: '#cbd5e1' }
+    ]
+  },
+
+  // ==========================================================================
+  // PILAR 11: DEMOCRACIA, GOVERNANÇA, EMENDAS E FEDERALISMO (5 SÉRIES)
+  // ==========================================================================
+  {
+    id: 'c-amendments',
+    pillar: 'institutions',
+    code: '11.1',
+    type: 'bar',
+    unit: 'R$ Bilhões (Valores Correntes/Reais)',
+    title: {
+      pt: 'Parlamentarismo Orçamentário: Escalada das Emendas Parlamentares no Orçamento Federal (R$ Bi, 2014–2024)',
+      es: 'Parlamentarismo Presupuestario: Escalada de las Enmiendas Parlamentarias Federales (R$ Mil Millones, 2014–2024)',
+      en: 'Budgetary Parliamentarism: Surge of Congressional Budget Amendments (R$ Billions, 2014–2024)'
+    },
+    takeaway: {
+      pt: 'Com a aprovação do orçamento impositivo (EC 86/2015, EC 100/2019 e "Emendas Pix" EC 105), as emendas do Congresso saltaram de R$ 6,1 bi em 2014 para R$ 53,0 bi em 2024 — absorvendo mais de 25% da margem discricionária de investimento da União.',
+      es: 'Las enmiendas del Congreso saltaron de R$ 6,1 mil millones en 2014 a R$ 53,0 mil millones en 2024 (más del 25% del gasto discrecional).',
+      en: 'Mandatory congressional budget amendments jumped from R$ 6.1B in 2014 to R$ 53.0B in 2024, capturing over 25% of federal discretionary funds.'
+    },
+    uk: {
+      pt: 'No sistema parlamentarista britânico (Westminster), parlamentares individuais são proibidos pelo Standing Order nº 48 da Coroa de criar despesas ou alocar verbas paroquiais diretas.',
+      es: 'En el Parlamento británico (Westminster), los diputados individuales no pueden asignar partidas presupuestarias locales.',
+      en: 'Under UK Westminster rules (Crown Financial Initiative), individual MPs cannot earmark pork-barrel spending.'
+    },
+    source: 'Senado Federal (Siga Brasil), Tesouro Nacional & Consultoria de Orçamento da Câmara',
+    labels: ['2014', '2016', '2018', '2020', '2021', '2022', '2023', '2024'],
+    datasets: [
+      { label: 'Emendas Parlamentares Empenhadas (R$ Bilhões)', data: [6.1, 9.4, 14.2, 33.8, 36.9, 38.4, 46.2, 53.0], backgroundColor: '#be123c' }
+    ]
+  },
+  {
+    id: 'c-party-frag',
+    pillar: 'institutions',
+    code: '11.2',
+    type: 'line',
+    unit: 'NEP (Nº Efetivo de Partidos)',
+    title: {
+      pt: 'Fragmentação Partidária na Câmara dos Deputados: Número Efetivo de Partidos (NEP, 1990–2022)',
+      es: 'Fragmentación Partidaria en la Cámara de Diputados: Número Efectivo de Partidos (NEP, 1990–2022)',
+      en: 'Party System Fragmentation in the Lower House: Effective Number of Parties (ENP, 1990–2022)'
+    },
+    takeaway: {
+      pt: 'O Brasil atingiu em 2018 o recorde mundial da história das democracias em fragmentação parlamentar (NEP = 16,4; 30 partidos com assento). A cláusula de desempenho e o fim das coligações proporcionais (EC 97/2017) iniciaram a reversão para 9,8 em 2022.',
+      es: 'Brasil alcanzó el récord mundial de fragmentación parlamentaria en 2018 (NEP = 16,4), bajando a 9,8 en 2022 tras la cláusula de barrera.',
+      en: 'Brazil hit a world record for legislative fragmentation in 2018 (ENP = 16.4 across 30 seated parties) before electoral threshold reforms reduced it to 9.8 in 2022.'
+    },
+    uk: {
+      pt: 'No Reino Unido (distrital puro), o Número Efetivo de Partidos na Câmara dos Comuns é de ~2,5 a 3,1; na média europeia, ~4,5.',
+      es: 'En el Reino Unido el NEP es de ~2,8; en la media europea, ~4,5.',
+      en: 'In the UK House of Commons, the Effective Number of Parties is ~2.8; the Western European average is ~4.5.'
+    },
+    source: 'Tribunal Superior Eleitoral (TSE) & Departamento Intersindical de Assessoria Parlamentar (DIAP)',
+    labels: ['1990', '1994', '1998', '2002', '2006', '2010', '2014', '2018 (Pico)', '2022'],
+    datasets: [
+      { label: 'Número Efetivo de Partidos - NEP (Índice Laakso-Taagepera)', data: [8.7, 8.2, 7.1, 8.5, 9.3, 10.4, 13.2, 16.4, 9.8], borderColor: '#be123c', backgroundColor: 'rgba(190,18,60,0.12)', fill: true }
+    ]
+  },
+  {
+    id: 'c-women-politics',
+    pillar: 'institutions',
+    code: '11.3',
+    type: 'bar',
+    unit: '% de Cadeiras na Câmara Baixa',
+    title: {
+      pt: 'Representação Feminina no Parlamento (% de Deputadas): Brasil vs. América Latina, Reino Unido e OCDE',
+      es: 'Representación Femenina en el Parlamento (% de Diputadas): Brasil vs. América Latina y OCDE',
+      en: 'Women in Parliament (% of Lower House Seats): Brazil vs. Latin America, UK & OECD'
+    },
+    takeaway: {
+      pt: 'Embora as mulheres sejam 52,5% do eleitorado brasileiro, ocupam apenas 17,7% das cadeiras na Câmara dos Deputados (91 de 513) e 14% das prefeituras — colocando o Brasil na 133ª posição mundial e atrás de quase toda a América Latina.',
+      es: 'Aunque son el 52,5% del electorado, las mujeres ocupan solo el 17,7% de la Cámara de Diputados en Brasil (puesto 133 mundial).',
+      en: 'Despite making up 52.5% of voters, women hold just 17.7% of seats in Brazil’s Chamber of Deputies (ranking 133rd globally).'
+    },
+    uk: {
+      pt: 'No Reino Unido (eleição de 2024), as mulheres conquistaram recorde de 40,5% das cadeiras na Câmara dos Comuns (263 de 650).',
+      es: 'En el Reino Unido (2024), las mujeres ocupan el 40,5% de la Cámara de los Comunes; en México, el 50,0%.',
+      en: 'In the UK (2024 election), women won a record 40.5% of seats in the House of Commons; Mexico sits at 50.0%.'
+    },
+    source: 'Inter-Parliamentary Union (IPU Parline 2024) & Tribunal Superior Eleitoral (TSE)',
+    labels: ['México', 'Reino Unido', 'Argentina', 'Média América Latina', 'Média OCDE', 'Brasil (133º)'],
+    datasets: [
+      { label: 'Mulheres na Câmara Baixa (%)', data: [50.0, 40.5, 43.2, 35.8, 34.1, 17.7], backgroundColor: ['#059669', '#1e293b', '#0284c7', '#64748b', '#94a3b8', '#be123c'] }
+    ]
+  },
+  {
+    id: 'c-municipal-fiscal',
+    pillar: 'institutions',
+    code: '11.4',
+    type: 'bar',
+    unit: '% dos 5.570 Municípios',
+    title: {
+      pt: 'Fragilidade do Federalismo Municipal: Autonomia de Receita Própria dos 5.570 Municípios (FIRJAN IFGF)',
+      es: 'Fragilidad del Federalismo Municipal: Autonomía Fiscal de los 5.570 Municipios (FIRJAN IFGF)',
+      en: 'Municipal Fiscal Dependency: Own-Revenue Autonomy Across Brazil’s 5,570 Municipalities (FIRJAN)'
+    },
+    takeaway: {
+      pt: 'Segundo o Índice FIRJAN de Gestão Fiscal, 1.856 prefeituras brasileiras (34,5% do total) não geram receita tributária própria (IPTU/ISS) suficiente nem para pagar os salários do prefeito e dos vereadores, dependendo >90% de FPM e repasses.',
+      es: 'El 34,5% de los 5.570 municipios brasileños no genera ingresos propios suficientes ni para pagar la alcaldía y el concejo municipal.',
+      en: '34.5% of Brazil’s 5,570 municipalities do not collect enough local tax revenue to cover their own mayor and city council payroll, relying >90% on transfers.'
+    },
+    uk: {
+      pt: 'O Brasil possui 5.570 municípios autônomos; o Reino Unido inteiro é administrado por apenas 317 autoridades locais (Local Councils).',
+      es: 'Brasil tiene 5.570 municipios autónomos; el Reino Unido entero se administra con 317 concejos locales.',
+      en: 'Brazil is divided into 5,570 autonomous municipalities; the entire United Kingdom is governed by 317 local authorities.'
+    },
+    source: 'FIRJAN (Índice Firjan de Gestão Fiscal - IFGF 2024) & STN Finbra',
+    labels: ['Crítica (Não paga Câmara/Prefeito)', 'Difícil (Baixa receita própria)', 'Boa Autonomia Local', 'Excelente Autonomia (>25% própria)'],
+    datasets: [
+      { label: 'Proporção dos Municípios Brasileiros (%)', data: [34.5, 39.2, 16.8, 9.5], backgroundColor: ['#be123c', '#f59e0b', '#0284c7', '#059669'] }
+    ]
+  },
+  {
+    id: 'c-governance-cpi',
+    pillar: 'institutions',
+    code: '11.5',
+    type: 'line',
+    unit: 'Pontos (0 a 100)',
+    title: {
+      pt: 'Qualidade Institucional: Índice de Percepção da Corrupção (IPC) e Efetividade Governamental (2012–2024)',
+      es: 'Calidad Institucional: Índice de Percepción de la Corrupción y Efectividad Gubernamental (2012–2024)',
+      en: 'Institutional Quality: Corruption Perceptions Index (CPI) & Government Effectiveness Percentile (2012–2024)'
+    },
+    takeaway: {
+      pt: 'No Índice de Percepção da Corrupção (0 = altamente corrupto, 100 = íntegro), o Brasil recuou de 43 pontos (2012–2014) para 36 pontos em 2023/2024 (104ª posição global), abaixo da média mundial (43) e de vizinhos como Uruguai (73) e Chile (66).',
+      es: 'En el Índice de Percepción de la Corrupción, Brasil cayó de 43 puntos en 2014 a 36 puntos (puesto 104 global), lejos de Uruguay (73) y Chile (66).',
+      en: 'Brazil’s Corruption Perceptions Index score slipped from 43 in 2014 to 36 (104th globally), well behind regional peers Uruguay (73) and Chile (66).'
+    },
+    uk: {
+      pt: 'Reino Unido no IPC: 71 pontos; Média da OCDE: 66 pontos; Uruguai: 73 pontos.',
+      es: 'Reino Unido en el IPC: 71 puntos; Media OCDE: 66 puntos.',
+      en: 'UK CPI score: 71/100; OECD average: 66/100; Uruguay: 73/100.'
+    },
+    source: 'Transparência Internacional (CPI) & Banco Mundial (Worldwide Governance Indicators - WGI)',
+    labels: ['2012', '2014', '2016', '2018', '2020', '2022', '2024'],
+    datasets: [
+      { label: 'Chile (Pontos IPC 0–100)', data: [72, 73, 66, 67, 67, 67, 66], borderColor: '#0284c7' },
+      { label: 'Média Mundial (Pontos IPC)', data: [43, 43, 43, 43, 43, 43, 43], borderColor: '#94a3b8', borderDash: [5, 5], pointRadius: 0 },
+      { label: 'Brasil (Pontos IPC 0–100)', data: [43, 43, 40, 35, 38, 38, 36], borderColor: '#be123c', borderWidth: 3 }
+    ]
+  },
+
+  // ==========================================================================
+  // PILAR 12: CIDADES, TURISMO, TRANSIÇÃO RELIGIOSA E SOCIEDADE (5 SÉRIES)
+  // ==========================================================================
+  {
+    id: 'c-tourism',
+    pillar: 'society_culture',
+    code: '12.1',
+    type: 'bar',
+    unit: 'Milhões de Turistas / Ano',
+    title: {
+      pt: 'O Paradoxo do Turismo Internacional: Chegadas de Turistas Estrangeiros (Milhões/Ano — Brasil vs. Mundo)',
+      es: 'La Paradoja del Turismo Internacional: Llegadas de Turistas Extranjeros (Millones/Año — Brasil vs. Mundo)',
+      en: 'The International Tourism Paradox: Annual Foreign Tourist Arrivals (Millions — Brazil vs. Global Peers)'
+    },
+    takeaway: {
+      pt: 'Apesar de ser #1 mundial em recursos naturais (WEF), o Brasil está estagnado há duas décadas na faixa de 5,3 a 6,6 milhões de turistas estrangeiros/ano (menos de 0,5% do fluxo mundial e igual apenas aos visitantes da Torre Eiffel), devido à distância aérea, conectividade e percepção de insegurança.',
+      es: 'Pese a su riqueza natural, Brasil lleva 20 años estancado en ~6,6 millones de turistas extranjeros al año (frente a 42,2M en México).',
+      en: 'Despite ranking #1 in natural resources, Brazil has been stuck at ~6.0–6.6M international tourists/year for two decades — vs. 42.2M in Mexico and 85.1M in Spain.'
+    },
+    uk: {
+      pt: 'Apenas a cidade de Londres recebe 3x mais turistas internacionais por ano (~20 milhões) que o Brasil inteiro (6,6 milhões).',
+      es: 'Solo la ciudad de Londres recibe 3 veces más turistas extranjeros (~20M) que todo Brasil (6,6M).',
+      en: 'The city of London alone welcomes 3x more international visitors (~20M/yr) than the entire country of Brazil (6.6M).'
+    },
+    source: 'Embratur / Ministério do Turismo, Polícia Federal & ONU Turismo (UNWTO 2024)',
+    labels: ['Espanha', 'México (Líder LatAm)', 'Reino Unido', 'Turquia', 'Tailândia', 'Brasil (Estagnado desde 2005)'],
+    datasets: [
+      { label: 'Chegadas de Turistas Internacionais (Milhões / Ano)', data: [85.1, 42.2, 38.0, 55.2, 28.1, 6.6], backgroundColor: ['#94a3b8', '#0284c7', '#1e293b', '#64748b', '#0d9488', '#0369a1'] }
+    ]
+  },
+  {
+    id: 'c-religion',
+    pillar: 'society_culture',
+    code: '12.2',
+    type: 'line',
+    unit: '% da População',
+    title: {
+      pt: 'Transição Religiosa Histórica nos Censos do IBGE: Católicos, Evangélicos e Sem Religião (1970–2022/24)',
+      es: 'Transición Religiosa Histórica en los Censos del IBGE: Católicos, Evangélicos y Sin Religión (1970–2024)',
+      en: 'Historic Religious Transition Across IBGE Censuses: Catholics, Evangelicals & Unaffiliated (1970–2024)'
+    },
+    takeaway: {
+      pt: 'O Brasil vive uma das mais rápidas transições religiosas do mundo ocidental: a parcela católica caiu de 91,8% (1970) para ~55,4% (2022/24), enquanto os evangélicos cresceram de 5,2% para ~29,2% e os sem religião subiram para ~10,2%.',
+      es: 'Los católicos pasaron del 91,8% en 1970 al ~55,4% hoy, mientras los evangélicos subieron del 5,2% al ~29,2%.',
+      en: 'Brazil is undergoing a rapid religious shift: Catholics fell from 91.8% in 1970 to ~55.4%, while Evangelicals rose from 5.2% to ~29.2% and the unaffiliated hit ~10.2%.'
+    },
+    uk: {
+      pt: 'No Censo de 2021 do Reino Unido (Inglaterra e País de Gales), 46,2% declararam-se cristãos e 37,2% declararam "sem religião".',
+      es: 'En el Censo 2021 del Reino Unido, el 46,2% se declaró cristiano y el 37,2% sin religión.',
+      en: 'In the 2021 England & Wales Census (ONS), 46.2% identified as Christian while 37.2% reported "No religion".'
+    },
+    source: 'IBGE (Série Histórica dos Censos Demográficos 1970–2022) & Datafolha/IPEA',
+    labels: ['1970', '1980', '1991', '2000', '2010', '2022/24'],
+    datasets: [
+      { label: 'Católicos Apostólicos Romanos (%)', data: [91.8, 89.0, 83.3, 73.6, 64.6, 55.4], borderColor: '#0284c7', borderWidth: 3 },
+      { label: 'Evangélicos (Tradicionais + Pentecostais %)', data: [5.2, 6.6, 9.0, 15.4, 22.2, 29.2], borderColor: '#059669', borderWidth: 3 },
+      { label: 'Sem Religião (%)', data: [0.8, 1.6, 4.7, 7.3, 8.0, 10.2], borderColor: '#64748b' }
+    ]
+  },
+  {
+    id: 'c-diaspora',
+    pillar: 'society_culture',
+    code: '12.3',
+    type: 'line',
+    unit: 'Milhões de Brasileiros',
+    title: {
+      pt: 'Diáspora e Fuga de Cérebros: Brasileiros Vivendo no Exterior (Milhões, 2010–2023 — Itamaraty)',
+      es: 'Diáspora y Fuga de Cerebros: Brasileños Viviendo en el Exterior (Millones, 2010–2023 — Itamaraty)',
+      en: 'Diaspora & Brain Drain: Brazilians Living Abroad (Millions, 2010–2023 — Foreign Ministry)'
+    },
+    takeaway: {
+      pt: 'O número de brasileiros residindo fora do país mais que dobrou em uma década, saltando de 1,89 milhão em 2012 para 4,59 milhões em 2023 — concentrados nos EUA (2,08M), Portugal (360k+), Paraguai (254k) e Reino Unido (220k).',
+      es: 'El número de brasileños en el extranjero se duplicó de 1,89 millones en 2012 a 4,59 millones en 2023 (2,08M en EE.UU. y 360k en Portugal).',
+      en: 'The Brazilian diaspora more than doubled from 1.89M in 2012 to 4.59M in 2023, led by the US (2.08M), Portugal (360k+), Paraguay (254k), and the UK (220k).'
+    },
+    uk: {
+      pt: 'Em sentido inverso, os imigrantes estrangeiros vivendo no Brasil somam apenas ~1,0 milhão (0,47% da população — uma das menores taxas do mundo ocidental).',
+      es: 'En sentido inverso, los inmigrantes en Brasil representan solo el 0,47% de la población (vs. 14,8% en el Reino Unido).',
+      en: 'Conversely, foreign-born residents in Brazil make up just 0.47% of the population (vs. 14.8% in the UK).'
+    },
+    source: 'Ministério das Relações Exteriores (Itamaraty — Comunidades Brasileiras no Exterior 2023)',
+    labels: ['2012', '2014', '2016', '2018', '2020', '2021', '2022', '2023'],
+    datasets: [
+      { label: 'Brasileiros Residindo no Exterior (Milhões)', data: [1.89, 2.51, 3.08, 3.59, 4.21, 4.40, 4.50, 4.59], borderColor: '#0369a1', backgroundColor: 'rgba(3,105,161,0.12)', fill: true }
+    ]
+  },
+  {
+    id: 'c-screen-time',
+    pillar: 'society_culture',
+    code: '12.4',
+    type: 'bar',
+    unit: 'Horas por Dia / Semana',
+    title: {
+      pt: 'Hiperconectividade e Uso do Tempo: Horas Diárias na Internet (Ranking Global) e Trabalho Doméstico',
+      es: 'Hiperconectividad y Uso del Tiempo: Horas Diarias en Internet (Ranking Global)',
+      en: 'Hyper-Connectivity & Time Use: Average Daily Time Spent Using the Internet (Hours/Day)'
+    },
+    takeaway: {
+      pt: 'Os brasileiros passam em média 9h13 por dia conectados à internet (2º lugar mundial, atrás apenas da África do Sul, e 1º em redes sociais com 3h37/dia). No trabalho doméstico não remunerado, mulheres dedicam 21,3h/semana contra 11,7h dos homens (IBGE).',
+      es: 'Los brasileños pasan 9h13 al día en internet (#2 mundial y #1 en redes sociales con 3h37/día).',
+      en: 'Brazilians spend an average of 9.2 hours/day online (#2 globally and #1 in social media use at 3h37m/day).'
+    },
+    uk: {
+      pt: 'Média diária online: Brasil 9h13 vs. Reino Unido 5h36 e Japão 3h56 (GWI / DataReportal).',
+      es: 'Media diaria en línea: Brasil 9h13 vs. Reino Unido 5h36 y Japón 3h56.',
+      en: 'Daily time spent online: Brazil 9.2h vs. UK 5.6h, Global Average 6.7h, and Japan 3.9h.'
+    },
+    source: 'DataReportal / GWI (Digital 2024) & IBGE (PNAD Contínua Outras Formas de Trabalho)',
+    labels: ['Brasil (9h13)', 'Filipinas', 'Colômbia', 'Média Mundial', 'Estados Unidos', 'Reino Unido (5h36)', 'Japão'],
+    datasets: [
+      { label: 'Tempo Médio Diário na Internet (Horas/Dia)', data: [9.22, 8.87, 8.72, 6.67, 6.98, 5.60, 3.93], backgroundColor: ['#0369a1', '#64748b', '#0284c7', '#94a3b8', '#475569', '#1e293b', '#cbd5e1'] }
+    ]
+  },
+  {
+    id: 'c-interior-shift',
+    pillar: 'society_culture',
+    code: '12.5',
+    type: 'line',
+    unit: '% do PIB Nacional',
+    title: {
+      pt: 'Desconcentração Econômica: Participação das Capitais vs. Interior no PIB Brasileiro (2002–2022)',
+      es: 'Desconcentración Económica: Participación de las Capitales vs. el Interior en el PIB (2002–2022)',
+      en: 'Economic Decentralization: State Capitals vs. Interior Municipalities Share of Brazilian GDP (%)'
+    },
+    takeaway: {
+      pt: 'As 27 capitais estaduais perderam 7,5 pontos percentuais de participação no PIB nacional em duas décadas (caindo de 36,1% em 2002 para 28,6%), enquanto cidades médias do interior agroindustrial e logístico (já respondendo por 71,4% do PIB) lideram a geração de empregos.',
+      es: 'Las 27 capitales cayeron del 36,1% al 28,6% del PIB nacional, mientras las ciudades medias del interior ya generan el 71,4% del PIB.',
+      en: 'Brazil’s 27 state capitals saw their share of national GDP fall from 36.1% in 2002 to 28.6%, as mid-sized interior cities rose to 71.4% of GDP.'
+    },
+    uk: {
+      pt: 'No Reino Unido ocorre o oposto: apenas a Grande Londres concentra ~23% do PIB nacional e ampliou sua distância frente ao interior britânico desde 2000.',
+      es: 'En el Reino Unido ocurre lo opuesto: Londres concentra el ~23% del PIB y amplió su ventaja.',
+      en: 'In the UK the opposite occurred: Greater London concentrates ~23% of national output and widened its gap over regional Britain.'
+    },
+    source: 'IBGE (Produto Interno Bruto dos Municípios — Série Histórica)',
+    labels: ['2002', '2006', '2010', '2014', '2018', '2020', '2022'],
+    datasets: [
+      { label: 'Municípios do Interior (% do PIB Nacional)', data: [63.9, 65.4, 66.2, 67.9, 69.2, 70.8, 71.4], borderColor: '#059669', borderWidth: 3 },
+      { label: '27 Capitais Estaduais (% do PIB Nacional)', data: [36.1, 34.6, 33.8, 32.1, 30.8, 29.2, 28.6], borderColor: '#0369a1' }
+    ]
   }
 ];
+
+// Ordenar as 60 séries automaticamente pelo código numérico (1.1 .. 12.5)
+window.BR_DATA.CHARTS.sort((a, b) => {
+  const [pa, sa] = a.code.split('.').map(Number);
+  const [pb, sb] = b.code.split('.').map(Number);
+  return pa !== pb ? pa - pb : sa - sb;
+});
+

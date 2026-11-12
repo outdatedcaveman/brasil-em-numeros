@@ -1,6 +1,6 @@
 // ============================================================================
-// BRASIL EM NÚMEROS | BRAZIL BY NUMBERS — PILARES, KPIs E PARADOXOS ESTRUTURAIS
-// Fontes Oficiais: IBGE, BCB, STN, IPEA, DataSUS, INEP, EPE, SEEG, INPE, FBSP, CNJ, MDIC
+// BRASIL EM NÚMEROS | BRAZIL BY NUMBERS — 12 PILARES, 16 KPIs COM SPARKLINES
+// E 8 PARADOXOS ESTRUTURAIS (EDIÇÃO EXPANDIDA — 60 SÉRIES HISTÓRICAS)
 // ============================================================================
 
 window.BR_DATA = window.BR_DATA || {};
@@ -8,498 +8,294 @@ window.BR_DATA = window.BR_DATA || {};
 window.BR_DATA.UI_TEXT = {
   pt: {
     brandTitle: 'Brasil em Números',
-    editionTag: 'Edição Completa • 10 Pilares • 40 Séries',
-    brandSub: 'Portal Público de Inteligência Estatística e Simulação Estrutural do Brasil',
-    searchPlaceholder: 'Buscar séries, indicadores ou fontes (ex: fecundidade, Gini, PRODES, Selic, PIX, homicídios)...',
+    editionTag: '12 Pilares • 60 Séries • 27 UFs • API BCB/IBGE',
+    brandSub: 'Portal Público de Inteligência Estatística, Mapas e Simulação Estrutural do Brasil',
+    searchPlaceholder: 'Buscar entre 60 séries, 27 estados ou fontes (ex: fecundidade, Gini, PRODES, Selic, PIX, emendas, turismo)...',
     ukBtnOn: 'Benchmark UK / OCDE: Ativo',
     ukBtnOff: 'Benchmark UK / OCDE: Oculto',
+    darkBtnOff: '🌙 Modo Escuro',
+    darkBtnOn: '☀️ Modo Claro',
     tabs: {
-      overview: '1. Visão Geral & 10 Pilares',
-      charts: '2. Explorador (40 Séries)',
-      states: '3. Mapa & Atlas das 27 UFs',
+      overview: '1. Visão Geral & 12 Pilares',
+      charts: '2. Explorador (60 Séries)',
+      states: '3. Mapa Geográfico & 27 UFs',
       correlations: '4. Lab de Correlações (XY)',
-      simulator: '5. Simulador Fiscal & Demográfico',
-      income: '6. Calculadora de Renda',
+      simulator: '5. Simulador Fiscal, Orçamento & Pirâmide',
+      income: '6. Calculadora de Renda & Impostos',
       benchmark: '7. Brasil vs. Mundo (OCDE/BRICS)',
-      datahub: '8. Dados Abertos & API'
+      datahub: '8. API ao Vivo (BCB/IBGE) & Dados'
     },
     heroBadge: 'Portal Público de Inteligência Estatística • Inspirado em UK by Numbers & Our World in Data',
-    heroTitle: 'Entenda os desafios e as transformações estruturais do Brasil com dados oficiais auditáveis.',
-    heroDesc: 'Síntese integrada de 40 séries históricas oficiais em 10 pilares temáticos (IBGE, Banco Central, Tesouro Nacional, IPEA, DataSUS, INEP, EPE, SEEG, INPE, FBSP, CNJ, Anatel e MDIC), acompanhada de Mapa Coroplético das 27 UFs, Laboratório de Regressão e Correlação, Simulador Dinâmico da Dívida Pública (DBGG), Pirâmide Etária (1980–2060) e Calculadora de Posição na Pirâmide de Renda.',
-    openPillarCharts: 'Explorar as 4 séries deste pilar →',
-    allPillars: 'Todos os 10 Pilares (40)'
+    heroTitle: 'Todas as grandes questões estruturais do Brasil em dados públicos, mapas e simuladores interativos.',
+    heroDesc: 'Síntese completa de 60 séries históricas oficiais em 12 pilares temáticos (IBGE, Banco Central, Tesouro Nacional, IPEA, DataSUS, INEP, EPE, SEEG, INPE, FBSP, CNJ, TSE, Anatel, Embratur e MDIC), acompanhada de Mapa Geográfico Interativo das 27 UFs, Laboratório de Regressão OLS, Simulador da Dívida Pública (DBGG), Decomposição do Orçamento, Pirâmide Etária (1980–2060), Calculadora de Renda/Tributos e Conexão em Tempo Real com a API do Banco Central.',
+    openPillarCharts: 'Explorar as 5 séries deste pilar →',
+    allPillars: 'Todos os 12 Pilares (60)'
   },
   es: {
     brandTitle: 'Brasil en Números',
-    editionTag: 'Edición Completa • 10 Pilares • 40 Series',
-    brandSub: 'Portal Público de Inteligencia Estadística y Simulación Estructural de Brasil',
-    searchPlaceholder: 'Buscar series, indicadores o fuentes (ej: fecundidad, Gini, PRODES, Selic, PIX, homicidios)...',
+    editionTag: '12 Pilares • 60 Series • 27 UFs • API BCB/IBGE',
+    brandSub: 'Portal Público de Inteligencia Estadística, Mapas y Simulación Estructural de Brasil',
+    searchPlaceholder: 'Buscar entre 60 series, 27 estados o fuentes (ej: fecundidad, Gini, PRODES, Selic, PIX, enmiendas, turismo)...',
     ukBtnOn: 'Benchmark UK / OCDE: Activo',
     ukBtnOff: 'Benchmark UK / OCDE: Oculto',
+    darkBtnOff: '🌙 Modo Oscuro',
+    darkBtnOn: '☀️ Modo Claro',
     tabs: {
-      overview: '1. Visión General y 10 Pilares',
-      charts: '2. Explorador (40 Series)',
-      states: '3. Mapa y Atlas de 27 Estados',
+      overview: '1. Visión General y 12 Pilares',
+      charts: '2. Explorador (60 Series)',
+      states: '3. Mapa Geográfico y 27 UFs',
       correlations: '4. Lab de Correlaciones (XY)',
-      simulator: '5. Simulador Fiscal y Demográfico',
-      income: '6. Calculadora de Ingresos',
+      simulator: '5. Simulador Fiscal y Pirámide',
+      income: '6. Calculadora de Ingresos e Impuestos',
       benchmark: '7. Brasil vs. Mundo (OCDE/BRICS)',
-      datahub: '8. Datos Abiertos y Descarga'
+      datahub: '8. API en Vivo (BCB/IBGE) y Datos'
     },
     heroBadge: 'Portal Público de Inteligencia Estadística • Inspirado en UK by Numbers y Our World in Data',
-    heroTitle: 'Comprenda los desafíos y transformaciones estructurales de Brasil a través de datos oficiales auditables.',
-    heroDesc: 'Síntesis integrada de 40 series históricas oficiales en 10 pilares temáticos (IBGE, Banco Central, Tesoro Nacional, IPEA, DataSUS, INEP, EPE, SEEG, INPE, FBSP, CNJ, Anatel y MDIC), con Mapa Coroplético de las 27 UFs, Laboratorio de Correlación, Simulador de Deuda Pública (DBGG), Pirámide Demográfica y Calculadora de Distribución del Ingreso.',
-    openPillarCharts: 'Explorar las 4 series de este pilar →',
-    allPillars: 'Todos los 10 Pilares (40)'
+    heroTitle: 'Todas las grandes cuestiones estructurales de Brasil en datos públicos, mapas y simuladores.',
+    heroDesc: 'Síntesis completa de 60 series históricas oficiales en 12 pilares temáticos (IBGE, Banco Central, Tesoro Nacional, IPEA, DataSUS, INEP, EPE, SEEG, INPE, FBSP, CNJ, TSE, Anatel y MDIC), con Mapa Geográfico de las 27 UFs, Laboratorio de Correlación OLS, Simulador de Deuda Pública (DBGG), Pirámide Demográfica, Calculadora de Ingresos y Conexión en Vivo con la API del Banco Central.',
+    openPillarCharts: 'Explorar las 5 series de este pilar →',
+    allPillars: 'Todos los 12 Pilares (60)'
   },
   en: {
     brandTitle: 'Brazil by Numbers',
-    editionTag: 'Complete Edition • 10 Pillars • 40 Series',
-    brandSub: 'Public Statistical Intelligence & Structural Simulation Portal for Brazil',
-    searchPlaceholder: 'Search series, indicators, or sources (e.g., fertility, Gini, PRODES, Selic, PIX, homicides)...',
+    editionTag: '12 Pillars • 60 Series • 27 States • Live API',
+    brandSub: 'Public Statistical Intelligence, Geographic Atlas & Structural Simulation Portal for Brazil',
+    searchPlaceholder: 'Search across 60 series, 27 states, or sources (e.g., fertility, Gini, PRODES, Selic, PIX, tourism)...',
     ukBtnOn: 'UK / OECD Benchmark: On',
     ukBtnOff: 'UK / OECD Benchmark: Off',
+    darkBtnOff: '🌙 Dark Mode',
+    darkBtnOn: '☀️ Light Mode',
     tabs: {
-      overview: '1. Overview & 10 Pillars',
-      charts: '2. Chart Explorer (40 Series)',
-      states: '3. Map & 27-State Atlas',
+      overview: '1. Overview & 12 Pillars',
+      charts: '2. Chart Explorer (60 Series)',
+      states: '3. Geographic Map & 27 States',
       correlations: '4. Correlation Lab (XY)',
-      simulator: '5. Fiscal & Demographic Sim',
-      income: '6. Income Percentile Calc',
+      simulator: '5. Fiscal, Budget & Demographic Sim',
+      income: '6. Income & Tax Calculator',
       benchmark: '7. Brazil vs. World (OECD/BRICS)',
-      datahub: '8. Open Data & Export'
+      datahub: '8. Live API (BCB/IBGE) & Data'
     },
     heroBadge: 'Public Statistical Intelligence Portal • Inspired by UK by Numbers & Our World in Data',
-    heroTitle: 'Understand Brazil’s structural challenges and transformations through clear, auditable official data.',
-    heroDesc: 'Integrated synthesis of 40 official historical series across 10 thematic pillars (IBGE, Central Bank, National Treasury, IPEA, DataSUS, INEP, EPE, SEEG, INPE, FBSP, CNJ, Anatel, and MDIC), featuring an interactive 27-State Choropleth Map, OLS Correlation Lab, Public Debt (DBGG) Simulator, Demographic Pyramid (1980–2060), and Household Income Percentile Calculator.',
-    openPillarCharts: 'Explore all 4 series in this pillar →',
-    allPillars: 'All 10 Pillars (40)'
+    heroTitle: 'Every major structural question about Brazil answered through auditable data, maps, and simulators.',
+    heroDesc: 'Comprehensive synthesis of 60 official historical series across 12 thematic pillars (IBGE, Central Bank, National Treasury, IPEA, DataSUS, INEP, EPE, SEEG, INPE, FBSP, CNJ, TSE, Anatel, and MDIC), featuring an interactive 27-State Geographic Choropleth Map, OLS Correlation Lab, Public Debt (DBGG) & Budget Simulator, Demographic Pyramid (1980–2060), Income & Tax Incidence Calculator, and Live Central Bank API Connector.',
+    openPillarCharts: 'Explore all 5 series in this pillar →',
+    allPillars: 'All 12 Pillars (60)'
   }
 };
 
 window.BR_DATA.KPIS = [
   {
-    id: 'pop',
-    pillar: 'demographics',
-    chartId: 'c-pop-peak',
+    id: 'pop', pillar: 'demographics', chartId: 'c-pop-peak',
     label: { pt: 'População 2024', es: 'Población 2024', en: 'Population 2024' },
-    value: '212,6M',
-    sub: { pt: 'Pico em 2041: 220,4M', es: 'Pico en 2041: 220,4M', en: 'Peak in 2041: 220.4M' },
-    badge: '+0,4% a.a.',
-    badgeColor: 'emerald'
+    value: '212,6M', sub: { pt: 'Pico em 2041: 220,4M', es: 'Pico en 2041: 220,4M', en: 'Peak in 2041: 220.4M' },
+    badge: '+0,4% a.a.', badgeColor: 'emerald', spark: [93, 119, 147, 174, 191, 203, 212.6, 220.4]
   },
   {
-    id: 'tfr',
-    pillar: 'demographics',
-    chartId: 'c-tfr',
+    id: 'tfr', pillar: 'demographics', chartId: 'c-tfr',
     label: { pt: 'Fecundidade Total', es: 'Fecundidad Total', en: 'Fertility Rate' },
-    value: '1,57',
-    sub: { pt: 'Reposição: 2,10 filhos', es: 'Reemplazo: 2,10 hijos', en: 'Replacement: 2.10' },
-    badge: '1960: 6,28',
-    badgeColor: 'amber'
+    value: '1,57', sub: { pt: 'Reposição: 2,10 filhos', es: 'Reemplazo: 2,10 hijos', en: 'Replacement: 2.10' },
+    badge: '1960: 6,28', badgeColor: 'amber', spark: [6.28, 5.76, 4.35, 2.89, 2.38, 1.90, 1.65, 1.57]
   },
   {
-    id: 'gdp_pc',
-    pillar: 'economy',
-    chartId: 'c-gdp-ppp',
+    id: 'gdp_pc', pillar: 'economy', chartId: 'c-gdp-ppp',
     label: { pt: 'PIB per Capita PPC', es: 'PIB per Cápita PPA', en: 'GDP per Capita PPP' },
-    value: 'US$ 20,8k',
-    sub: { pt: '36% do nível do UK', es: '36% del nivel de UK', en: '36% of UK level' },
-    badge: 'R$ 55,2 mil',
-    badgeColor: 'sky'
+    value: 'US$ 20,8k', sub: { pt: '36% do nível do UK', es: '36% del nivel de UK', en: '36% of UK level' },
+    badge: 'R$ 55,2 mil', badgeColor: 'sky', spark: [10.8, 11.2, 13.1, 15.4, 17.8, 19.6, 18.2, 20.8]
   },
   {
-    id: 'informality',
-    pillar: 'economy',
-    chartId: 'c-labor',
+    id: 'informality', pillar: 'economy', chartId: 'c-labor',
     label: { pt: 'Informalidade', es: 'Informalidad', en: 'Informality Rate' },
-    value: '38,7%',
-    sub: { pt: '39,8M trabalhadores', es: '39,8M trabajadores', en: '39.8M workers' },
-    badge: 'Desemp: 6,2%',
-    badgeColor: 'amber'
+    value: '38,7%', sub: { pt: '39,8M trabalhadores', es: '39,8M trabajadores', en: '39.8M workers' },
+    badge: 'Desemp: 6,2%', badgeColor: 'amber', spark: [39.1, 37.8, 39.5, 41.1, 40.7, 38.7, 39.4, 38.7]
   },
   {
-    id: 'selic',
-    pillar: 'economy',
-    chartId: 'c-selic-ipca',
+    id: 'selic', pillar: 'economy', chartId: 'c-selic-ipca',
     label: { pt: 'Juro Real Ex-Post', es: 'Tasa Real Ex-Post', en: 'Real Interest Rate' },
-    value: '6,8% a.a.',
-    sub: { pt: 'Selic 11,75% vs IPCA 4,8%', es: 'Selic 11,75% vs IPCA 4,8%', en: 'Selic 11.75% / CPI 4.8%' },
-    badge: 'Top 3 Global',
-    badgeColor: 'rose'
+    value: '6,8% a.a.', sub: { pt: 'Selic 11,75% vs IPCA 4,8%', es: 'Selic 11,75% vs IPCA 4,8%', en: 'Selic 11.75% / CPI 4.8%' },
+    badge: 'Top 3 Global', badgeColor: 'rose', spark: [10.2, 7.8, 5.1, 7.4, 2.1, -2.4, 7.9, 6.8]
   },
   {
-    id: 'tax',
-    pillar: 'fiscal',
-    chartId: 'c-tax',
+    id: 'tax', pillar: 'fiscal', chartId: 'c-tax',
     label: { pt: 'Carga Tributária', es: 'Carga Tributaria', en: 'Tax Burden (% GDP)' },
-    value: '32,4%',
-    sub: { pt: '44,2% sobre consumo', es: '44,2% en consumo', en: '44.2% on consumption' },
-    badge: 'OCDE: 34,0%',
-    badgeColor: 'indigo'
+    value: '32,4%', sub: { pt: '44,2% sobre consumo', es: '44,2% en consumo', en: '44.2% on consumption' },
+    badge: 'OCDE: 34,0%', badgeColor: 'indigo', spark: [28.4, 31.5, 32.8, 32.1, 31.7, 33.1, 32.6, 32.4]
   },
   {
-    id: 'debt',
-    pillar: 'fiscal',
-    chartId: 'c-debt',
+    id: 'debt', pillar: 'fiscal', chartId: 'c-debt',
     label: { pt: 'Dívida Bruta (DBGG)', es: 'Deuda Bruta (DBGG)', en: 'Gross Public Debt' },
-    value: '78,6%',
-    sub: { pt: 'Rigidez orç.: 91,8%', es: 'Rigidez pres.: 91,8%', en: '91.8% mandatory spend' },
-    badge: 'Juros: 7,8% PIB',
-    badgeColor: 'rose'
+    value: '78,6%', sub: { pt: 'Rigidez orç.: 91,8%', es: 'Rigidez pres.: 91,8%', en: '91.8% mandatory spend' },
+    badge: 'Juros: 7,8% PIB', badgeColor: 'rose', spark: [55.5, 51.8, 51.5, 65.5, 75.3, 86.9, 71.7, 78.6]
   },
   {
-    id: 'gini',
-    pillar: 'inequality',
-    chartId: 'c-ineq',
+    id: 'gini', pillar: 'inequality', chartId: 'c-ineq',
     label: { pt: 'Índice de Gini', es: 'Índice de Gini', en: 'Gini Coefficient' },
-    value: '0,518',
-    sub: { pt: '1% Topo detém 26,5%', es: '1% Top tiene 26,5%', en: 'Top 1% holds 26.5%' },
-    badge: 'UK: 0,357',
-    badgeColor: 'rose'
+    value: '0,518', sub: { pt: '1% Topo detém 26,5%', es: '1% Top tiene 26,5%', en: 'Top 1% holds 26.5%' },
+    badge: 'UK: 0,357', badgeColor: 'rose', spark: [0.601, 0.594, 0.569, 0.531, 0.524, 0.545, 0.544, 0.518]
   },
   {
-    id: 'sewage',
-    pillar: 'inequality',
-    chartId: 'c-sanit',
+    id: 'sewage', pillar: 'inequality', chartId: 'c-sanit',
     label: { pt: 'Coleta de Esgoto', es: 'Red Alcantarillado', en: 'Sewage Network' },
-    value: '56,0%',
-    sub: { pt: '~90M sem rede (SNIS)', es: '~90M sin red (SNIS)', en: '~90M lack mains network' },
-    badge: 'Água: 84,9%',
-    badgeColor: 'teal'
+    value: '56,0%', sub: { pt: '~90M sem rede (SNIS)', es: '~90M sin red (SNIS)', en: '~90M lack mains network' },
+    badge: 'Água: 84,9%', badgeColor: 'teal', spark: [42.1, 45.4, 48.1, 50.3, 52.4, 54.1, 55.2, 56.0]
   },
   {
-    id: 'life_exp',
-    pillar: 'health',
-    chartId: 'c-mort-life',
+    id: 'life_exp', pillar: 'health', chartId: 'c-mort-life',
     label: { pt: 'Esperança de Vida', es: 'Esperanza de Vida', en: 'Life Expectancy' },
-    value: '76,4 anos',
-    sub: { pt: '1980: 62,5 anos (IBGE)', es: '1980: 62,5 años (IBGE)', en: '1980: 62.5 yrs (IBGE)' },
-    badge: '+13,9 anos',
-    badgeColor: 'emerald'
+    value: '76,4 anos', sub: { pt: '1980: 62,5 anos (IBGE)', es: '1980: 62,5 años (IBGE)', en: '1980: 62.5 yrs (IBGE)' },
+    badge: '+13,9 anos', badgeColor: 'emerald', spark: [62.5, 66.9, 71.1, 73.9, 75.2, 76.2, 75.5, 76.4]
   },
   {
-    id: 'pisa',
-    pillar: 'education',
-    chartId: 'c-pisa',
+    id: 'pisa', pillar: 'education', chartId: 'c-pisa',
     label: { pt: 'PISA Matemática', es: 'PISA Matemáticas', en: 'PISA Math Score' },
-    value: '379 pts',
-    sub: { pt: 'IDEB Ens. Médio: 4,3', es: 'IDEB Secundaria: 4,3', en: 'High School IDEB: 4.3' },
-    badge: 'OCDE: 472 pts',
-    badgeColor: 'amber'
+    value: '379 pts', sub: { pt: 'IDEB Ens. Médio: 4,3', es: 'IDEB Secundaria: 4,3', en: 'High School IDEB: 4.3' },
+    badge: 'OCDE: 472 pts', badgeColor: 'amber', spark: [334, 356, 370, 386, 391, 377, 384, 379]
   },
   {
-    id: 'clean_elec',
-    pillar: 'energy_climate',
-    chartId: 'c-elec-mix',
+    id: 'clean_elec', pillar: 'energy_climate', chartId: 'c-elec-mix',
     label: { pt: 'Eletricidade Limpa', es: 'Electricidad Limpia', en: 'Clean Electricity' },
-    value: '89,2%',
-    sub: { pt: 'Matriz total: 49,1% ren.', es: 'Matriz total: 49,1% ren.', en: 'Total energy: 49.1% ren.' },
-    badge: 'OCDE: 33,4%',
-    badgeColor: 'emerald'
+    value: '89,2%', sub: { pt: 'Matriz total: 49,1% ren.', es: 'Matriz total: 49,1% ren.', en: 'Total energy: 49.1% ren.' },
+    badge: 'OCDE: 33,4%', badgeColor: 'emerald', spark: [84.5, 79.2, 74.6, 80.4, 82.3, 78.1, 87.9, 89.2]
   },
   {
-    id: 'prodes',
-    pillar: 'energy_climate',
-    chartId: 'c-prodes',
+    id: 'prodes', pillar: 'energy_climate', chartId: 'c-prodes',
     label: { pt: 'PRODES Amazônia', es: 'PRODES Amazonía', en: 'Amazon Deforestation' },
-    value: '6.288 km²',
-    sub: { pt: '-45,7% vs. 2022 (INPE)', es: '-45,7% vs. 2022 (INPE)', en: '-45.7% vs. 2022 (INPE)' },
-    badge: 'Pico 04: 27,7k',
-    badgeColor: 'emerald'
+    value: '6.288 km²', sub: { pt: '-45,7% vs. 2022 (INPE)', es: '-45,7% vs. 2022 (INPE)', en: '-45.7% vs. 2022 (INPE)' },
+    badge: 'Pico 04: 27,7k', badgeColor: 'emerald', spark: [27772, 12911, 4571, 7893, 10129, 13038, 11594, 6288]
   },
   {
-    id: 'homicide',
-    pillar: 'security_justice',
-    chartId: 'c-crime',
+    id: 'homicide', pillar: 'security_justice', chartId: 'c-crime',
     label: { pt: 'Taxa de Homicídios', es: 'Tasa de Homicidios', en: 'Homicide Rate' },
-    value: '22,8 /100k',
-    sub: { pt: '46.328 MVI (FBSP)', es: '46.328 muertes (FBSP)', en: '46,328 deaths (FBSP)' },
-    badge: 'SP: 6,4 | AP: 57,4',
-    badgeColor: 'rose'
+    value: '22,8 /100k', sub: { pt: '46.328 MVI (FBSP)', es: '46.328 muertes (FBSP)', en: '46,328 deaths (FBSP)' },
+    badge: 'SP: 6,4 | AP: 57,4', badgeColor: 'rose', spark: [26.7, 25.8, 27.8, 28.9, 30.9, 23.6, 23.3, 22.8]
   },
   {
-    id: 'pix',
-    pillar: 'infrastructure',
-    chartId: 'c-digital-pix',
+    id: 'pix', pillar: 'infrastructure', chartId: 'c-digital-pix',
     label: { pt: 'Transações PIX / Ano', es: 'Transacciones PIX', en: 'PIX Transactions/Yr' },
-    value: '63,8 Bi',
-    sub: { pt: '84% domicílios c/ web', es: '84% hogares con web', en: '84% households online' },
-    badge: 'Líder Global',
-    badgeColor: 'sky'
+    value: '63,8 Bi', sub: { pt: '84% domicílios c/ web', es: '84% hogares con web', en: '84% households online' },
+    badge: 'Líder Global', badgeColor: 'sky', spark: [0, 0, 0, 0.2, 9.4, 24.1, 41.9, 63.8]
   },
   {
-    id: 'trade',
-    pillar: 'trade_global',
-    chartId: 'c-trade-bal',
+    id: 'trade', pillar: 'trade_global', chartId: 'c-trade-bal',
     label: { pt: 'Saldo Comercial', es: 'Balanza Comercial', en: 'Trade Surplus' },
-    value: 'US$ 74,6B',
-    sub: { pt: '30,7% export. p/ China', es: '30,7% export. a China', en: '30.7% exports to China' },
-    badge: 'Grãos: 312Mt',
-    badgeColor: 'emerald'
+    value: 'US$ 74,6B', sub: { pt: '30,7% export. p/ China', es: '30,7% export. a China', en: '30.7% exports to China' },
+    badge: 'Grãos: 312Mt', badgeColor: 'emerald', spark: [-0.7, 44.9, 20.1, -4.0, 46.6, 61.4, 98.9, 74.6]
   }
 ];
 
 window.BR_DATA.PILLARS = [
   {
-    id: 'demographics',
-    num: '01',
-    icon: '👥',
-    color: '#059669',
-    seriesCount: 4,
+    id: 'demographics', num: '01', icon: '👥', color: '#059669', seriesCount: 5,
     keyStat: '1,57 filho/mulher • Pico 2041',
-    title: {
-      pt: 'População, Demografia e Transição Etária',
-      es: 'Población, Demografía y Transición de Edad',
-      en: 'Population, Demographics & Age Transition'
-    },
-    desc: {
-      pt: 'Queda acelerada da fecundidade (de 6,28 para 1,57), fim do bônus demográfico, inversão entre jovens e idosos em 2036 e pico populacional em 2041 (220,4 milhões).',
-      es: 'Caída acelerada de la fecundidad (de 6,28 a 1,57), fin del bono demográfico, inversión entre jóvenes y ancianos en 2036 y pico poblacional en 2041.',
-      en: 'Rapid fertility drop (from 6.28 to 1.57), end of the demographic dividend, youth-to-senior crossover in 2036, and population peak in 2041 (220.4M).'
-    }
+    title: { pt: 'População, Demografia, Censo 2022 e Migrações', es: 'Población, Demografía, Censo 2022 y Migraciones', en: 'Population, Demographics, Census 2022 & Migration' },
+    desc: { pt: 'Queda acelerada da fecundidade (6,28 → 1,57), fim do bônus demográfico, inversão jovens/idosos em 2036, pico populacional em 2041 (220,4M) e saldo migratório inter-regional no Censo 2022.', es: 'Caída de la fecundidad (1,57), fin del bono demográfico, pico poblacional en 2041 y migración interna.', en: 'Rapid fertility drop (1.57), end of demographic dividend, 2041 peak (220.4M), and internal migration shifts.' }
   },
   {
-    id: 'economy',
-    num: '02',
-    icon: '📈',
-    color: '#0284c7',
-    seriesCount: 4,
+    id: 'economy', num: '02', icon: '📈', color: '#0284c7', seriesCount: 5,
     keyStat: 'Agro +255% • Informalidade 38,7%',
-    title: {
-      pt: 'Economia, Trabalho, Renda e Produtividade',
-      es: 'Economía, Trabajo, Ingresos y Productividad',
-      en: 'Economy, Labor, Income & Productivity'
-    },
-    desc: {
-      pt: 'Dualismo produtivo (agropecuária +255% vs. estagnação da indústria e serviços), informalidade estrutural de 38,7%, baixa taxa de investimento (16,5% do PIB) e juro real elevado.',
-      es: 'Dualismo productivo (agro +255% vs. estancamiento industrial y de servicios), informalidad del 38,7%, baja inversión (16,5% PIB) y altas tasas reales.',
-      en: 'Productive dualism (agribusiness +255% vs. stagnant manufacturing/services), 38.7% structural informality, low investment (16.5% GDP), and high real interest rates.'
-    }
+    title: { pt: 'Economia, Produtividade, Juros e Crédito', es: 'Economía, Productividad, Tasas y Crédito', en: 'Economy, Productivity, Interest Rates & Credit' },
+    desc: { pt: 'Dualismo produtivo (Agro +255% vs. Indústria/Serviços estagnados), informalidade de 38,7%, armadilha da renda média (US$ 20,8k PPC), juro real Selic vs. FBCF e spread bancário/endividamento.', es: 'Dualismo productivo, informalidad del 38,7%, trampa de renta media, tasas reales y crédito.', en: 'Productive dualism (Agri +255%), 38.7% informality, middle-income trap, real interest rates, and household credit.' }
   },
   {
-    id: 'fiscal',
-    num: '03',
-    icon: '🏛️',
-    color: '#4f46e5',
-    seriesCount: 4,
+    id: 'fiscal', num: '03', icon: '🏛️', color: '#4f46e5', seriesCount: 5,
     keyStat: 'Carga 32,4% PIB • Rigidez 91,8%',
-    title: {
-      pt: 'Estado Fiscal, Tributos, Previdência e Dívida',
-      es: 'Estado Fiscal, Tributos, Pensiones y Deuda',
-      en: 'Public Finances, Taxation, Pensions & Debt'
-    },
-    desc: {
-      pt: 'Carga tributária de padrão OCDE (32,4% do PIB) concentrada no consumo (44,2%), 91,8% de despesas obrigatórias, gasto previdenciário precoce e DBGG em 78,6% do PIB.',
-      es: 'Carga tributaria del 32,4% del PIB concentrada en consumo (44,2%), 91,8% de gasto obligatorio, alto gasto previsional y deuda bruta del 78,6% del PIB.',
-      en: 'OECD-like tax burden (32.4% GDP) heavily skewed to consumption (44.2%), 91.8% mandatory budget rigidity, high pension spending, and 78.6% GDP gross debt.'
-    }
+    title: { pt: 'Estado Fiscal, Tributos, Previdência e Funcionalismo', es: 'Estado Fiscal, Tributos, Pensiones y Empleo Público', en: 'Public Finances, Taxes, Pensions & Civil Service' },
+    desc: { pt: 'Carga tributária de 32,4% do PIB regressiva no consumo (44,2%), DBGG em 78,6% do PIB, 91,8% de despesa federal obrigatória, gasto previdenciário precoce e prêmio salarial público-privado.', es: 'Carga tributaria del 32,4% PIB, rigidez del 91,8%, gasto previsional y premio salarial público.', en: '32.4% GDP tax burden skewed to consumption, 91.8% budget rigidity, pension spending, and public-private wage gap.' }
   },
   {
-    id: 'inequality',
-    num: '04',
-    icon: '⚖️',
-    color: '#e11d48',
-    seriesCount: 4,
+    id: 'inequality', num: '04', icon: '⚖️', color: '#e11d48', seriesCount: 5,
     keyStat: 'Gini 0,518 • Esgoto 56,0%',
-    title: {
-      pt: 'Pobreza, Desigualdade, Transferências e Habitação',
-      es: 'Pobreza, Desigualdad, Transferencias y Saneamiento',
-      en: 'Poverty, Inequality, Transfers & Sanitation'
-    },
-    desc: {
-      pt: 'Concentração extrema no 1% do topo (26,5% da renda nacional), redução da extrema pobreza via transferências e déficit histórico de coleta de esgoto (44% sem rede).',
-      es: 'Concentración en el 1% superior (26,5% del ingreso), reducción de pobreza extrema y déficit histórico de alcantarillado (44% sin red).',
-      en: 'Extreme Top 1% income share (26.5%), poverty reduction via targeted transfers, and persistent sanitation gaps (44% lacking sewage collection).'
-    }
+    title: { pt: 'Pobreza, Desigualdade, Raça/Gênero e Saneamento', es: 'Pobreza, Desigualdad, Raza/Género y Saneamiento', en: 'Poverty, Inequality, Race/Gender & Sanitation' },
+    desc: { pt: 'Concentração no 1% mais rico (26,5%), gargalo de coleta e tratamento de esgoto (SNIS), redução da pobreza via transferências, série do Gini e hiato salarial por raça e gênero.', es: 'Concentración en el 1% superior (26,5%), brecha de alcantarillado, pobreza y brecha racial/género.', en: 'Top 1% income share (26.5%), sanitation gaps, poverty trends, Gini trajectory, and race/gender wage gaps.' }
   },
   {
-    id: 'health',
-    num: '05',
-    icon: '🩺',
-    color: '#db2777',
-    seriesCount: 4,
+    id: 'health', num: '05', icon: '🩺', color: '#db2777', seriesCount: 5,
     keyStat: 'Vida 76,4 anos • Obesidade 24,3%',
-    title: {
-      pt: 'Saúde Pública (SUS), Nutrição e Epidemiologia',
-      es: 'Salud Pública (SUS), Nutrición y Epidemiología',
-      en: 'Public Health (SUS), Nutrition & Epidemiology'
-    },
-    desc: {
-      pt: 'Queda drástica da mortalidade infantil e do tabagismo (9,3%), contraposta à duplicação da obesidade adulta (24,3%), subfinanciamento público do SUS (4,0% PIB) e oscilação vacinal.',
-      es: 'Caída de mortalidad infantil y tabaquismo (9,3%) frente al alza de obesidad adulta (24,3%) y gasto público en salud del 4,0% del PIB.',
-      en: 'Sharp drop in infant mortality and smoking (9.3%) contrasted with surging adult obesity (24.3%), public health spending at 4.0% of GDP, and immunization recovery.'
-    }
+    title: { pt: 'Saúde Pública (SUS), Nutrição e Epidemiologia', es: 'Salud Pública (SUS), Nutrición y Epidemiología', en: 'Public Health (SUS), Nutrition & Epidemiology' },
+    desc: { pt: 'Queda de 82% na mortalidade infantil e do tabagismo (9,3%) vs. alta da obesidade (24,3%), financiamento público do SUS (4,0% PIB) vs. privado (5,6% PIB), vacinação PNI e dengue/leitos UTI.', es: 'Caída de mortalidad infantil y tabaquismo vs. obesidad, gasto SUS (4,0% PIB) y vacunación.', en: '82% infant mortality drop and low smoking vs. obesity surge, SUS vs. private health spend, and immunization.' }
   },
   {
-    id: 'education',
-    num: '06',
-    icon: '🎓',
-    color: '#d97706',
-    seriesCount: 4,
-    keyStat: 'IDEB Iniciais 6,0 vs EM 4,3 • PISA 379',
-    title: {
-      pt: 'Educação, Capital Humano e Ciência & Tecnologia',
-      es: 'Educación, Capital Humano y Ciencia y Tecnología',
-      en: 'Education, Human Capital & Science / R&D'
-    },
-    desc: {
-      pt: 'Avanço consistente na alfabetização e anos iniciais (IDEB 6,0), mas estagnação no Ensino Médio (4,3), baixo aprendizado em Matemática no PISA (379) e 19,8% de jovens "nem-nem".',
-      es: 'Avance en primaria (IDEB 6,0), pero estancamiento en secundaria (4,3), rezago en PISA Matemáticas (379) y 19,8% de jóvenes "ni-ni".',
-      en: 'Strong progress in early primary (IDEB 6.0), but high school stagnation (4.3), low PISA Math scores (379 vs. 472 OECD), and 19.8% NEET youth rate.'
-    }
+    id: 'education', num: '06', icon: '🎓', color: '#d97706', seriesCount: 5,
+    keyStat: 'IDEB Iniciais 6,0 vs EM 4,3 • EAD 51%',
+    title: { pt: 'Educação, Capital Humano, Ensino Superior e C&T', es: 'Educación, Capital Humano, Universidad y C&T', en: 'Education, Human Capital, Higher Ed & Science' },
+    desc: { pt: 'Avanço nos anos iniciais (IDEB 6,0) vs. estagnação no Ensino Médio (4,3), PISA Matemática (379 pts), jovens "nem-nem" (19,8%), gasto por aluno (Básico vs. Superior) e explosão do ensino EAD (51%).', es: 'Avance en primaria vs. estancamiento en secundaria, PISA, jóvenes ni-ni y explosión universitaria EAD.', en: 'Early primary IDEB gains vs. high school stagnation, PISA gaps, NEET youth, per-pupil spend, and 51% online higher ed.' }
   },
   {
-    id: 'energy_climate',
-    num: '07',
-    icon: '🌱',
-    color: '#16a34a',
-    seriesCount: 4,
+    id: 'energy_climate', num: '07', icon: '🌱', color: '#16a34a', seriesCount: 5,
     keyStat: 'Eletric. 89,2% Limpa • 75% GEE Terra/Agro',
-    title: {
-      pt: 'Energia Limpa, Clima, Desmatamento e Biomas',
-      es: 'Energía Limpia, Clima, Deforestación y Biomas',
-      en: 'Clean Energy, Climate, Land Use & Biomes'
-    },
-    desc: {
-      pt: 'Matriz elétrica mais limpa do G20 (89,2% renovável com boom solar e eólico), enquanto 75% das emissões de GEE decorrem de mudança de uso da terra (Amazônia/Cerrado) e agropecuária.',
-      es: 'Matriz eléctrica más limpia del G20 (89,2% renovable), mientras el 75% de las emisiones GEI provienen del uso del suelo y agropecuaria.',
-      en: 'Cleanest G20 power grid (89.2% renewable via hydro, wind, and solar boom), while 75% of GHG emissions stem from deforestation and agriculture.'
-    }
+    title: { pt: 'Energia Limpa, Clima, Desmatamento e Biocombustíveis', es: 'Energía Limpia, Clima, Deforestación y Biocombustibles', en: 'Clean Energy, Climate, Deforestation & Biofuels' },
+    desc: { pt: 'Matriz elétrica 89,2% renovável (boom solar e eólico), 75% das emissões de GEE vindas de Uso da Terra e Agro (SEEG), desmatamento PRODES Amazônia/Cerrado, desastres climáticos e biocombustíveis.', es: 'Electricidad 89,2% renovable, emisiones por uso del suelo, PRODES y biocombustibles.', en: '89.2% renewable electricity, 75% land-use/agri GHG profile, PRODES deforestation, climate losses, and biofuels.' }
   },
   {
-    id: 'security_justice',
-    num: '08',
-    icon: '🛡️',
-    color: '#dc2626',
-    seriesCount: 4,
+    id: 'security_justice', num: '08', icon: '🛡️', color: '#dc2626', seriesCount: 5,
     keyStat: 'Homicídios 22,8/100k • 84M Processos',
-    title: {
-      pt: 'Segurança Pública, Justiça e Sistema Prisional',
-      es: 'Seguridad Pública, Justicia y Sistema Penitenciario',
-      en: 'Public Safety, Justice & Prison System'
-    },
-    desc: {
-      pt: 'Inversão geográfica dos homicídios (queda de 85% em SP vs. alta no Norte/Nordeste), explosão de crimes digitais, 852 mil presos e Judiciário custando 1,3% do PIB com 84 milhões de processos.',
-      es: 'Inversión geográfica de homicidios (caída del 85% en SP vs. Norte/Nordeste), explosión de estafas digitales, 852 mil presos y alto costo judicial (1,3% PIB).',
-      en: 'Geographic inversion of homicides (85% drop in São Paulo vs. North/Northeast), surge in cyber fraud, 852k prisoners, and judiciary costing 1.3% of GDP.'
-    }
+    title: { pt: 'Segurança Pública, Crime Digital, Prisões e Justiça', es: 'Seguridad Pública, Delito Digital, Prisiones y Justicia', en: 'Public Safety, Cyber Crime, Prisons & Justice' },
+    desc: { pt: 'Inversão geográfica dos homicídios (SP -85% vs. Norte/Nordeste), explosão de golpes digitais (+368%), 852 mil presos, Judiciário custando 1,3% do PIB (84M processos) e letalidade policial/trânsito.', es: 'Inversión geográfica de homicidios, estafas digitales (+368%), 852 mil presos y costo judicial (1,3% PIB).', en: 'Geographic inversion of homicides, +368% digital fraud surge, 852k prisoners, and judiciary costing 1.3% of GDP.' }
   },
   {
-    id: 'infrastructure',
-    num: '09',
-    icon: '🚄',
-    color: '#0d9488',
-    seriesCount: 4,
+    id: 'infrastructure', num: '09', icon: '🚄', color: '#0d9488', seriesCount: 5,
     keyStat: '65% Carga Rodoviária • PIX 63,8 Bi',
-    title: {
-      pt: 'Infraestrutura, Logística, Cidades e Digitalização',
-      es: 'Infraestructura, Logística, Ciudades y Digitalización',
-      en: 'Infrastructure, Logistics, Cities & Digitalization'
-    },
-    desc: {
-      pt: 'Contraste entre infraestrutura física subfinanciada (investimento de 1,8% do PIB e 65% de dependência rodoviária) e infraestrutura digital de ponta (PIX, Open Finance e 84% de banda larga).',
-      es: 'Contraste entre infraestructura física rezagada (inversión del 1,8% PIB y 65% transporte carretero) y liderazgo digital (PIX con 63,8 mil millones de operaciones).',
-      en: 'Stark contrast between underfunded physical logistics (1.8% GDP investment, 65% road freight dependency) and world-leading digital public infrastructure (PIX).'
-    }
+    title: { pt: 'Infraestrutura, Logística, Mobilidade e Digitalização', es: 'Infraestructura, Logística, Movilidad y Digitalización', en: 'Infrastructure, Logistics, Mobility & Digitalization' },
+    desc: { pt: 'Dependência rodoviária (64,9% da carga), subinvestimento físico (2,1% vs. 4,3% do PIB), liderança mundial do PIX (63,8 bi transações), fibra óptica (84% domicílios) e crise dos ônibus urbanos vs. motos.', es: 'Dependencia carretera (64,9%), baja inversión física, liderazgo mundial de PIX y crisis del autobús urbano.', en: 'Road freight dependency (64.9%), infrastructure capex gap, PIX real-time payments boom, fiber broadband, and urban transit.' }
   },
   {
-    id: 'trade_global',
-    num: '10',
-    icon: '🌐',
-    color: '#7c3aed',
-    seriesCount: 4,
+    id: 'trade_global', num: '10', icon: '🌐', color: '#7c3aed', seriesCount: 5,
     keyStat: 'Superávit US$ 74,6B • China 30,7%',
-    title: {
-      pt: 'Comércio Exterior, Agronegócio e Inserção Global',
-      es: 'Comercio Exterior, Agronegocio e Inserción Global',
-      en: 'Foreign Trade, Agribusiness & Global Integration'
-    },
-    desc: {
-      pt: 'Superávits comerciais estruturais impulsionados por grãos (312 Mt), petróleo e minério, ascensão da China (30,7% das exportações) e recuo da indústria de transformação para 11,4% do PIB.',
-      es: 'Superávits comerciales impulsados por granos (312 Mt), petróleo y minerales, ascenso de China (30,7% de exportaciones) y desindustrialización temprana.',
-      en: 'Structural trade surpluses driven by grains (312 Mt), oil, and iron ore, China’s rise to 30.7% of exports, and premature deindustrialization (manufacturing at 11.4% GDP).'
-    }
+    title: { pt: 'Comércio Exterior, Agronegócio, Indústria e IDP', es: 'Comercio Exterior, Agronegocio, Industria e IED', en: 'Foreign Trade, Agribusiness, Manufacturing & FDI' },
+    desc: { pt: 'Superávit comercial estrutural (US$ 74,6B–98,9B), China absorvendo 30,7% das exportações, desindustrialização precoce (11,4% PIB), efeito poupa-terra na safra de grãos (312 Mt) e Investimento Direto (IDP).', es: 'Superávit comercial estructural, ascenso de China (30,7%), desindustrialización y productividad agrícola.', en: 'Structural trade surpluses, China at 30.7% of exports, premature deindustrialization, grain yield boom, and FDI inflows.' }
+  },
+  {
+    id: 'institutions', num: '11', icon: '⚖️', color: '#be123c', seriesCount: 5,
+    keyStat: 'Emendas R$ 53 Bi • 34% Municípios s/ Receita',
+    title: { pt: 'Democracia, Governança, Emendas e Federalismo', es: 'Democracia, Gobernanza, Enmiendas y Federalismo', en: 'Democracy, Governance, Budget Amendments & Federalism' },
+    desc: { pt: 'Escalada das emendas parlamentares (R$ 53 bi/ano), fragmentação partidária (NEP), sub-representação feminina na Câmara (17,7%), percepção de corrupção/governança e dependência fiscal de 5.570 municípios.', es: 'Escalada de enmiendas parlamentarias (R$ 53 mil millones), fragmentación partidaria y dependencia fiscal municipal.', en: 'Surge of congressional budget amendments (R$ 53B/yr), party fragmentation, women in parliament (17.7%), and municipal fiscal dependency.' }
+  },
+  {
+    id: 'society_culture', num: '12', icon: '🏙️', color: '#0369a1', seriesCount: 5,
+    keyStat: 'Turismo 6,6M • Diáspora 4,6M • 9h13 Online',
+    title: { pt: 'Cidades, Turismo, Transição Religiosa e Sociedade', es: 'Ciudades, Turismo, Transición Religiosa y Sociedad', en: 'Cities, Tourism, Religious Shift & Digital Society' },
+    desc: { pt: 'Ascensão das cidades médias do interior vs. metrópoles, paradoxo do turismo internacional estagnado (6,6M visitantes/ano), transição religiosa nos Censos (1970–2022), tempo online (#1 global) e diáspora (4,6M no exterior).', es: 'Ascenso de ciudades medias, paradoja del turismo internacional (6,6M), transición religiosa y diáspora (4,6M).', en: 'Rise of interior agribusiness cities, international tourism stagnation (6.6M visitors/yr), Census religious shift, and 4.6M diaspora.' }
   }
 ];
 
 window.BR_DATA.PARADOXES = [
   {
     num: 'I',
-    title: {
-      pt: 'Envelhecimento Europeu antes da Renda Plena',
-      es: 'Envejecimiento Europeo antes de Altos Ingresos',
-      en: 'European Aging Before High Income'
-    },
-    text: {
-      pt: 'A França levou 115 anos e o Reino Unido 45 anos para dobrar a proporção de idosos de 7% para 14%; o Brasil fará essa transição em apenas 21 anos (2011–2032), com fecundidade de 1,57 e PIB per capita equivalente a um terço da OCDE.',
-      es: 'Francia tardó 115 años en duplicar su población mayor del 7% al 14%; Brasil lo hará en solo 21 años (2011–2032) con un tercio del ingreso OCDE.',
-      en: 'France took 115 years to double its senior share from 7% to 14%; Brazil is doing it in just 21 years (2011–2032) at one-third of OECD per-capita income.'
-    }
+    title: { pt: 'Envelhecimento Europeu antes da Renda Plena', es: 'Envejecimiento Europeo antes de Altos Ingresos', en: 'European Aging Before High Income' },
+    text: { pt: 'A França levou 115 anos e o Reino Unido 45 anos para dobrar a proporção de idosos de 7% para 14%; o Brasil fará essa transição em apenas 21 anos (2011–2032), com fecundidade de 1,57 e PIB per capita equivalente a um terço da OCDE.', es: 'Francia tardó 115 años en duplicar su población mayor del 7% al 14%; Brasil lo hará en solo 21 años (2011–2032).', en: 'France took 115 years to double its senior share from 7% to 14%; Brazil is doing it in just 21 years (2011–2032) at one-third of OECD per-capita income.' }
   },
   {
     num: 'II',
-    title: {
-      pt: 'Superpotência Agroambiental vs. Estagnação Urbana',
-      es: 'Superpotencia Agro vs. Estancamiento Urbano',
-      en: 'Agri-Productivity Boom vs. Urban Stagnation'
-    },
-    text: {
-      pt: 'Entre 1995 e 2024, a produtividade do trabalho na agropecuária cresceu +255% com tecnologia tropical (Embrapa), enquanto a indústria (-3,2%) e os serviços tradicionais (+4,2%), que empregam 85% dos brasileiros, ficaram estagnados.',
-      es: 'Entre 1995 y 2024, la productividad agropecuaria creció +255%, mientras industria (-3,2%) y servicios (+4,2%) permanecieron estancados.',
-      en: 'From 1995 to 2024, agricultural labor productivity jumped +255%, while manufacturing (-3.2%) and services (+4.2%), employing 85% of workers, flatlined.'
-    }
+    title: { pt: 'Superpotência Agroambiental vs. Estagnação Urbana', es: 'Superpotencia Agro vs. Estancamiento Urbano', en: 'Agri-Productivity Boom vs. Urban Stagnation' },
+    text: { pt: 'Entre 1995 e 2024, a produtividade do trabalho na agropecuária cresceu +255% com tecnologia tropical (Embrapa), enquanto a indústria (-3,2%) e os serviços tradicionais (+4,2%), que empregam 85% dos brasileiros, ficaram estagnados.', es: 'Entre 1995 y 2024, la productividad agropecuaria creció +255%, mientras industria y servicios permanecieron estancados.', en: 'From 1995 to 2024, agricultural labor productivity jumped +255%, while manufacturing (-3.2%) and services (+4.2%), employing 85% of workers, flatlined.' }
   },
   {
     num: 'III',
-    title: {
-      pt: 'Carga Tributária de OCDE com Estado Regressivo',
-      es: 'Recaudación OCDE con Tributo Regresivo',
-      en: 'OECD Tax Burden with Regressive Incidence'
-    },
-    text: {
-      pt: 'O Brasil arrecada 32,4% do PIB (próximo aos 34,0% da OCDE), mas 44,2% vêm de tributos indiretos sobre consumo e 91,8% do orçamento federal é obrigatório, restando menos de 2% do PIB para investimento público em infraestrutura.',
-      es: 'Brasil recauda el 32,4% del PIB, pero el 44,2% proviene del consumo y el 91,8% del presupuesto federal es gasto obligatorio.',
-      en: 'Brazil collects 32.4% of GDP in taxes (near the 34.0% OECD mean), yet 44.2% falls on consumption and 91.8% of federal spending is mandatory.'
-    }
+    title: { pt: 'Carga Tributária de OCDE com Estado Regressivo', es: 'Recaudación OCDE con Tributo Regresivo', en: 'OECD Tax Burden with Regressive Incidence' },
+    text: { pt: 'O Brasil arrecada 32,4% do PIB (próximo aos 34,0% da OCDE), mas 44,2% vêm de tributos indiretos sobre consumo e 91,8% do orçamento federal é obrigatório, enquanto emendas parlamentares já capturam R$ 53 bilhões/ano.', es: 'Brasil recauda el 32,4% del PIB, pero el 44,2% proviene del consumo y el 91,8% del presupuesto federal es gasto obligatorio.', en: 'Brazil collects 32.4% of GDP in taxes, yet 44.2% falls on consumption and 91.8% of federal spending is mandatory.' }
   },
   {
     num: 'IV',
-    title: {
-      pt: 'Eletricidade de Primeiro Mundo, Emissões Florestais',
-      es: 'Electricidad Limpia, Emisiones Forestales',
-      en: 'G20’s Cleanest Grid, Land-Use Carbon Profile'
-    },
-    text: {
-      pt: '89,2% da eletricidade brasileira é renovável (vs. 33,4% na OCDE). Por isso, a descarbonização brasileira depende fundamentalmente de zerar o desmatamento na Amazônia e no Cerrado (48% das emissões de GEE) e recuperar pastagens.',
-      es: 'El 89,2% de la electricidad brasileña es renovable; el 75% de sus emisiones proviene del uso de la tierra y agropecuaria.',
-      en: '89.2% of Brazil’s electricity is renewable (vs. 33.4% in the OECD); 75% of national GHG emissions come from land-use change and agriculture.'
-    }
+    title: { pt: 'Eletricidade de Primeiro Mundo, Emissões Florestais', es: 'Electricidad Limpia, Emisiones Forestales', en: 'G20’s Cleanest Grid, Land-Use Carbon Profile' },
+    text: { pt: '89,2% da eletricidade brasileira é renovável (vs. 33,4% na OCDE). Por isso, a descarbonização brasileira depende fundamentalmente de zerar o desmatamento na Amazônia e no Cerrado (48% das emissões de GEE) e recuperar pastagens.', es: 'El 89,2% de la electricidad brasileña es renovable; el 75% de sus emisiones proviene del uso de la tierra y agropecuaria.', en: '89.2% of Brazil’s electricity is renewable (vs. 33.4% in the OECD); 75% of national GHG emissions come from land-use change and agriculture.' }
   },
   {
     num: 'V',
-    title: {
-      pt: 'Digitalização Financeira Líder vs. Déficit de Saneamento',
-      es: 'Finanzas Digitales Líderes vs. Rezago Sanitario',
-      en: 'World-Class FinTech vs. 19th-Century Sanitation Gap'
-    },
-    text: {
-      pt: 'O país que processa 63,8 bilhões de transações instantâneas no PIX por ano e tem 84% dos domicílios conectados à internet ainda possui ~90 milhões de habitantes (44% da população) sem conexão à rede coletora de esgoto.',
-      es: 'El país que procesa 63,8 mil millones de pagos PIX al año aún tiene al 44% de su población sin red de alcantarillado.',
-      en: 'A nation processing 63.8 billion instant PIX payments annually still leaves 44% of its population (~90 million people) without mains sewage collection.'
-    }
+    title: { pt: 'Digitalização Financeira Líder vs. Déficit de Saneamento', es: 'Finanzas Digitales Líderes vs. Rezago Sanitario', en: 'World-Class FinTech vs. 19th-Century Sanitation Gap' },
+    text: { pt: 'O país que processa 63,8 bilhões de transações instantâneas no PIX por ano e é #1 mundial em tempo conectado (9h13/dia) ainda possui ~90 milhões de habitantes (44% da população) sem conexão à rede coletora de esgoto.', es: 'El país que procesa 63,8 mil millones de pagos PIX al año aún tiene al 44% de su población sin red de alcantarillado.', en: 'A nation processing 63.8 billion instant PIX payments annually still leaves 44% of its population (~90 million people) without mains sewage collection.' }
   },
   {
     num: 'VI',
-    title: {
-      pt: 'A Grande Inversão Geográfica da Violência',
-      es: 'La Gran Inversión Geográfica de la Violencia',
-      en: 'The Great Geographic Inversion of Homicides'
-    },
-    text: {
-      pt: 'Em 2000, São Paulo tinha taxa de 42,2 homicídios por 100 mil hab. — mais que o dobro do Nordeste (19,5). Em 2023, São Paulo caiu para 6,4 (-85%), enquanto Nordeste (33,4) e Norte (32,1) tornaram-se o epicentro da letalidade.',
-      es: 'En 2000, São Paulo tenía 42,2 homicidios/100k y el Nordeste 19,5; hoy São Paulo tiene 6,4 (-85%) y el Nordeste 33,4.',
-      en: 'In 2000, São Paulo’s homicide rate (42.2/100k) was double the Northeast’s (19.5). By 2023, São Paulo fell 85% to 6.4, while the Northeast (33.4) and North (32.1) surged.'
-    }
+    title: { pt: 'A Grande Inversão Geográfica da Violência', es: 'La Gran Inversión Geográfica de la Violencia', en: 'The Great Geographic Inversion of Homicides' },
+    text: { pt: 'Em 2000, São Paulo tinha taxa de 42,2 homicídios por 100 mil hab. — mais que o dobro do Nordeste (19,5). Em 2023, São Paulo caiu para 6,4 (-85%), enquanto Nordeste (33,4) e Norte (32,1) tornaram-se o epicentro da letalidade.', es: 'En 2000, São Paulo tenía 42,2 homicidios/100k y el Nordeste 19,5; hoy São Paulo tiene 6,4 (-85%) y el Nordeste 33,4.', en: 'In 2000, São Paulo’s homicide rate (42.2/100k) was double the Northeast’s (19.5). By 2023, São Paulo fell 85% to 6.4, while the Northeast (33.4) and North (32.1) surged.' }
+  },
+  {
+    num: 'VII',
+    title: { pt: 'Gigante Natural com Turismo Internacional de Uma Torre Eiffel', es: 'Gigante Natural con Turismo Estancado en 6,6M', en: 'Continental Megadiversity with 1 Eiffel Tower of Tourists' },
+    text: { pt: 'Apesar de liderar o ranking mundial de biodiversidade e patrimônio natural, o Brasil recebe apenas ~6,6 milhões de turistas internacionais por ano (praticamente o mesmo patamar de 2005 e equivalente apenas aos visitantes pagantes da Torre Eiffel), contra 42 milhões no México e 85 milhões na Espanha.', es: 'Pese a su biodiversidad, Brasil recibe solo 6,6 millones de turistas extranjeros al año frente a 42 millones en México.', en: 'Despite unmatched natural biodiversity, Brazil attracts just ~6.6M international tourists a year (roughly equal to the Eiffel Tower alone), vs. 42M in Mexico.' }
+  },
+  {
+    num: 'VIII',
+    title: { pt: 'Federalismo sem Receita Própria e Judiciário Recordista', es: 'Federalismo Dependiente y Costo Judicial Récord', en: 'Dependent Municipalities & World-Record Judicial Spend' },
+    text: { pt: 'Dos 5.570 municípios brasileiros, 34% não arrecadam nem 10% do próprio orçamento (dependendo >90% de repasses), enquanto o Poder Judiciário consome 1,3% do PIB (4x a média europeia) para administrar 84 milhões de processos.', es: 'El 34% de los 5.570 municipios no genera ni el 10% de sus ingresos, y el Poder Judicial consume el 1,3% del PIB.', en: '34% of Brazil’s 5,570 municipalities generate under 10% of their own revenue, while the Judiciary consumes a world-record 1.3% of GDP.' }
   }
 ];

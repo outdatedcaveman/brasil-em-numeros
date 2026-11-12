@@ -4,12 +4,17 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Brasil em Números | Brazil by Numbers — Portal Público de Inteligência Estatística</title>
-  <meta name="description" content="Portal público de estatísticas estruturais do Brasil em 10 pilares, 40 séries históricas, Mapa e Atlas das 27 UFs, Laboratório de Correlações OLS, Simulador Fiscal da Dívida Bruta (DBGG), Pirâmide Etária e Calculadora de Renda." />
+  <meta name="description" content="Portal público de estatísticas estruturais do Brasil em 12 pilares, 60 séries históricas, Mapa Geográfico e Cartograma das 27 UFs, Laboratório de Correlações OLS, Simulador Fiscal (DBGG), Decomposição do Orçamento, Pirâmide Etária, Calculadora de Renda/Impostos e API do Banco Central ao vivo." />
   <meta property="og:title" content="Brasil em Números | Brazil by Numbers — Portal de Inteligência Estatística" />
-  <meta property="og:description" content="10 pilares estruturais, 40 séries oficiais auditáveis (IBGE, BCB, STN, IPEA, DataSUS, INEP, EPE, SEEG, INPE, FBSP), Mapa das 27 UFs e Simuladores." />
+  <meta property="og:description" content="12 pilares estruturais, 60 séries oficiais auditáveis (IBGE, BCB, STN, IPEA, DataSUS, INEP, EPE, SEEG, INPE, FBSP, CNJ, TSE), Mapa das 27 UFs e Simuladores." />
   <meta property="og:type" content="website" />
-  <!-- Tailwind CSS CDN -->
+  <!-- Tailwind CSS CDN with class-based Dark Mode -->
   <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class'
+    };
+  </script>
   <!-- Google Fonts: Inter & JetBrains Mono -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -19,8 +24,6 @@
   <style>
     body {
       font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-      background-color: #FAF8F5;
-      color: #1C1917;
     }
     .font-mono {
       font-family: 'JetBrains Mono', monospace;
@@ -34,10 +37,10 @@
     }
   </style>
 </head>
-<body class="min-h-screen bg-[#FAF8F5] text-stone-900 selection:bg-emerald-200 selection:text-emerald-950">
+<body class="min-h-screen bg-[#FAF8F5] dark:bg-stone-950 text-stone-900 dark:text-stone-100 selection:bg-emerald-200 selection:text-emerald-950 transition-colors duration-200">
 
   <!-- TOP STICKY HEADER -->
-  <header class="sticky top-0 z-40 bg-[#FAF8F5]/95 backdrop-blur-md border-b border-stone-200 shadow-sm">
+  <header class="sticky top-0 z-40 bg-[#FAF8F5]/95 dark:bg-stone-950/95 backdrop-blur-md border-b border-stone-200 dark:border-stone-800 shadow-sm">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex flex-col md:flex-row md:items-center md:justify-between py-3 gap-3">
         <!-- Brand -->
@@ -47,54 +50,63 @@
           </div>
           <div>
             <div class="flex items-center gap-2">
-              <h1 id="ui-brand-title" class="text-xl font-extrabold tracking-tight text-stone-900">Brasil em Números</h1>
-              <span id="ui-edition-tag" class="hidden sm:inline-block px-2 py-0.5 text-[11px] font-bold uppercase tracking-wider bg-amber-100 text-amber-900 rounded-md border border-amber-200">
-                Edição Completa • 10 Pilares • 40 Séries
+              <h1 id="ui-brand-title" class="text-xl font-extrabold tracking-tight text-stone-900 dark:text-stone-100">Brasil em Números</h1>
+              <span id="ui-edition-tag" class="hidden sm:inline-block px-2 py-0.5 text-[11px] font-bold uppercase tracking-wider bg-amber-100 dark:bg-amber-950 text-amber-900 dark:text-amber-300 rounded-md border border-amber-200 dark:border-amber-800">
+                12 Pilares • 60 Séries • 27 UFs • API BCB/IBGE
               </span>
             </div>
-            <p id="ui-brand-sub" class="text-xs text-stone-500 font-medium">Portal Público de Inteligência Estatística e Simulação Estrutural do Brasil</p>
+            <p id="ui-brand-sub" class="text-xs text-stone-500 dark:text-stone-400 font-medium">Portal Público de Inteligência Estatística, Mapas e Simulação Estrutural do Brasil</p>
           </div>
         </div>
 
-        <!-- Controls: Search + UK Toggle + Language Switcher -->
+        <!-- Controls: Search + UK Toggle + Dark Mode + Language Switcher (PT | ES | EN) -->
         <div class="flex flex-wrap items-center gap-2">
-          <div class="relative flex-1 sm:w-64">
+          <div class="relative flex-1 sm:w-56">
             <input
               id="search-input"
               type="text"
               oninput="window.BR_APP.handleSearch(this.value)"
-              placeholder="Buscar séries, indicadores ou fontes..."
-              class="w-full pl-3.5 pr-3 py-1.5 bg-white border border-stone-300 rounded-xl text-xs text-stone-900 placeholder-stone-400 focus:outline-none focus:border-emerald-600"
+              placeholder="Buscar entre 60 séries, 27 estados ou fontes..."
+              class="w-full pl-3.5 pr-3 py-1.5 bg-white dark:bg-stone-900 border border-stone-300 dark:border-stone-700 rounded-xl text-xs text-stone-900 dark:text-stone-100 placeholder-stone-400 focus:outline-none focus:border-emerald-600"
             />
           </div>
 
           <button
             id="btn-uk-toggle"
             onclick="window.BR_APP.toggleUkBenchmark()"
-            class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold border bg-blue-50 text-blue-900 border-blue-200 hover:bg-blue-100 transition-all"
+            class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold border bg-blue-50 dark:bg-blue-950/60 text-blue-900 dark:text-blue-300 border-blue-200 dark:border-blue-800 hover:bg-blue-100 transition-all"
           >
             <span>🌐</span>
             <span id="ui-uk-btn">Benchmark UK / OCDE: Ativo</span>
           </button>
 
-          <div class="inline-flex rounded-xl bg-stone-200/80 p-0.5 border border-stone-300">
-            <button id="lang-pt" onclick="window.BR_APP.setLanguage('pt')" class="px-2.5 py-1 rounded-lg text-xs font-extrabold bg-white text-emerald-900 shadow-sm">PT-BR</button>
-            <button id="lang-es" onclick="window.BR_APP.setLanguage('es')" class="px-2.5 py-1 rounded-lg text-xs font-extrabold text-stone-600">ES</button>
-            <button id="lang-en" onclick="window.BR_APP.setLanguage('en')" class="px-2.5 py-1 rounded-lg text-xs font-extrabold text-stone-600">EN</button>
+          <button
+            id="btn-dark-toggle"
+            onclick="window.BR_APP.toggleDarkMode()"
+            class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold border bg-stone-200/80 dark:bg-stone-800 text-stone-800 dark:text-stone-200 border-stone-300 dark:border-stone-700 hover:bg-stone-300 dark:hover:bg-stone-700 transition-all"
+            title="Alternar Modo Escuro / Claro"
+          >
+            <span id="ui-dark-btn">🌙 Modo Escuro</span>
+          </button>
+
+          <div class="inline-flex rounded-xl bg-stone-200/80 dark:bg-stone-800 p-0.5 border border-stone-300 dark:border-stone-700">
+            <button id="lang-pt" onclick="window.BR_APP.setLanguage('pt')" class="px-2.5 py-1 rounded-lg text-xs font-extrabold bg-white dark:bg-stone-900 text-emerald-900 dark:text-emerald-400 shadow-sm">PT</button>
+            <button id="lang-es" onclick="window.BR_APP.setLanguage('es')" class="px-2.5 py-1 rounded-lg text-xs font-extrabold text-stone-600 dark:text-stone-400">ES</button>
+            <button id="lang-en" onclick="window.BR_APP.setLanguage('en')" class="px-2.5 py-1 rounded-lg text-xs font-extrabold text-stone-600 dark:text-stone-400">EN</button>
           </div>
         </div>
       </div>
 
       <!-- 8 Navigation Tabs -->
-      <nav class="flex items-center gap-1.5 overflow-x-auto py-2 border-t border-stone-200/80 no-scrollbar">
-        <button id="tab-overview" onclick="window.BR_APP.switchTab('overview')" class="px-3.5 py-2 rounded-xl text-xs font-extrabold whitespace-nowrap bg-emerald-700 text-white shadow-sm">1. Visão Geral & 10 Pilares</button>
-        <button id="tab-charts" onclick="window.BR_APP.switchTab('charts')" class="px-3.5 py-2 rounded-xl text-xs font-bold whitespace-nowrap text-stone-600 hover:bg-stone-200/70">2. Explorador (40 Séries)</button>
-        <button id="tab-states" onclick="window.BR_APP.switchTab('states')" class="px-3.5 py-2 rounded-xl text-xs font-bold whitespace-nowrap text-stone-600 hover:bg-stone-200/70">3. Mapa & Atlas das 27 UFs</button>
-        <button id="tab-correlations" onclick="window.BR_APP.switchTab('correlations')" class="px-3.5 py-2 rounded-xl text-xs font-bold whitespace-nowrap text-stone-600 hover:bg-stone-200/70">4. Lab de Correlações (XY)</button>
-        <button id="tab-simulator" onclick="window.BR_APP.switchTab('simulator')" class="px-3.5 py-2 rounded-xl text-xs font-bold whitespace-nowrap text-stone-600 hover:bg-stone-200/70">5. Simulador Fiscal & Demográfico</button>
-        <button id="tab-income" onclick="window.BR_APP.switchTab('income')" class="px-3.5 py-2 rounded-xl text-xs font-bold whitespace-nowrap text-stone-600 hover:bg-stone-200/70">6. Calculadora de Renda</button>
-        <button id="tab-benchmark" onclick="window.BR_APP.switchTab('benchmark')" class="px-3.5 py-2 rounded-xl text-xs font-bold whitespace-nowrap text-stone-600 hover:bg-stone-200/70">7. Brasil vs. Mundo (OCDE/BRICS)</button>
-        <button id="tab-datahub" onclick="window.BR_APP.switchTab('datahub')" class="px-3.5 py-2 rounded-xl text-xs font-bold whitespace-nowrap text-stone-600 hover:bg-stone-200/70">8. Dados Abertos & API</button>
+      <nav class="flex items-center gap-1.5 overflow-x-auto py-2 border-t border-stone-200/80 dark:border-stone-800 no-scrollbar">
+        <button id="tab-overview" onclick="window.BR_APP.switchTab('overview')" class="px-3.5 py-2 rounded-xl text-xs font-extrabold whitespace-nowrap bg-emerald-700 text-white shadow-sm">1. Visão Geral & 12 Pilares</button>
+        <button id="tab-charts" onclick="window.BR_APP.switchTab('charts')" class="px-3.5 py-2 rounded-xl text-xs font-bold whitespace-nowrap text-stone-600 dark:text-stone-300 hover:bg-stone-200/70 dark:hover:bg-stone-800">2. Explorador (60 Séries)</button>
+        <button id="tab-states" onclick="window.BR_APP.switchTab('states')" class="px-3.5 py-2 rounded-xl text-xs font-bold whitespace-nowrap text-stone-600 dark:text-stone-300 hover:bg-stone-200/70 dark:hover:bg-stone-800">3. Mapa Geográfico & 27 UFs</button>
+        <button id="tab-correlations" onclick="window.BR_APP.switchTab('correlations')" class="px-3.5 py-2 rounded-xl text-xs font-bold whitespace-nowrap text-stone-600 dark:text-stone-300 hover:bg-stone-200/70 dark:hover:bg-stone-800">4. Lab de Correlações (XY)</button>
+        <button id="tab-simulator" onclick="window.BR_APP.switchTab('simulator')" class="px-3.5 py-2 rounded-xl text-xs font-bold whitespace-nowrap text-stone-600 dark:text-stone-300 hover:bg-stone-200/70 dark:hover:bg-stone-800">5. Simulador Fiscal, Orçamento & Pirâmide</button>
+        <button id="tab-income" onclick="window.BR_APP.switchTab('income')" class="px-3.5 py-2 rounded-xl text-xs font-bold whitespace-nowrap text-stone-600 dark:text-stone-300 hover:bg-stone-200/70 dark:hover:bg-stone-800">6. Calculadora de Renda & Impostos</button>
+        <button id="tab-benchmark" onclick="window.BR_APP.switchTab('benchmark')" class="px-3.5 py-2 rounded-xl text-xs font-bold whitespace-nowrap text-stone-600 dark:text-stone-300 hover:bg-stone-200/70 dark:hover:bg-stone-800">7. Brasil vs. Mundo (OCDE/BRICS)</button>
+        <button id="tab-datahub" onclick="window.BR_APP.switchTab('datahub')" class="px-3.5 py-2 rounded-xl text-xs font-bold whitespace-nowrap text-stone-600 dark:text-stone-300 hover:bg-stone-200/70 dark:hover:bg-stone-800">8. API ao Vivo (BCB/IBGE) & Dados</button>
       </nav>
     </div>
   </header>
@@ -103,207 +115,218 @@
   <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
 
     <!-- ================================================================== -->
-    <!-- VIEW 1: OVERVIEW, 16 NATIONAL KPIS, 10 PILLARS & 6 PARADOXES       -->
+    <!-- VIEW 1: OVERVIEW, 16 NATIONAL KPIS WITH SPARKLINES, 12 PILLARS     -->
     <!-- ================================================================== -->
     <section id="view-overview" class="space-y-8">
-      <div class="bg-white rounded-3xl p-6 sm:p-10 border border-stone-200 shadow-sm">
-        <span id="ui-hero-badge" class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold bg-emerald-50 text-emerald-800 border border-emerald-200">
+      <div class="bg-white dark:bg-stone-900 rounded-3xl p-6 sm:p-10 border border-stone-200 dark:border-stone-800 shadow-sm">
+        <span id="ui-hero-badge" class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold bg-emerald-50 dark:bg-emerald-950 text-emerald-800 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800">
           Portal Público de Inteligência Estatística • Inspirado em UK by Numbers & Our World in Data
         </span>
-        <h2 id="ui-hero-title" class="text-2xl sm:text-4xl font-black text-stone-900 tracking-tight mt-4 leading-tight max-w-4xl">
-          Entenda os desafios e as transformações estruturais do Brasil com dados oficiais auditáveis.
+        <h2 id="ui-hero-title" class="text-2xl sm:text-4xl font-black text-stone-900 dark:text-stone-100 tracking-tight mt-4 leading-tight max-w-4xl">
+          Todas as grandes questões estruturais do Brasil em dados públicos, mapas e simuladores interativos.
         </h2>
-        <p id="ui-hero-desc" class="text-stone-600 text-sm sm:text-base mt-3 max-w-4xl leading-relaxed">
-          Síntese integrada de 40 séries históricas oficiais em 10 pilares temáticos (IBGE, Banco Central, Tesouro Nacional, IPEA, DataSUS, INEP, EPE, SEEG, INPE, FBSP, CNJ, Anatel e MDIC), acompanhada de Mapa Coroplético das 27 UFs, Laboratório de Regressão e Correlação, Simulador Dinâmico da Dívida Pública (DBGG), Pirâmide Etária (1980–2060) e Calculadora de Posição na Pirâmide de Renda.
+        <p id="ui-hero-desc" class="text-stone-600 dark:text-stone-400 text-sm sm:text-base mt-3 max-w-4xl leading-relaxed">
+          Síntese completa de 60 séries históricas oficiais em 12 pilares temáticos (IBGE, Banco Central, Tesouro Nacional, IPEA, DataSUS, INEP, EPE, SEEG, INPE, FBSP, CNJ, TSE, Anatel, Embratur e MDIC), acompanhada de Mapa Geográfico Interativo das 27 UFs, Laboratório de Regressão OLS, Simulador da Dívida Pública (DBGG), Decomposição do Orçamento, Pirâmide Etária (1980–2060), Calculadora de Renda/Tributos e Conexão em Tempo Real com a API do Banco Central.
         </p>
 
         <div class="flex flex-wrap gap-2.5 mt-6">
           <button onclick="window.BR_APP.switchTab('charts')" class="px-5 py-2.5 rounded-xl text-xs sm:text-sm font-bold bg-emerald-700 hover:bg-emerald-800 text-white shadow-sm transition-all">
-            Explorar as 40 Séries Interativas →
+            Explorar as 60 Séries Interativas →
           </button>
-          <button onclick="window.BR_APP.switchTab('states')" class="px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold bg-[#FAF8F5] hover:bg-stone-200/70 text-stone-800 border border-stone-300">
-            🗺️ Mapa & Atlas das 27 UFs
+          <button onclick="window.BR_APP.switchTab('states')" class="px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold bg-[#FAF8F5] dark:bg-stone-800 hover:bg-stone-200/70 text-stone-800 dark:text-stone-200 border border-stone-300 dark:border-stone-700">
+            🗺️ Mapa Geográfico & 27 UFs
           </button>
-          <button onclick="window.BR_APP.switchTab('correlations')" class="px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold bg-[#FAF8F5] hover:bg-stone-200/70 text-stone-800 border border-stone-300">
-            🔬 Laboratório de Correlações (XY)
+          <button onclick="window.BR_APP.switchTab('correlations')" class="px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold bg-[#FAF8F5] dark:bg-stone-800 hover:bg-stone-200/70 text-stone-800 dark:text-stone-200 border border-stone-300 dark:border-stone-700">
+            🔬 Lab de Correlações (XY)
           </button>
-          <button onclick="window.BR_APP.switchTab('simulator')" class="px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold bg-[#FAF8F5] hover:bg-stone-200/70 text-stone-800 border border-stone-300">
-            🏛️ Simulador Fiscal (DBGG) & Pirâmide
+          <button onclick="window.BR_APP.switchTab('simulator')" class="px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold bg-[#FAF8F5] dark:bg-stone-800 hover:bg-stone-200/70 text-stone-800 dark:text-stone-200 border border-stone-300 dark:border-stone-700">
+            🏛️ Simulador DBGG, Orçamento & Pirâmide
           </button>
-          <button onclick="window.BR_APP.switchTab('income')" class="px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold bg-[#FAF8F5] hover:bg-stone-200/70 text-stone-800 border border-stone-300">
-            💰 Calculadora de Renda
+          <button onclick="window.BR_APP.switchTab('income')" class="px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold bg-[#FAF8F5] dark:bg-stone-800 hover:bg-stone-200/70 text-stone-800 dark:text-stone-200 border border-stone-300 dark:border-stone-700">
+            💰 Calculadora de Renda & Impostos
+          </button>
+          <button onclick="window.BR_APP.switchTab('datahub')" class="px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold bg-[#FAF8F5] dark:bg-stone-800 hover:bg-stone-200/70 text-stone-800 dark:text-stone-200 border border-stone-300 dark:border-stone-700">
+            ⚡ API Banco Central ao Vivo
           </button>
         </div>
 
-        <!-- 16 National Headline KPIs (Clickable) -->
-        <div class="mt-8 pt-6 border-t border-stone-200">
+        <!-- 16 National Headline KPIs with Sparklines -->
+        <div class="mt-8 pt-6 border-t border-stone-200 dark:border-stone-800">
           <div class="flex items-center justify-between mb-3">
-            <h3 class="text-xs font-extrabold uppercase tracking-wider text-stone-500">16 Indicadores-Chave Nacionais (Clique em qualquer card para abrir a série histórica)</h3>
+            <h3 class="text-xs font-extrabold uppercase tracking-wider text-stone-500 dark:text-stone-400">16 Indicadores-Chave Nacionais com Mini-Curvas Históricas (Clique para abrir o gráfico completo)</h3>
             <span class="text-[11px] text-stone-400 font-mono">Dados Oficiais 2024/2025</span>
           </div>
           <div id="kpis-grid" class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-3"></div>
         </div>
       </div>
 
-      <!-- 10 Structural Pillars Grid -->
+      <!-- 12 Structural Pillars Grid -->
       <div>
         <div class="flex flex-col sm:flex-row sm:items-end justify-between mb-4 gap-2">
           <div>
-            <h3 class="text-2xl font-black text-stone-900">Os 10 Pilares Estruturais do Brasil</h3>
-            <p class="text-sm text-stone-600">Cada pilar reúne 4 séries históricas oficiais, síntese analítica e comparativo com o Reino Unido e a OCDE.</p>
+            <h3 class="text-2xl font-black text-stone-900 dark:text-stone-100">Os 12 Pilares Estruturais do Brasil (60 Séries Históricas)</h3>
+            <p class="text-sm text-stone-600 dark:text-stone-400">Cada pilar reúne 5 séries históricas oficiais, síntese analítica e comparativo com o Reino Unido e a OCDE.</p>
           </div>
         </div>
-        <div id="pillars-grid" class="grid grid-cols-1 md:grid-cols-2 gap-5"></div>
+        <div id="pillars-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5"></div>
       </div>
 
-      <!-- 6 Structural Paradoxes of Brazil -->
-      <div class="bg-white rounded-3xl p-6 sm:p-8 border border-stone-200 shadow-sm">
+      <!-- 8 Structural Paradoxes of Brazil -->
+      <div class="bg-white dark:bg-stone-900 rounded-3xl p-6 sm:p-8 border border-stone-200 dark:border-stone-800 shadow-sm">
         <div class="max-w-3xl">
-          <span class="px-2.5 py-1 rounded-full text-xs font-extrabold uppercase bg-stone-900 text-white">Síntese Diagnóstica</span>
-          <h3 class="text-2xl font-black text-stone-900 mt-3">Os 6 Grandes Paradoxos Estruturais do Brasil</h3>
-          <p class="text-sm text-stone-600 mt-1">Por que o Brasil desafia diagnósticos simplistas? Os dados oficiais revelam contrastes profundos entre modernidade e atraso.</p>
+          <span class="px-2.5 py-1 rounded-full text-xs font-extrabold uppercase bg-emerald-700 text-white">Síntese Diagnóstica</span>
+          <h3 class="text-2xl font-black text-stone-900 dark:text-stone-100 mt-3">Os 8 Grandes Paradoxos Estruturais do Brasil</h3>
+          <p class="text-sm text-stone-600 dark:text-stone-400 mt-1">Por que o Brasil desafia diagnósticos simplistas? Os dados públicos revelam contrastes profundos entre modernidade e atraso.</p>
         </div>
-        <div id="paradoxes-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-6"></div>
+        <div id="paradoxes-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mt-6"></div>
       </div>
     </section>
 
     <!-- ================================================================== -->
-    <!-- VIEW 2: CHARTS EXPLORER (40 SERIES + DATA TRANSFORM + EXPORT)      -->
+    <!-- VIEW 2: CHARTS EXPLORER (60 SERIES + DATA TRANSFORM + EXPORT)      -->
     <!-- ================================================================== -->
     <section id="view-charts" class="hidden space-y-6">
-      <div class="bg-white p-4 sm:p-5 rounded-2xl border border-stone-200 shadow-sm space-y-3">
+      <div class="bg-white dark:bg-stone-900 p-4 sm:p-5 rounded-2xl border border-stone-200 dark:border-stone-800 shadow-sm space-y-3">
         <div class="flex flex-wrap items-center justify-between gap-3">
           <div>
-            <h2 class="text-lg font-extrabold text-stone-900">Explorador Interativo das 40 Séries Históricas</h2>
-            <p class="text-xs text-stone-500">Alterne entre Linha, Barras, Área ou Tabela, aplique Índice Base 100 ou baixe qualquer gráfico em CSV/PNG.</p>
+            <h2 class="text-lg font-extrabold text-stone-900 dark:text-stone-100">Explorador Interativo das 60 Séries Históricas Oficiais</h2>
+            <p class="text-xs text-stone-500 dark:text-stone-400">Alterne entre Linha, Barras, Área ou Tabela, aplique Índice Base 100 ou baixe qualquer gráfico em CSV/PNG.</p>
           </div>
           <div class="flex flex-wrap items-center gap-2">
-            <span id="charts-count-badge" class="text-xs font-mono font-bold text-emerald-900 bg-emerald-50 px-2.5 py-1 rounded-lg border border-emerald-200">40 / 40 séries</span>
-            <div class="inline-flex rounded-xl bg-stone-100 p-1 border border-stone-200">
+            <span id="charts-count-badge" class="text-xs font-mono font-bold text-emerald-900 dark:text-emerald-300 bg-emerald-50 dark:bg-emerald-950 px-2.5 py-1 rounded-lg border border-emerald-200 dark:border-emerald-800">60 / 60 séries</span>
+            <div class="inline-flex rounded-xl bg-stone-100 dark:bg-stone-800 p-1 border border-stone-200 dark:border-stone-700">
               <button id="btn-transform-raw" onclick="window.BR_APP.setGlobalTransform('raw')" class="px-2.5 py-1 rounded-lg text-xs font-extrabold bg-emerald-700 text-white">Original</button>
-              <button id="btn-transform-index100" onclick="window.BR_APP.setGlobalTransform('index100')" class="px-2.5 py-1 rounded-lg text-xs font-bold text-stone-600 hover:bg-stone-200">Base 100 (1º Ano)</button>
-              <button id="btn-transform-pctChange" onclick="window.BR_APP.setGlobalTransform('pctChange')" class="px-2.5 py-1 rounded-lg text-xs font-bold text-stone-600 hover:bg-stone-200">Variação Δ%</button>
+              <button id="btn-transform-index100" onclick="window.BR_APP.setGlobalTransform('index100')" class="px-2.5 py-1 rounded-lg text-xs font-bold text-stone-600 dark:text-stone-300 hover:bg-stone-200">Base 100 (1º Ano)</button>
+              <button id="btn-transform-pctChange" onclick="window.BR_APP.setGlobalTransform('pctChange')" class="px-2.5 py-1 rounded-lg text-xs font-bold text-stone-600 dark:text-stone-300 hover:bg-stone-200">Variação Δ%</button>
             </div>
-            <button id="btn-log-scale" onclick="window.BR_APP.toggleLogScale()" class="px-3 py-1 rounded-xl text-xs font-bold bg-[#FAF8F5] text-stone-700 border border-stone-300">
+            <button id="btn-log-scale" onclick="window.BR_APP.toggleLogScale()" class="px-3 py-1 rounded-xl text-xs font-bold bg-[#FAF8F5] dark:bg-stone-800 text-stone-700 dark:text-stone-300 border border-stone-300 dark:border-stone-700">
               Escala Log
             </button>
           </div>
         </div>
-        <div id="pillar-filter-bar" class="flex flex-wrap gap-1.5 pt-2 border-t border-stone-100"></div>
+        <div id="pillar-filter-bar" class="flex flex-wrap gap-1.5 pt-2 border-t border-stone-100 dark:border-stone-800"></div>
       </div>
 
       <div id="charts-grid" class="grid grid-cols-1 lg:grid-cols-2 gap-6"></div>
     </section>
 
     <!-- ================================================================== -->
-    <!-- VIEW 3: 27 STATES CHOROPLETH MAP, RADAR COMPARATOR & ATLAS TABLE   -->
+    <!-- VIEW 3: 27 STATES GEOGRAPHIC MAP + CARTOGRAM + INSPECTOR + RADAR   -->
     <!-- ================================================================== -->
     <section id="view-states" class="hidden space-y-6">
-      <!-- Choropleth Map + Ranking Card -->
-      <div class="bg-white rounded-2xl p-6 border border-stone-200 shadow-sm">
+      <div class="bg-white dark:bg-stone-900 rounded-2xl p-6 border border-stone-200 dark:border-stone-800 shadow-sm">
         <div class="flex flex-col md:flex-row md:items-center justify-between gap-3">
           <div>
-            <span class="px-2.5 py-0.5 rounded-md text-[11px] font-bold uppercase bg-emerald-50 text-emerald-800 border border-emerald-200">Geografia Socioeconômica</span>
-            <h2 class="text-2xl font-extrabold text-stone-900 mt-1">Mapa Coroplético Interativo das 27 Unidades da Federação</h2>
-            <p class="text-xs sm:text-sm text-stone-600">Selecione qualquer um dos 12 indicadores estaduais abaixo para colorir o mapa e o ranking nacional. Clique em um estado no mapa para carregá-lo no Radar.</p>
+            <span class="px-2.5 py-0.5 rounded-md text-[11px] font-bold uppercase bg-emerald-50 dark:bg-emerald-950 text-emerald-800 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800">Geografia Socioeconômica</span>
+            <h2 class="text-2xl font-extrabold text-stone-900 dark:text-stone-100 mt-1">Mapa Coroplético e Cartograma das 27 Unidades da Federação (14 Indicadores)</h2>
+            <p class="text-xs sm:text-sm text-stone-600 dark:text-stone-400">Clique em qualquer estado no mapa para inspecionar sua ficha completa (ranking 1º a 27º em todos os indicadores) e compará-lo no Radar.</p>
           </div>
-          <button onclick="window.BR_APP.downloadAllStatesCSV()" class="self-start px-3.5 py-2 rounded-xl text-xs font-bold bg-emerald-700 hover:bg-emerald-800 text-white shadow-sm">
-            ⬇ Baixar Atlas 27 UFs (CSV)
-          </button>
+          <div class="flex flex-wrap items-center gap-2">
+            <div class="inline-flex rounded-xl bg-stone-100 dark:bg-stone-800 p-1 border border-stone-200 dark:border-stone-700">
+              <button id="map-mode-geo" onclick="window.BR_APP.setMapMode('geo')" class="px-2.5 py-1 rounded-lg text-xs font-extrabold bg-emerald-700 text-white">🗺️ Mapa Geográfico</button>
+              <button id="map-mode-grid" onclick="window.BR_APP.setMapMode('grid')" class="px-2.5 py-1 rounded-lg text-xs font-bold text-stone-600 dark:text-stone-300">🟦 Cartograma</button>
+            </div>
+            <button onclick="window.BR_APP.downloadAllStatesCSV()" class="px-3.5 py-2 rounded-xl text-xs font-bold bg-emerald-700 hover:bg-emerald-800 text-white shadow-sm">
+              ⬇ CSV (27 UFs)
+            </button>
+          </div>
         </div>
 
-        <div id="map-metric-selector" class="flex flex-wrap gap-1.5 mt-4 pt-3 border-t border-stone-100"></div>
+        <div id="map-metric-selector" class="flex flex-wrap gap-1.5 mt-4 pt-3 border-t border-stone-100 dark:border-stone-800"></div>
 
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 mt-6 items-center">
-          <!-- Left: Interactive SVG Tile Choropleth Map -->
-          <div class="lg:col-span-5 bg-[#FAF8F5] p-4 rounded-2xl border border-stone-200">
-            <div class="flex items-center justify-between text-xs font-bold text-stone-600 mb-2">
-              <span>Cartograma das 27 UFs</span>
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 mt-6 items-start">
+          <!-- Left: Interactive SVG Map -->
+          <div class="lg:col-span-5 bg-[#FAF8F5] dark:bg-stone-950 p-4 rounded-2xl border border-stone-200 dark:border-stone-800">
+            <div class="flex items-center justify-between text-xs font-bold text-stone-600 dark:text-stone-400 mb-2">
+              <span>Clique em uma UF para inspecionar</span>
               <div class="flex items-center gap-2 text-[10px]">
-                <span class="inline-block w-3 h-3 rounded bg-rose-600"></span> Pior relativo
+                <span class="inline-block w-3 h-3 rounded bg-rose-600"></span> Crítico
                 <span class="inline-block w-3 h-3 rounded bg-amber-500"></span> Médio
-                <span class="inline-block w-3 h-3 rounded bg-emerald-600"></span> Melhor relativo
+                <span class="inline-block w-3 h-3 rounded bg-emerald-600"></span> Destaque
               </div>
             </div>
             <div id="brazil-svg-map" class="w-full"></div>
           </div>
 
-          <!-- Right: Sorted Bar Chart across all 27 UFs -->
-          <div class="lg:col-span-7 bg-[#FAF8F5] p-4 rounded-2xl border border-stone-200">
-            <div class="text-xs font-bold text-stone-600 mb-2">Ranking das 27 UFs no Indicador Selecionado</div>
-            <div class="h-96 w-full">
-              <canvas id="map-ranking-canvas"></canvas>
+          <!-- Right: State Inspector Scorecard + Ranking Chart -->
+          <div class="lg:col-span-7 space-y-4">
+            <div id="uf-inspector-card" class="bg-[#FAF8F5] dark:bg-stone-950 p-4 rounded-2xl border border-stone-200 dark:border-stone-800"></div>
+            <div class="bg-[#FAF8F5] dark:bg-stone-950 p-4 rounded-2xl border border-stone-200 dark:border-stone-800">
+              <div class="text-xs font-bold text-stone-600 dark:text-stone-400 mb-2">Ranking das 27 UFs no Indicador Selecionado</div>
+              <div class="h-56 w-full">
+                <canvas id="map-ranking-canvas"></canvas>
+              </div>
             </div>
           </div>
         </div>
       </div>
 
       <!-- Multi-State Radar Comparator ("Raio-X Estadual") -->
-      <div class="bg-white rounded-2xl p-6 border border-stone-200 shadow-sm">
+      <div class="bg-white dark:bg-stone-900 rounded-2xl p-6 border border-stone-200 dark:border-stone-800 shadow-sm">
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
           <div class="lg:col-span-5 space-y-4">
-            <span class="px-2.5 py-0.5 rounded-md text-[11px] font-bold uppercase bg-indigo-50 text-indigo-800 border border-indigo-200">Comparador Multidimensional</span>
-            <h3 class="text-xl font-extrabold text-stone-900">Raio-X Comparativo de Estados (Score Normalizado 0–100)</h3>
-            <p class="text-xs text-stone-600 leading-relaxed">
-              Compare até 3 Unidades da Federação simultaneamente em 7 dimensões normalizadas (onde 100 representa o melhor desempenho nacional e 0 o menor desempenho, invertendo indicadores negativos como homicídios e informalidade).
+            <span class="px-2.5 py-0.5 rounded-md text-[11px] font-bold uppercase bg-indigo-50 dark:bg-indigo-950 text-indigo-800 dark:text-indigo-300 border border-indigo-200 dark:border-indigo-800">Comparador Multidimensional</span>
+            <h3 class="text-xl font-extrabold text-stone-900 dark:text-stone-100">Raio-X Comparativo de Estados (Score Normalizado 0–100)</h3>
+            <p class="text-xs text-stone-600 dark:text-stone-400 leading-relaxed">
+              Compare até 3 Unidades da Federação simultaneamente em 7 dimensões normalizadas (onde 100 representa a melhor marca nacional e 0 a menor marca, invertendo indicadores negativos como homicídios e informalidade).
             </p>
             <div class="space-y-2.5 pt-2">
               <div>
-                <label class="text-xs font-bold text-emerald-800">Estado 1 (Verde):</label>
-                <select id="radar-uf-1" onchange="window.BR_APP.updateRadarSelection()" class="w-full mt-1 p-2 rounded-xl border border-stone-300 text-xs font-bold bg-white"></select>
+                <label class="text-xs font-bold text-emerald-700 dark:text-emerald-400">Estado 1 (Selecionado no Mapa):</label>
+                <select id="radar-uf-1" onchange="window.BR_APP.updateRadarSelection()" class="w-full mt-1 p-2 rounded-xl border border-stone-300 dark:border-stone-700 text-xs font-bold bg-white dark:bg-stone-800"></select>
               </div>
               <div>
-                <label class="text-xs font-bold text-rose-700">Estado 2 (Vermelho):</label>
-                <select id="radar-uf-2" onchange="window.BR_APP.updateRadarSelection()" class="w-full mt-1 p-2 rounded-xl border border-stone-300 text-xs font-bold bg-white"></select>
+                <label class="text-xs font-bold text-rose-600 dark:text-rose-400">Estado 2:</label>
+                <select id="radar-uf-2" onchange="window.BR_APP.updateRadarSelection()" class="w-full mt-1 p-2 rounded-xl border border-stone-300 dark:border-stone-700 text-xs font-bold bg-white dark:bg-stone-800"></select>
               </div>
               <div>
-                <label class="text-xs font-bold text-blue-700">Estado 3 (Azul):</label>
-                <select id="radar-uf-3" onchange="window.BR_APP.updateRadarSelection()" class="w-full mt-1 p-2 rounded-xl border border-stone-300 text-xs font-bold bg-white"></select>
+                <label class="text-xs font-bold text-blue-600 dark:text-blue-400">Estado 3:</label>
+                <select id="radar-uf-3" onchange="window.BR_APP.updateRadarSelection()" class="w-full mt-1 p-2 rounded-xl border border-stone-300 dark:border-stone-700 text-xs font-bold bg-white dark:bg-stone-800"></select>
               </div>
             </div>
           </div>
-          <div class="lg:col-span-7 h-80 w-full bg-[#FAF8F5] p-4 rounded-2xl border border-stone-200">
+          <div class="lg:col-span-7 h-80 w-full bg-[#FAF8F5] dark:bg-stone-950 p-4 rounded-2xl border border-stone-200 dark:border-stone-800">
             <canvas id="state-radar-canvas"></canvas>
           </div>
         </div>
       </div>
 
       <!-- Full Sortable 27-UF Table -->
-      <div class="bg-white rounded-2xl p-6 border border-stone-200 shadow-sm">
+      <div class="bg-white dark:bg-stone-900 rounded-2xl p-6 border border-stone-200 dark:border-stone-800 shadow-sm">
         <div class="flex flex-wrap items-center justify-between gap-3">
           <div>
-            <h3 class="text-xl font-extrabold text-stone-900">Tabela Completa das 27 Unidades da Federação (12 Indicadores)</h3>
-            <p class="text-xs text-stone-500 mt-0.5">Clique em qualquer coluna para ordenar ou filtre por macrorregião.</p>
+            <h3 class="text-xl font-extrabold text-stone-900 dark:text-stone-100">Tabela Completa das 27 Unidades da Federação</h3>
+            <p class="text-xs text-stone-500 dark:text-stone-400 mt-0.5">Clique em qualquer cabeçalho para ordenar ou filtre por macrorregião.</p>
           </div>
           <div class="flex flex-wrap gap-1.5">
             <button id="reg-btn-ALL" onclick="window.BR_APP.setRegionFilter('ALL')" class="px-3 py-1 rounded-lg text-xs font-bold bg-emerald-700 text-white">Todas (27)</button>
-            <button id="reg-btn-Norte" onclick="window.BR_APP.setRegionFilter('Norte')" class="px-3 py-1 rounded-lg text-xs font-bold bg-[#FAF8F5] text-stone-700 border border-stone-200">Norte (7)</button>
-            <button id="reg-btn-Nordeste" onclick="window.BR_APP.setRegionFilter('Nordeste')" class="px-3 py-1 rounded-lg text-xs font-bold bg-[#FAF8F5] text-stone-700 border border-stone-200">Nordeste (9)</button>
-            <button id="reg-btn-Centro-Oeste" onclick="window.BR_APP.setRegionFilter('Centro-Oeste')" class="px-3 py-1 rounded-lg text-xs font-bold bg-[#FAF8F5] text-stone-700 border border-stone-200">Centro-Oeste (4)</button>
-            <button id="reg-btn-Sudeste" onclick="window.BR_APP.setRegionFilter('Sudeste')" class="px-3 py-1 rounded-lg text-xs font-bold bg-[#FAF8F5] text-stone-700 border border-stone-200">Sudeste (4)</button>
-            <button id="reg-btn-Sul" onclick="window.BR_APP.setRegionFilter('Sul')" class="px-3 py-1 rounded-lg text-xs font-bold bg-[#FAF8F5] text-stone-700 border border-stone-200">Sul (3)</button>
+            <button id="reg-btn-Norte" onclick="window.BR_APP.setRegionFilter('Norte')" class="px-3 py-1 rounded-lg text-xs font-bold bg-[#FAF8F5] dark:bg-stone-800 text-stone-700 dark:text-stone-300 border border-stone-200 dark:border-stone-700">Norte (7)</button>
+            <button id="reg-btn-Nordeste" onclick="window.BR_APP.setRegionFilter('Nordeste')" class="px-3 py-1 rounded-lg text-xs font-bold bg-[#FAF8F5] dark:bg-stone-800 text-stone-700 dark:text-stone-300 border border-stone-200 dark:border-stone-700">Nordeste (9)</button>
+            <button id="reg-btn-Centro-Oeste" onclick="window.BR_APP.setRegionFilter('Centro-Oeste')" class="px-3 py-1 rounded-lg text-xs font-bold bg-[#FAF8F5] dark:bg-stone-800 text-stone-700 dark:text-stone-300 border border-stone-200 dark:border-stone-700">Centro-Oeste (4)</button>
+            <button id="reg-btn-Sudeste" onclick="window.BR_APP.setRegionFilter('Sudeste')" class="px-3 py-1 rounded-lg text-xs font-bold bg-[#FAF8F5] dark:bg-stone-800 text-stone-700 dark:text-stone-300 border border-stone-200 dark:border-stone-700">Sudeste (4)</button>
+            <button id="reg-btn-Sul" onclick="window.BR_APP.setRegionFilter('Sul')" class="px-3 py-1 rounded-lg text-xs font-bold bg-[#FAF8F5] dark:bg-stone-800 text-stone-700 dark:text-stone-300 border border-stone-200 dark:border-stone-700">Sul (3)</button>
           </div>
         </div>
 
-        <div class="overflow-x-auto border border-stone-200 rounded-xl mt-4">
+        <div class="overflow-x-auto border border-stone-200 dark:border-stone-800 rounded-xl mt-4">
           <table class="w-full text-left border-collapse text-xs">
             <thead>
-              <tr class="bg-[#FAF8F5] border-b border-stone-200 text-stone-700 font-bold">
-                <th class="py-3 px-3 cursor-pointer hover:bg-stone-100" onclick="window.BR_APP.sortStates('name')">UF ↕</th>
-                <th class="py-3 px-3 cursor-pointer hover:bg-stone-100" onclick="window.BR_APP.sortStates('region')">Região ↕</th>
-                <th class="py-3 px-3 cursor-pointer hover:bg-stone-100" onclick="window.BR_APP.sortStates('pop')">Pop (M) ↕</th>
-                <th class="py-3 px-3 cursor-pointer hover:bg-stone-100" onclick="window.BR_APP.sortStates('gdpPerCapita')">PIB/Capita ↕</th>
-                <th class="py-3 px-3 cursor-pointer hover:bg-stone-100" onclick="window.BR_APP.sortStates('idhm')">IDH ↕</th>
-                <th class="py-3 px-3 cursor-pointer hover:bg-stone-100" onclick="window.BR_APP.sortStates('lifeExp')">Vida (Anos) ↕</th>
-                <th class="py-3 px-3 cursor-pointer hover:bg-stone-100" onclick="window.BR_APP.sortStates('sewage')">Esgoto (%) ↕</th>
-                <th class="py-3 px-3 cursor-pointer hover:bg-stone-100" onclick="window.BR_APP.sortStates('informality')">Informal. (%) ↕</th>
-                <th class="py-3 px-3 cursor-pointer hover:bg-stone-100" onclick="window.BR_APP.sortStates('poverty')">Pobreza (%) ↕</th>
-                <th class="py-3 px-3 cursor-pointer hover:bg-stone-100" onclick="window.BR_APP.sortStates('gini')">Gini ↕</th>
-                <th class="py-3 px-3 cursor-pointer hover:bg-stone-100" onclick="window.BR_APP.sortStates('idebHs')">IDEB EM ↕</th>
-                <th class="py-3 px-3 cursor-pointer hover:bg-stone-100" onclick="window.BR_APP.sortStates('homicide')">Homic. (/100k) ↕</th>
+              <tr class="bg-[#FAF8F5] dark:bg-stone-950 border-b border-stone-200 dark:border-stone-800 text-stone-700 dark:text-stone-300 font-bold">
+                <th class="py-3 px-3 cursor-pointer hover:bg-stone-100 dark:hover:bg-stone-800" onclick="window.BR_APP.sortStates('name')">UF ↕</th>
+                <th class="py-3 px-3 cursor-pointer hover:bg-stone-100 dark:hover:bg-stone-800" onclick="window.BR_APP.sortStates('region')">Região ↕</th>
+                <th class="py-3 px-3 cursor-pointer hover:bg-stone-100 dark:hover:bg-stone-800" onclick="window.BR_APP.sortStates('pop')">Pop (M) ↕</th>
+                <th class="py-3 px-3 cursor-pointer hover:bg-stone-100 dark:hover:bg-stone-800" onclick="window.BR_APP.sortStates('gdpPerCapita')">PIB/Capita ↕</th>
+                <th class="py-3 px-3 cursor-pointer hover:bg-stone-100 dark:hover:bg-stone-800" onclick="window.BR_APP.sortStates('idhm')">IDH ↕</th>
+                <th class="py-3 px-3 cursor-pointer hover:bg-stone-100 dark:hover:bg-stone-800" onclick="window.BR_APP.sortStates('lifeExp')">Vida (Anos) ↕</th>
+                <th class="py-3 px-3 cursor-pointer hover:bg-stone-100 dark:hover:bg-stone-800" onclick="window.BR_APP.sortStates('sewage')">Esgoto (%) ↕</th>
+                <th class="py-3 px-3 cursor-pointer hover:bg-stone-100 dark:hover:bg-stone-800" onclick="window.BR_APP.sortStates('informality')">Informal. (%) ↕</th>
+                <th class="py-3 px-3 cursor-pointer hover:bg-stone-100 dark:hover:bg-stone-800" onclick="window.BR_APP.sortStates('poverty')">Pobreza (%) ↕</th>
+                <th class="py-3 px-3 cursor-pointer hover:bg-stone-100 dark:hover:bg-stone-800" onclick="window.BR_APP.sortStates('gini')">Gini ↕</th>
+                <th class="py-3 px-3 cursor-pointer hover:bg-stone-100 dark:hover:bg-stone-800" onclick="window.BR_APP.sortStates('idebHs')">IDEB EM ↕</th>
+                <th class="py-3 px-3 cursor-pointer hover:bg-stone-100 dark:hover:bg-stone-800" onclick="window.BR_APP.sortStates('homicide')">Homic. (/100k) ↕</th>
               </tr>
             </thead>
-            <tbody id="states-table-body" class="divide-y divide-stone-100"></tbody>
+            <tbody id="states-table-body" class="divide-y divide-stone-100 dark:divide-stone-800"></tbody>
           </table>
         </div>
       </div>
@@ -313,53 +336,52 @@
     <!-- VIEW 4: CORRELATION & OLS REGRESSION LAB (XY SCATTER/BUBBLE)       -->
     <!-- ================================================================== -->
     <section id="view-correlations" class="hidden space-y-6">
-      <div class="bg-white rounded-2xl p-6 sm:p-8 border border-stone-200 shadow-sm">
-        <span class="px-2.5 py-0.5 rounded-md text-[11px] font-bold uppercase bg-purple-50 text-purple-800 border border-purple-200">Econometria Exploratória das 27 UFs</span>
-        <h2 class="text-2xl font-extrabold text-stone-900 mt-1">Laboratório de Correlações e Regressão Linear (OLS)</h2>
-        <p class="text-sm text-stone-600 mt-1">
+      <div class="bg-white dark:bg-stone-900 rounded-2xl p-6 sm:p-8 border border-stone-200 dark:border-stone-800 shadow-sm">
+        <span class="px-2.5 py-0.5 rounded-md text-[11px] font-bold uppercase bg-purple-50 dark:bg-purple-950 text-purple-800 dark:text-purple-300 border border-purple-200 dark:border-purple-800">Econometria Exploratória das 27 UFs</span>
+        <h2 class="text-2xl font-extrabold text-stone-900 dark:text-stone-100 mt-1">Laboratório de Correlações e Regressão Linear (OLS)</h2>
+        <p class="text-sm text-stone-600 dark:text-stone-400 mt-1">
           Cruze quaisquer dois indicadores estaduais nos eixos X e Y. O tamanho da bolha representa a população da UF, a cor indica a macrorregião e a reta tracejada mostra a regressão de Mínimos Quadrados Ordinários ($y = \alpha + \beta x$).
         </p>
 
-        <!-- Preset Hypotheses -->
-        <div class="flex flex-wrap items-center gap-2 mt-4 pt-3 border-t border-stone-100">
+        <div class="flex flex-wrap items-center gap-2 mt-4 pt-3 border-t border-stone-100 dark:border-stone-800">
           <span class="text-xs font-bold text-stone-500">Hipóteses Rápidas:</span>
-          <button onclick="window.BR_APP.setCorrPreset('informality', 'gdpPerCapita')" class="px-3 py-1.5 rounded-xl text-xs font-bold bg-emerald-50 text-emerald-900 border border-emerald-200 hover:bg-emerald-100">Informalidade × PIB per Capita</button>
-          <button onclick="window.BR_APP.setCorrPreset('sewage', 'lifeExp')" class="px-3 py-1.5 rounded-xl text-xs font-bold bg-sky-50 text-sky-900 border border-sky-200 hover:bg-sky-100">Coleta de Esgoto × Esperança de Vida</button>
-          <button onclick="window.BR_APP.setCorrPreset('poverty', 'idhm')" class="px-3 py-1.5 rounded-xl text-xs font-bold bg-amber-50 text-amber-900 border border-amber-200 hover:bg-amber-100">Taxa de Pobreza × IDH Estadual</button>
-          <button onclick="window.BR_APP.setCorrPreset('idebHs', 'homicide')" class="px-3 py-1.5 rounded-xl text-xs font-bold bg-rose-50 text-rose-900 border border-rose-200 hover:bg-rose-100">IDEB Ensino Médio × Homicídios</button>
-          <button onclick="window.BR_APP.setCorrPreset('water', 'sewage')" class="px-3 py-1.5 rounded-xl text-xs font-bold bg-indigo-50 text-indigo-900 border border-indigo-200 hover:bg-indigo-100">Água Tratada × Rede de Esgoto</button>
+          <button onclick="window.BR_APP.setCorrPreset('informality', 'gdpPerCapita')" class="px-3 py-1.5 rounded-xl text-xs font-bold bg-emerald-50 dark:bg-emerald-950 text-emerald-900 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800">Informalidade × PIB per Capita</button>
+          <button onclick="window.BR_APP.setCorrPreset('sewage', 'lifeExp')" class="px-3 py-1.5 rounded-xl text-xs font-bold bg-sky-50 dark:bg-sky-950 text-sky-900 dark:text-sky-300 border border-sky-200 dark:border-sky-800">Coleta de Esgoto × Esperança de Vida</button>
+          <button onclick="window.BR_APP.setCorrPreset('poverty', 'idhm')" class="px-3 py-1.5 rounded-xl text-xs font-bold bg-amber-50 dark:bg-amber-950 text-amber-900 dark:text-amber-300 border border-amber-200 dark:border-amber-800">Taxa de Pobreza × IDH Estadual</button>
+          <button onclick="window.BR_APP.setCorrPreset('idebHs', 'homicide')" class="px-3 py-1.5 rounded-xl text-xs font-bold bg-rose-50 dark:bg-rose-950 text-rose-900 dark:text-rose-300 border border-rose-200 dark:border-rose-800">IDEB Ensino Médio × Homicídios</button>
+          <button onclick="window.BR_APP.setCorrPreset('internetPct', 'gdpPerCapita')" class="px-3 py-1.5 rounded-xl text-xs font-bold bg-indigo-50 dark:bg-indigo-950 text-indigo-900 dark:text-indigo-300 border border-indigo-200 dark:border-indigo-800">Internet Domiciliar × PIB per Capita</button>
         </div>
 
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 mt-6">
-          <div class="lg:col-span-4 space-y-4 bg-[#FAF8F5] p-5 rounded-2xl border border-stone-200">
+          <div class="lg:col-span-4 space-y-4 bg-[#FAF8F5] dark:bg-stone-950 p-5 rounded-2xl border border-stone-200 dark:border-stone-800">
             <div>
-              <label class="text-xs font-bold text-stone-700">Variável Explicativa (Eixo X):</label>
-              <select id="corr-select-x" onchange="window.BR_APP.updateCorrelationsFromUI()" class="w-full mt-1 p-2.5 rounded-xl border border-stone-300 text-xs font-bold bg-white"></select>
+              <label class="text-xs font-bold text-stone-700 dark:text-stone-300">Variável Explicativa (Eixo X):</label>
+              <select id="corr-select-x" onchange="window.BR_APP.updateCorrelationsFromUI()" class="w-full mt-1 p-2.5 rounded-xl border border-stone-300 dark:border-stone-700 text-xs font-bold bg-white dark:bg-stone-800"></select>
             </div>
             <div>
-              <label class="text-xs font-bold text-stone-700">Variável Resposta (Eixo Y):</label>
-              <select id="corr-select-y" onchange="window.BR_APP.updateCorrelationsFromUI()" class="w-full mt-1 p-2.5 rounded-xl border border-stone-300 text-xs font-bold bg-white"></select>
+              <label class="text-xs font-bold text-stone-700 dark:text-stone-300">Variável Resposta (Eixo Y):</label>
+              <select id="corr-select-y" onchange="window.BR_APP.updateCorrelationsFromUI()" class="w-full mt-1 p-2.5 rounded-xl border border-stone-300 dark:border-stone-700 text-xs font-bold bg-white dark:bg-stone-800"></select>
             </div>
 
             <div class="grid grid-cols-2 gap-3 pt-2">
-              <div class="bg-white p-3 rounded-xl border border-stone-200">
+              <div class="bg-white dark:bg-stone-900 p-3 rounded-xl border border-stone-200 dark:border-stone-800">
                 <div class="text-[10px] font-bold uppercase text-stone-500">Pearson (r)</div>
-                <div id="corr-stat-r" class="text-lg font-black font-mono text-emerald-800 mt-0.5">--</div>
+                <div id="corr-stat-r" class="text-lg font-black font-mono text-emerald-700 dark:text-emerald-400 mt-0.5">--</div>
               </div>
-              <div class="bg-white p-3 rounded-xl border border-stone-200">
+              <div class="bg-white dark:bg-stone-900 p-3 rounded-xl border border-stone-200 dark:border-stone-800">
                 <div class="text-[10px] font-bold uppercase text-stone-500">R² Explicado</div>
-                <div id="corr-stat-r2" class="text-lg font-black font-mono text-indigo-800 mt-0.5">--</div>
+                <div id="corr-stat-r2" class="text-lg font-black font-mono text-indigo-700 dark:text-indigo-400 mt-0.5">--</div>
               </div>
             </div>
 
-            <div class="bg-white p-3 rounded-xl border border-stone-200">
+            <div class="bg-white dark:bg-stone-900 p-3 rounded-xl border border-stone-200 dark:border-stone-800">
               <div class="text-[10px] font-bold uppercase text-stone-500">Equação Linear OLS</div>
-              <div id="corr-stat-eq" class="text-xs font-bold font-mono text-stone-900 mt-1">--</div>
-              <p id="corr-stat-interp" class="text-xs text-stone-600 mt-2 leading-relaxed"></p>
+              <div id="corr-stat-eq" class="text-xs font-bold font-mono text-stone-900 dark:text-stone-100 mt-1">--</div>
+              <p id="corr-stat-interp" class="text-xs text-stone-600 dark:text-stone-400 mt-2 leading-relaxed"></p>
             </div>
           </div>
 
-          <div class="lg:col-span-8 bg-white p-4 rounded-2xl border border-stone-200 h-96">
+          <div class="lg:col-span-8 bg-white dark:bg-stone-900 p-4 rounded-2xl border border-stone-200 dark:border-stone-800 h-96">
             <canvas id="corr-chart-canvas"></canvas>
           </div>
         </div>
@@ -367,72 +389,72 @@
     </section>
 
     <!-- ================================================================== -->
-    <!-- VIEW 5: FISCAL DEBT SIMULATOR (DBGG) & DEMOGRAPHIC PYRAMID         -->
+    <!-- VIEW 5: FISCAL DEBT SIMULATOR, BUDGET BREAKDOWN & PYRAMID          -->
     <!-- ================================================================== -->
     <section id="view-simulator" class="hidden space-y-8">
       <!-- Part A: Dynamic Debt Simulator -->
-      <div class="bg-white rounded-2xl p-6 sm:p-8 border border-stone-200 shadow-sm">
-        <span class="px-2.5 py-0.5 rounded-md text-[11px] font-bold uppercase bg-indigo-50 text-indigo-800 border border-indigo-200">Macroeconomia Fiscal</span>
-        <h2 class="text-2xl font-extrabold text-stone-900 mt-1">Simulador de Sustentabilidade da Dívida Bruta (DBGG % do PIB, 2025–2035)</h2>
-        <p class="text-sm text-stone-600 mt-1">
-          Simule a equação dinâmica da dívida pública: $d_t = d_{t-1} \cdot \left(\frac{1 + r}{1 + g}\right) - s_p + \text{choque}$. Compare sua trajetória com o superávit primário estabilizador.
+      <div class="bg-white dark:bg-stone-900 rounded-2xl p-6 sm:p-8 border border-stone-200 dark:border-stone-800 shadow-sm">
+        <span class="px-2.5 py-0.5 rounded-md text-[11px] font-bold uppercase bg-indigo-50 dark:bg-indigo-950 text-indigo-800 dark:text-indigo-300 border border-indigo-200 dark:border-indigo-800">Macroeconomia Fiscal</span>
+        <h2 class="text-2xl font-extrabold text-stone-900 dark:text-stone-100 mt-1">Simulador de Sustentabilidade da Dívida Bruta (DBGG % do PIB, 2025–2035)</h2>
+        <p class="text-sm text-stone-600 dark:text-stone-400 mt-1">
+          Ajuste crescimento real do PIB, juro real implícito, resultado primário e choques para simular a trajetória da dívida e encontrar o superávit primário estabilizador.
         </p>
 
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 mt-6">
-          <div class="lg:col-span-5 space-y-4 bg-[#FAF8F5] p-5 rounded-2xl border border-stone-200">
+          <div class="lg:col-span-5 space-y-4 bg-[#FAF8F5] dark:bg-stone-950 p-5 rounded-2xl border border-stone-200 dark:border-stone-800">
             <div>
-              <div class="flex justify-between text-xs font-bold text-stone-800 mb-1">
+              <div class="flex justify-between text-xs font-bold text-stone-800 dark:text-stone-200 mb-1">
                 <span>Crescimento Real do PIB (g, % a.a.)</span>
-                <span id="val-gdp" class="font-mono text-emerald-800">+2.2%</span>
+                <span id="val-gdp" class="font-mono text-emerald-700 dark:text-emerald-400">+2.2%</span>
               </div>
-              <input id="sim-gdp" type="range" min="-2.0" max="5.0" step="0.1" value="2.2" oninput="window.BR_APP.updateSimulator()" class="w-full accent-emerald-700" />
+              <input id="sim-gdp" type="range" min="-2.0" max="5.0" step="0.1" value="2.2" oninput="window.BR_APP.updateSimulator()" class="w-full accent-emerald-600" />
             </div>
             <div>
-              <div class="flex justify-between text-xs font-bold text-stone-800 mb-1">
+              <div class="flex justify-between text-xs font-bold text-stone-800 dark:text-stone-200 mb-1">
                 <span>Juro Real Implícito da Dívida (r, % a.a.)</span>
-                <span id="val-rate" class="font-mono text-indigo-800">6.2%</span>
+                <span id="val-rate" class="font-mono text-indigo-700 dark:text-indigo-400">6.2%</span>
               </div>
-              <input id="sim-rate" type="range" min="2.0" max="10.0" step="0.1" value="6.2" oninput="window.BR_APP.updateSimulator()" class="w-full accent-indigo-700" />
+              <input id="sim-rate" type="range" min="2.0" max="10.0" step="0.1" value="6.2" oninput="window.BR_APP.updateSimulator()" class="w-full accent-indigo-600" />
             </div>
             <div>
-              <div class="flex justify-between text-xs font-bold text-stone-800 mb-1">
+              <div class="flex justify-between text-xs font-bold text-stone-800 dark:text-stone-200 mb-1">
                 <span>Resultado Primário Anual (sp, % do PIB)</span>
-                <span id="val-prim" class="font-mono text-rose-700">-0.4%</span>
+                <span id="val-prim" class="font-mono text-rose-600 dark:text-rose-400">-0.4%</span>
               </div>
-              <input id="sim-prim" type="range" min="-3.0" max="3.0" step="0.1" value="-0.4" oninput="window.BR_APP.updateSimulator()" class="w-full accent-blue-700" />
+              <input id="sim-prim" type="range" min="-3.0" max="3.0" step="0.1" value="-0.4" oninput="window.BR_APP.updateSimulator()" class="w-full accent-blue-600" />
             </div>
             <div>
-              <div class="flex justify-between text-xs font-bold text-stone-800 mb-1">
+              <div class="flex justify-between text-xs font-bold text-stone-800 dark:text-stone-200 mb-1">
                 <span>Passivos Contingentes / Choque em 2026 (% PIB)</span>
-                <span id="val-shock" class="font-mono text-amber-800">0.0% PIB</span>
+                <span id="val-shock" class="font-mono text-amber-600">0.0% PIB</span>
               </div>
               <input id="sim-shock" type="range" min="-2.0" max="5.0" step="0.5" value="0.0" oninput="window.BR_APP.updateSimulator()" class="w-full accent-amber-600" />
             </div>
 
             <div class="flex flex-wrap gap-2 pt-2">
-              <button onclick="window.BR_APP.setSimPreset(3.0, 4.2, 1.5, 0)" class="px-3 py-1.5 rounded-lg text-xs font-bold bg-emerald-100 text-emerald-900 hover:bg-emerald-200">Ajuste Estrutural (+1,5%)</button>
-              <button onclick="window.BR_APP.setSimPreset(2.2, 6.2, -0.4, 0)" class="px-3 py-1.5 rounded-lg text-xs font-bold bg-stone-200 text-stone-800 hover:bg-stone-300">Base Focus (-0,4%)</button>
-              <button onclick="window.BR_APP.setSimPreset(1.0, 7.8, -1.5, 2.0)" class="px-3 py-1.5 rounded-lg text-xs font-bold bg-rose-100 text-rose-900 hover:bg-rose-200">Dominância / Estresse</button>
+              <button onclick="window.BR_APP.setSimPreset(3.0, 4.2, 1.5, 0)" class="px-3 py-1.5 rounded-lg text-xs font-bold bg-emerald-100 dark:bg-emerald-950 text-emerald-900 dark:text-emerald-300">Ajuste Estrutural (+1,5%)</button>
+              <button onclick="window.BR_APP.setSimPreset(2.2, 6.2, -0.4, 0)" class="px-3 py-1.5 rounded-lg text-xs font-bold bg-stone-200 dark:bg-stone-800 text-stone-800 dark:text-stone-200">Base Focus (-0,4%)</button>
+              <button onclick="window.BR_APP.setSimPreset(1.0, 7.8, -1.5, 2.0)" class="px-3 py-1.5 rounded-lg text-xs font-bold bg-rose-100 dark:bg-rose-950 text-rose-900 dark:text-rose-300">Dominância / Estresse</button>
             </div>
           </div>
 
-          <div class="lg:col-span-7 bg-white p-5 rounded-2xl border border-stone-200">
+          <div class="lg:col-span-7 bg-white dark:bg-stone-900 p-5 rounded-2xl border border-stone-200 dark:border-stone-800">
             <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-4">
-              <div class="bg-[#FAF8F5] p-3 rounded-xl border border-stone-200">
+              <div class="bg-[#FAF8F5] dark:bg-stone-950 p-3 rounded-xl border border-stone-200 dark:border-stone-800">
                 <div class="text-[10px] font-bold text-stone-500 uppercase">DBGG 2025</div>
-                <div class="text-lg font-black font-mono text-stone-900">78,6%</div>
+                <div class="text-lg font-black font-mono text-stone-900 dark:text-stone-100">78,6%</div>
               </div>
-              <div class="bg-[#FAF8F5] p-3 rounded-xl border border-stone-200">
+              <div class="bg-[#FAF8F5] dark:bg-stone-950 p-3 rounded-xl border border-stone-200 dark:border-stone-800">
                 <div class="text-[10px] font-bold text-stone-500 uppercase">DBGG 2030</div>
-                <div id="kpi-sim-2030" class="text-lg font-black font-mono text-indigo-900">--</div>
+                <div id="kpi-sim-2030" class="text-lg font-black font-mono text-indigo-700 dark:text-indigo-400">--</div>
               </div>
-              <div class="bg-[#FAF8F5] p-3 rounded-xl border border-stone-200">
+              <div class="bg-[#FAF8F5] dark:bg-stone-950 p-3 rounded-xl border border-stone-200 dark:border-stone-800">
                 <div class="text-[10px] font-bold text-stone-500 uppercase">DBGG 2035</div>
-                <div id="kpi-sim-2035" class="text-lg font-black font-mono text-stone-900">--</div>
+                <div id="kpi-sim-2035" class="text-lg font-black font-mono text-stone-900 dark:text-stone-100">--</div>
               </div>
-              <div class="bg-amber-50 p-3 rounded-xl border border-amber-200">
-                <div class="text-[10px] font-bold text-amber-900 uppercase">Primário Estabilizador</div>
-                <div id="kpi-sim-stabilizing" class="text-lg font-black font-mono text-amber-950">--</div>
+              <div class="bg-amber-50 dark:bg-amber-950/60 p-3 rounded-xl border border-amber-200 dark:border-amber-800">
+                <div class="text-[10px] font-bold text-amber-900 dark:text-amber-300 uppercase">Primário Estabilizador</div>
+                <div id="kpi-sim-stabilizing" class="text-lg font-black font-mono text-amber-950 dark:text-amber-200">--</div>
               </div>
             </div>
             <div class="h-64 w-full">
@@ -442,40 +464,55 @@
         </div>
       </div>
 
-      <!-- Part B: Demographic Pyramid Simulator (1980 - 2060) -->
-      <div class="bg-white rounded-2xl p-6 sm:p-8 border border-stone-200 shadow-sm">
+      <!-- Part B: Visual Public Budget Breakdown (Cada R$ 100 do Gasto Público) -->
+      <div class="bg-white dark:bg-stone-900 rounded-2xl p-6 sm:p-8 border border-stone-200 dark:border-stone-800 shadow-sm">
+        <span class="px-2.5 py-0.5 rounded-md text-[11px] font-bold uppercase bg-rose-50 dark:bg-rose-950 text-rose-800 dark:text-rose-300 border border-rose-200 dark:border-rose-800">Raio-X Orçamentário (COFOG / Tesouro)</span>
+        <h3 class="text-2xl font-extrabold text-stone-900 dark:text-stone-100 mt-1">Para onde vão cada R$ 100 do Gasto Público no Brasil?</h3>
+        <p class="text-sm text-stone-600 dark:text-stone-400 mt-1">
+          Mais da metade (R$ 51,40 de cada R$ 100) do gasto consolidado do Estado brasileiro destina-se a apenas duas rubricas: Previdência Social (R$ 31,80) e Juros da Dívida (R$ 19,60).
+        </p>
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 mt-6 items-center">
+          <div class="lg:col-span-5 h-72 bg-[#FAF8F5] dark:bg-stone-950 p-4 rounded-2xl border border-stone-200 dark:border-stone-800">
+            <canvas id="budget-chart-canvas"></canvas>
+          </div>
+          <div id="budget-breakdown-list" class="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-2.5"></div>
+        </div>
+      </div>
+
+      <!-- Part C: Demographic Pyramid Simulator (1980 - 2060) -->
+      <div class="bg-white dark:bg-stone-900 rounded-2xl p-6 sm:p-8 border border-stone-200 dark:border-stone-800 shadow-sm">
         <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
           <div>
-            <span class="px-2.5 py-0.5 rounded-md text-[11px] font-bold uppercase bg-emerald-50 text-emerald-800 border border-emerald-200">Simulador Demográfico IBGE</span>
-            <h3 class="text-2xl font-extrabold text-stone-900 mt-1">A Metamorfose da Pirâmide Etária Brasileira (1980–2060)</h3>
-            <p class="text-sm text-stone-600">Clique nas décadas para visualizar a inversão da base jovem para o topo idoso e o impacto sobre o índice de suporte previdenciário.</p>
+            <span class="px-2.5 py-0.5 rounded-md text-[11px] font-bold uppercase bg-emerald-50 dark:bg-emerald-950 text-emerald-800 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800">Simulador Demográfico IBGE</span>
+            <h3 class="text-2xl font-extrabold text-stone-900 dark:text-stone-100 mt-1">A Metamorfose da Pirâmide Etária Brasileira (1980–2060)</h3>
+            <p class="text-sm text-stone-600 dark:text-stone-400">Clique nas décadas para visualizar a inversão da base jovem para o topo idoso e o colapso da razão de suporte previdenciário.</p>
           </div>
           <div class="flex flex-wrap gap-1.5">
-            <button id="pyr-btn-1980" onclick="window.BR_APP.renderPyramid('1980')" class="px-3 py-1.5 rounded-xl text-xs font-bold bg-[#FAF8F5] text-stone-700 border border-stone-200">1980</button>
-            <button id="pyr-btn-2000" onclick="window.BR_APP.renderPyramid('2000')" class="px-3 py-1.5 rounded-xl text-xs font-bold bg-[#FAF8F5] text-stone-700 border border-stone-200">2000</button>
+            <button id="pyr-btn-1980" onclick="window.BR_APP.renderPyramid('1980')" class="px-3 py-1.5 rounded-xl text-xs font-bold bg-[#FAF8F5] dark:bg-stone-800 text-stone-700 dark:text-stone-300 border border-stone-200 dark:border-stone-700">1980</button>
+            <button id="pyr-btn-2000" onclick="window.BR_APP.renderPyramid('2000')" class="px-3 py-1.5 rounded-xl text-xs font-bold bg-[#FAF8F5] dark:bg-stone-800 text-stone-700 dark:text-stone-300 border border-stone-200 dark:border-stone-700">2000</button>
             <button id="pyr-btn-2024" onclick="window.BR_APP.renderPyramid('2024')" class="px-3 py-1.5 rounded-xl text-xs font-extrabold bg-emerald-700 text-white shadow-sm">2024</button>
-            <button id="pyr-btn-2040" onclick="window.BR_APP.renderPyramid('2040')" class="px-3 py-1.5 rounded-xl text-xs font-bold bg-[#FAF8F5] text-stone-700 border border-stone-200">2040</button>
-            <button id="pyr-btn-2060" onclick="window.BR_APP.renderPyramid('2060')" class="px-3 py-1.5 rounded-xl text-xs font-bold bg-[#FAF8F5] text-stone-700 border border-stone-200">2060</button>
+            <button id="pyr-btn-2040" onclick="window.BR_APP.renderPyramid('2040')" class="px-3 py-1.5 rounded-xl text-xs font-bold bg-[#FAF8F5] dark:bg-stone-800 text-stone-700 dark:text-stone-300 border border-stone-200 dark:border-stone-700">2040</button>
+            <button id="pyr-btn-2060" onclick="window.BR_APP.renderPyramid('2060')" class="px-3 py-1.5 rounded-xl text-xs font-bold bg-[#FAF8F5] dark:bg-stone-800 text-stone-700 dark:text-stone-300 border border-stone-200 dark:border-stone-700">2060</button>
           </div>
         </div>
 
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 mt-6 items-center">
           <div class="lg:col-span-4 space-y-3">
-            <div class="bg-[#FAF8F5] p-4 rounded-2xl border border-stone-200">
+            <div class="bg-[#FAF8F5] dark:bg-stone-950 p-4 rounded-2xl border border-stone-200 dark:border-stone-800">
               <div class="text-xs font-bold text-stone-500 uppercase">População Total no Ano</div>
-              <div id="pyr-kpi-pop" class="text-2xl font-black font-mono text-stone-900 mt-1">212,6M</div>
+              <div id="pyr-kpi-pop" class="text-2xl font-black font-mono text-stone-900 dark:text-stone-100 mt-1">212,6M</div>
             </div>
-            <div class="bg-[#FAF8F5] p-4 rounded-2xl border border-stone-200">
+            <div class="bg-[#FAF8F5] dark:bg-stone-950 p-4 rounded-2xl border border-stone-200 dark:border-stone-800">
               <div class="text-xs font-bold text-stone-500 uppercase">Idade Mediana Nacional</div>
-              <div id="pyr-kpi-age" class="text-2xl font-black font-mono text-emerald-800 mt-1">35.5 anos</div>
+              <div id="pyr-kpi-age" class="text-2xl font-black font-mono text-emerald-700 dark:text-emerald-400 mt-1">35.5 anos</div>
             </div>
-            <div class="bg-[#FAF8F5] p-4 rounded-2xl border border-stone-200">
+            <div class="bg-[#FAF8F5] dark:bg-stone-950 p-4 rounded-2xl border border-stone-200 dark:border-stone-800">
               <div class="text-xs font-bold text-stone-500 uppercase">Razão de Suporte (15–64 / 65+)</div>
-              <div id="pyr-kpi-ratio" class="text-2xl font-black font-mono text-rose-700 mt-1">4.5 ativos / idoso</div>
+              <div id="pyr-kpi-ratio" class="text-2xl font-black font-mono text-rose-600 dark:text-rose-400 mt-1">4.5 ativos / idoso</div>
               <p class="text-[11px] text-stone-500 mt-1">Em 1980 havia quase 10 adultos em idade ativa para cada idoso; em 2060 serão apenas 1,8.</p>
             </div>
           </div>
-          <div class="lg:col-span-8 h-80 bg-[#FAF8F5] p-4 rounded-2xl border border-stone-200">
+          <div class="lg:col-span-8 h-80 bg-[#FAF8F5] dark:bg-stone-950 p-4 rounded-2xl border border-stone-200 dark:border-stone-800">
             <canvas id="pyramid-chart-canvas"></canvas>
           </div>
         </div>
@@ -483,57 +520,62 @@
     </section>
 
     <!-- ================================================================== -->
-    <!-- VIEW 6: HOUSEHOLD INCOME PERCENTILE CALCULATOR                     -->
+    <!-- VIEW 6: HOUSEHOLD INCOME & EFFECTIVE TAX BURDEN CALCULATOR         -->
     <!-- ================================================================== -->
     <section id="view-income" class="hidden space-y-6">
-      <div class="bg-white rounded-2xl p-6 sm:p-8 border border-stone-200 shadow-sm">
-        <span class="px-2.5 py-0.5 rounded-md text-[11px] font-bold uppercase bg-rose-50 text-rose-800 border border-rose-200">Distribuição de Renda PNAD / WID</span>
-        <h2 class="text-2xl font-extrabold text-stone-900 mt-1">Calculadora de Renda: Onde você está na pirâmide salarial do Brasil?</h2>
-        <p class="text-sm text-stone-600 mt-1">
-          Informe a renda mensal per capita do seu domicílio (soma da renda de todos os moradores dividida pelo número de moradores) para descobrir seu percentil exato no Brasil, no seu Estado e em Paridade de Poder de Compra (PPC).
+      <div class="bg-white dark:bg-stone-900 rounded-2xl p-6 sm:p-8 border border-stone-200 dark:border-stone-800 shadow-sm">
+        <span class="px-2.5 py-0.5 rounded-md text-[11px] font-bold uppercase bg-rose-50 dark:bg-rose-950 text-rose-800 dark:text-rose-300 border border-rose-200 dark:border-rose-800">Distribuição de Renda & Incidência Tributária (PNAD / WID / IPEA)</span>
+        <h2 class="text-2xl font-extrabold text-stone-900 dark:text-stone-100 mt-1">Calculadora de Renda e Impostos: Sua posição na pirâmide brasileira</h2>
+        <p class="text-sm text-stone-600 dark:text-stone-400 mt-1">
+          Informe a renda mensal per capita do seu domicílio para descobrir seu percentil exato no Brasil, quanto você paga de impostos diretos e indiretos sobre consumo e seu equivalente internacional em PPC.
         </p>
 
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 mt-6">
-          <div class="lg:col-span-5 space-y-4 bg-[#FAF8F5] p-5 rounded-2xl border border-stone-200">
+          <div class="lg:col-span-5 space-y-4 bg-[#FAF8F5] dark:bg-stone-950 p-5 rounded-2xl border border-stone-200 dark:border-stone-800">
             <div>
-              <label class="text-xs font-bold text-stone-800">Sua Renda Domiciliar per Capita Mensal (R$):</label>
+              <label class="text-xs font-bold text-stone-800 dark:text-stone-200">Sua Renda Domiciliar per Capita Mensal (R$):</label>
               <input id="inc-input-val" type="number" min="100" max="100000" step="50" value="2500" oninput="window.BR_APP.updateIncomeCalculator()"
-                     class="w-full mt-1.5 px-3.5 py-2.5 rounded-xl border border-stone-300 font-mono text-base font-extrabold text-stone-900 bg-white" />
+                     class="w-full mt-1.5 px-3.5 py-2.5 rounded-xl border border-stone-300 dark:border-stone-700 font-mono text-base font-extrabold text-stone-900 dark:text-stone-100 bg-white dark:bg-stone-900" />
             </div>
             <div>
-              <label class="text-xs font-bold text-stone-800">Sua Unidade da Federação (UF):</label>
-              <select id="inc-select-uf" onchange="window.BR_APP.updateIncomeCalculator()" class="w-full mt-1.5 p-2.5 rounded-xl border border-stone-300 text-xs font-bold bg-white"></select>
+              <label class="text-xs font-bold text-stone-800 dark:text-stone-200">Sua Unidade da Federação (UF):</label>
+              <select id="inc-select-uf" onchange="window.BR_APP.updateIncomeCalculator()" class="w-full mt-1.5 p-2.5 rounded-xl border border-stone-300 dark:border-stone-700 text-xs font-bold bg-white dark:bg-stone-900"></select>
             </div>
             <div class="flex flex-wrap gap-1.5 pt-1">
-              <button onclick="window.BR_APP.setIncomePreset(706)" class="px-2.5 py-1 rounded-lg text-xs font-bold bg-stone-200 text-stone-800">1/2 Salário Mín. (R$ 706)</button>
-              <button onclick="window.BR_APP.setIncomePreset(1412)" class="px-2.5 py-1 rounded-lg text-xs font-bold bg-stone-200 text-stone-800">1 Salário Mín. (R$ 1.412)</button>
-              <button onclick="window.BR_APP.setIncomePreset(4250)" class="px-2.5 py-1 rounded-lg text-xs font-bold bg-emerald-100 text-emerald-900">Top 10% (R$ 4.250)</button>
-              <button onclick="window.BR_APP.setIncomePreset(21800)" class="px-2.5 py-1 rounded-lg text-xs font-bold bg-indigo-100 text-indigo-900">Top 1% (R$ 21.800)</button>
+              <button onclick="window.BR_APP.setIncomePreset(706)" class="px-2.5 py-1 rounded-lg text-xs font-bold bg-stone-200 dark:bg-stone-800 text-stone-800 dark:text-stone-200">1/2 Sal. Mín (R$ 706)</button>
+              <button onclick="window.BR_APP.setIncomePreset(1412)" class="px-2.5 py-1 rounded-lg text-xs font-bold bg-stone-200 dark:bg-stone-800 text-stone-800 dark:text-stone-200">1 Sal. Mín (R$ 1.412)</button>
+              <button onclick="window.BR_APP.setIncomePreset(4250)" class="px-2.5 py-1 rounded-lg text-xs font-bold bg-emerald-100 dark:bg-emerald-950 text-emerald-900 dark:text-emerald-300">Top 10% (R$ 4.250)</button>
+              <button onclick="window.BR_APP.setIncomePreset(21800)" class="px-2.5 py-1 rounded-lg text-xs font-bold bg-indigo-100 dark:bg-indigo-950 text-indigo-900 dark:text-indigo-300">Top 1% (R$ 21.800)</button>
             </div>
 
-            <div class="bg-white p-4 rounded-xl border border-emerald-200 space-y-2">
-              <div class="text-[11px] font-bold uppercase text-emerald-800">Sua Posição Nacional</div>
-              <div id="inc-res-pct" class="text-2xl font-black font-mono text-stone-900">--</div>
-              <p id="inc-res-desc" class="text-xs text-stone-600 leading-relaxed"></p>
+            <div class="bg-white dark:bg-stone-900 p-4 rounded-xl border border-emerald-200 dark:border-emerald-800 space-y-2">
+              <div class="text-[11px] font-bold uppercase text-emerald-700 dark:text-emerald-400">Sua Posição Nacional</div>
+              <div id="inc-res-pct" class="text-2xl font-black font-mono text-stone-900 dark:text-stone-100">--</div>
+              <p id="inc-res-desc" class="text-xs text-stone-600 dark:text-stone-400 leading-relaxed"></p>
+            </div>
+
+            <div class="bg-white dark:bg-stone-900 p-4 rounded-xl border border-rose-200 dark:border-rose-900/60 space-y-1">
+              <div class="text-[11px] font-bold uppercase text-rose-700 dark:text-rose-400">Tributos Estimados na sua Faixa (Consumo + Renda)</div>
+              <div id="inc-res-tax" class="text-sm font-black font-mono text-stone-900 dark:text-stone-100">--</div>
             </div>
           </div>
 
           <div class="lg:col-span-7 space-y-4">
             <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
-              <div class="bg-[#FAF8F5] p-3.5 rounded-xl border border-stone-200">
+              <div class="bg-[#FAF8F5] dark:bg-stone-950 p-3.5 rounded-xl border border-stone-200 dark:border-stone-800">
                 <div class="text-[10px] font-bold uppercase text-stone-500">Vs. Mediana Nacional</div>
-                <div id="inc-res-median" class="text-sm font-black font-mono text-stone-900 mt-1">--</div>
+                <div id="inc-res-median" class="text-sm font-black font-mono text-stone-900 dark:text-stone-100 mt-1">--</div>
               </div>
-              <div class="bg-[#FAF8F5] p-3.5 rounded-xl border border-stone-200">
+              <div class="bg-[#FAF8F5] dark:bg-stone-950 p-3.5 rounded-xl border border-stone-200 dark:border-stone-800">
                 <div class="text-[10px] font-bold uppercase text-stone-500">Vs. Média da sua UF</div>
-                <div id="inc-res-state" class="text-sm font-black font-mono text-emerald-800 mt-1">--</div>
+                <div id="inc-res-state" class="text-sm font-black font-mono text-emerald-700 dark:text-emerald-400 mt-1">--</div>
               </div>
-              <div class="bg-[#FAF8F5] p-3.5 rounded-xl border border-stone-200">
+              <div class="bg-[#FAF8F5] dark:bg-stone-950 p-3.5 rounded-xl border border-stone-200 dark:border-stone-800">
                 <div class="text-[10px] font-bold uppercase text-stone-500">Equivalente Internacional</div>
-                <div id="inc-res-ppp" class="text-sm font-black font-mono text-indigo-800 mt-1">--</div>
+                <div id="inc-res-ppp" class="text-sm font-black font-mono text-indigo-700 dark:text-indigo-400 mt-1">--</div>
               </div>
             </div>
-            <div class="bg-[#FAF8F5] p-4 rounded-2xl border border-stone-200 h-72">
+            <div class="bg-[#FAF8F5] dark:bg-stone-950 p-4 rounded-2xl border border-stone-200 dark:border-stone-800 h-72">
               <canvas id="inc-chart-canvas"></canvas>
             </div>
           </div>
@@ -545,16 +587,16 @@
     <!-- VIEW 7: INTERNATIONAL BENCHMARK TABLE (BR VS UK, OECD, US, CN, CL) -->
     <!-- ================================================================== -->
     <section id="view-benchmark" class="hidden space-y-6">
-      <div class="bg-white rounded-2xl p-6 sm:p-8 border border-stone-200 shadow-sm">
-        <span class="px-2.5 py-0.5 rounded-md text-[11px] font-bold uppercase bg-blue-50 text-blue-800 border border-blue-200">Comparativo Internacional</span>
-        <h2 class="text-2xl font-extrabold text-stone-900 mt-1">Brasil vs. Reino Unido (UK), OCDE, Estados Unidos, China e Chile</h2>
-        <p class="text-sm text-stone-600 mt-1">16 indicadores estruturais padronizados para comparação direta entre economias avançadas, emergentes e América Latina.</p>
-        <div class="overflow-x-auto border border-stone-200 rounded-xl mt-5">
+      <div class="bg-white dark:bg-stone-900 rounded-2xl p-6 sm:p-8 border border-stone-200 dark:border-stone-800 shadow-sm">
+        <span class="px-2.5 py-0.5 rounded-md text-[11px] font-bold uppercase bg-blue-50 dark:bg-blue-950 text-blue-800 dark:text-blue-300 border border-blue-200 dark:border-blue-800">Comparativo Internacional</span>
+        <h2 class="text-2xl font-extrabold text-stone-900 dark:text-stone-100 mt-1">Brasil vs. Reino Unido (UK), OCDE, Estados Unidos, China e Chile (18 Indicadores)</h2>
+        <p class="text-sm text-stone-600 dark:text-stone-400 mt-1">Indicadores estruturais padronizados para comparação direta entre economias avançadas, emergentes e América Latina.</p>
+        <div class="overflow-x-auto border border-stone-200 dark:border-stone-800 rounded-xl mt-5">
           <table class="w-full text-left border-collapse text-xs sm:text-sm">
             <thead>
-              <tr class="bg-[#FAF8F5] border-b border-stone-200 text-stone-700 font-bold">
+              <tr class="bg-[#FAF8F5] dark:bg-stone-950 border-b border-stone-200 dark:border-stone-800 text-stone-700 dark:text-stone-300 font-bold">
                 <th class="py-3 px-4">Indicador Estrutural</th>
-                <th class="py-3 px-4 bg-emerald-100/70 text-emerald-950">🇧🇷 Brasil</th>
+                <th class="py-3 px-4 bg-emerald-100/70 dark:bg-emerald-950/70 text-emerald-950 dark:text-emerald-300">🇧🇷 Brasil</th>
                 <th class="py-3 px-4">🇬🇧 Reino Unido</th>
                 <th class="py-3 px-4">🌐 Média OCDE</th>
                 <th class="py-3 px-4">🇺🇸 EUA</th>
@@ -563,56 +605,83 @@
                 <th class="py-3 px-4">Fontes</th>
               </tr>
             </thead>
-            <tbody id="benchmark-table-body" class="divide-y divide-stone-100"></tbody>
+            <tbody id="benchmark-table-body" class="divide-y divide-stone-100 dark:divide-stone-800"></tbody>
           </table>
         </div>
       </div>
     </section>
 
     <!-- ================================================================== -->
-    <!-- VIEW 8: OPEN DATA HUB, DOWNLOADS & METHODOLOGY                     -->
+    <!-- VIEW 8: LIVE BCB/IBGE API CONNECTOR & OPEN DATA HUB                -->
     <!-- ================================================================== -->
     <section id="view-datahub" class="hidden space-y-6">
-      <div class="bg-white rounded-2xl p-6 sm:p-8 border border-stone-200 shadow-sm space-y-6">
+      <!-- Live API Explorer Card -->
+      <div class="bg-white dark:bg-stone-900 rounded-2xl p-6 sm:p-8 border border-stone-200 dark:border-stone-800 shadow-sm space-y-5">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+          <div>
+            <span class="px-2.5 py-0.5 rounded-md text-[11px] font-bold uppercase bg-emerald-50 dark:bg-emerald-950 text-emerald-800 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800">Conexão Direta SGS / Banco Central do Brasil</span>
+            <h2 class="text-2xl font-extrabold text-stone-900 dark:text-stone-100 mt-1">Explorador de Séries Governamentais em Tempo Real (API BCB)</h2>
+            <p class="text-sm text-stone-600 dark:text-stone-400">Clique em qualquer série abaixo para consultar diretamente o servidor oficial `api.bcb.gov.br` e plotar os últimos 48 pontos divulgados.</p>
+          </div>
+          <div id="live-api-status" class="text-xs font-mono font-bold text-emerald-700 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950/60 px-3 py-1.5 rounded-xl border border-emerald-200 dark:border-emerald-800">
+            Pronto para consulta ao vivo
+          </div>
+        </div>
+
+        <div class="flex flex-wrap gap-2">
+          <button onclick="window.BR_APP.fetchLiveBcbSeries(432)" class="px-3 py-1.5 rounded-xl text-xs font-bold bg-rose-50 dark:bg-rose-950 text-rose-900 dark:text-rose-300 border border-rose-200 dark:border-rose-800">⚡ SGS 432: Taxa Selic Meta</button>
+          <button onclick="window.BR_APP.fetchLiveBcbSeries(433)" class="px-3 py-1.5 rounded-xl text-xs font-bold bg-amber-50 dark:bg-amber-950 text-amber-900 dark:text-amber-300 border border-amber-200 dark:border-amber-800">⚡ SGS 433: Inflação IPCA Mensal</button>
+          <button onclick="window.BR_APP.fetchLiveBcbSeries(13762)" class="px-3 py-1.5 rounded-xl text-xs font-bold bg-indigo-50 dark:bg-indigo-950 text-indigo-900 dark:text-indigo-300 border border-indigo-200 dark:border-indigo-800">⚡ SGS 13762: Dívida Bruta DBGG (% PIB)</button>
+          <button onclick="window.BR_APP.fetchLiveBcbSeries(24369)" class="px-3 py-1.5 rounded-xl text-xs font-bold bg-sky-50 dark:bg-sky-950 text-sky-900 dark:text-sky-300 border border-sky-200 dark:border-sky-800">⚡ SGS 24369: Desocupação PNAD (%)</button>
+          <button onclick="window.BR_APP.fetchLiveBcbSeries(1)" class="px-3 py-1.5 rounded-xl text-xs font-bold bg-emerald-50 dark:bg-emerald-950 text-emerald-900 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800">⚡ SGS 1: Câmbio Dólar PTAX</button>
+          <button onclick="window.BR_APP.fetchLiveBcbSeries(29037)" class="px-3 py-1.5 rounded-xl text-xs font-bold bg-purple-50 dark:bg-purple-950 text-purple-900 dark:text-purple-300 border border-purple-200 dark:border-purple-800">⚡ SGS 29037: Endividamento Famílias</button>
+        </div>
+
+        <div class="h-72 w-full bg-[#FAF8F5] dark:bg-stone-950 p-4 rounded-2xl border border-stone-200 dark:border-stone-800">
+          <canvas id="live-api-canvas"></canvas>
+        </div>
+      </div>
+
+      <!-- Static Dataset Export Cards -->
+      <div class="bg-white dark:bg-stone-900 rounded-2xl p-6 sm:p-8 border border-stone-200 dark:border-stone-800 shadow-sm space-y-6">
         <div>
-          <span class="px-2.5 py-0.5 rounded-md text-[11px] font-bold uppercase bg-emerald-50 text-emerald-800 border border-emerald-200">Ciência Aberta & Reprodutibilidade</span>
-          <h2 class="text-2xl font-extrabold text-stone-900 mt-1">Central de Dados Abertos, Metodologia e Exportação</h2>
-          <p class="text-sm text-stone-600 mt-1">
-            Todos os conjuntos de dados compilados neste portal são públicos, auditáveis e disponibilizados sob licença Creative Commons Attribution 4.0 (CC BY 4.0).
+          <h3 class="text-xl font-extrabold text-stone-900 dark:text-stone-100">Central de Dados Abertos e Exportação (CC BY 4.0)</h3>
+          <p class="text-sm text-stone-600 dark:text-stone-400 mt-1">
+            Baixe toda a base compilada neste portal (12 pilares, 60 séries históricas e 27 UFs com 14 indicadores) em JSON ou CSV.
           </p>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-          <div class="bg-[#FAF8F5] p-5 rounded-2xl border border-stone-200 flex flex-col justify-between">
+          <div class="bg-[#FAF8F5] dark:bg-stone-950 p-5 rounded-2xl border border-stone-200 dark:border-stone-800 flex flex-col justify-between">
             <div>
-              <span class="text-xs font-mono font-bold text-emerald-800">JSON • API Estática Completa</span>
-              <h3 class="text-base font-extrabold text-stone-900 mt-1">Dataset Completo (40 Séries + 27 UFs)</h3>
-              <p class="text-xs text-stone-600 mt-1">Inclui os 10 pilares, 16 KPIs, 40 séries históricas trilíngues, 27 UFs com 12 variáveis e tabela OCDE/BRICS.</p>
+              <span class="text-xs font-mono font-bold text-emerald-700 dark:text-emerald-400">JSON • Base Completa</span>
+              <h4 class="text-base font-extrabold text-stone-900 dark:text-stone-100 mt-1">Dataset Completo (60 Séries + 27 UFs)</h4>
+              <p class="text-xs text-stone-600 dark:text-stone-400 mt-1">Inclui os 12 pilares, 16 KPIs, 60 séries históricas trilíngues, 27 UFs e tabela OCDE/BRICS.</p>
             </div>
             <button onclick="window.BR_APP.downloadAllJSON()" class="mt-4 w-full py-2.5 rounded-xl text-xs font-bold bg-emerald-700 hover:bg-emerald-800 text-white">
               ⬇ Baixar Dataset Completo (.JSON)
             </button>
           </div>
 
-          <div class="bg-[#FAF8F5] p-5 rounded-2xl border border-stone-200 flex flex-col justify-between">
+          <div class="bg-[#FAF8F5] dark:bg-stone-950 p-5 rounded-2xl border border-stone-200 dark:border-stone-800 flex flex-col justify-between">
             <div>
-              <span class="text-xs font-mono font-bold text-sky-800">CSV • Planilha Regional</span>
-              <h3 class="text-base font-extrabold text-stone-900 mt-1">Atlas Socioeconômico das 27 UFs</h3>
-              <p class="text-xs text-stone-600 mt-1">Planilha pronta para Excel, R ou Python (Pandas) com os 12 indicadores estaduais para os 26 estados e o DF.</p>
+              <span class="text-xs font-mono font-bold text-sky-700 dark:text-sky-400">CSV • Planilha Regional</span>
+              <h4 class="text-base font-extrabold text-stone-900 dark:text-stone-100 mt-1">Atlas Socioeconômico das 27 UFs (14 Variáveis)</h4>
+              <p class="text-xs text-stone-600 dark:text-stone-400 mt-1">Planilha pronta para Excel, R ou Python (Pandas) com todos os indicadores estaduais.</p>
             </div>
             <button onclick="window.BR_APP.downloadAllStatesCSV()" class="mt-4 w-full py-2.5 rounded-xl text-xs font-bold bg-sky-700 hover:bg-sky-800 text-white">
               ⬇ Baixar Atlas das 27 UFs (.CSV)
             </button>
           </div>
 
-          <div class="bg-[#FAF8F5] p-5 rounded-2xl border border-stone-200 flex flex-col justify-between">
+          <div class="bg-[#FAF8F5] dark:bg-stone-950 p-5 rounded-2xl border border-stone-200 dark:border-stone-800 flex flex-col justify-between">
             <div>
-              <span class="text-xs font-mono font-bold text-indigo-800">GitHub & Código-Fonte</span>
-              <h3 class="text-base font-extrabold text-stone-900 mt-1">Repositório Público Open-Source</h3>
-              <p class="text-xs text-stone-600 mt-1">Arquitetura zero-build em HTML5, Tailwind CSS e Chart.js, auditável e hospedada gratuitamente.</p>
+              <span class="text-xs font-mono font-bold text-indigo-700 dark:text-indigo-400">GitHub & Código-Fonte</span>
+              <h4 class="text-base font-extrabold text-stone-900 dark:text-stone-100 mt-1">Repositório Público Open-Source</h4>
+              <p class="text-xs text-stone-600 dark:text-stone-400 mt-1">Arquitetura zero-build em HTML5, Tailwind CSS e Chart.js, auditável e hospedada gratuitamente.</p>
             </div>
             <a href="https://github.com/outdatedcaveman/brasil-em-numeros" target="_blank" rel="noopener noreferrer"
-               class="mt-4 w-full py-2.5 rounded-xl text-xs font-bold bg-stone-900 hover:bg-stone-800 text-white text-center block">
+               class="mt-4 w-full py-2.5 rounded-xl text-xs font-bold bg-stone-900 dark:bg-stone-800 hover:bg-stone-800 text-white text-center block">
               ★ Acessar Repositório no GitHub →
             </a>
           </div>
@@ -622,15 +691,15 @@
 
   </main>
 
-  <footer class="mt-16 border-t border-stone-200 bg-white py-8 text-center text-xs text-stone-500 px-4">
+  <footer class="mt-16 border-t border-stone-200 dark:border-stone-800 bg-white dark:bg-stone-900 py-8 text-center text-xs text-stone-500 dark:text-stone-400 px-4">
     <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
       <div>
-        <strong>Brasil em Números | Brazil by Numbers</strong> — Portal de Inteligência Estatística (10 Pilares • 40 Séries • 27 UFs). Licença CC BY 4.0.
+        <strong>Brasil em Números | Brazil by Numbers</strong> — Portal de Inteligência Estatística (12 Pilares • 60 Séries • 27 UFs). Licença CC BY 4.0.
       </div>
       <div class="flex items-center gap-4">
-        <a href="https://github.com/outdatedcaveman/brasil-em-numeros" target="_blank" rel="noopener" class="font-bold text-emerald-800 hover:underline">GitHub Repo</a>
+        <a href="https://github.com/outdatedcaveman/brasil-em-numeros" target="_blank" rel="noopener" class="font-bold text-emerald-700 dark:text-emerald-400 hover:underline">GitHub Repo</a>
         <span>•</span>
-        <span>Fontes: IBGE, BCB, STN, IPEA, DataSUS, INEP, EPE, SEEG, INPE, FBSP, CNJ, MDIC</span>
+        <span>Fontes: IBGE, BCB, STN, IPEA, DataSUS, INEP, EPE, SEEG, INPE, FBSP, CNJ, TSE, Embratur, MDIC</span>
       </div>
     </div>
   </footer>
