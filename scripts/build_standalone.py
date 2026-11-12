@@ -9,10 +9,10 @@ def build():
     states_js = (ROOT / "data" / "states.js").read_text(encoding="utf-8")
     app_js = (ROOT / "js" / "app.js").read_text(encoding="utf-8")
 
-    target_block = """  <script src="data/pillars.js?v=20261112d"></script>
-  <script src="data/series.js?v=20261112d"></script>
-  <script src="data/states.js?v=20261112d"></script>
-  <script src="js/app.js?v=20261112d"></script>"""
+    target_block = """  <script src="data/pillars.js?v=20261112e"></script>
+  <script src="data/series.js?v=20261112e"></script>
+  <script src="data/states.js?v=20261112e"></script>
+  <script src="js/app.js?v=20261112e"></script>"""
 
     inline_block = f"""  <script>
 {pillars_js}

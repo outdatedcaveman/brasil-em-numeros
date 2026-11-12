@@ -427,23 +427,37 @@
 
     const svgContainer = document.getElementById('brazil-svg-map');
     if (svgContainer) {
-      const strokeCol = isDark ? '#0c0a09' : '#ffffff';
+      const strokeCol = isDark ? '#1c1917' : '#ffffff';
       if (mapMode === 'geo') {
-        const paths = D.UF_LIST.map(u => {
+        // Ensure DF is drawn after GO (since DF is an enclave inside GO) and selected UF is drawn on top
+        const orderedUfs = [...D.UF_LIST].sort((a, b) => {
+          const rank = u => (u.uf === inspectedUf ? 2 : (u.uf === 'DF' ? 1 : 0));
+          return rank(a) - rank(b);
+        });
+        const paths = orderedUfs.map(u => {
           const val = u[selectedMapMetric];
           const fill = getMetricColor(val, minVal, maxVal, mObj.higherBetter);
           const formatted = formatMetricVal(val, mObj);
           const isSelected = u.uf === inspectedUf;
           return `
-            <g class="cursor-pointer transition-opacity hover:opacity-90"
+            <g class="cursor-pointer transition-opacity hover:opacity-85"
                onclick="window.BR_APP.selectStateForRadar('${u.uf}')">
-              <path d="${u.geo}" fill="${fill}" stroke="${isSelected ? '#facc15' : strokeCol}" stroke-width="${isSelected ? '3.5' : '1.8'}" stroke-linejoin="round" />
-              <text x="${u.lx}" y="${u.ly}" text-anchor="middle" fill="#ffffff" font-size="11" font-weight="900" font-family="Inter, sans-serif" style="paint-order:stroke;stroke:rgba(0,0,0,0.55);stroke-width:2.5px;">${u.uf}</text>
+              <path d="${u.geo}" fill="${fill}" stroke="${isSelected ? '#facc15' : strokeCol}" stroke-width="${isSelected ? '2.8' : '1.15'}" stroke-linejoin="round" stroke-linecap="round" />
               <title>${u.name} (${u.uf}) — ${mObj.label[currentLang]}: ${formatted}</title>
             </g>
           `;
         }).join('');
-        svgContainer.innerHTML = `<svg viewBox="20 10 565 595" class="w-full max-w-[460px] mx-auto select-none">${paths}</svg>`;
+        const labels = D.UF_LIST.map(u => {
+          const isSmall = ['DF', 'SE', 'AL', 'PB', 'RN', 'ES', 'RJ'].includes(u.uf);
+          return `
+            <text x="${u.lx}" y="${u.ly}" text-anchor="middle" dominant-baseline="central"
+                  onclick="window.BR_APP.selectStateForRadar('${u.uf}')"
+                  class="cursor-pointer"
+                  fill="#ffffff" font-size="${isSmall ? '9.5' : '11'}" font-weight="900" font-family="Inter, sans-serif"
+                  style="paint-order:stroke;stroke:rgba(0,0,0,0.75);stroke-width:2.8px;">${u.uf}</text>
+          `;
+        }).join('');
+        svgContainer.innerHTML = `<svg viewBox="0 0 600 600" class="w-full max-w-[500px] mx-auto select-none">${paths}<g>${labels}</g></svg>`;
       } else {
         const cellSize = 56, gap = 6;
         const tiles = D.UF_LIST.map(u => {
