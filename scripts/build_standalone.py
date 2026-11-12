@@ -9,10 +9,10 @@ def build():
     states_js = (ROOT / "data" / "states.js").read_text(encoding="utf-8")
     app_js = (ROOT / "js" / "app.js").read_text(encoding="utf-8")
 
-    target_block = """  <script src="data/pillars.js"></script>
-  <script src="data/series.js"></script>
-  <script src="data/states.js"></script>
-  <script src="js/app.js"></script>"""
+    target_block = """  <script src="data/pillars.js?v=20261112d"></script>
+  <script src="data/series.js?v=20261112d"></script>
+  <script src="data/states.js?v=20261112d"></script>
+  <script src="js/app.js?v=20261112d"></script>"""
 
     inline_block = f"""  <script>
 {pillars_js}
@@ -23,9 +23,10 @@ def build():
 
     assert target_block in index_html, "Target script tags not found in index.html"
     standalone = index_html.replace(target_block, inline_block)
-    out_path = ROOT / "standalone.html"
-    out_path.write_text(standalone, encoding="utf-8", newline="\n")
-    print(f"Built standalone.html ({out_path.stat().st_size:,} bytes)")
+    for name in ("standalone.html", "standalone_portal_github_pages_google_sites_ready.html"):
+        out_path = ROOT / name
+        out_path.write_text(standalone, encoding="utf-8", newline="\n")
+        print(f"Built {name} ({out_path.stat().st_size:,} bytes)")
 
 if __name__ == "__main__":
     build()

@@ -306,13 +306,14 @@
         return {
           ...ds,
           data: transformed,
-          borderColor: chartJsType === 'line' ? singleColor : ds.borderColor,
+          borderColor: chartJsType === 'line' ? singleColor : (ds.borderColor || 'transparent'),
           backgroundColor: activeType === 'area'
             ? singleColor + '28'
             : (chartJsType === 'bar' ? (ds.backgroundColor || singleColor) : (ds.backgroundColor || singleColor)),
           fill: activeType === 'area' ? true : Boolean(ds.fill),
           tension: 0.28,
-          borderWidth: ds.borderWidth || 2.5
+          borderRadius: chartJsType === 'bar' ? 6 : 0,
+          borderWidth: chartJsType === 'bar' ? 0 : (ds.borderWidth || 2.5)
         };
       });
 
@@ -324,17 +325,17 @@
           maintainAspectRatio: false,
           interaction: { mode: 'index', intersect: false },
           plugins: {
-            legend: { position: 'bottom', labels: { color: tc.text, boxWidth: 12, font: { size: 11, weight: 'bold' } } }
+            legend: { position: 'bottom', labels: { color: tc.text, boxWidth: 12, font: { family: "'Inter', sans-serif", size: 11, weight: 'bold' } } }
           },
           scales: {
             y: {
               type: globalLogScale ? 'logarithmic' : 'linear',
               grid: { color: tc.grid },
-              ticks: { color: tc.muted, font: { family: 'JetBrains Mono', size: 10 } }
+              ticks: { color: tc.muted, font: { family: "'Inter', sans-serif", size: 11, weight: '600' } }
             },
             x: {
               grid: { display: false },
-              ticks: { color: tc.muted, font: { size: 10, weight: '600' } }
+              ticks: { color: tc.muted, font: { family: "'Inter', sans-serif", size: 11, weight: '600' } }
             }
           }
         }
@@ -489,8 +490,8 @@
           maintainAspectRatio: false,
           plugins: { legend: { display: false } },
           scales: {
-            x: { ticks: { font: { size: 9, weight: 'bold' } }, grid: { display: false } },
-            y: { ticks: { font: { family: 'JetBrains Mono', size: 10 } } }
+            x: { ticks: { font: { family: "'Inter', sans-serif", size: 10, weight: 'bold' } }, grid: { display: false } },
+            y: { ticks: { font: { family: "'Inter', sans-serif", size: 11, weight: '600' } } }
           }
         }
       });
@@ -1125,8 +1126,8 @@
       const btn = document.getElementById(`tab-${id}`);
       if (btn) {
         btn.className = id === tabId
-          ? 'w-full text-center px-2.5 py-2 rounded-xl text-xs sm:text-[13px] font-extrabold bg-emerald-700 text-white shadow-sm transition-all leading-tight flex items-center justify-center'
-          : 'w-full text-center px-2.5 py-2 rounded-xl text-xs sm:text-[13px] font-bold bg-[#FAF8F5] dark:bg-stone-900/90 text-stone-700 dark:text-stone-300 border border-stone-200/80 dark:border-stone-800 hover:bg-stone-200/70 dark:hover:bg-stone-800 transition-all leading-tight flex items-center justify-center';
+          ? 'min-w-0 overflow-hidden w-full text-center px-2.5 py-2 rounded-xl text-xs sm:text-[13px] font-extrabold bg-emerald-700 text-white shadow-sm transition-all leading-tight flex items-center justify-center'
+          : 'min-w-0 overflow-hidden w-full text-center px-2.5 py-2 rounded-xl text-xs sm:text-[13px] font-bold bg-[#FAF8F5] dark:bg-stone-900/90 text-stone-700 dark:text-stone-300 border border-stone-200/80 dark:border-stone-800 hover:bg-stone-200/70 dark:hover:bg-stone-800 transition-all leading-tight flex items-center justify-center';
       }
     });
 

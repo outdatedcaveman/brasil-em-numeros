@@ -98,15 +98,15 @@
       </div>
 
       <!-- 8 Responsive Adaptive Navigation Tabs (Zero horizontal overflow clipping) -->
-      <nav class="grid grid-cols-2 sm:grid-cols-4 xl:grid-cols-8 gap-1.5 py-2.5 border-t border-stone-200/80 dark:border-stone-800">
-        <button id="tab-overview" onclick="window.BR_APP.switchTab('overview')" class="w-full text-center px-2.5 py-2 rounded-xl text-xs sm:text-[13px] font-extrabold bg-emerald-700 text-white shadow-sm transition-all leading-tight flex items-center justify-center">1. Visão Geral</button>
-        <button id="tab-charts" onclick="window.BR_APP.switchTab('charts')" class="w-full text-center px-2.5 py-2 rounded-xl text-xs sm:text-[13px] font-bold bg-[#FAF8F5] dark:bg-stone-900/90 text-stone-700 dark:text-stone-300 border border-stone-200/80 dark:border-stone-800 hover:bg-stone-200/70 dark:hover:bg-stone-800 transition-all leading-tight flex items-center justify-center">2. 60 Séries</button>
-        <button id="tab-states" onclick="window.BR_APP.switchTab('states')" class="w-full text-center px-2.5 py-2 rounded-xl text-xs sm:text-[13px] font-bold bg-[#FAF8F5] dark:bg-stone-900/90 text-stone-700 dark:text-stone-300 border border-stone-200/80 dark:border-stone-800 hover:bg-stone-200/70 dark:hover:bg-stone-800 transition-all leading-tight flex items-center justify-center">3. Mapa 27 UFs</button>
-        <button id="tab-correlations" onclick="window.BR_APP.switchTab('correlations')" class="w-full text-center px-2.5 py-2 rounded-xl text-xs sm:text-[13px] font-bold bg-[#FAF8F5] dark:bg-stone-900/90 text-stone-700 dark:text-stone-300 border border-stone-200/80 dark:border-stone-800 hover:bg-stone-200/70 dark:hover:bg-stone-800 transition-all leading-tight flex items-center justify-center">4. Correlações XY</button>
-        <button id="tab-simulator" onclick="window.BR_APP.switchTab('simulator')" class="w-full text-center px-2.5 py-2 rounded-xl text-xs sm:text-[13px] font-bold bg-[#FAF8F5] dark:bg-stone-900/90 text-stone-700 dark:text-stone-300 border border-stone-200/80 dark:border-stone-800 hover:bg-stone-200/70 dark:hover:bg-stone-800 transition-all leading-tight flex items-center justify-center">5. Simulador & Pirâmide</button>
-        <button id="tab-income" onclick="window.BR_APP.switchTab('income')" class="w-full text-center px-2.5 py-2 rounded-xl text-xs sm:text-[13px] font-bold bg-[#FAF8F5] dark:bg-stone-900/90 text-stone-700 dark:text-stone-300 border border-stone-200/80 dark:border-stone-800 hover:bg-stone-200/70 dark:hover:bg-stone-800 transition-all leading-tight flex items-center justify-center">6. Renda & Impostos</button>
-        <button id="tab-benchmark" onclick="window.BR_APP.switchTab('benchmark')" class="w-full text-center px-2.5 py-2 rounded-xl text-xs sm:text-[13px] font-bold bg-[#FAF8F5] dark:bg-stone-900/90 text-stone-700 dark:text-stone-300 border border-stone-200/80 dark:border-stone-800 hover:bg-stone-200/70 dark:hover:bg-stone-800 transition-all leading-tight flex items-center justify-center">7. Brasil vs. Mundo</button>
-        <button id="tab-datahub" onclick="window.BR_APP.switchTab('datahub')" class="w-full text-center px-2.5 py-2 rounded-xl text-xs sm:text-[13px] font-bold bg-[#FAF8F5] dark:bg-stone-900/90 text-stone-700 dark:text-stone-300 border border-stone-200/80 dark:border-stone-800 hover:bg-stone-200/70 dark:hover:bg-stone-800 transition-all leading-tight flex items-center justify-center">8. API BCB & Dados</button>
+      <nav class="grid grid-cols-2 sm:grid-cols-4 xl:grid-cols-8 gap-2 py-2.5 border-t border-stone-200/80 dark:border-stone-800">
+        <button id="tab-overview" onclick="window.BR_APP.switchTab('overview')" class="min-w-0 overflow-hidden w-full text-center px-2.5 py-2 rounded-xl text-xs sm:text-[13px] font-extrabold bg-emerald-700 text-white shadow-sm transition-all leading-tight flex items-center justify-center">1. Visão Geral</button>
+        <button id="tab-charts" onclick="window.BR_APP.switchTab('charts')" class="min-w-0 overflow-hidden w-full text-center px-2.5 py-2 rounded-xl text-xs sm:text-[13px] font-bold bg-[#FAF8F5] dark:bg-stone-900/90 text-stone-700 dark:text-stone-300 border border-stone-200/80 dark:border-stone-800 hover:bg-stone-200/70 dark:hover:bg-stone-800 transition-all leading-tight flex items-center justify-center">2. 60 Séries</button>
+        <button id="tab-states" onclick="window.BR_APP.switchTab('states')" class="min-w-0 overflow-hidden w-full text-center px-2.5 py-2 rounded-xl text-xs sm:text-[13px] font-bold bg-[#FAF8F5] dark:bg-stone-900/90 text-stone-700 dark:text-stone-300 border border-stone-200/80 dark:border-stone-800 hover:bg-stone-200/70 dark:hover:bg-stone-800 transition-all leading-tight flex items-center justify-center">3. Mapa 27 UFs</button>
+        <button id="tab-correlations" onclick="window.BR_APP.switchTab('correlations')" class="min-w-0 overflow-hidden w-full text-center px-2.5 py-2 rounded-xl text-xs sm:text-[13px] font-bold bg-[#FAF8F5] dark:bg-stone-900/90 text-stone-700 dark:text-stone-300 border border-stone-200/80 dark:border-stone-800 hover:bg-stone-200/70 dark:hover:bg-stone-800 transition-all leading-tight flex items-center justify-center">4. Correlações XY</button>
+        <button id="tab-simulator" onclick="window.BR_APP.switchTab('simulator')" class="min-w-0 overflow-hidden w-full text-center px-2.5 py-2 rounded-xl text-xs sm:text-[13px] font-bold bg-[#FAF8F5] dark:bg-stone-900/90 text-stone-700 dark:text-stone-300 border border-stone-200/80 dark:border-stone-800 hover:bg-stone-200/70 dark:hover:bg-stone-800 transition-all leading-tight flex items-center justify-center">5. Simulador & Pirâmide</button>
+        <button id="tab-income" onclick="window.BR_APP.switchTab('income')" class="min-w-0 overflow-hidden w-full text-center px-2.5 py-2 rounded-xl text-xs sm:text-[13px] font-bold bg-[#FAF8F5] dark:bg-stone-900/90 text-stone-700 dark:text-stone-300 border border-stone-200/80 dark:border-stone-800 hover:bg-stone-200/70 dark:hover:bg-stone-800 transition-all leading-tight flex items-center justify-center">6. Renda & Impostos</button>
+        <button id="tab-benchmark" onclick="window.BR_APP.switchTab('benchmark')" class="min-w-0 overflow-hidden w-full text-center px-2.5 py-2 rounded-xl text-xs sm:text-[13px] font-bold bg-[#FAF8F5] dark:bg-stone-900/90 text-stone-700 dark:text-stone-300 border border-stone-200/80 dark:border-stone-800 hover:bg-stone-200/70 dark:hover:bg-stone-800 transition-all leading-tight flex items-center justify-center">7. Brasil vs. Mundo</button>
+        <button id="tab-datahub" onclick="window.BR_APP.switchTab('datahub')" class="min-w-0 overflow-hidden w-full text-center px-2.5 py-2 rounded-xl text-xs sm:text-[13px] font-bold bg-[#FAF8F5] dark:bg-stone-900/90 text-stone-700 dark:text-stone-300 border border-stone-200/80 dark:border-stone-800 hover:bg-stone-200/70 dark:hover:bg-stone-800 transition-all leading-tight flex items-center justify-center">8. API BCB & Dados</button>
       </nav>
     </div>
   </header>
@@ -704,10 +704,10 @@
     </div>
   </footer>
 
-  <!-- Data & Interactive Application Scripts -->
-  <script src="data/pillars.js"></script>
-  <script src="data/series.js"></script>
-  <script src="data/states.js"></script>
-  <script src="js/app.js"></script>
+  <!-- Data & Interactive Application Scripts (Cache-busted) -->
+  <script src="data/pillars.js?v=20261112d"></script>
+  <script src="data/series.js?v=20261112d"></script>
+  <script src="data/states.js?v=20261112d"></script>
+  <script src="js/app.js?v=20261112d"></script>
 </body>
 </html>

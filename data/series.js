@@ -331,26 +331,27 @@ window.BR_DATA.CHARTS = [
     pillar: 'fiscal',
     code: '3.4',
     type: 'bar',
-    unit: '% do PIB',
+    unit: '% do PIB / % da Pop.',
     title: {
-      pt: 'Gasto Público com Previdência (RGPS + RPPS + Militares) vs. Proporção de Idosos (% PIB)',
-      es: 'Gasto Público en Pensiones (% PIB) comparado con la Población Mayor (65+)',
-      en: 'Public Pension Spending (% GDP) vs. Senior Population Share (International Benchmark)'
+      pt: 'Gasto Público com Previdência (% do PIB) vs. População Idosa de 65+ Anos (% da População)',
+      es: 'Gasto Público en Pensiones (% PIB) vs. Población Mayor de 65+ Años (% de la Población)',
+      en: 'Public Pension Spending (% GDP) vs. Senior Population Share 65+ (% of Population)'
     },
     takeaway: {
-      pt: 'Mesmo após a Reforma de 2019 (EC 103), o Brasil gasta ~12,4% do PIB com previdência pública (RGPS 8,7% + RPPS/Militares 3,7%) tendo apenas 10,9% de idosos — patamar superior ao do Reino Unido (7,6% PIB com 19,1% de idosos).',
-      es: 'Brasil gasta el 12,4% del PIB en pensiones públicas con solo 10,9% de ancianos (vs. 7,6% del PIB en el Reino Unido).',
-      en: 'Brazil spends 12.4% of GDP on public pensions with just 10.9% seniors — far above the UK (7.6% GDP with 19.1% seniors).'
+      pt: 'Mesmo após a Reforma de 2019 (EC 103), o Brasil gasta 12,4% do PIB com previdência pública (RGPS 8,7% + RPPS/Militares 3,7%) tendo apenas 10,9% de idosos (65+) — enquanto a OCDE (8,9% PIB) e o Reino Unido (7,6% PIB) gastam bem menos tendo quase o dobro de idosos (18,5% e 19,1%).',
+      es: 'Brasil gasta el 12,4% del PIB en pensiones públicas con solo 10,9% de ancianos (vs. 7,6% del PIB en el Reino Unido con 19,1% de ancianos).',
+      en: 'Brazil spends 12.4% of GDP on public pensions with just 10.9% seniors — whereas the UK spends 7.6% of GDP despite having 19.1% seniors.'
     },
     uk: {
-      pt: 'Reino Unido: 7,6% do PIB; Média OCDE: 8,9% do PIB; Chile: 4,8% do PIB.',
-      es: 'Reino Unido: 7,6% del PIB; Media OCDE: 8,9% del PIB.',
-      en: 'UK Benchmark: 7.6% of GDP; OECD average: 8.9% of GDP.'
+      pt: 'Reino Unido: Gasto previdenciário de 7,6% do PIB para 19,1% de idosos; Média OCDE: 8,9% do PIB para 18,5% de idosos.',
+      es: 'Reino Unido: 7,6% del PIB (19,1% mayores); Media OCDE: 8,9% del PIB (18,5% mayores).',
+      en: 'UK Benchmark: 7.6% of GDP (19.1% seniors); OECD average: 8.9% of GDP (18.5% seniors).'
     },
-    source: 'Tesouro Nacional (RREO), IPEA & OCDE Pensions at a Glance',
-    labels: ['Brasil (10,9% 65+)', 'Média OCDE (18,5% 65+)', 'Reino Unido (19,1% 65+)', 'EUA (17,6% 65+)', 'Chile (13,8% 65+)'],
+    source: 'Tesouro Nacional (RREO), IBGE, IPEA & OCDE Pensions at a Glance',
+    labels: ['Brasil', 'Média OCDE', 'Reino Unido', 'EUA', 'Chile'],
     datasets: [
-      { label: 'Gasto Público com Previdência (% do PIB)', data: [12.4, 8.9, 7.6, 7.1, 4.8], backgroundColor: ['#4f46e5', '#64748b', '#0284c7', '#94a3b8', '#0d9488'] }
+      { label: 'Gasto com Previdência (% do PIB)', data: [12.4, 8.9, 7.6, 7.1, 4.8], backgroundColor: '#6366f1' },
+      { label: 'População Idosa 65+ (% da População)', data: [10.9, 18.5, 19.1, 17.6, 13.8], backgroundColor: '#f59e0b' }
     ]
   },
 
@@ -643,10 +644,10 @@ window.BR_DATA.CHARTS = [
     source: 'OCDE (Programme for International Student Assessment - PISA 2022) & INEP',
     labels: ['Matemática', 'Leitura', 'Ciências'],
     datasets: [
-      { label: 'Brasil', data: [379, 410, 403], backgroundColor: '#d97706' },
-      { label: 'Chile (Líder LatAm)', data: [412, 448, 444], backgroundColor: '#0284c7' },
+      { label: 'Brasil', data: [379, 410, 403], backgroundColor: '#f59e0b' },
+      { label: 'Chile (Líder LatAm)', data: [412, 448, 444], backgroundColor: '#0ea5e9' },
       { label: 'Média OCDE', data: [472, 476, 485], backgroundColor: '#94a3b8' },
-      { label: 'Reino Unido', data: [489, 494, 500], backgroundColor: '#1e293b' }
+      { label: 'Reino Unido', data: [489, 494, 500], backgroundColor: '#6366f1' }
     ]
   },
   {
@@ -934,9 +935,9 @@ window.BR_DATA.CHARTS = [
       en: 'In the UK and Germany, court systems cost between 0.25% and 0.35% of GDP.'
     },
     source: 'Conselho Nacional de Justiça (Relatório Justiça em Números 2024) & Tesouro Nacional',
-    labels: ['Brasil (84M processos)', 'Colômbia', 'Alemanha', 'Média União Europeia', 'Reino Unido', 'EUA'],
+    labels: ['Brasil', 'Colômbia', 'Alemanha', 'Média União Europeia', 'Reino Unido', 'EUA'],
     datasets: [
-      { label: 'Despesa do Poder Judiciário (% do PIB)', data: [1.30, 0.58, 0.36, 0.31, 0.26, 0.21], backgroundColor: ['#dc2626', '#64748b', '#94a3b8', '#0284c7', '#1e293b', '#cbd5e1'] }
+      { label: 'Despesa do Poder Judiciário (% do PIB)', data: [1.30, 0.58, 0.36, 0.31, 0.26, 0.21], backgroundColor: ['#e11d48', '#f59e0b', '#0ea5e9', '#6366f1', '#10b981', '#94a3b8'] }
     ]
   },
 
@@ -1257,9 +1258,9 @@ window.BR_DATA.CHARTS = [
       en: 'In the UK and OECD, the education-adjusted central government wage premium is +4% to +9% (vs. +68% in Brazil’s federal tier).'
     },
     source: 'IPEA (Atlas do Estado Brasileiro) & Banco Mundial',
-    labels: ['Judiciário / MP', 'Executivo Federal', 'Estadual (Média)', 'Setor Privado Formal (CLT)', 'Municipal (Prof./Saúde)'],
+    labels: ['Judiciário / MP', 'Executivo Federal', 'Executivo Estadual', 'Executivo Municipal', 'Setor Privado Formal (CLT)'],
     datasets: [
-      { label: 'Remuneração Média Mensal (R$ de 2024)', data: [19450, 12840, 6420, 3980, 4120], backgroundColor: ['#be123c', '#4f46e5', '#0284c7', '#64748b', '#059669'] }
+      { label: 'Remuneração Média Mensal (R$ de 2024)', data: [19450, 12840, 6420, 4120, 3980], backgroundColor: ['#e11d48', '#6366f1', '#0ea5e9', '#10b981', '#94a3b8'] }
     ]
   },
   {
@@ -1286,7 +1287,7 @@ window.BR_DATA.CHARTS = [
     source: 'IBGE (Desigualdades Sociais por Cor ou Raça no Brasil — PNAD Contínua 2024)',
     labels: ['Homem Branco', 'Mulher Branca', 'Média Nacional', 'Homem Preto/Pardo', 'Mulher Preta/Parda'],
     datasets: [
-      { label: 'Rendimento Médio Habitual do Trabalho (R$/mês)', data: [4460, 3380, 3215, 2640, 2140], backgroundColor: ['#1e293b', '#0284c7', '#64748b', '#d97706', '#e11d48'] }
+      { label: 'Rendimento Médio Habitual do Trabalho (R$/mês)', data: [4460, 3380, 3215, 2640, 2140], backgroundColor: ['#6366f1', '#0ea5e9', '#94a3b8', '#f59e0b', '#e11d48'] }
     ]
   },
   {
@@ -1535,9 +1536,9 @@ window.BR_DATA.CHARTS = [
       en: 'In the UK (2024 election), women won a record 40.5% of seats in the House of Commons; Mexico sits at 50.0%.'
     },
     source: 'Inter-Parliamentary Union (IPU Parline 2024) & Tribunal Superior Eleitoral (TSE)',
-    labels: ['México', 'Reino Unido', 'Argentina', 'Média América Latina', 'Média OCDE', 'Brasil (133º)'],
+    labels: ['México', 'Argentina', 'Reino Unido', 'Média América Latina', 'Média OCDE', 'Brasil'],
     datasets: [
-      { label: 'Mulheres na Câmara Baixa (%)', data: [50.0, 40.5, 43.2, 35.8, 34.1, 17.7], backgroundColor: ['#059669', '#1e293b', '#0284c7', '#64748b', '#94a3b8', '#be123c'] }
+      { label: 'Mulheres na Câmara Baixa (%)', data: [50.0, 43.2, 40.5, 35.8, 34.1, 17.7], backgroundColor: ['#10b981', '#0ea5e9', '#6366f1', '#94a3b8', '#64748b', '#e11d48'] }
     ]
   },
   {
@@ -1622,9 +1623,9 @@ window.BR_DATA.CHARTS = [
       en: 'The city of London alone welcomes 3x more international visitors (~20M/yr) than the entire country of Brazil (6.6M).'
     },
     source: 'Embratur / Ministério do Turismo, Polícia Federal & ONU Turismo (UNWTO 2024)',
-    labels: ['Espanha', 'México (Líder LatAm)', 'Reino Unido', 'Turquia', 'Tailândia', 'Brasil (Estagnado desde 2005)'],
+    labels: ['Espanha', 'Turquia', 'México', 'Reino Unido', 'Tailândia', 'Brasil'],
     datasets: [
-      { label: 'Chegadas de Turistas Internacionais (Milhões / Ano)', data: [85.1, 42.2, 38.0, 55.2, 28.1, 6.6], backgroundColor: ['#94a3b8', '#0284c7', '#1e293b', '#64748b', '#0d9488', '#0369a1'] }
+      { label: 'Chegadas de Turistas Internacionais (Milhões / Ano)', data: [85.1, 55.2, 42.2, 38.0, 28.1, 6.6], backgroundColor: ['#10b981', '#0ea5e9', '#6366f1', '#8b5cf6', '#f59e0b', '#e11d48'] }
     ]
   },
   {
@@ -1705,9 +1706,9 @@ window.BR_DATA.CHARTS = [
       en: 'Daily time spent online: Brazil 9.2h vs. UK 5.6h, Global Average 6.7h, and Japan 3.9h.'
     },
     source: 'DataReportal / GWI (Digital 2024) & IBGE (PNAD Contínua Outras Formas de Trabalho)',
-    labels: ['Brasil (9h13)', 'Filipinas', 'Colômbia', 'Média Mundial', 'Estados Unidos', 'Reino Unido (5h36)', 'Japão'],
+    labels: ['Brasil', 'Filipinas', 'Colômbia', 'Estados Unidos', 'Média Mundial', 'Reino Unido', 'Japão'],
     datasets: [
-      { label: 'Tempo Médio Diário na Internet (Horas/Dia)', data: [9.22, 8.87, 8.72, 6.67, 6.98, 5.60, 3.93], backgroundColor: ['#0369a1', '#64748b', '#0284c7', '#94a3b8', '#475569', '#1e293b', '#cbd5e1'] }
+      { label: 'Tempo Médio Diário na Internet (Horas/Dia)', data: [9.22, 8.87, 8.72, 6.98, 6.67, 5.60, 3.93], backgroundColor: ['#0ea5e9', '#6366f1', '#10b981', '#f59e0b', '#94a3b8', '#8b5cf6', '#64748b'] }
     ]
   },
   {
