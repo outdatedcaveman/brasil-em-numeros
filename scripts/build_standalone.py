@@ -10,11 +10,11 @@ def build():
     deep_js = (ROOT / "data" / "deep_brazil.js").read_text(encoding="utf-8")
     app_js = (ROOT / "js" / "app.js").read_text(encoding="utf-8")
 
-    target_block = """  <script src="data/pillars.js?v=20261112f"></script>
-  <script src="data/series.js?v=20261112f"></script>
-  <script src="data/states.js?v=20261112f"></script>
-  <script src="data/deep_brazil.js?v=20261112f"></script>
-  <script src="js/app.js?v=20261112f"></script>"""
+    target_block = """  <script src="data/pillars.js?v=20261112g"></script>
+  <script src="data/series.js?v=20261112g"></script>
+  <script src="data/states.js?v=20261112g"></script>
+  <script src="data/deep_brazil.js?v=20261112g"></script>
+  <script src="js/app.js?v=20261112g"></script>"""
 
     inline_block = f"""  <script>
 {pillars_js}

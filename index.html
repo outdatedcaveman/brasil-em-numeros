@@ -39,42 +39,63 @@
 </head>
 <body class="min-h-screen bg-[#FAF8F5] dark:bg-stone-950 text-stone-900 dark:text-stone-100 selection:bg-emerald-200 selection:text-emerald-950 transition-colors duration-200">
 
-  <!-- TOP STICKY HEADER -->
-  <header class="sticky top-0 z-40 bg-[#FAF8F5]/95 dark:bg-stone-950/95 backdrop-blur-md border-b border-stone-200 dark:border-stone-800 shadow-sm">
-    <div class="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between py-3 gap-3">
-        <!-- Brand -->
-        <div class="flex items-center gap-3 cursor-pointer shrink-0" onclick="window.BR_APP.switchTab('overview')">
-          <div class="w-10 h-10 rounded-xl bg-emerald-700 flex items-center justify-center text-white font-black text-lg shadow-sm border border-emerald-800 shrink-0">
-            BR
-          </div>
-          <div class="min-w-0">
-            <div class="flex flex-wrap items-center gap-2">
-              <h1 id="ui-brand-title" class="text-lg sm:text-xl font-extrabold tracking-tight text-stone-900 dark:text-stone-100 whitespace-nowrap">Brasil em Números</h1>
-              <span id="ui-edition-tag" class="inline-block px-2 py-0.5 text-[11px] font-bold uppercase tracking-wider bg-amber-100 dark:bg-amber-950 text-amber-900 dark:text-amber-300 rounded-md border border-amber-200 dark:border-amber-800 whitespace-nowrap">
-                16 Pilares • 80 Séries • 27 UFs • 60 Profissões • 36 Cidades • Nomes IBGE
-              </span>
+  <!-- TOP HEADER (Scrolls away naturally so it never crowds mobile screens) -->
+  <header class="bg-[#FAF8F5] dark:bg-stone-950 border-b border-stone-200/60 dark:border-stone-800/70">
+    <div class="max-w-[1440px] mx-auto px-3 sm:px-6 lg:px-8 py-2 sm:py-3">
+      <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-2 sm:gap-3">
+        <!-- Row 1 on Mobile: Brand + Quick Theme/Lang Toggles on the exact same line -->
+        <div class="flex items-center justify-between gap-2">
+          <div class="flex items-center gap-2.5 cursor-pointer min-w-0" onclick="window.BR_APP.switchTab('overview')">
+            <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-xl bg-emerald-700 flex items-center justify-center text-white font-black text-sm sm:text-lg shadow-sm border border-emerald-800 shrink-0">
+              BR
             </div>
-            <p id="ui-brand-sub" class="text-xs text-stone-500 dark:text-stone-400 font-medium truncate sm:whitespace-normal">Enciclopédia Pública de Inteligência Estatística, Mapas, Salários, Urbanismo e Simulação do Brasil</p>
+            <div class="min-w-0">
+              <div class="flex flex-wrap items-center gap-2">
+                <h1 id="ui-brand-title" class="text-base sm:text-xl font-extrabold tracking-tight text-stone-900 dark:text-stone-100 whitespace-nowrap">Brasil em Números</h1>
+                <span id="ui-edition-tag" class="hidden md:inline-block px-2 py-0.5 text-[11px] font-bold uppercase tracking-wider bg-amber-100 dark:bg-amber-950 text-amber-900 dark:text-amber-300 rounded-md border border-amber-200 dark:border-amber-800 whitespace-nowrap">
+                  16 Pilares • 80 Séries • 27 UFs • 60 Profissões • 36 Cidades
+                </span>
+              </div>
+              <p id="ui-brand-sub" class="hidden sm:block text-xs text-stone-500 dark:text-stone-400 font-medium truncate">Enciclopédia Pública de Inteligência Estatística, Mapas, Salários, Urbanismo e Simulação do Brasil</p>
+            </div>
+          </div>
+
+          <!-- Compact Mobile-Right Controls (visible on <lg right next to Brand) -->
+          <div class="flex lg:hidden items-center gap-1 shrink-0">
+            <button
+              onclick="window.BR_APP.toggleUkBenchmark()"
+              class="px-2 py-1 rounded-lg text-[11px] font-bold border bg-blue-50 dark:bg-blue-950/60 text-blue-900 dark:text-blue-300 border-blue-200 dark:border-blue-800"
+              title="Alternar Benchmark UK/OCDE"
+            >🌐</button>
+            <button
+              onclick="window.BR_APP.toggleDarkMode()"
+              class="px-2 py-1 rounded-lg text-[11px] font-bold border bg-stone-200/80 dark:bg-stone-800 text-stone-800 dark:text-stone-200 border-stone-300 dark:border-stone-700"
+              title="Alternar Modo Escuro / Claro"
+            >🌙</button>
+            <div class="inline-flex rounded-lg bg-stone-200/80 dark:bg-stone-800 p-0.5 border border-stone-300 dark:border-stone-700">
+              <button onclick="window.BR_APP.setLanguage('pt')" class="px-1.5 py-0.5 rounded text-[10px] font-extrabold bg-white dark:bg-stone-900 text-emerald-900 dark:text-emerald-400">PT</button>
+              <button onclick="window.BR_APP.setLanguage('es')" class="px-1.5 py-0.5 rounded text-[10px] font-bold text-stone-600 dark:text-stone-400">ES</button>
+              <button onclick="window.BR_APP.setLanguage('en')" class="px-1.5 py-0.5 rounded text-[10px] font-bold text-stone-600 dark:text-stone-400">EN</button>
+            </div>
           </div>
         </div>
 
-        <!-- Controls: Search + UK Toggle + Dark Mode + Language Switcher (PT | ES | EN) -->
-        <div class="flex flex-wrap sm:flex-nowrap items-center gap-2 w-full lg:w-auto">
-          <div class="relative flex-1 sm:w-64 xl:w-80 min-w-[200px]">
+        <!-- Search + Desktop Controls -->
+        <div class="flex items-center gap-2 w-full lg:w-auto">
+          <div class="relative flex-1 lg:w-72 xl:w-80">
             <input
               id="search-input"
               type="text"
               oninput="window.BR_APP.handleSearch(this.value)"
               placeholder="Buscar entre 80 séries, 60 profissões, 36 cidades..."
-              class="w-full pl-3.5 pr-3 py-1.5 bg-white dark:bg-stone-900 border border-stone-300 dark:border-stone-700 rounded-xl text-xs text-stone-900 dark:text-stone-100 placeholder-stone-400 focus:outline-none focus:border-emerald-600"
+              class="w-full pl-3 pr-3 py-1.5 bg-white dark:bg-stone-900 border border-stone-300 dark:border-stone-700 rounded-xl text-xs text-stone-900 dark:text-stone-100 placeholder-stone-400 focus:outline-none focus:border-emerald-600"
             />
           </div>
 
           <button
             id="btn-uk-toggle"
             onclick="window.BR_APP.toggleUkBenchmark()"
-            class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold border bg-blue-50 dark:bg-blue-950/60 text-blue-900 dark:text-blue-300 border-blue-200 dark:border-blue-800 hover:bg-blue-100 transition-all whitespace-nowrap shrink-0"
+            class="hidden lg:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold border bg-blue-50 dark:bg-blue-950/60 text-blue-900 dark:text-blue-300 border-blue-200 dark:border-blue-800 hover:bg-blue-100 transition-all whitespace-nowrap shrink-0"
           >
             <span>🌐</span>
             <span id="ui-uk-btn">UK/OCDE: Ativo</span>
@@ -83,35 +104,39 @@
           <button
             id="btn-dark-toggle"
             onclick="window.BR_APP.toggleDarkMode()"
-            class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold border bg-stone-200/80 dark:bg-stone-800 text-stone-800 dark:text-stone-200 border-stone-300 dark:border-stone-700 hover:bg-stone-300 dark:hover:bg-stone-700 transition-all whitespace-nowrap shrink-0"
+            class="hidden lg:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold border bg-stone-200/80 dark:bg-stone-800 text-stone-800 dark:text-stone-200 border-stone-300 dark:border-stone-700 hover:bg-stone-300 dark:hover:bg-stone-700 transition-all whitespace-nowrap shrink-0"
             title="Alternar Modo Escuro / Claro"
           >
             <span id="ui-dark-btn">🌙 Escuro</span>
           </button>
 
-          <div class="inline-flex rounded-xl bg-stone-200/80 dark:bg-stone-800 p-0.5 border border-stone-300 dark:border-stone-700 shrink-0">
+          <div class="hidden lg:inline-flex rounded-xl bg-stone-200/80 dark:bg-stone-800 p-0.5 border border-stone-300 dark:border-stone-700 shrink-0">
             <button id="lang-pt" onclick="window.BR_APP.setLanguage('pt')" class="px-2.5 py-1 rounded-lg text-xs font-extrabold bg-white dark:bg-stone-900 text-emerald-900 dark:text-emerald-400 shadow-sm">PT</button>
             <button id="lang-es" onclick="window.BR_APP.setLanguage('es')" class="px-2.5 py-1 rounded-lg text-xs font-extrabold text-stone-600 dark:text-stone-400">ES</button>
             <button id="lang-en" onclick="window.BR_APP.setLanguage('en')" class="px-2.5 py-1 rounded-lg text-xs font-extrabold text-stone-600 dark:text-stone-400">EN</button>
           </div>
         </div>
       </div>
-
-      <!-- 10 Responsive Adaptive Navigation Tabs (5 columns x 2 rows on Desktop/Tablet, 2 columns on Mobile) -->
-      <nav class="grid grid-cols-2 sm:grid-cols-5 gap-1.5 py-2.5 border-t border-stone-200/80 dark:border-stone-800">
-        <button id="tab-overview" onclick="window.BR_APP.switchTab('overview')" class="min-w-0 overflow-hidden w-full text-center px-2 py-2 rounded-xl text-xs font-extrabold bg-emerald-700 text-white shadow-sm transition-all leading-tight flex items-center justify-center">📊 Visão Geral</button>
-        <button id="tab-charts" onclick="window.BR_APP.switchTab('charts')" class="min-w-0 overflow-hidden w-full text-center px-2 py-2 rounded-xl text-xs font-bold bg-[#FAF8F5] dark:bg-stone-900/90 text-stone-700 dark:text-stone-300 border border-stone-200/80 dark:border-stone-800 hover:bg-stone-200/70 dark:hover:bg-stone-800 transition-all leading-tight flex items-center justify-center">📈 80 Séries</button>
-        <button id="tab-states" onclick="window.BR_APP.switchTab('states')" class="min-w-0 overflow-hidden w-full text-center px-2 py-2 rounded-xl text-xs font-bold bg-[#FAF8F5] dark:bg-stone-900/90 text-stone-700 dark:text-stone-300 border border-stone-200/80 dark:border-stone-800 hover:bg-stone-200/70 dark:hover:bg-stone-800 transition-all leading-tight flex items-center justify-center">🗺️ Mapa & 27 UFs</button>
-        <button id="tab-professions" onclick="window.BR_APP.switchTab('professions')" class="min-w-0 overflow-hidden w-full text-center px-2 py-2 rounded-xl text-xs font-bold bg-[#FAF8F5] dark:bg-stone-900/90 text-stone-700 dark:text-stone-300 border border-stone-200/80 dark:border-stone-800 hover:bg-stone-200/70 dark:hover:bg-stone-800 transition-all leading-tight flex items-center justify-center">💼 60 Profissões & Salários</button>
-        <button id="tab-cities" onclick="window.BR_APP.switchTab('cities')" class="min-w-0 overflow-hidden w-full text-center px-2 py-2 rounded-xl text-xs font-bold bg-[#FAF8F5] dark:bg-stone-900/90 text-stone-700 dark:text-stone-300 border border-stone-200/80 dark:border-stone-800 hover:bg-stone-200/70 dark:hover:bg-stone-800 transition-all leading-tight flex items-center justify-center">🏙️ Cidades & Lotes (m²)</button>
-        <button id="tab-names" onclick="window.BR_APP.switchTab('names')" class="min-w-0 overflow-hidden w-full text-center px-2 py-2 rounded-xl text-xs font-bold bg-[#FAF8F5] dark:bg-stone-900/90 text-stone-700 dark:text-stone-300 border border-stone-200/80 dark:border-stone-800 hover:bg-stone-200/70 dark:hover:bg-stone-800 transition-all leading-tight flex items-center justify-center">🪪 Nomes & Sobrenomes</button>
-        <button id="tab-correlations" onclick="window.BR_APP.switchTab('correlations')" class="min-w-0 overflow-hidden w-full text-center px-2 py-2 rounded-xl text-xs font-bold bg-[#FAF8F5] dark:bg-stone-900/90 text-stone-700 dark:text-stone-300 border border-stone-200/80 dark:border-stone-800 hover:bg-stone-200/70 dark:hover:bg-stone-800 transition-all leading-tight flex items-center justify-center">🔬 Correlações XY</button>
-        <button id="tab-simulator" onclick="window.BR_APP.switchTab('simulator')" class="min-w-0 overflow-hidden w-full text-center px-2 py-2 rounded-xl text-xs font-bold bg-[#FAF8F5] dark:bg-stone-900/90 text-stone-700 dark:text-stone-300 border border-stone-200/80 dark:border-stone-800 hover:bg-stone-200/70 dark:hover:bg-stone-800 transition-all leading-tight flex items-center justify-center">🏛️ Simulador Fiscal</button>
-        <button id="tab-income" onclick="window.BR_APP.switchTab('income')" class="min-w-0 overflow-hidden w-full text-center px-2 py-2 rounded-xl text-xs font-bold bg-[#FAF8F5] dark:bg-stone-900/90 text-stone-700 dark:text-stone-300 border border-stone-200/80 dark:border-stone-800 hover:bg-stone-200/70 dark:hover:bg-stone-800 transition-all leading-tight flex items-center justify-center">💰 Renda & Impostos</button>
-        <button id="tab-datahub" onclick="window.BR_APP.switchTab('datahub')" class="min-w-0 overflow-hidden w-full text-center px-2 py-2 rounded-xl text-xs font-bold bg-[#FAF8F5] dark:bg-stone-900/90 text-stone-700 dark:text-stone-300 border border-stone-200/80 dark:border-stone-800 hover:bg-stone-200/70 dark:hover:bg-stone-800 transition-all leading-tight flex items-center justify-center">🌐 Mundo & API BCB</button>
-      </nav>
     </div>
   </header>
+
+  <!-- ULTRA-COMPACT STICKY NAVIGATION BAR (Only 1 single row ~44px on Mobile, 5x2 Grid on Desktop) -->
+  <div class="sticky top-0 z-40 bg-[#FAF8F5]/95 dark:bg-stone-950/95 backdrop-blur-md border-b border-stone-200 dark:border-stone-800 shadow-sm">
+    <div class="max-w-[1440px] mx-auto px-3 sm:px-6 lg:px-8">
+      <nav class="flex md:grid md:grid-cols-5 gap-1.5 py-1.5 sm:py-2 overflow-x-auto no-scrollbar items-center">
+        <button id="tab-overview" onclick="window.BR_APP.switchTab('overview')" class="shrink-0 whitespace-nowrap md:w-full md:whitespace-normal text-center px-3 md:px-2 py-1.5 sm:py-2 rounded-xl text-xs font-extrabold bg-emerald-700 text-white shadow-sm transition-all leading-tight flex items-center justify-center">📊 Visão Geral</button>
+        <button id="tab-charts" onclick="window.BR_APP.switchTab('charts')" class="shrink-0 whitespace-nowrap md:w-full md:whitespace-normal text-center px-3 md:px-2 py-1.5 sm:py-2 rounded-xl text-xs font-bold bg-[#FAF8F5] dark:bg-stone-900/90 text-stone-700 dark:text-stone-300 border border-stone-200/80 dark:border-stone-800 hover:bg-stone-200/70 dark:hover:bg-stone-800 transition-all leading-tight flex items-center justify-center">📈 80 Séries</button>
+        <button id="tab-states" onclick="window.BR_APP.switchTab('states')" class="shrink-0 whitespace-nowrap md:w-full md:whitespace-normal text-center px-3 md:px-2 py-1.5 sm:py-2 rounded-xl text-xs font-bold bg-[#FAF8F5] dark:bg-stone-900/90 text-stone-700 dark:text-stone-300 border border-stone-200/80 dark:border-stone-800 hover:bg-stone-200/70 dark:hover:bg-stone-800 transition-all leading-tight flex items-center justify-center">🗺️ Mapa & 27 UFs</button>
+        <button id="tab-professions" onclick="window.BR_APP.switchTab('professions')" class="shrink-0 whitespace-nowrap md:w-full md:whitespace-normal text-center px-3 md:px-2 py-1.5 sm:py-2 rounded-xl text-xs font-bold bg-[#FAF8F5] dark:bg-stone-900/90 text-stone-700 dark:text-stone-300 border border-stone-200/80 dark:border-stone-800 hover:bg-stone-200/70 dark:hover:bg-stone-800 transition-all leading-tight flex items-center justify-center">💼 60 Profissões</button>
+        <button id="tab-cities" onclick="window.BR_APP.switchTab('cities')" class="shrink-0 whitespace-nowrap md:w-full md:whitespace-normal text-center px-3 md:px-2 py-1.5 sm:py-2 rounded-xl text-xs font-bold bg-[#FAF8F5] dark:bg-stone-900/90 text-stone-700 dark:text-stone-300 border border-stone-200/80 dark:border-stone-800 hover:bg-stone-200/70 dark:hover:bg-stone-800 transition-all leading-tight flex items-center justify-center">🏙️ Cidades & Lotes</button>
+        <button id="tab-names" onclick="window.BR_APP.switchTab('names')" class="shrink-0 whitespace-nowrap md:w-full md:whitespace-normal text-center px-3 md:px-2 py-1.5 sm:py-2 rounded-xl text-xs font-bold bg-[#FAF8F5] dark:bg-stone-900/90 text-stone-700 dark:text-stone-300 border border-stone-200/80 dark:border-stone-800 hover:bg-stone-200/70 dark:hover:bg-stone-800 transition-all leading-tight flex items-center justify-center">🪪 Nomes IBGE</button>
+        <button id="tab-correlations" onclick="window.BR_APP.switchTab('correlations')" class="shrink-0 whitespace-nowrap md:w-full md:whitespace-normal text-center px-3 md:px-2 py-1.5 sm:py-2 rounded-xl text-xs font-bold bg-[#FAF8F5] dark:bg-stone-900/90 text-stone-700 dark:text-stone-300 border border-stone-200/80 dark:border-stone-800 hover:bg-stone-200/70 dark:hover:bg-stone-800 transition-all leading-tight flex items-center justify-center">🔬 Correlações XY</button>
+        <button id="tab-simulator" onclick="window.BR_APP.switchTab('simulator')" class="shrink-0 whitespace-nowrap md:w-full md:whitespace-normal text-center px-3 md:px-2 py-1.5 sm:py-2 rounded-xl text-xs font-bold bg-[#FAF8F5] dark:bg-stone-900/90 text-stone-700 dark:text-stone-300 border border-stone-200/80 dark:border-stone-800 hover:bg-stone-200/70 dark:hover:bg-stone-800 transition-all leading-tight flex items-center justify-center">🏛️ Simulador Fiscal</button>
+        <button id="tab-income" onclick="window.BR_APP.switchTab('income')" class="shrink-0 whitespace-nowrap md:w-full md:whitespace-normal text-center px-3 md:px-2 py-1.5 sm:py-2 rounded-xl text-xs font-bold bg-[#FAF8F5] dark:bg-stone-900/90 text-stone-700 dark:text-stone-300 border border-stone-200/80 dark:border-stone-800 hover:bg-stone-200/70 dark:hover:bg-stone-800 transition-all leading-tight flex items-center justify-center">💰 Renda & Impostos</button>
+        <button id="tab-datahub" onclick="window.BR_APP.switchTab('datahub')" class="shrink-0 whitespace-nowrap md:w-full md:whitespace-normal text-center px-3 md:px-2 py-1.5 sm:py-2 rounded-xl text-xs font-bold bg-[#FAF8F5] dark:bg-stone-900/90 text-stone-700 dark:text-stone-300 border border-stone-200/80 dark:border-stone-800 hover:bg-stone-200/70 dark:hover:bg-stone-800 transition-all leading-tight flex items-center justify-center">🌐 Mundo & API BCB</button>
+      </nav>
+    </div>
+  </div>
 
   <!-- MAIN CONTAINER -->
   <main class="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 py-8">
@@ -1020,11 +1045,11 @@
     </div>
   </footer>
 
-  <!-- Data & Interactive Application Scripts (Cache-busted v20261112f) -->
-  <script src="data/pillars.js?v=20261112f"></script>
-  <script src="data/series.js?v=20261112f"></script>
-  <script src="data/states.js?v=20261112f"></script>
-  <script src="data/deep_brazil.js?v=20261112f"></script>
-  <script src="js/app.js?v=20261112f"></script>
+  <!-- Data & Interactive Application Scripts (Cache-busted v20261112g) -->
+  <script src="data/pillars.js?v=20261112g"></script>
+  <script src="data/series.js?v=20261112g"></script>
+  <script src="data/states.js?v=20261112g"></script>
+  <script src="data/deep_brazil.js?v=20261112g"></script>
+  <script src="js/app.js?v=20261112g"></script>
 </body>
 </html>

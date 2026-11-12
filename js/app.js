@@ -1839,8 +1839,11 @@
       const btn = document.getElementById(`tab-${id}`);
       if (btn) {
         btn.className = id === tabId
-          ? 'min-w-0 overflow-hidden w-full text-center px-2 py-2 rounded-xl text-xs font-extrabold bg-emerald-700 text-white shadow-sm transition-all leading-tight flex items-center justify-center'
-          : 'min-w-0 overflow-hidden w-full text-center px-2 py-2 rounded-xl text-xs font-bold bg-[#FAF8F5] dark:bg-stone-900/90 text-stone-700 dark:text-stone-300 border border-stone-200/80 dark:border-stone-800 hover:bg-stone-200/70 dark:hover:bg-stone-800 transition-all leading-tight flex items-center justify-center';
+          ? 'shrink-0 whitespace-nowrap md:w-full md:whitespace-normal text-center px-3 md:px-2 py-1.5 sm:py-2 rounded-xl text-xs font-extrabold bg-emerald-700 text-white shadow-sm transition-all leading-tight flex items-center justify-center'
+          : 'shrink-0 whitespace-nowrap md:w-full md:whitespace-normal text-center px-3 md:px-2 py-1.5 sm:py-2 rounded-xl text-xs font-bold bg-[#FAF8F5] dark:bg-stone-900/90 text-stone-700 dark:text-stone-300 border border-stone-200/80 dark:border-stone-800 hover:bg-stone-200/70 dark:hover:bg-stone-800 transition-all leading-tight flex items-center justify-center';
+        if (id === tabId && typeof btn.scrollIntoView === 'function') {
+          try { btn.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' }); } catch (e) {}
+        }
       }
     });
 
