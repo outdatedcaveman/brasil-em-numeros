@@ -54,8 +54,8 @@
 
   function getThemeColors() {
     return isDark
-      ? { text: '#e7e5e4', muted: '#a8a29e', grid: '#292524', border: '#44403c', bgCard: '#1c1917' }
-      : { text: '#1c1917', muted: '#57534e', grid: '#f5f5f4', border: '#e7e5e4', bgCard: '#ffffff' };
+      ? { text: '#f5f5f4', muted: '#a8a29e', grid: '#292524', border: '#44403c', bgCard: '#1c1917' }
+      : { text: '#1c1917', muted: '#57534e', grid: '#e7e5e4', border: '#d6d3d1', bgCard: '#ffffff' };
   }
 
   function applyChartDefaults() {
@@ -70,17 +70,17 @@
     if (!arr || arr.length < 2) return '';
     const min = Math.min(...arr);
     const max = Math.max(...arr);
-    const w = 76, h = 22;
+    const w = 96, h = 28;
     const pts = arr.map((v, i) => {
-      const x = (i / (arr.length - 1)) * (w - 4) + 2;
-      const y = h - 3 - ((v - min) / (max - min || 1)) * (h - 6);
+      const x = (i / (arr.length - 1)) * (w - 8) + 4;
+      const y = h - 4 - ((v - min) / (max - min || 1)) * (h - 8);
       return `${x.toFixed(1)},${y.toFixed(1)}`;
     }).join(' ');
-    const lastY = h - 3 - ((arr[arr.length - 1] - min) / (max - min || 1)) * (h - 6);
+    const lastY = h - 4 - ((arr[arr.length - 1] - min) / (max - min || 1)) * (h - 8);
     return `
-      <svg width="${w}" height="${h}" viewBox="0 0 ${w} ${h}" class="overflow-visible">
-        <polyline fill="none" stroke="${colorHex}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" points="${pts}" />
-        <circle cx="${w - 2}" cy="${lastY.toFixed(1)}" r="2.6" fill="${colorHex}" />
+      <svg width="${w}" height="${h}" viewBox="0 0 ${w} ${h}" class="overflow-visible shrink-0">
+        <polyline fill="none" stroke="${colorHex}" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" points="${pts}" />
+        <circle cx="${w - 4}" cy="${lastY.toFixed(1)}" r="3" fill="${colorHex}" />
       </svg>
     `;
   }
@@ -92,29 +92,29 @@
     const kpiContainer = document.getElementById('kpis-grid');
     if (kpiContainer) {
       const badgeStyles = {
-        emerald: { cls: 'bg-emerald-100 text-emerald-900 border-emerald-200 dark:bg-emerald-950/80 dark:text-emerald-300 dark:border-emerald-800', hex: '#10b981' },
-        amber:   { cls: 'bg-amber-100 text-amber-900 border-amber-200 dark:bg-amber-950/80 dark:text-amber-300 dark:border-amber-800', hex: '#f59e0b' },
-        sky:     { cls: 'bg-sky-100 text-sky-900 border-sky-200 dark:bg-sky-950/80 dark:text-sky-300 dark:border-sky-800', hex: '#0ea5e9' },
-        rose:    { cls: 'bg-rose-100 text-rose-900 border-rose-200 dark:bg-rose-950/80 dark:text-rose-300 dark:border-rose-800', hex: '#f43f5e' },
-        indigo:  { cls: 'bg-indigo-100 text-indigo-900 border-indigo-200 dark:bg-indigo-950/80 dark:text-indigo-300 dark:border-indigo-800', hex: '#6366f1' },
-        teal:    { cls: 'bg-teal-100 text-teal-900 border-teal-200 dark:bg-teal-950/80 dark:text-teal-300 dark:border-teal-800', hex: '#14b8a6' }
+        emerald: { cls: 'bg-emerald-100 text-emerald-900 border-emerald-300 dark:bg-emerald-950/90 dark:text-emerald-300 dark:border-emerald-800', hex: '#10b981' },
+        amber:   { cls: 'bg-amber-100 text-amber-900 border-amber-300 dark:bg-amber-950/90 dark:text-amber-300 dark:border-amber-800', hex: '#f59e0b' },
+        sky:     { cls: 'bg-sky-100 text-sky-900 border-sky-300 dark:bg-sky-950/90 dark:text-sky-300 dark:border-sky-800', hex: '#0ea5e9' },
+        rose:    { cls: 'bg-rose-100 text-rose-900 border-rose-300 dark:bg-rose-950/90 dark:text-rose-300 dark:border-rose-800', hex: '#f43f5e' },
+        indigo:  { cls: 'bg-indigo-100 text-indigo-900 border-indigo-300 dark:bg-indigo-950/90 dark:text-indigo-300 dark:border-indigo-800', hex: '#6366f1' },
+        teal:    { cls: 'bg-teal-100 text-teal-900 border-teal-300 dark:bg-teal-950/90 dark:text-teal-300 dark:border-teal-800', hex: '#14b8a6' }
       };
       kpiContainer.innerHTML = D.KPIS.map(k => {
         const st = badgeStyles[k.badgeColor] || badgeStyles.emerald;
         return `
           <div onclick="window.BR_APP.jumpToChart('${k.pillar}', '${k.chartId}')"
-               class="bg-[#FAF8F5] dark:bg-stone-900/90 hover:bg-white dark:hover:bg-stone-800 p-3.5 rounded-2xl border border-stone-200/90 dark:border-stone-800 hover:border-emerald-500 shadow-sm hover:shadow transition-all cursor-pointer group flex flex-col justify-between">
-            <div class="flex items-start justify-between gap-1">
-              <span class="text-[10px] font-extrabold uppercase tracking-wider text-stone-500 dark:text-stone-400 group-hover:text-emerald-600">${k.label[currentLang]}</span>
-              <span class="px-1.5 py-0.5 text-[9px] font-bold rounded border ${st.cls}">${k.badge}</span>
+               class="bg-[#FAF8F5] dark:bg-stone-950/90 hover:bg-white dark:hover:bg-stone-800/90 p-4 sm:p-5 rounded-2xl border border-stone-200/90 dark:border-stone-800 hover:border-emerald-500 dark:hover:border-emerald-500 shadow-sm hover:shadow-md transition-all cursor-pointer group flex flex-col justify-between min-h-[136px]">
+            <div class="flex items-start justify-between gap-2">
+              <span class="text-xs font-extrabold uppercase tracking-wider text-stone-600 dark:text-stone-300 group-hover:text-emerald-600 dark:group-hover:text-emerald-400 leading-snug">${k.label[currentLang]}</span>
+              <span class="px-2 py-0.5 text-[11px] font-mono font-bold rounded-md border whitespace-nowrap shrink-0 ${st.cls}">${k.badge}</span>
             </div>
-            <div class="flex items-end justify-between gap-1 mt-1.5">
-              <div class="text-lg sm:text-xl font-black font-mono text-stone-900 dark:text-stone-100 tracking-tight">${k.value}</div>
+            <div class="flex items-center justify-between gap-3 my-3">
+              <div class="text-2xl sm:text-[26px] font-black font-mono text-stone-900 dark:text-stone-50 tracking-tight whitespace-nowrap leading-none">${k.value}</div>
               ${buildSparklineSVG(k.spark, st.hex)}
             </div>
-            <div class="text-[10px] text-stone-500 dark:text-stone-400 mt-1 flex items-center justify-between">
-              <span class="truncate">${k.sub[currentLang]}</span>
-              <span class="opacity-0 group-hover:opacity-100 text-emerald-600 font-bold">→</span>
+            <div class="text-xs text-stone-600 dark:text-stone-400 pt-2 border-t border-stone-200/70 dark:border-stone-800/80 flex items-center justify-between gap-2 leading-snug">
+              <span class="font-medium">${k.sub[currentLang]}</span>
+              <span class="text-emerald-600 dark:text-emerald-400 font-bold shrink-0 group-hover:translate-x-0.5 transition-transform">→</span>
             </div>
           </div>
         `;
@@ -381,13 +381,13 @@
       const rank = sorted.findIndex(x => x.uf === u.uf) + 1;
       const pctWidth = Math.round(((28 - rank) / 27) * 100);
       return `
-        <div class="p-2 rounded-xl bg-white dark:bg-stone-900 border border-stone-200/80 dark:border-stone-800">
-          <div class="flex items-center justify-between text-[10px] text-stone-500 dark:text-stone-400 font-bold">
-            <span class="truncate">${m.label[currentLang]}</span>
-            <span class="font-mono text-emerald-700 dark:text-emerald-400">${rank}º/27</span>
+        <div class="p-2.5 rounded-xl bg-white dark:bg-stone-900 border border-stone-200/80 dark:border-stone-800 flex flex-col justify-between">
+          <div class="flex items-start justify-between gap-1 text-[11px] text-stone-600 dark:text-stone-300 font-bold leading-snug">
+            <span>${m.label[currentLang]}</span>
+            <span class="font-mono text-emerald-700 dark:text-emerald-400 shrink-0">${rank}º/27</span>
           </div>
-          <div class="text-xs font-black font-mono text-stone-900 dark:text-stone-100 mt-0.5">${formatMetricVal(u[m.key], m)}</div>
-          <div class="w-full h-1.5 bg-stone-200 dark:bg-stone-800 rounded-full mt-1 overflow-hidden">
+          <div class="text-sm font-black font-mono text-stone-900 dark:text-stone-100 mt-1">${formatMetricVal(u[m.key], m)}</div>
+          <div class="w-full h-1.5 bg-stone-200 dark:bg-stone-800 rounded-full mt-1.5 overflow-hidden">
             <div class="h-full bg-emerald-600 rounded-full" style="width:${pctWidth}%"></div>
           </div>
         </div>
@@ -395,14 +395,14 @@
     }).join('');
 
     box.innerHTML = `
-      <div class="flex items-center justify-between border-b border-stone-200 dark:border-stone-800 pb-2.5 mb-3">
+      <div class="flex flex-wrap items-center justify-between gap-2 border-b border-stone-200 dark:border-stone-800 pb-2.5 mb-3">
         <div>
           <span class="text-[10px] font-extrabold uppercase px-2 py-0.5 rounded bg-emerald-100 dark:bg-emerald-950 text-emerald-900 dark:text-emerald-300">${u.region}</span>
-          <h4 class="text-base font-black text-stone-900 dark:text-stone-100 mt-1">${u.name} (${u.uf}) — Capital: ${u.capital}</h4>
+          <h4 class="text-base sm:text-lg font-black text-stone-900 dark:text-stone-100 mt-1">${u.name} (${u.uf}) — Capital: ${u.capital}</h4>
         </div>
-        <div class="text-right font-mono text-xs text-stone-500">Pop: <strong>${u.pop.toFixed(2)}M</strong></div>
+        <div class="text-right font-mono text-xs text-stone-500 dark:text-stone-400">População: <strong>${u.pop.toFixed(2)}M</strong></div>
       </div>
-      <div class="grid grid-cols-2 sm:grid-cols-3 gap-2">${items}</div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-2.5">${items}</div>
     `;
   }
 
@@ -1125,8 +1125,8 @@
       const btn = document.getElementById(`tab-${id}`);
       if (btn) {
         btn.className = id === tabId
-          ? 'px-3.5 py-2 rounded-xl text-xs font-extrabold whitespace-nowrap bg-emerald-700 text-white shadow-sm transition-all'
-          : 'px-3.5 py-2 rounded-xl text-xs font-bold whitespace-nowrap text-stone-600 dark:text-stone-300 hover:bg-stone-200/70 dark:hover:bg-stone-800 transition-all';
+          ? 'w-full text-center px-2.5 py-2 rounded-xl text-xs sm:text-[13px] font-extrabold bg-emerald-700 text-white shadow-sm transition-all leading-tight flex items-center justify-center'
+          : 'w-full text-center px-2.5 py-2 rounded-xl text-xs sm:text-[13px] font-bold bg-[#FAF8F5] dark:bg-stone-900/90 text-stone-700 dark:text-stone-300 border border-stone-200/80 dark:border-stone-800 hover:bg-stone-200/70 dark:hover:bg-stone-800 transition-all leading-tight flex items-center justify-center';
       }
     });
 

@@ -41,32 +41,32 @@
 
   <!-- TOP STICKY HEADER -->
   <header class="sticky top-0 z-40 bg-[#FAF8F5]/95 dark:bg-stone-950/95 backdrop-blur-md border-b border-stone-200 dark:border-stone-800 shadow-sm">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex flex-col md:flex-row md:items-center md:justify-between py-3 gap-3">
+    <div class="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between py-3 gap-3">
         <!-- Brand -->
-        <div class="flex items-center gap-3 cursor-pointer" onclick="window.BR_APP.switchTab('overview')">
-          <div class="w-10 h-10 rounded-xl bg-emerald-700 flex items-center justify-center text-white font-black text-lg shadow-sm border border-emerald-800">
+        <div class="flex items-center gap-3 cursor-pointer shrink-0" onclick="window.BR_APP.switchTab('overview')">
+          <div class="w-10 h-10 rounded-xl bg-emerald-700 flex items-center justify-center text-white font-black text-lg shadow-sm border border-emerald-800 shrink-0">
             BR
           </div>
-          <div>
-            <div class="flex items-center gap-2">
-              <h1 id="ui-brand-title" class="text-xl font-extrabold tracking-tight text-stone-900 dark:text-stone-100">Brasil em Números</h1>
-              <span id="ui-edition-tag" class="hidden sm:inline-block px-2 py-0.5 text-[11px] font-bold uppercase tracking-wider bg-amber-100 dark:bg-amber-950 text-amber-900 dark:text-amber-300 rounded-md border border-amber-200 dark:border-amber-800">
-                12 Pilares • 60 Séries • 27 UFs • API BCB/IBGE
+          <div class="min-w-0">
+            <div class="flex flex-wrap items-center gap-2">
+              <h1 id="ui-brand-title" class="text-lg sm:text-xl font-extrabold tracking-tight text-stone-900 dark:text-stone-100 whitespace-nowrap">Brasil em Números</h1>
+              <span id="ui-edition-tag" class="inline-block px-2 py-0.5 text-[11px] font-bold uppercase tracking-wider bg-amber-100 dark:bg-amber-950 text-amber-900 dark:text-amber-300 rounded-md border border-amber-200 dark:border-amber-800 whitespace-nowrap">
+                12 Pilares • 60 Séries • 27 UFs
               </span>
             </div>
-            <p id="ui-brand-sub" class="text-xs text-stone-500 dark:text-stone-400 font-medium">Portal Público de Inteligência Estatística, Mapas e Simulação Estrutural do Brasil</p>
+            <p id="ui-brand-sub" class="text-xs text-stone-500 dark:text-stone-400 font-medium truncate sm:whitespace-normal">Portal Público de Inteligência Estatística, Mapas e Simulação Estrutural do Brasil</p>
           </div>
         </div>
 
         <!-- Controls: Search + UK Toggle + Dark Mode + Language Switcher (PT | ES | EN) -->
-        <div class="flex flex-wrap items-center gap-2">
-          <div class="relative flex-1 sm:w-56">
+        <div class="flex flex-wrap sm:flex-nowrap items-center gap-2 w-full lg:w-auto">
+          <div class="relative flex-1 sm:w-64 xl:w-80 min-w-[200px]">
             <input
               id="search-input"
               type="text"
               oninput="window.BR_APP.handleSearch(this.value)"
-              placeholder="Buscar entre 60 séries, 27 estados ou fontes..."
+              placeholder="Buscar série, estado ou fonte..."
               class="w-full pl-3.5 pr-3 py-1.5 bg-white dark:bg-stone-900 border border-stone-300 dark:border-stone-700 rounded-xl text-xs text-stone-900 dark:text-stone-100 placeholder-stone-400 focus:outline-none focus:border-emerald-600"
             />
           </div>
@@ -74,22 +74,22 @@
           <button
             id="btn-uk-toggle"
             onclick="window.BR_APP.toggleUkBenchmark()"
-            class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold border bg-blue-50 dark:bg-blue-950/60 text-blue-900 dark:text-blue-300 border-blue-200 dark:border-blue-800 hover:bg-blue-100 transition-all"
+            class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold border bg-blue-50 dark:bg-blue-950/60 text-blue-900 dark:text-blue-300 border-blue-200 dark:border-blue-800 hover:bg-blue-100 transition-all whitespace-nowrap shrink-0"
           >
             <span>🌐</span>
-            <span id="ui-uk-btn">Benchmark UK / OCDE: Ativo</span>
+            <span id="ui-uk-btn">UK/OCDE: Ativo</span>
           </button>
 
           <button
             id="btn-dark-toggle"
             onclick="window.BR_APP.toggleDarkMode()"
-            class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold border bg-stone-200/80 dark:bg-stone-800 text-stone-800 dark:text-stone-200 border-stone-300 dark:border-stone-700 hover:bg-stone-300 dark:hover:bg-stone-700 transition-all"
+            class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold border bg-stone-200/80 dark:bg-stone-800 text-stone-800 dark:text-stone-200 border-stone-300 dark:border-stone-700 hover:bg-stone-300 dark:hover:bg-stone-700 transition-all whitespace-nowrap shrink-0"
             title="Alternar Modo Escuro / Claro"
           >
-            <span id="ui-dark-btn">🌙 Modo Escuro</span>
+            <span id="ui-dark-btn">🌙 Escuro</span>
           </button>
 
-          <div class="inline-flex rounded-xl bg-stone-200/80 dark:bg-stone-800 p-0.5 border border-stone-300 dark:border-stone-700">
+          <div class="inline-flex rounded-xl bg-stone-200/80 dark:bg-stone-800 p-0.5 border border-stone-300 dark:border-stone-700 shrink-0">
             <button id="lang-pt" onclick="window.BR_APP.setLanguage('pt')" class="px-2.5 py-1 rounded-lg text-xs font-extrabold bg-white dark:bg-stone-900 text-emerald-900 dark:text-emerald-400 shadow-sm">PT</button>
             <button id="lang-es" onclick="window.BR_APP.setLanguage('es')" class="px-2.5 py-1 rounded-lg text-xs font-extrabold text-stone-600 dark:text-stone-400">ES</button>
             <button id="lang-en" onclick="window.BR_APP.setLanguage('en')" class="px-2.5 py-1 rounded-lg text-xs font-extrabold text-stone-600 dark:text-stone-400">EN</button>
@@ -97,28 +97,28 @@
         </div>
       </div>
 
-      <!-- 8 Navigation Tabs -->
-      <nav class="flex items-center gap-1.5 overflow-x-auto py-2 border-t border-stone-200/80 dark:border-stone-800 no-scrollbar">
-        <button id="tab-overview" onclick="window.BR_APP.switchTab('overview')" class="px-3.5 py-2 rounded-xl text-xs font-extrabold whitespace-nowrap bg-emerald-700 text-white shadow-sm">1. Visão Geral & 12 Pilares</button>
-        <button id="tab-charts" onclick="window.BR_APP.switchTab('charts')" class="px-3.5 py-2 rounded-xl text-xs font-bold whitespace-nowrap text-stone-600 dark:text-stone-300 hover:bg-stone-200/70 dark:hover:bg-stone-800">2. Explorador (60 Séries)</button>
-        <button id="tab-states" onclick="window.BR_APP.switchTab('states')" class="px-3.5 py-2 rounded-xl text-xs font-bold whitespace-nowrap text-stone-600 dark:text-stone-300 hover:bg-stone-200/70 dark:hover:bg-stone-800">3. Mapa Geográfico & 27 UFs</button>
-        <button id="tab-correlations" onclick="window.BR_APP.switchTab('correlations')" class="px-3.5 py-2 rounded-xl text-xs font-bold whitespace-nowrap text-stone-600 dark:text-stone-300 hover:bg-stone-200/70 dark:hover:bg-stone-800">4. Lab de Correlações (XY)</button>
-        <button id="tab-simulator" onclick="window.BR_APP.switchTab('simulator')" class="px-3.5 py-2 rounded-xl text-xs font-bold whitespace-nowrap text-stone-600 dark:text-stone-300 hover:bg-stone-200/70 dark:hover:bg-stone-800">5. Simulador Fiscal, Orçamento & Pirâmide</button>
-        <button id="tab-income" onclick="window.BR_APP.switchTab('income')" class="px-3.5 py-2 rounded-xl text-xs font-bold whitespace-nowrap text-stone-600 dark:text-stone-300 hover:bg-stone-200/70 dark:hover:bg-stone-800">6. Calculadora de Renda & Impostos</button>
-        <button id="tab-benchmark" onclick="window.BR_APP.switchTab('benchmark')" class="px-3.5 py-2 rounded-xl text-xs font-bold whitespace-nowrap text-stone-600 dark:text-stone-300 hover:bg-stone-200/70 dark:hover:bg-stone-800">7. Brasil vs. Mundo (OCDE/BRICS)</button>
-        <button id="tab-datahub" onclick="window.BR_APP.switchTab('datahub')" class="px-3.5 py-2 rounded-xl text-xs font-bold whitespace-nowrap text-stone-600 dark:text-stone-300 hover:bg-stone-200/70 dark:hover:bg-stone-800">8. API ao Vivo (BCB/IBGE) & Dados</button>
+      <!-- 8 Responsive Adaptive Navigation Tabs (Zero horizontal overflow clipping) -->
+      <nav class="grid grid-cols-2 sm:grid-cols-4 xl:grid-cols-8 gap-1.5 py-2.5 border-t border-stone-200/80 dark:border-stone-800">
+        <button id="tab-overview" onclick="window.BR_APP.switchTab('overview')" class="w-full text-center px-2.5 py-2 rounded-xl text-xs sm:text-[13px] font-extrabold bg-emerald-700 text-white shadow-sm transition-all leading-tight flex items-center justify-center">1. Visão Geral</button>
+        <button id="tab-charts" onclick="window.BR_APP.switchTab('charts')" class="w-full text-center px-2.5 py-2 rounded-xl text-xs sm:text-[13px] font-bold bg-[#FAF8F5] dark:bg-stone-900/90 text-stone-700 dark:text-stone-300 border border-stone-200/80 dark:border-stone-800 hover:bg-stone-200/70 dark:hover:bg-stone-800 transition-all leading-tight flex items-center justify-center">2. 60 Séries</button>
+        <button id="tab-states" onclick="window.BR_APP.switchTab('states')" class="w-full text-center px-2.5 py-2 rounded-xl text-xs sm:text-[13px] font-bold bg-[#FAF8F5] dark:bg-stone-900/90 text-stone-700 dark:text-stone-300 border border-stone-200/80 dark:border-stone-800 hover:bg-stone-200/70 dark:hover:bg-stone-800 transition-all leading-tight flex items-center justify-center">3. Mapa 27 UFs</button>
+        <button id="tab-correlations" onclick="window.BR_APP.switchTab('correlations')" class="w-full text-center px-2.5 py-2 rounded-xl text-xs sm:text-[13px] font-bold bg-[#FAF8F5] dark:bg-stone-900/90 text-stone-700 dark:text-stone-300 border border-stone-200/80 dark:border-stone-800 hover:bg-stone-200/70 dark:hover:bg-stone-800 transition-all leading-tight flex items-center justify-center">4. Correlações XY</button>
+        <button id="tab-simulator" onclick="window.BR_APP.switchTab('simulator')" class="w-full text-center px-2.5 py-2 rounded-xl text-xs sm:text-[13px] font-bold bg-[#FAF8F5] dark:bg-stone-900/90 text-stone-700 dark:text-stone-300 border border-stone-200/80 dark:border-stone-800 hover:bg-stone-200/70 dark:hover:bg-stone-800 transition-all leading-tight flex items-center justify-center">5. Simulador & Pirâmide</button>
+        <button id="tab-income" onclick="window.BR_APP.switchTab('income')" class="w-full text-center px-2.5 py-2 rounded-xl text-xs sm:text-[13px] font-bold bg-[#FAF8F5] dark:bg-stone-900/90 text-stone-700 dark:text-stone-300 border border-stone-200/80 dark:border-stone-800 hover:bg-stone-200/70 dark:hover:bg-stone-800 transition-all leading-tight flex items-center justify-center">6. Renda & Impostos</button>
+        <button id="tab-benchmark" onclick="window.BR_APP.switchTab('benchmark')" class="w-full text-center px-2.5 py-2 rounded-xl text-xs sm:text-[13px] font-bold bg-[#FAF8F5] dark:bg-stone-900/90 text-stone-700 dark:text-stone-300 border border-stone-200/80 dark:border-stone-800 hover:bg-stone-200/70 dark:hover:bg-stone-800 transition-all leading-tight flex items-center justify-center">7. Brasil vs. Mundo</button>
+        <button id="tab-datahub" onclick="window.BR_APP.switchTab('datahub')" class="w-full text-center px-2.5 py-2 rounded-xl text-xs sm:text-[13px] font-bold bg-[#FAF8F5] dark:bg-stone-900/90 text-stone-700 dark:text-stone-300 border border-stone-200/80 dark:border-stone-800 hover:bg-stone-200/70 dark:hover:bg-stone-800 transition-all leading-tight flex items-center justify-center">8. API BCB & Dados</button>
       </nav>
     </div>
   </header>
 
   <!-- MAIN CONTAINER -->
-  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+  <main class="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 py-8">
 
     <!-- ================================================================== -->
     <!-- VIEW 1: OVERVIEW, 16 NATIONAL KPIS WITH SPARKLINES, 12 PILLARS     -->
     <!-- ================================================================== -->
     <section id="view-overview" class="space-y-8">
-      <div class="bg-white dark:bg-stone-900 rounded-3xl p-6 sm:p-10 border border-stone-200 dark:border-stone-800 shadow-sm">
+      <div class="bg-white dark:bg-stone-900 rounded-3xl p-5 sm:p-8 lg:p-10 border border-stone-200 dark:border-stone-800 shadow-sm">
         <span id="ui-hero-badge" class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold bg-emerald-50 dark:bg-emerald-950 text-emerald-800 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800">
           Portal Público de Inteligência Estatística • Inspirado em UK by Numbers & Our World in Data
         </span>
@@ -150,13 +150,13 @@
           </button>
         </div>
 
-        <!-- 16 National Headline KPIs with Sparklines -->
+        <!-- 16 National Headline KPIs with Sparklines (4 Spacious Columns on Desktop, 2 on Tablet, 1 on Mobile) -->
         <div class="mt-8 pt-6 border-t border-stone-200 dark:border-stone-800">
-          <div class="flex items-center justify-between mb-3">
-            <h3 class="text-xs font-extrabold uppercase tracking-wider text-stone-500 dark:text-stone-400">16 Indicadores-Chave Nacionais com Mini-Curvas Históricas (Clique para abrir o gráfico completo)</h3>
-            <span class="text-[11px] text-stone-400 font-mono">Dados Oficiais 2024/2025</span>
+          <div class="flex flex-wrap items-center justify-between gap-2 mb-4">
+            <h3 class="text-xs sm:text-sm font-extrabold uppercase tracking-wider text-stone-600 dark:text-stone-300">16 Indicadores-Chave Nacionais com Mini-Curvas Históricas (Clique em qualquer card para abrir o gráfico)</h3>
+            <span class="text-xs text-stone-500 dark:text-stone-400 font-mono">Dados Oficiais 2024/2025</span>
           </div>
-          <div id="kpis-grid" class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-3"></div>
+          <div id="kpis-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4"></div>
         </div>
       </div>
 
@@ -692,7 +692,7 @@
   </main>
 
   <footer class="mt-16 border-t border-stone-200 dark:border-stone-800 bg-white dark:bg-stone-900 py-8 text-center text-xs text-stone-500 dark:text-stone-400 px-4">
-    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+    <div class="max-w-[1440px] mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
       <div>
         <strong>Brasil em Números | Brazil by Numbers</strong> — Portal de Inteligência Estatística (12 Pilares • 60 Séries • 27 UFs). Licença CC BY 4.0.
       </div>

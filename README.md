@@ -6,7 +6,7 @@
 [![License: CC BY 4.0](https://img.shields.io/badge/Data%20License-CC%20BY%204.0-emerald.svg)](https://creativecommons.org/licenses/by/4.0/)
 [![Code License: MIT](https://img.shields.io/badge/Code%20License-MIT-blue.svg)](LICENSE)
 
-Inspirado em iniciativas como **UK by Numbers** e **Our World in Data**, o portal **Brasil em Números** reúne **40 séries históricas oficiais auditáveis** organizadas em **10 Pilares Estruturais**, além de **6 ferramentas analíticas e simuladores interativos** integrados (zero-build, client-side).
+Inspirado em iniciativas como **UK by Numbers** e **Our World in Data**, o portal **Brasil em Números** reúne **60 séries históricas oficiais auditáveis** organizadas em **12 Pilares Estruturais**, além de **Modo Escuro (Dark Mode)**, **Mapa Geográfico + Cartograma das 27 UFs (14 variáveis)**, **Conexão ao Vivo com a API do Banco Central (SGS)** e **simuladores fiscais, orçamentários, demográficos e tributários**.
 
 ---
 

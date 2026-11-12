@@ -1,6 +1,6 @@
 // ============================================================================
 // BRASIL EM NÚMEROS | BRAZIL BY NUMBERS — 12 PILARES, 16 KPIs COM SPARKLINES
-// E 8 PARADOXOS ESTRUTURAIS (EDIÇÃO EXPANDIDA — 60 SÉRIES HISTÓRICAS)
+// E 8 PARADOXOS ESTRUTURAIS (LAYOUT EDITORIAL RESPONSIVO E ADAPTATIVO)
 // ============================================================================
 
 window.BR_DATA = window.BR_DATA || {};
@@ -8,76 +8,76 @@ window.BR_DATA = window.BR_DATA || {};
 window.BR_DATA.UI_TEXT = {
   pt: {
     brandTitle: 'Brasil em Números',
-    editionTag: '12 Pilares • 60 Séries • 27 UFs • API BCB/IBGE',
-    brandSub: 'Portal Público de Inteligência Estatística, Mapas e Simulação Estrutural do Brasil',
-    searchPlaceholder: 'Buscar entre 60 séries, 27 estados ou fontes (ex: fecundidade, Gini, PRODES, Selic, PIX, emendas, turismo)...',
-    ukBtnOn: 'Benchmark UK / OCDE: Ativo',
-    ukBtnOff: 'Benchmark UK / OCDE: Oculto',
-    darkBtnOff: '🌙 Modo Escuro',
-    darkBtnOn: '☀️ Modo Claro',
+    editionTag: '12 Pilares • 60 Séries • 27 UFs',
+    brandSub: 'Portal Público de Inteligência Estatística, Mapas e Simulação Estrutural',
+    searchPlaceholder: 'Buscar série, estado ou fonte (ex: Gini, Selic, PIX)...',
+    ukBtnOn: 'UK / OCDE: Ativo',
+    ukBtnOff: 'UK / OCDE: Oculto',
+    darkBtnOff: '🌙 Escuro',
+    darkBtnOn: '☀️ Claro',
     tabs: {
-      overview: '1. Visão Geral & 12 Pilares',
-      charts: '2. Explorador (60 Séries)',
-      states: '3. Mapa Geográfico & 27 UFs',
-      correlations: '4. Lab de Correlações (XY)',
-      simulator: '5. Simulador Fiscal, Orçamento & Pirâmide',
-      income: '6. Calculadora de Renda & Impostos',
-      benchmark: '7. Brasil vs. Mundo (OCDE/BRICS)',
-      datahub: '8. API ao Vivo (BCB/IBGE) & Dados'
+      overview: '📊 Visão Geral',
+      charts: '📈 60 Séries',
+      states: '🗺️ Mapa & 27 UFs',
+      correlations: '🔬 Correlações',
+      simulator: '🏛️ Simulador Fiscal',
+      income: '💰 Renda & Impostos',
+      benchmark: '🌐 Brasil vs. Mundo',
+      datahub: '⚡ API & Dados'
     },
     heroBadge: 'Portal Público de Inteligência Estatística • Inspirado em UK by Numbers & Our World in Data',
-    heroTitle: 'Todas as grandes questões estruturais do Brasil em dados públicos, mapas e simuladores interativos.',
-    heroDesc: 'Síntese completa de 60 séries históricas oficiais em 12 pilares temáticos (IBGE, Banco Central, Tesouro Nacional, IPEA, DataSUS, INEP, EPE, SEEG, INPE, FBSP, CNJ, TSE, Anatel, Embratur e MDIC), acompanhada de Mapa Geográfico Interativo das 27 UFs, Laboratório de Regressão OLS, Simulador da Dívida Pública (DBGG), Decomposição do Orçamento, Pirâmide Etária (1980–2060), Calculadora de Renda/Tributos e Conexão em Tempo Real com a API do Banco Central.',
+    heroTitle: 'As grandes questões estruturais do Brasil em dados públicos, mapas e simuladores interativos.',
+    heroDesc: 'Síntese completa de 60 séries históricas oficiais em 12 pilares temáticos (IBGE, Banco Central, Tesouro Nacional, IPEA, DataSUS, INEP, EPE, SEEG, INPE, FBSP, CNJ, TSE, Anatel, Embratur e MDIC), com Mapa Geográfico das 27 UFs, Laboratório de Regressão OLS, Simulador da Dívida Pública (DBGG), Decomposição do Orçamento, Pirâmide Etária (1980–2060), Calculadora de Renda/Impostos e API do Banco Central ao vivo.',
     openPillarCharts: 'Explorar as 5 séries deste pilar →',
     allPillars: 'Todos os 12 Pilares (60)'
   },
   es: {
     brandTitle: 'Brasil en Números',
-    editionTag: '12 Pilares • 60 Series • 27 UFs • API BCB/IBGE',
-    brandSub: 'Portal Público de Inteligencia Estadística, Mapas y Simulación Estructural de Brasil',
-    searchPlaceholder: 'Buscar entre 60 series, 27 estados o fuentes (ej: fecundidad, Gini, PRODES, Selic, PIX, enmiendas, turismo)...',
-    ukBtnOn: 'Benchmark UK / OCDE: Activo',
-    ukBtnOff: 'Benchmark UK / OCDE: Oculto',
-    darkBtnOff: '🌙 Modo Oscuro',
-    darkBtnOn: '☀️ Modo Claro',
+    editionTag: '12 Pilares • 60 Series • 27 UFs',
+    brandSub: 'Portal Público de Inteligencia Estadística, Mapas y Simulación Estructural',
+    searchPlaceholder: 'Buscar serie, estado o fuente (ej: Gini, Selic, PIX)...',
+    ukBtnOn: 'UK / OCDE: Activo',
+    ukBtnOff: 'UK / OCDE: Oculto',
+    darkBtnOff: '🌙 Oscuro',
+    darkBtnOn: '☀️ Claro',
     tabs: {
-      overview: '1. Visión General y 12 Pilares',
-      charts: '2. Explorador (60 Series)',
-      states: '3. Mapa Geográfico y 27 UFs',
-      correlations: '4. Lab de Correlaciones (XY)',
-      simulator: '5. Simulador Fiscal y Pirámide',
-      income: '6. Calculadora de Ingresos e Impuestos',
-      benchmark: '7. Brasil vs. Mundo (OCDE/BRICS)',
-      datahub: '8. API en Vivo (BCB/IBGE) y Datos'
+      overview: '📊 Visión General',
+      charts: '📈 60 Series',
+      states: '🗺️ Mapa y 27 UFs',
+      correlations: '🔬 Correlaciones',
+      simulator: '🏛️ Simulador Fiscal',
+      income: '💰 Renta e Impuestos',
+      benchmark: '🌐 Brasil vs. Mundo',
+      datahub: '⚡ API y Datos'
     },
     heroBadge: 'Portal Público de Inteligencia Estadística • Inspirado en UK by Numbers y Our World in Data',
-    heroTitle: 'Todas las grandes cuestiones estructurales de Brasil en datos públicos, mapas y simuladores.',
-    heroDesc: 'Síntesis completa de 60 series históricas oficiales en 12 pilares temáticos (IBGE, Banco Central, Tesoro Nacional, IPEA, DataSUS, INEP, EPE, SEEG, INPE, FBSP, CNJ, TSE, Anatel y MDIC), con Mapa Geográfico de las 27 UFs, Laboratorio de Correlación OLS, Simulador de Deuda Pública (DBGG), Pirámide Demográfica, Calculadora de Ingresos y Conexión en Vivo con la API del Banco Central.',
+    heroTitle: 'Las grandes cuestiones estructurales de Brasil en datos públicos, mapas y simuladores.',
+    heroDesc: 'Síntesis completa de 60 series históricas oficiales en 12 pilares temáticos (IBGE, Banco Central, Tesoro Nacional, IPEA, DataSUS, INEP, EPE, SEEG, INPE, FBSP, CNJ, TSE, Anatel y MDIC), con Mapa Geográfico de las 27 UFs, Laboratorio de Correlación OLS, Simulador de Deuda Pública (DBGG), Pirámide Demográfica, Calculadora de Ingresos y API del Banco Central en vivo.',
     openPillarCharts: 'Explorar las 5 series de este pilar →',
     allPillars: 'Todos los 12 Pilares (60)'
   },
   en: {
     brandTitle: 'Brazil by Numbers',
-    editionTag: '12 Pillars • 60 Series • 27 States • Live API',
-    brandSub: 'Public Statistical Intelligence, Geographic Atlas & Structural Simulation Portal for Brazil',
-    searchPlaceholder: 'Search across 60 series, 27 states, or sources (e.g., fertility, Gini, PRODES, Selic, PIX, tourism)...',
-    ukBtnOn: 'UK / OECD Benchmark: On',
-    ukBtnOff: 'UK / OECD Benchmark: Off',
-    darkBtnOff: '🌙 Dark Mode',
-    darkBtnOn: '☀️ Light Mode',
+    editionTag: '12 Pillars • 60 Series • 27 States',
+    brandSub: 'Public Statistical Intelligence, Geographic Atlas & Structural Simulation Portal',
+    searchPlaceholder: 'Search series, state, or source (e.g., Gini, Selic, PIX)...',
+    ukBtnOn: 'UK / OECD: On',
+    ukBtnOff: 'UK / OECD: Off',
+    darkBtnOff: '🌙 Dark',
+    darkBtnOn: '☀️ Light',
     tabs: {
-      overview: '1. Overview & 12 Pillars',
-      charts: '2. Chart Explorer (60 Series)',
-      states: '3. Geographic Map & 27 States',
-      correlations: '4. Correlation Lab (XY)',
-      simulator: '5. Fiscal, Budget & Demographic Sim',
-      income: '6. Income & Tax Calculator',
-      benchmark: '7. Brazil vs. World (OECD/BRICS)',
-      datahub: '8. Live API (BCB/IBGE) & Data'
+      overview: '📊 Overview',
+      charts: '📈 60 Series',
+      states: '🗺️ Map & 27 States',
+      correlations: '🔬 Correlations',
+      simulator: '🏛️ Fiscal & Age Sim',
+      income: '💰 Income & Tax',
+      benchmark: '🌐 Global Benchmark',
+      datahub: '⚡ Live API & Data'
     },
     heroBadge: 'Public Statistical Intelligence Portal • Inspired by UK by Numbers & Our World in Data',
     heroTitle: 'Every major structural question about Brazil answered through auditable data, maps, and simulators.',
-    heroDesc: 'Comprehensive synthesis of 60 official historical series across 12 thematic pillars (IBGE, Central Bank, National Treasury, IPEA, DataSUS, INEP, EPE, SEEG, INPE, FBSP, CNJ, TSE, Anatel, and MDIC), featuring an interactive 27-State Geographic Choropleth Map, OLS Correlation Lab, Public Debt (DBGG) & Budget Simulator, Demographic Pyramid (1980–2060), Income & Tax Incidence Calculator, and Live Central Bank API Connector.',
+    heroDesc: 'Comprehensive synthesis of 60 official historical series across 12 thematic pillars (IBGE, Central Bank, National Treasury, IPEA, DataSUS, INEP, EPE, SEEG, INPE, FBSP, CNJ, TSE, Anatel, and MDIC), featuring an interactive 27-State Geographic Choropleth Map, OLS Correlation Lab, Public Debt (DBGG) & Budget Simulator, Demographic Pyramid (1980–2060), Income & Tax Calculator, and Live Central Bank API Connector.',
     openPillarCharts: 'Explore all 5 series in this pillar →',
     allPillars: 'All 12 Pillars (60)'
   }
@@ -86,98 +86,98 @@ window.BR_DATA.UI_TEXT = {
 window.BR_DATA.KPIS = [
   {
     id: 'pop', pillar: 'demographics', chartId: 'c-pop-peak',
-    label: { pt: 'População 2024', es: 'Población 2024', en: 'Population 2024' },
-    value: '212,6M', sub: { pt: 'Pico em 2041: 220,4M', es: 'Pico en 2041: 220,4M', en: 'Peak in 2041: 220.4M' },
+    label: { pt: 'População (2024)', es: 'Población (2024)', en: 'Population (2024)' },
+    value: '212,6M', sub: { pt: 'Pico demográfico em 2041: 220,4M (IBGE)', es: 'Pico demográfico en 2041: 220,4M (IBGE)', en: 'Demographic peak in 2041: 220.4M (IBGE)' },
     badge: '+0,4% a.a.', badgeColor: 'emerald', spark: [93, 119, 147, 174, 191, 203, 212.6, 220.4]
   },
   {
     id: 'tfr', pillar: 'demographics', chartId: 'c-tfr',
-    label: { pt: 'Fecundidade Total', es: 'Fecundidad Total', en: 'Fertility Rate' },
-    value: '1,57', sub: { pt: 'Reposição: 2,10 filhos', es: 'Reemplazo: 2,10 hijos', en: 'Replacement: 2.10' },
+    label: { pt: 'Taxa de Fecundidade', es: 'Tasa de Fecundidad', en: 'Total Fertility Rate' },
+    value: '1,57', sub: { pt: 'Filhos por mulher (nível de reposição: 2,10)', es: 'Hijos por mujer (nivel reemplazo: 2,10)', en: 'Births per woman (replacement level: 2.10)' },
     badge: '1960: 6,28', badgeColor: 'amber', spark: [6.28, 5.76, 4.35, 2.89, 2.38, 1.90, 1.65, 1.57]
   },
   {
     id: 'gdp_pc', pillar: 'economy', chartId: 'c-gdp-ppp',
     label: { pt: 'PIB per Capita PPC', es: 'PIB per Cápita PPA', en: 'GDP per Capita PPP' },
-    value: 'US$ 20,8k', sub: { pt: '36% do nível do UK', es: '36% del nivel de UK', en: '36% of UK level' },
+    value: 'US$ 20,8k', sub: { pt: 'Equivale a 36% do nível do Reino Unido', es: 'Equivale al 36% del nivel del Reino Unido', en: 'Equals 36% of the UK per-capita level' },
     badge: 'R$ 55,2 mil', badgeColor: 'sky', spark: [10.8, 11.2, 13.1, 15.4, 17.8, 19.6, 18.2, 20.8]
   },
   {
     id: 'informality', pillar: 'economy', chartId: 'c-labor',
-    label: { pt: 'Informalidade', es: 'Informalidad', en: 'Informality Rate' },
-    value: '38,7%', sub: { pt: '39,8M trabalhadores', es: '39,8M trabajadores', en: '39.8M workers' },
-    badge: 'Desemp: 6,2%', badgeColor: 'amber', spark: [39.1, 37.8, 39.5, 41.1, 40.7, 38.7, 39.4, 38.7]
+    label: { pt: 'Informalidade no Trabalho', es: 'Informalidad Laboral', en: 'Labor Informality Rate' },
+    value: '38,7%', sub: { pt: '39,8 milhões de trabalhadores sem carteira', es: '39,8 millones de ocupados informales', en: '39.8 million informal workers (PNAD)' },
+    badge: 'Desemp.: 6,2%', badgeColor: 'amber', spark: [39.1, 37.8, 39.5, 41.1, 40.7, 38.7, 39.4, 38.7]
   },
   {
     id: 'selic', pillar: 'economy', chartId: 'c-selic-ipca',
     label: { pt: 'Juro Real Ex-Post', es: 'Tasa Real Ex-Post', en: 'Real Interest Rate' },
-    value: '6,8% a.a.', sub: { pt: 'Selic 11,75% vs IPCA 4,8%', es: 'Selic 11,75% vs IPCA 4,8%', en: 'Selic 11.75% / CPI 4.8%' },
+    value: '6,8% a.a.', sub: { pt: 'Selic 11,75% vs. Inflação IPCA 4,8% (BCB)', es: 'Selic 11,75% vs. Inflación IPCA 4,8%', en: 'Selic 11.75% vs. CPI Inflation 4.8%' },
     badge: 'Top 3 Global', badgeColor: 'rose', spark: [10.2, 7.8, 5.1, 7.4, 2.1, -2.4, 7.9, 6.8]
   },
   {
     id: 'tax', pillar: 'fiscal', chartId: 'c-tax',
-    label: { pt: 'Carga Tributária', es: 'Carga Tributaria', en: 'Tax Burden (% GDP)' },
-    value: '32,4%', sub: { pt: '44,2% sobre consumo', es: '44,2% en consumo', en: '44.2% on consumption' },
+    label: { pt: 'Carga Tributária Bruta', es: 'Carga Tributaria Bruta', en: 'Gross Tax Burden' },
+    value: '32,4% PIB', sub: { pt: '44,2% da arrecadação vem do consumo', es: '44,2% proviene de impuestos al consumo', en: '44.2% of tax revenue falls on consumption' },
     badge: 'OCDE: 34,0%', badgeColor: 'indigo', spark: [28.4, 31.5, 32.8, 32.1, 31.7, 33.1, 32.6, 32.4]
   },
   {
     id: 'debt', pillar: 'fiscal', chartId: 'c-debt',
     label: { pt: 'Dívida Bruta (DBGG)', es: 'Deuda Bruta (DBGG)', en: 'Gross Public Debt' },
-    value: '78,6%', sub: { pt: 'Rigidez orç.: 91,8%', es: 'Rigidez pres.: 91,8%', en: '91.8% mandatory spend' },
+    value: '78,6% PIB', sub: { pt: 'Despesas obrigatórias: 91,8% do orçamento', es: 'Gasto obligatorio: 91,8% del presupuesto', en: '91.8% of federal primary spend is mandatory' },
     badge: 'Juros: 7,8% PIB', badgeColor: 'rose', spark: [55.5, 51.8, 51.5, 65.5, 75.3, 86.9, 71.7, 78.6]
   },
   {
     id: 'gini', pillar: 'inequality', chartId: 'c-ineq',
-    label: { pt: 'Índice de Gini', es: 'Índice de Gini', en: 'Gini Coefficient' },
-    value: '0,518', sub: { pt: '1% Topo detém 26,5%', es: '1% Top tiene 26,5%', en: 'Top 1% holds 26.5%' },
+    label: { pt: 'Desigualdade (Gini)', es: 'Desigualdad (Gini)', en: 'Income Inequality (Gini)' },
+    value: '0,518', sub: { pt: 'O 1% mais rico detém 26,5% da renda nacional', es: 'El 1% más rico concentra el 26,5% del ingreso', en: 'Top 1% captures 26.5% of national income' },
     badge: 'UK: 0,357', badgeColor: 'rose', spark: [0.601, 0.594, 0.569, 0.531, 0.524, 0.545, 0.544, 0.518]
   },
   {
     id: 'sewage', pillar: 'inequality', chartId: 'c-sanit',
-    label: { pt: 'Coleta de Esgoto', es: 'Red Alcantarillado', en: 'Sewage Network' },
-    value: '56,0%', sub: { pt: '~90M sem rede (SNIS)', es: '~90M sin red (SNIS)', en: '~90M lack mains network' },
+    label: { pt: 'Coleta de Esgoto', es: 'Red de Alcantarillado', en: 'Sewage Network Access' },
+    value: '56,0%', sub: { pt: '~90 milhões de brasileiros sem rede coletora', es: '~90 millones de personas sin alcantarillado', en: '~90 million residents lack mains sewerage' },
     badge: 'Água: 84,9%', badgeColor: 'teal', spark: [42.1, 45.4, 48.1, 50.3, 52.4, 54.1, 55.2, 56.0]
   },
   {
     id: 'life_exp', pillar: 'health', chartId: 'c-mort-life',
     label: { pt: 'Esperança de Vida', es: 'Esperanza de Vida', en: 'Life Expectancy' },
-    value: '76,4 anos', sub: { pt: '1980: 62,5 anos (IBGE)', es: '1980: 62,5 años (IBGE)', en: '1980: 62.5 yrs (IBGE)' },
+    value: '76,4 anos', sub: { pt: 'Aumento de +13,9 anos desde 1980 (62,5 anos)', es: 'Aumento de +13,9 años desde 1980 (62,5 años)', en: 'Up +13.9 years since 1980 (62.5 years)' },
     badge: '+13,9 anos', badgeColor: 'emerald', spark: [62.5, 66.9, 71.1, 73.9, 75.2, 76.2, 75.5, 76.4]
   },
   {
     id: 'pisa', pillar: 'education', chartId: 'c-pisa',
     label: { pt: 'PISA Matemática', es: 'PISA Matemáticas', en: 'PISA Math Score' },
-    value: '379 pts', sub: { pt: 'IDEB Ens. Médio: 4,3', es: 'IDEB Secundaria: 4,3', en: 'High School IDEB: 4.3' },
+    value: '379 pts', sub: { pt: 'IDEB Anos Iniciais: 6,0 | Ensino Médio: 4,3', es: 'IDEB Primaria: 6,0 | Secundaria: 4,3', en: 'Primary IDEB: 6.0 | High School IDEB: 4.3' },
     badge: 'OCDE: 472 pts', badgeColor: 'amber', spark: [334, 356, 370, 386, 391, 377, 384, 379]
   },
   {
     id: 'clean_elec', pillar: 'energy_climate', chartId: 'c-elec-mix',
-    label: { pt: 'Eletricidade Limpa', es: 'Electricidad Limpia', en: 'Clean Electricity' },
-    value: '89,2%', sub: { pt: 'Matriz total: 49,1% ren.', es: 'Matriz total: 49,1% ren.', en: 'Total energy: 49.1% ren.' },
+    label: { pt: 'Eletricidade Renovável', es: 'Electricidad Renovable', en: 'Renewable Electricity' },
+    value: '89,2%', sub: { pt: 'Matriz energética total: 49,1% renovável (EPE)', es: 'Matriz energética total: 49,1% renovable', en: 'Total primary energy mix: 49.1% renewable' },
     badge: 'OCDE: 33,4%', badgeColor: 'emerald', spark: [84.5, 79.2, 74.6, 80.4, 82.3, 78.1, 87.9, 89.2]
   },
   {
     id: 'prodes', pillar: 'energy_climate', chartId: 'c-prodes',
     label: { pt: 'PRODES Amazônia', es: 'PRODES Amazonía', en: 'Amazon Deforestation' },
-    value: '6.288 km²', sub: { pt: '-45,7% vs. 2022 (INPE)', es: '-45,7% vs. 2022 (INPE)', en: '-45.7% vs. 2022 (INPE)' },
+    value: '6.288 km²', sub: { pt: 'Queda de 45,7% entre 2022 e 2024 (INPE)', es: 'Caída del 45,7% entre 2022 y 2024 (INPE)', en: 'Down 45.7% between 2022 and 2024 (INPE)' },
     badge: 'Pico 04: 27,7k', badgeColor: 'emerald', spark: [27772, 12911, 4571, 7893, 10129, 13038, 11594, 6288]
   },
   {
     id: 'homicide', pillar: 'security_justice', chartId: 'c-crime',
     label: { pt: 'Taxa de Homicídios', es: 'Tasa de Homicidios', en: 'Homicide Rate' },
-    value: '22,8 /100k', sub: { pt: '46.328 MVI (FBSP)', es: '46.328 muertes (FBSP)', en: '46,328 deaths (FBSP)' },
-    badge: 'SP: 6,4 | AP: 57,4', badgeColor: 'rose', spark: [26.7, 25.8, 27.8, 28.9, 30.9, 23.6, 23.3, 22.8]
+    value: '22,8 /100k', sub: { pt: '46.328 mortes violentas/ano (SP: 6,4 | AP: 57,4)', es: '46.328 muertes violentas/año (FBSP)', en: '46,328 violent deaths/yr (SP: 6.4 | AP: 57.4)' },
+    badge: 'UK: 1,0 /100k', badgeColor: 'rose', spark: [26.7, 25.8, 27.8, 28.9, 30.9, 23.6, 23.3, 22.8]
   },
   {
     id: 'pix', pillar: 'infrastructure', chartId: 'c-digital-pix',
-    label: { pt: 'Transações PIX / Ano', es: 'Transacciones PIX', en: 'PIX Transactions/Yr' },
-    value: '63,8 Bi', sub: { pt: '84% domicílios c/ web', es: '84% hogares con web', en: '84% households online' },
+    label: { pt: 'Transações PIX / Ano', es: 'Transacciones PIX / Año', en: 'PIX Transactions / Yr' },
+    value: '63,8 Bi', sub: { pt: '84% dos domicílios conectados à internet', es: '84% de los hogares conectados a internet', en: '84% of Brazilian households online (CETIC)' },
     badge: 'Líder Global', badgeColor: 'sky', spark: [0, 0, 0, 0.2, 9.4, 24.1, 41.9, 63.8]
   },
   {
     id: 'trade', pillar: 'trade_global', chartId: 'c-trade-bal',
-    label: { pt: 'Saldo Comercial', es: 'Balanza Comercial', en: 'Trade Surplus' },
-    value: 'US$ 74,6B', sub: { pt: '30,7% export. p/ China', es: '30,7% export. a China', en: '30.7% exports to China' },
+    label: { pt: 'Superávit Comercial', es: 'Superávit Comercial', en: 'Trade Surplus (FOB)' },
+    value: 'US$ 74,6B', sub: { pt: '30,7% das exportações destinadas à China', es: '30,7% de las exportaciones van a China', en: '30.7% of exports destined for China (MDIC)' },
     badge: 'Grãos: 312Mt', badgeColor: 'emerald', spark: [-0.7, 44.9, 20.1, -4.0, 46.6, 61.4, 98.9, 74.6]
   }
 ];
@@ -185,7 +185,7 @@ window.BR_DATA.KPIS = [
 window.BR_DATA.PILLARS = [
   {
     id: 'demographics', num: '01', icon: '👥', color: '#059669', seriesCount: 5,
-    keyStat: '1,57 filho/mulher • Pico 2041',
+    keyStat: 'Fecundidade 1,57 • Pico 2041',
     title: { pt: 'População, Demografia, Censo 2022 e Migrações', es: 'Población, Demografía, Censo 2022 y Migraciones', en: 'Population, Demographics, Census 2022 & Migration' },
     desc: { pt: 'Queda acelerada da fecundidade (6,28 → 1,57), fim do bônus demográfico, inversão jovens/idosos em 2036, pico populacional em 2041 (220,4M) e saldo migratório inter-regional no Censo 2022.', es: 'Caída de la fecundidad (1,57), fin del bono demográfico, pico poblacional en 2041 y migración interna.', en: 'Rapid fertility drop (1.57), end of demographic dividend, 2041 peak (220.4M), and internal migration shifts.' }
   },
@@ -215,13 +215,13 @@ window.BR_DATA.PILLARS = [
   },
   {
     id: 'education', num: '06', icon: '🎓', color: '#d97706', seriesCount: 5,
-    keyStat: 'IDEB Iniciais 6,0 vs EM 4,3 • EAD 51%',
+    keyStat: 'IDEB 6,0 vs EM 4,3 • EAD 51%',
     title: { pt: 'Educação, Capital Humano, Ensino Superior e C&T', es: 'Educación, Capital Humano, Universidad y C&T', en: 'Education, Human Capital, Higher Ed & Science' },
     desc: { pt: 'Avanço nos anos iniciais (IDEB 6,0) vs. estagnação no Ensino Médio (4,3), PISA Matemática (379 pts), jovens "nem-nem" (19,8%), gasto por aluno (Básico vs. Superior) e explosão do ensino EAD (51%).', es: 'Avance en primaria vs. estancamiento en secundaria, PISA, jóvenes ni-ni y explosión universitaria EAD.', en: 'Early primary IDEB gains vs. high school stagnation, PISA gaps, NEET youth, per-pupil spend, and 51% online higher ed.' }
   },
   {
     id: 'energy_climate', num: '07', icon: '🌱', color: '#16a34a', seriesCount: 5,
-    keyStat: 'Eletric. 89,2% Limpa • 75% GEE Terra/Agro',
+    keyStat: 'Eletric. 89,2% Limpa • 75% GEE Terra',
     title: { pt: 'Energia Limpa, Clima, Desmatamento e Biocombustíveis', es: 'Energía Limpia, Clima, Deforestación y Biocombustibles', en: 'Clean Energy, Climate, Deforestation & Biofuels' },
     desc: { pt: 'Matriz elétrica 89,2% renovável (boom solar e eólico), 75% das emissões de GEE vindas de Uso da Terra e Agro (SEEG), desmatamento PRODES Amazônia/Cerrado, desastres climáticos e biocombustíveis.', es: 'Electricidad 89,2% renovable, emisiones por uso del suelo, PRODES y biocombustibles.', en: '89.2% renewable electricity, 75% land-use/agri GHG profile, PRODES deforestation, climate losses, and biofuels.' }
   },
@@ -239,19 +239,19 @@ window.BR_DATA.PILLARS = [
   },
   {
     id: 'trade_global', num: '10', icon: '🌐', color: '#7c3aed', seriesCount: 5,
-    keyStat: 'Superávit US$ 74,6B • China 30,7%',
+    keyStat: 'Saldo US$ 74,6B • China 30,7%',
     title: { pt: 'Comércio Exterior, Agronegócio, Indústria e IDP', es: 'Comercio Exterior, Agronegocio, Industria e IED', en: 'Foreign Trade, Agribusiness, Manufacturing & FDI' },
     desc: { pt: 'Superávit comercial estrutural (US$ 74,6B–98,9B), China absorvendo 30,7% das exportações, desindustrialização precoce (11,4% PIB), efeito poupa-terra na safra de grãos (312 Mt) e Investimento Direto (IDP).', es: 'Superávit comercial estructural, ascenso de China (30,7%), desindustrialización y productividad agrícola.', en: 'Structural trade surpluses, China at 30.7% of exports, premature deindustrialization, grain yield boom, and FDI inflows.' }
   },
   {
     id: 'institutions', num: '11', icon: '⚖️', color: '#be123c', seriesCount: 5,
-    keyStat: 'Emendas R$ 53 Bi • 34% Municípios s/ Receita',
+    keyStat: 'Emendas R$ 53 Bi • 34% Municípios',
     title: { pt: 'Democracia, Governança, Emendas e Federalismo', es: 'Democracia, Gobernanza, Enmiendas y Federalismo', en: 'Democracy, Governance, Budget Amendments & Federalism' },
     desc: { pt: 'Escalada das emendas parlamentares (R$ 53 bi/ano), fragmentação partidária (NEP), sub-representação feminina na Câmara (17,7%), percepção de corrupção/governança e dependência fiscal de 5.570 municípios.', es: 'Escalada de enmiendas parlamentarias (R$ 53 mil millones), fragmentación partidaria y dependencia fiscal municipal.', en: 'Surge of congressional budget amendments (R$ 53B/yr), party fragmentation, women in parliament (17.7%), and municipal fiscal dependency.' }
   },
   {
     id: 'society_culture', num: '12', icon: '🏙️', color: '#0369a1', seriesCount: 5,
-    keyStat: 'Turismo 6,6M • Diáspora 4,6M • 9h13 Online',
+    keyStat: 'Turismo 6,6M • Diáspora 4,6M',
     title: { pt: 'Cidades, Turismo, Transição Religiosa e Sociedade', es: 'Ciudades, Turismo, Transición Religiosa y Sociedad', en: 'Cities, Tourism, Religious Shift & Digital Society' },
     desc: { pt: 'Ascensão das cidades médias do interior vs. metrópoles, paradoxo do turismo internacional estagnado (6,6M visitantes/ano), transição religiosa nos Censos (1970–2022), tempo online (#1 global) e diáspora (4,6M no exterior).', es: 'Ascenso de ciudades medias, paradoja del turismo internacional (6,6M), transición religiosa y diáspora (4,6M).', en: 'Rise of interior agribusiness cities, international tourism stagnation (6.6M visitors/yr), Census religious shift, and 4.6M diaspora.' }
   }
