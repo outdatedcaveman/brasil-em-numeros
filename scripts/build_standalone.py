@@ -7,17 +7,20 @@ def build():
     pillars_js = (ROOT / "data" / "pillars.js").read_text(encoding="utf-8")
     series_js = (ROOT / "data" / "series.js").read_text(encoding="utf-8")
     states_js = (ROOT / "data" / "states.js").read_text(encoding="utf-8")
+    deep_js = (ROOT / "data" / "deep_brazil.js").read_text(encoding="utf-8")
     app_js = (ROOT / "js" / "app.js").read_text(encoding="utf-8")
 
-    target_block = """  <script src="data/pillars.js?v=20261112e"></script>
-  <script src="data/series.js?v=20261112e"></script>
-  <script src="data/states.js?v=20261112e"></script>
-  <script src="js/app.js?v=20261112e"></script>"""
+    target_block = """  <script src="data/pillars.js?v=20261112f"></script>
+  <script src="data/series.js?v=20261112f"></script>
+  <script src="data/states.js?v=20261112f"></script>
+  <script src="data/deep_brazil.js?v=20261112f"></script>
+  <script src="js/app.js?v=20261112f"></script>"""
 
     inline_block = f"""  <script>
 {pillars_js}
 {series_js}
 {states_js}
+{deep_js}
 {app_js}
   </script>"""
 

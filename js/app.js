@@ -1,7 +1,9 @@
 // ============================================================================
 // BRASIL EM NÚMEROS | BRAZIL BY NUMBERS — MOTOR INTERATIVO PRINCIPAL (APP.JS)
-// Suporte a Modo Escuro (Dark Mode), 12 Pilares, 60 Séries, Mapa Geográfico +
-// Cartograma das 27 UFs, OLS Lab, Simuladores, Orçamento/Impostos e API BCB
+// Suporte a Modo Escuro (Dark Mode), 16 Pilares, 80 Séries, Mapa Oficial IBGE
+// das 27 UFs, Explorador de 60 Profissões & Salários, Atlas de 36 Cidades &
+// Tamanho de Lotes (m²), Nomes & Sobrenomes (API IBGE ao Vivo), Lab OLS,
+// Simulador Fiscal/Demográfico, Calculadora de Renda/Tributos e API BCB
 // ============================================================================
 
 (function () {
@@ -26,11 +28,32 @@
   let radarUf2 = 'BA';
   let radarUf3 = 'SC';
 
-  // Correlation Lab state
+  // Professions Explorer state (Tab 4)
+  let selectedProfSector = 'ALL';
+  let profSearchTerm = '';
+  let profSortKey = 'median';
+  let profSortAsc = false;
+  let compProf1 = 'Juiz / Magistrado / Promotor';
+  let compProf2 = 'Professor da Educação Básica (Rede Pública)';
+
+  // Cities & Lot Size Explorer state (Tab 5)
+  let selectedCityMetric = 'lotSizeM2';
+  let selectedCityRegion = 'ALL';
+  let inspectedCityName = 'São Paulo';
+  let cityScatterX = 'lotSizeM2';
+  let cityScatterY = 'aptPct';
+  let citySortKey = 'lotSizeM2';
+  let citySortAsc = false;
+
+  // Names & Surnames Explorer state (Tab 6)
+  let selectedName1 = 'MARIA';
+  let selectedName2 = 'ENZO';
+
+  // Correlation Lab state (Tab 7)
   let corrX = 'informality';
   let corrY = 'gdpPerCapita';
 
-  // Pyramid state
+  // Pyramid state (Tab 8)
   let currentPyramidYear = '2024';
 
   // Chart.js instances registry
@@ -43,6 +66,11 @@
   let corrChartInstance = null;
   let incomeChartInstance = null;
   let liveApiChartInstance = null;
+  let profChartInstance = null;
+  let cityBarChartInstance = null;
+  let cityScatterChartInstance = null;
+  let namesDecadeChartInstance = null;
+  let surnamesChartInstance = null;
 
   const REGION_COLORS = {
     'Norte': '#16a34a',
@@ -63,6 +91,7 @@
     const tc = getThemeColors();
     Chart.defaults.color = tc.muted;
     Chart.defaults.borderColor = tc.grid;
+    Chart.defaults.font.family = "'Inter', -apple-system, BlinkMacSystemFont, sans-serif";
   }
 
   // Helper to build an inline SVG sparkline for KPI cards
@@ -86,7 +115,7 @@
   }
 
   // ==========================================================================
-  // 1. OVERVIEW: 16 KPIS WITH SPARKLINES, 12 PILLARS & 8 PARADOXES
+  // 1. OVERVIEW: 20 KPIS WITH SPARKLINES, 16 PILLARS & 8 PARADOXES
   // ==========================================================================
   function renderOverview() {
     const kpiContainer = document.getElementById('kpis-grid');
@@ -103,8 +132,9 @@
         const st = badgeStyles[k.badgeColor] || badgeStyles.emerald;
         return `
           <div onclick="window.BR_APP.jumpToChart('${k.pillar}', '${k.chartId}')"
-               class="bg-[#FAF8F5] dark:bg-stone-950/90 hover:bg-white dark:hover:bg-stone-800/90 p-4 sm:p-5 rounded-2xl border border-stone-200/90 dark:border-stone-800 hover:border-emerald-500 dark:hover:border-emerald-500 shadow-sm hover:shadow-md transition-all cursor-pointer group flex flex-col justify-between min-h-[136px]">
-            <div class="flex items-start justify-between gap-2">
+               class="relative overflow-hidden bg-[#FAF8F5] dark:bg-stone-950/90 hover:bg-white dark:hover:bg-stone-800/90 p-4 sm:p-5 rounded-2xl border border-stone-200/90 dark:border-stone-800 hover:border-emerald-500 dark:hover:border-emerald-500 shadow-sm hover:shadow-md transition-all cursor-pointer group flex flex-col justify-between min-h-[142px]">
+            <div class="absolute top-0 left-0 right-0 h-1" style="background:${st.hex}"></div>
+            <div class="flex items-start justify-between gap-2 pt-0.5">
               <span class="text-xs font-extrabold uppercase tracking-wider text-stone-600 dark:text-stone-300 group-hover:text-emerald-600 dark:group-hover:text-emerald-400 leading-snug">${k.label[currentLang]}</span>
               <span class="px-2 py-0.5 text-[11px] font-mono font-bold rounded-md border whitespace-nowrap shrink-0 ${st.cls}">${k.badge}</span>
             </div>
@@ -126,9 +156,10 @@
       const t = D.UI_TEXT[currentLang];
       pillarsContainer.innerHTML = D.PILLARS.map(p => `
         <div onclick="window.BR_APP.openPillar('${p.id}')"
-             class="bg-white dark:bg-stone-900 rounded-2xl p-6 border border-stone-200 dark:border-stone-800 shadow-sm hover:shadow-md hover:border-emerald-500/60 transition-all cursor-pointer flex flex-col justify-between group">
+             class="relative overflow-hidden bg-white dark:bg-stone-900 rounded-2xl p-6 border border-stone-200 dark:border-stone-800 shadow-sm hover:shadow-md hover:border-emerald-500/60 transition-all cursor-pointer flex flex-col justify-between group">
+          <div class="absolute top-0 left-0 right-0 h-1.5" style="background:${p.color}"></div>
           <div>
-            <div class="flex items-center justify-between gap-2">
+            <div class="flex items-center justify-between gap-2 pt-0.5">
               <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs font-extrabold uppercase" style="background:${p.color}20;color:${p.color}">
                 <span>${p.icon}</span> Pilar ${p.num}
               </span>
@@ -162,7 +193,7 @@
   }
 
   // ==========================================================================
-  // 2. CHARTS EXPLORER (60 SERIES + TRANSFORMATIONS + EXPORT)
+  // 2. CHARTS EXPLORER (80 SERIES + TRANSFORMATIONS + EXPORT)
   // ==========================================================================
   function transformSeriesData(rawArr, mode) {
     if (!rawArr || !rawArr.length || mode === 'raw') return rawArr;
@@ -245,9 +276,10 @@
       }
 
       return `
-        <article id="card-${c.id}" class="bg-white dark:bg-stone-900 rounded-2xl border border-stone-200 dark:border-stone-800 shadow-sm p-5 flex flex-col justify-between hover:border-stone-300 dark:hover:border-stone-700 transition-all">
+        <article id="card-${c.id}" class="relative overflow-hidden bg-white dark:bg-stone-900 rounded-2xl border border-stone-200 dark:border-stone-800 shadow-sm p-5 flex flex-col justify-between hover:border-stone-300 dark:hover:border-stone-700 transition-all">
+          <div class="absolute top-0 left-0 right-0 h-1" style="background:${pObj.color}"></div>
           <div>
-            <div class="flex flex-wrap items-center justify-between gap-2">
+            <div class="flex flex-wrap items-center justify-between gap-2 pt-0.5">
               <div class="flex items-center gap-2">
                 <span class="px-2 py-0.5 rounded-md text-[11px] font-extrabold uppercase" style="background:${pObj.color}22;color:${pObj.color}">
                   Série ${c.code}
@@ -429,7 +461,6 @@
     if (svgContainer) {
       const strokeCol = isDark ? '#1c1917' : '#ffffff';
       if (mapMode === 'geo') {
-        // Ensure DF is drawn after GO (since DF is an enclave inside GO) and selected UF is drawn on top
         const orderedUfs = [...D.UF_LIST].sort((a, b) => {
           const rank = u => (u.uf === inspectedUf ? 2 : (u.uf === 'DF' ? 1 : 0));
           return rank(a) - rank(b);
@@ -473,7 +504,7 @@
               <rect x="${x}" y="${y}" width="${cellSize}" height="${cellSize}" rx="10"
                     fill="${fill}" stroke="${u.uf === inspectedUf ? '#facc15' : strokeCol}" stroke-width="${u.uf === inspectedUf ? '3.5' : '2'}" />
               <text x="${x + cellSize / 2}" y="${y + 23}" text-anchor="middle" fill="#ffffff" font-size="14" font-weight="900">${u.uf}</text>
-              <text x="${x + cellSize / 2}" y="${y + 42}" text-anchor="middle" fill="#ffffff" font-size="9.5" font-weight="700" font-family="JetBrains Mono, monospace">${shortVal}</text>
+              <text x="${x + cellSize / 2}" y="${y + 42}" text-anchor="middle" fill="#ffffff" font-size="9.5" font-weight="700" font-family="Inter, sans-serif">${shortVal}</text>
               <title>${u.name} (${u.uf}) — ${mObj.label[currentLang]}: ${formatted}</title>
             </g>
           `;
@@ -602,7 +633,7 @@
             min: 0, max: 100,
             grid: { color: tc.grid },
             angleLines: { color: tc.grid },
-            pointLabels: { color: tc.text, font: { size: 11, weight: 'bold' } },
+            pointLabels: { color: tc.text, font: { family: "'Inter', sans-serif", size: 11, weight: 'bold' } },
             ticks: { stepSize: 25, display: false }
           }
         },
@@ -612,7 +643,657 @@
   }
 
   // ==========================================================================
-  // 4. CORRELATION & OLS REGRESSION LAB (27 UFs)
+  // 4. PROFESSIONS & SALARIES EXPLORER (60 CAREERS IN BRAZIL — RAIS/CAGED/PNAD)
+  // ==========================================================================
+  function renderProfessions() {
+    applyChartDefaults();
+    if (!D.PROFESSIONS || !D.PROFESSION_SECTORS) return;
+
+    const sectorBar = document.getElementById('prof-sector-bar');
+    if (sectorBar) {
+      sectorBar.innerHTML = D.PROFESSION_SECTORS.map(s => `
+        <button onclick="window.BR_APP.setProfSector('${s.id}')"
+                class="px-3 py-1.5 rounded-xl text-xs font-bold transition-all ${selectedProfSector === s.id ? 'bg-emerald-700 text-white shadow-sm' : 'bg-[#FAF8F5] dark:bg-stone-800 text-stone-700 dark:text-stone-300 border border-stone-200 dark:border-stone-700 hover:bg-stone-100'}">
+          ${s.label[currentLang]}
+        </button>
+      `).join('');
+    }
+
+    // Populate 2-Career Comparator dropdowns
+    const sel1 = document.getElementById('prof-comp-1');
+    const sel2 = document.getElementById('prof-comp-2');
+    if (sel1 && !sel1.options.length) {
+      const opts = D.PROFESSIONS.map(p => `<option value="${p.name}">${p.name} (Mediana: R$ ${p.median.toLocaleString('pt-BR')})</option>`).join('');
+      sel1.innerHTML = opts;
+      sel2.innerHTML = opts;
+      sel1.value = compProf1;
+      sel2.value = compProf2;
+    }
+
+    renderProfessionComparator();
+
+    let list = D.PROFESSIONS.filter(p => {
+      const matchS = selectedProfSector === 'ALL' || p.sector === selectedProfSector;
+      const q = profSearchTerm;
+      const matchQ = !q || p.name.toLowerCase().includes(q) || p.note.toLowerCase().includes(q) || p.edu.toLowerCase().includes(q);
+      return matchS && matchQ;
+    });
+
+    list.sort((a, b) => {
+      if (profSortKey === 'name') {
+        return profSortAsc ? a.name.localeCompare(b.name) : b.name.localeCompare(a.name);
+      }
+      return profSortAsc ? a[profSortKey] - b[profSortKey] : b[profSortKey] - a[profSortKey];
+    });
+
+    const countEl = document.getElementById('prof-count-badge');
+    if (countEl) countEl.textContent = `${list.length} / ${D.PROFESSIONS.length} profissões`;
+
+    // Render Top 20 Chart from filtered list
+    const chartSlice = list.slice(0, 18);
+    const ctx = document.getElementById('prof-chart-canvas');
+    if (ctx) {
+      if (profChartInstance) profChartInstance.destroy();
+      const tc = getThemeColors();
+      profChartInstance = new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: chartSlice.map(p => p.name.length > 32 ? p.name.slice(0, 30) + '…' : p.name),
+          datasets: [
+            {
+              label: 'P25 (Entrada / Júnior R$)',
+              data: chartSlice.map(p => p.p25),
+              backgroundColor: '#94a3b8',
+              borderRadius: 4
+            },
+            {
+              label: 'Salário Mediano (R$/mês)',
+              data: chartSlice.map(p => p.median),
+              backgroundColor: '#10b981',
+              borderRadius: 4
+            },
+            {
+              label: 'P90 (Topo Sênior / Especialista R$)',
+              data: chartSlice.map(p => p.p90),
+              backgroundColor: '#6366f1',
+              borderRadius: 4
+            }
+          ]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          interaction: { mode: 'index', intersect: false },
+          plugins: {
+            legend: { position: 'bottom', labels: { color: tc.text, font: { family: "'Inter', sans-serif", size: 11, weight: 'bold' } } },
+            tooltip: {
+              callbacks: {
+                label: c => `${c.dataset.label}: R$ ${Number(c.raw).toLocaleString('pt-BR')}`
+              }
+            }
+          },
+          scales: {
+            x: { ticks: { color: tc.muted, font: { family: "'Inter', sans-serif", size: 10, weight: 'bold' } }, grid: { display: false } },
+            y: {
+              ticks: {
+                color: tc.muted,
+                font: { family: "'Inter', sans-serif", size: 11, weight: '600' },
+                callback: v => 'R$ ' + Number(v).toLocaleString('pt-BR')
+              },
+              grid: { color: tc.grid }
+            }
+          }
+        }
+      });
+    }
+
+    // Render Full Table of Professions
+    const maxP90 = Math.max(...D.PROFESSIONS.map(p => p.p90));
+    const tbody = document.getElementById('prof-table-body');
+    if (tbody) {
+      tbody.innerHTML = list.map((p, idx) => {
+        const sObj = D.PROFESSION_SECTORS.find(s => s.id === p.sector) || D.PROFESSION_SECTORS[0];
+        const barLeft = Math.round((p.p25 / maxP90) * 100);
+        const barWidth = Math.max(4, Math.round(((p.p90 - p.p25) / maxP90) * 100));
+        const medPos = Math.round((p.median / maxP90) * 100);
+        return `
+          <tr class="hover:bg-emerald-50/40 dark:hover:bg-stone-800/60 transition-colors">
+            <td class="py-3 px-3">
+              <div class="font-extrabold text-stone-900 dark:text-stone-100 text-xs sm:text-sm">${idx + 1}. ${p.name}</div>
+              <div class="text-[11px] text-stone-500 dark:text-stone-400 mt-0.5">${p.note}</div>
+            </td>
+            <td class="py-3 px-3 whitespace-nowrap">
+              <span class="px-2 py-0.5 rounded-md text-[10px] font-bold bg-stone-100 dark:bg-stone-800 text-stone-700 dark:text-stone-300 border border-stone-200 dark:border-stone-700">${sObj.label[currentLang]}</span>
+              <div class="text-[10px] text-stone-400 mt-1">Escolaridade: ${p.edu}</div>
+            </td>
+            <td class="py-3 px-3 font-mono text-xs text-stone-600 dark:text-stone-400 whitespace-nowrap">R$ ${p.p25.toLocaleString('pt-BR')}</td>
+            <td class="py-3 px-3 font-mono text-sm font-black text-emerald-700 dark:text-emerald-400 whitespace-nowrap">R$ ${p.median.toLocaleString('pt-BR')}</td>
+            <td class="py-3 px-3 font-mono text-xs font-bold text-indigo-700 dark:text-indigo-400 whitespace-nowrap">R$ ${p.p90.toLocaleString('pt-BR')}</td>
+            <td class="py-3 px-3 min-w-[140px]">
+              <div class="relative w-full h-2.5 bg-stone-200 dark:bg-stone-800 rounded-full overflow-hidden">
+                <div class="absolute top-0 bottom-0 bg-emerald-500/50 rounded-full" style="left:${barLeft}%;width:${barWidth}%"></div>
+                <div class="absolute top-0 bottom-0 w-1.5 bg-emerald-700 dark:bg-emerald-300 rounded-full" style="left:${medPos}%"></div>
+              </div>
+              <div class="text-[10px] font-mono text-stone-500 mt-1">Média: R$ ${p.mean.toLocaleString('pt-BR')}</div>
+            </td>
+            <td class="py-3 px-3 font-mono text-xs whitespace-nowrap">${p.workersK >= 1000 ? (p.workersK / 1000).toFixed(2) + 'M' : p.workersK + ' mil'}</td>
+            <td class="py-3 px-3 font-mono text-xs whitespace-nowrap">${p.formalPct}%</td>
+            <td class="py-3 px-3 font-mono text-xs whitespace-nowrap">${p.femalePct}% ♀</td>
+          </tr>
+        `;
+      }).join('');
+    }
+  }
+
+  function renderProfessionComparator() {
+    const p1 = D.PROFESSIONS.find(p => p.name === compProf1) || D.PROFESSIONS[0];
+    const p2 = D.PROFESSIONS.find(p => p.name === compProf2) || D.PROFESSIONS[24];
+    const box = document.getElementById('prof-comp-result');
+    if (!box || !p1 || !p2) return;
+
+    const ratio = (p1.median / Math.max(1, p2.median)).toFixed(1);
+    const monthsForOne = (p1.median / Math.max(1, p2.median)).toFixed(1);
+    box.innerHTML = `
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 items-center">
+        <div class="p-4 rounded-2xl bg-emerald-50/70 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800">
+          <div class="text-[10px] font-extrabold uppercase text-emerald-700 dark:text-emerald-400">Profissão A</div>
+          <div class="text-sm font-black text-stone-900 dark:text-stone-100 mt-0.5">${p1.name}</div>
+          <div class="text-2xl font-black font-mono text-emerald-700 dark:text-emerald-400 mt-2">R$ ${p1.median.toLocaleString('pt-BR')}<span class="text-xs font-normal">/mês</span></div>
+          <div class="text-[11px] font-mono text-stone-600 dark:text-stone-400 mt-1">Faixa P25–P90: R$ ${p1.p25.toLocaleString('pt-BR')} a R$ ${p1.p90.toLocaleString('pt-BR')}</div>
+          <div class="text-[11px] text-stone-500 mt-1">Força de trabalho: ${p1.workersK} mil • Formal: ${p1.formalPct}%</div>
+        </div>
+
+        <div class="p-4 rounded-2xl bg-[#FAF8F5] dark:bg-stone-950 border border-stone-200 dark:border-stone-800 text-center">
+          <div class="text-[11px] font-bold uppercase text-stone-500">Razão Salarial Mediana</div>
+          <div class="text-3xl font-black font-mono text-indigo-700 dark:text-indigo-400 my-1">${ratio}×</div>
+          <p class="text-xs text-stone-600 dark:text-stone-400 leading-relaxed">
+            1 mês na <strong>Profissão A</strong> equivale a <strong>${monthsForOne} meses</strong> de salário mediano na <strong>Profissão B</strong>.
+          </p>
+        </div>
+
+        <div class="p-4 rounded-2xl bg-indigo-50/70 dark:bg-indigo-950/40 border border-indigo-200 dark:border-indigo-800">
+          <div class="text-[10px] font-extrabold uppercase text-indigo-700 dark:text-indigo-400">Profissão B</div>
+          <div class="text-sm font-black text-stone-900 dark:text-stone-100 mt-0.5">${p2.name}</div>
+          <div class="text-2xl font-black font-mono text-indigo-700 dark:text-indigo-400 mt-2">R$ ${p2.median.toLocaleString('pt-BR')}<span class="text-xs font-normal">/mês</span></div>
+          <div class="text-[11px] font-mono text-stone-600 dark:text-stone-400 mt-1">Faixa P25–P90: R$ ${p2.p25.toLocaleString('pt-BR')} a R$ ${p2.p90.toLocaleString('pt-BR')}</div>
+          <div class="text-[11px] text-stone-500 mt-1">Força de trabalho: ${p2.workersK} mil • Formal: ${p2.formalPct}%</div>
+        </div>
+      </div>
+    `;
+  }
+
+  // ==========================================================================
+  // 5. CITIES, LOT SIZE (m²) & URBAN FORM EXPLORER (36 BRAZILIAN CITIES)
+  // ==========================================================================
+  function formatCityMetric(val, mDef) {
+    if (val === undefined || val === null) return '-';
+    if (mDef.key === 'priceM2') return 'R$ ' + Math.round(val).toLocaleString('pt-BR');
+    return val.toFixed(mDef.dec) + (mDef.unit ? ' ' + mDef.unit : '');
+  }
+
+  function renderCities() {
+    applyChartDefaults();
+    if (!D.CITIES_URBAN || !D.CITY_METRICS_DEF) return;
+
+    const mDef = D.CITY_METRICS_DEF.find(m => m.key === selectedCityMetric) || D.CITY_METRICS_DEF[0];
+
+    // Metric selector pills
+    const metricBar = document.getElementById('city-metric-bar');
+    if (metricBar) {
+      metricBar.innerHTML = D.CITY_METRICS_DEF.map(m => `
+        <button onclick="window.BR_APP.setCityMetric('${m.key}')"
+                class="px-3 py-1.5 rounded-xl text-xs font-bold transition-all ${selectedCityMetric === m.key ? 'bg-emerald-700 text-white shadow-sm' : 'bg-[#FAF8F5] dark:bg-stone-800 text-stone-700 dark:text-stone-300 border border-stone-200 dark:border-stone-700 hover:bg-stone-100'}">
+          ${m.label[currentLang]}
+        </button>
+      `).join('');
+    }
+
+    // Populate XY scatter selects for cities
+    const sx = document.getElementById('city-scatter-x');
+    const sy = document.getElementById('city-scatter-y');
+    if (sx && !sx.options.length) {
+      const opts = D.CITY_METRICS_DEF.map(m => `<option value="${m.key}">${m.label[currentLang]}</option>`).join('');
+      sx.innerHTML = opts;
+      sy.innerHTML = opts;
+      sx.value = cityScatterX;
+      sy.value = cityScatterY;
+    }
+
+    // Inspector card for selected city
+    renderCityInspector(inspectedCityName);
+
+    // Filter cities by region
+    const filteredCities = D.CITIES_URBAN.filter(c => selectedCityRegion === 'ALL' || c.region === selectedCityRegion);
+
+    // 1. Bar Chart of Cities sorted descending on selectedCityMetric
+    const sortedForBar = [...filteredCities].sort((a, b) => b[selectedCityMetric] - a[selectedCityMetric]);
+    const barCtx = document.getElementById('city-ranking-canvas');
+    if (barCtx) {
+      if (cityBarChartInstance) cityBarChartInstance.destroy();
+      const tc = getThemeColors();
+      cityBarChartInstance = new Chart(barCtx, {
+        type: 'bar',
+        data: {
+          labels: sortedForBar.map(c => `${c.city} (${c.uf})`),
+          datasets: [{
+            label: mDef.label[currentLang],
+            data: sortedForBar.map(c => c[selectedCityMetric]),
+            backgroundColor: sortedForBar.map(c => REGION_COLORS[c.region] || '#10b981'),
+            borderRadius: 4
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: { display: false },
+            tooltip: {
+              callbacks: {
+                label: ctx => `${ctx.label}: ${formatCityMetric(ctx.raw, mDef)}`
+              }
+            }
+          },
+          scales: {
+            x: { ticks: { color: tc.muted, font: { family: "'Inter', sans-serif", size: 10, weight: 'bold' } }, grid: { display: false } },
+            y: { ticks: { color: tc.muted, font: { family: "'Inter', sans-serif", size: 11, weight: '600' } }, grid: { color: tc.grid } }
+          }
+        }
+      });
+    }
+
+    // 2. XY Bubble Chart of Cities (e.g. Lot Size m² vs Verticalization %)
+    renderCityScatter();
+
+    // 3. Sortable Table of 36 Cities
+    const sortedForTable = [...filteredCities].sort((a, b) => {
+      if (citySortKey === 'city' || citySortKey === 'region') {
+        return citySortAsc ? a[citySortKey].localeCompare(b[citySortKey]) : b[citySortKey].localeCompare(a[citySortKey]);
+      }
+      return citySortAsc ? a[citySortKey] - b[citySortKey] : b[citySortKey] - a[citySortKey];
+    });
+
+    const tbody = document.getElementById('cities-table-body');
+    if (tbody) {
+      tbody.innerHTML = sortedForTable.map((c, idx) => `
+        <tr onclick="window.BR_APP.selectCity('${c.city}')" class="hover:bg-emerald-50/40 dark:hover:bg-stone-800/60 transition-colors cursor-pointer">
+          <td class="py-2.5 px-3 font-bold text-stone-900 dark:text-stone-100 whitespace-nowrap">${idx + 1}. ${c.city} <span class="text-xs font-mono text-stone-500">(${c.uf})</span></td>
+          <td class="py-2.5 px-3 text-stone-600 dark:text-stone-400 whitespace-nowrap"><span class="inline-block w-2 h-2 rounded-full mr-1.5" style="background:${REGION_COLORS[c.region]}"></span>${c.region}</td>
+          <td class="py-2.5 px-3 font-mono">${c.popM.toFixed(2)}M</td>
+          <td class="py-2.5 px-3 font-mono font-black text-emerald-700 dark:text-emerald-400">${c.lotSizeM2} m²</td>
+          <td class="py-2.5 px-3 font-mono text-stone-500">${c.minLotM2} m²</td>
+          <td class="py-2.5 px-3 font-mono font-bold text-indigo-700 dark:text-indigo-400">${c.aptSizeM2} m²</td>
+          <td class="py-2.5 px-3 font-mono font-semibold">R$ ${c.priceM2.toLocaleString('pt-BR')}</td>
+          <td class="py-2.5 px-3 font-mono">${c.aptPct.toFixed(1)}%</td>
+          <td class="py-2.5 px-3 font-mono text-rose-600 dark:text-rose-400 font-bold">${c.favelaPct.toFixed(1)}%</td>
+          <td class="py-2.5 px-3 font-mono">${c.treesPct.toFixed(1)}%</td>
+          <td class="py-2.5 px-3 font-mono">${c.rampsPct.toFixed(1)}%</td>
+          <td class="py-2.5 px-3 font-mono">${c.commuteMin} min</td>
+        </tr>
+      `).join('');
+    }
+  }
+
+  function renderCityInspector(cityName) {
+    inspectedCityName = cityName;
+    const c = D.CITIES_URBAN.find(x => x.city === cityName) || D.CITIES_URBAN[0];
+    const box = document.getElementById('city-inspector-card');
+    if (!box || !c) return;
+
+    box.innerHTML = `
+      <div class="flex flex-wrap items-center justify-between gap-2 border-b border-stone-200 dark:border-stone-800 pb-3 mb-3">
+        <div>
+          <span class="text-[10px] font-extrabold uppercase px-2 py-0.5 rounded bg-emerald-100 dark:bg-emerald-950 text-emerald-900 dark:text-emerald-300">${c.region} • ${c.uf}</span>
+          <h4 class="text-lg font-black text-stone-900 dark:text-stone-100 mt-1">${c.city} (${c.uf}) — População: ${c.popM.toFixed(2)}M</h4>
+          <p class="text-xs text-stone-600 dark:text-stone-400 mt-0.5">${c.note}</p>
+        </div>
+        <div class="text-right font-mono text-xs text-stone-500">Densidade: <strong>${c.density.toLocaleString('pt-BR')} hab/km²</strong></div>
+      </div>
+      <div class="grid grid-cols-2 sm:grid-cols-5 gap-2.5">
+        <div class="p-3 rounded-xl bg-white dark:bg-stone-900 border border-stone-200 dark:border-stone-800">
+          <div class="text-[10px] font-bold uppercase text-stone-500">Lote Urbano Médio</div>
+          <div class="text-lg font-black font-mono text-emerald-700 dark:text-emerald-400 mt-0.5">${c.lotSizeM2} m²</div>
+          <div class="text-[10px] text-stone-400">Mín. Lei: ${c.minLotM2} m²</div>
+        </div>
+        <div class="p-3 rounded-xl bg-white dark:bg-stone-900 border border-stone-200 dark:border-stone-800">
+          <div class="text-[10px] font-bold uppercase text-stone-500">Área Média Apto</div>
+          <div class="text-lg font-black font-mono text-indigo-700 dark:text-indigo-400 mt-0.5">${c.aptSizeM2} m²</div>
+          <div class="text-[10px] text-stone-400">Verticalização: ${c.aptPct}%</div>
+        </div>
+        <div class="p-3 rounded-xl bg-white dark:bg-stone-900 border border-stone-200 dark:border-stone-800">
+          <div class="text-[10px] font-bold uppercase text-stone-500">Preço FipeZap m²</div>
+          <div class="text-lg font-black font-mono text-stone-900 dark:text-stone-100 mt-0.5">R$ ${c.priceM2.toLocaleString('pt-BR')}</div>
+          <div class="text-[10px] text-stone-400">Aluguel: ${c.rentPct}% dom.</div>
+        </div>
+        <div class="p-3 rounded-xl bg-white dark:bg-stone-900 border border-stone-200 dark:border-stone-800">
+          <div class="text-[10px] font-bold uppercase text-stone-500">Favelas (Censo 22)</div>
+          <div class="text-lg font-black font-mono text-rose-600 dark:text-rose-400 mt-0.5">${c.favelaPct}%</div>
+          <div class="text-[10px] text-stone-400">Vagos: ${c.vacantPct}%</div>
+        </div>
+        <div class="p-3 rounded-xl bg-white dark:bg-stone-900 border border-stone-200 dark:border-stone-800">
+          <div class="text-[10px] font-bold uppercase text-stone-500">Urbanismo Censo</div>
+          <div class="text-lg font-black font-mono text-teal-700 dark:text-teal-400 mt-0.5">${c.treesPct}% 🌳</div>
+          <div class="text-[10px] text-stone-400">Rampas: ${c.rampsPct}% | ${c.commuteMin}m</div>
+        </div>
+      </div>
+    `;
+  }
+
+  function renderCityScatter() {
+    const ctx = document.getElementById('city-scatter-canvas');
+    if (!ctx) return;
+    if (cityScatterChartInstance) cityScatterChartInstance.destroy();
+
+    const mX = D.CITY_METRICS_DEF.find(m => m.key === cityScatterX) || D.CITY_METRICS_DEF[0];
+    const mY = D.CITY_METRICS_DEF.find(m => m.key === cityScatterY) || D.CITY_METRICS_DEF[4];
+    const tc = getThemeColors();
+
+    const regions = ['Sudeste', 'Sul', 'Centro-Oeste', 'Nordeste', 'Norte'];
+    const datasets = regions.map(reg => ({
+      type: 'bubble',
+      label: reg,
+      data: D.CITIES_URBAN.filter(c => c.region === reg).map(c => ({
+        x: c[cityScatterX],
+        y: c[cityScatterY],
+        r: Math.max(5, Math.min(20, Math.sqrt(c.popM) * 5.2)),
+        city: c.city,
+        uf: c.uf
+      })),
+      backgroundColor: REGION_COLORS[reg] + 'BF',
+      borderColor: REGION_COLORS[reg],
+      borderWidth: 1.5
+    }));
+
+    cityScatterChartInstance = new Chart(ctx, {
+      data: { datasets },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: { position: 'bottom', labels: { color: tc.text, font: { family: "'Inter', sans-serif", size: 11, weight: 'bold' } } },
+          tooltip: {
+            callbacks: {
+              label: c => {
+                const raw = c.raw;
+                return `${raw.city} (${raw.uf}): ${mX.label[currentLang]}=${raw.x}, ${mY.label[currentLang]}=${raw.y}`;
+              }
+            }
+          }
+        },
+        scales: {
+          x: {
+            title: { display: true, text: mX.label[currentLang], color: tc.text, font: { family: "'Inter', sans-serif", weight: 'bold' } },
+            ticks: { color: tc.muted, font: { family: "'Inter', sans-serif", size: 11 } },
+            grid: { color: tc.grid }
+          },
+          y: {
+            title: { display: true, text: mY.label[currentLang], color: tc.text, font: { family: "'Inter', sans-serif", weight: 'bold' } },
+            ticks: { color: tc.muted, font: { family: "'Inter', sans-serif", size: 11 } },
+            grid: { color: tc.grid }
+          }
+        }
+      }
+    });
+  }
+
+  // ==========================================================================
+  // 6. NAMES & SURNAMES EXPLORER + LIVE IBGE NOMES API (CENSO + ARPEN)
+  // ==========================================================================
+  function normalizeIbgePeriodLabel(p) {
+    if (!p) return '';
+    if (p === '1930[' || p === 'Até 1930') return 'Até 1930';
+    const m = p.match(/\[(\d{4}),(\d{4})\[/);
+    if (m) return `${m[1]}–${m[2].slice(2)}`;
+    return p;
+  }
+
+  async function fetchSingleIbgeName(rawName) {
+    const clean = (rawName || '').trim().toUpperCase();
+    if (!clean) return null;
+
+    // Try live IBGE API v2 first
+    try {
+      const res = await fetch(`https://servicodados.ibge.gov.br/api/v2/censos/nomes/${encodeURIComponent(clean.toLowerCase())}`);
+      if (res.ok) {
+        const arr = await res.json();
+        if (Array.isArray(arr) && arr.length > 0 && Array.isArray(arr[0].res)) {
+          const rows = arr[0].res;
+          const labels = rows.map(r => normalizeIbgePeriodLabel(r.periodo));
+          const values = rows.map(r => Number((r.frequencia / 1000).toFixed(2)));
+          const totalK = Number(values.reduce((a, b) => a + b, 0).toFixed(1));
+          let maxIdx = 0;
+          values.forEach((v, i) => { if (v > values[maxIdx]) maxIdx = i; });
+          return {
+            name: arr[0].nome || clean,
+            labels,
+            valuesK: values,
+            totalK,
+            peakDecade: labels[maxIdx] || '-',
+            source: 'API IBGE ao Vivo'
+          };
+        }
+      }
+    } catch (e) {
+      // Fallback to local preloaded TOP_FIRST_NAMES if offline
+    }
+
+    const local = (D.TOP_FIRST_NAMES || []).find(n => n.name.toUpperCase() === clean);
+    if (local) {
+      return {
+        name: local.name.toUpperCase(),
+        labels: D.NAME_DECADES,
+        valuesK: local.byDecadeK,
+        totalK: local.totalK,
+        peakDecade: local.peakDecade,
+        source: 'Base Local Censo IBGE'
+      };
+    }
+    return null;
+  }
+
+  async function fetchAndRenderIbgeNames(nameA, nameB) {
+    applyChartDefaults();
+    selectedName1 = (nameA || selectedName1 || 'MARIA').trim().toUpperCase();
+    selectedName2 = (nameB !== undefined ? nameB : selectedName2 || '').trim().toUpperCase();
+
+    const in1 = document.getElementById('ibge-name-input-1');
+    const in2 = document.getElementById('ibge-name-input-2');
+    if (in1 && in1.value.toUpperCase() !== selectedName1) in1.value = selectedName1;
+    if (in2 && in2.value.toUpperCase() !== selectedName2) in2.value = selectedName2;
+
+    const statusEl = document.getElementById('ibge-name-status');
+    if (statusEl) statusEl.textContent = `Consultando API Censo Nomes IBGE para "${selectedName1}"${selectedName2 ? ` vs "${selectedName2}"` : ''}...`;
+
+    const [res1, res2] = await Promise.all([
+      fetchSingleIbgeName(selectedName1),
+      selectedName2 ? fetchSingleIbgeName(selectedName2) : Promise.resolve(null)
+    ]);
+
+    if (!res1) {
+      if (statusEl) statusEl.textContent = `⚠️ Nome "${selectedName1}" não encontrado ou com frequência abaixo do limiar de privacidade do Censo IBGE.`;
+      return;
+    }
+
+    if (statusEl) {
+      statusEl.textContent = `✅ ${res1.source}: ${res1.name} (${res1.totalK.toLocaleString('pt-BR')} mil brasileiros, pico em ${res1.peakDecade})${res2 ? ` × ${res2.name} (${res2.totalK.toLocaleString('pt-BR')} mil, pico em ${res2.peakDecade})` : ''}`;
+    }
+
+    // Update Summary KPI Cards for the 2 compared names
+    const summaryEl = document.getElementById('ibge-names-summary-cards');
+    if (summaryEl) {
+      summaryEl.innerHTML = `
+        <div class="p-4 rounded-2xl bg-emerald-50/70 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800">
+          <div class="text-[10px] font-extrabold uppercase text-emerald-700 dark:text-emerald-400">Nome 1 (${res1.source})</div>
+          <div class="text-xl font-black text-stone-900 dark:text-stone-100 mt-0.5">${res1.name}</div>
+          <div class="text-2xl font-black font-mono text-emerald-700 dark:text-emerald-400 mt-1">${res1.totalK >= 1000 ? (res1.totalK / 1000).toFixed(2) + ' Milhões' : res1.totalK.toLocaleString('pt-BR') + ' mil'}</div>
+          <div class="text-xs text-stone-600 dark:text-stone-400 mt-1">Década de pico: <strong>${res1.peakDecade}</strong></div>
+        </div>
+        ${res2 ? `
+          <div class="p-4 rounded-2xl bg-indigo-50/70 dark:bg-indigo-950/40 border border-indigo-200 dark:border-indigo-800">
+            <div class="text-[10px] font-extrabold uppercase text-indigo-700 dark:text-indigo-400">Nome 2 (${res2.source})</div>
+            <div class="text-xl font-black text-stone-900 dark:text-stone-100 mt-0.5">${res2.name}</div>
+            <div class="text-2xl font-black font-mono text-indigo-700 dark:text-indigo-400 mt-1">${res2.totalK >= 1000 ? (res2.totalK / 1000).toFixed(2) + ' Milhões' : res2.totalK.toLocaleString('pt-BR') + ' mil'}</div>
+            <div class="text-xs text-stone-600 dark:text-stone-400 mt-1">Década de pico: <strong>${res2.peakDecade}</strong></div>
+          </div>
+        ` : ''}
+      `;
+    }
+
+    const ctx = document.getElementById('names-decade-canvas');
+    if (ctx) {
+      if (namesDecadeChartInstance) namesDecadeChartInstance.destroy();
+      const tc = getThemeColors();
+      const labels = D.NAME_DECADES || res1.labels;
+      const mapToLabels = (r) => labels.map(lbl => {
+        const idx = r.labels.indexOf(lbl);
+        return idx >= 0 ? r.valuesK[idx] : 0;
+      });
+
+      const datasets = [
+        {
+          label: `${res1.name} (Milhares de Nascimentos por Década)`,
+          data: mapToLabels(res1),
+          borderColor: '#10b981',
+          backgroundColor: 'rgba(16,185,129,0.18)',
+          fill: true,
+          borderWidth: 3,
+          tension: 0.28
+        }
+      ];
+      if (res2) {
+        datasets.push({
+          label: `${res2.name} (Milhares de Nascimentos por Década)`,
+          data: mapToLabels(res2),
+          borderColor: '#6366f1',
+          backgroundColor: 'rgba(99,102,241,0.18)',
+          fill: true,
+          borderWidth: 3,
+          tension: 0.28
+        });
+      }
+
+      namesDecadeChartInstance = new Chart(ctx, {
+        type: 'line',
+        data: { labels, datasets },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          interaction: { mode: 'index', intersect: false },
+          plugins: {
+            legend: { position: 'bottom', labels: { color: tc.text, font: { family: "'Inter', sans-serif", size: 11, weight: 'bold' } } },
+            tooltip: {
+              callbacks: {
+                label: c => `${c.dataset.label.split(' (')[0]}: ${Number(c.raw).toLocaleString('pt-BR')} mil registros na década`
+              }
+            }
+          },
+          scales: {
+            x: { ticks: { color: tc.muted, font: { family: "'Inter', sans-serif", size: 11, weight: 'bold' } }, grid: { display: false } },
+            y: {
+              ticks: {
+                color: tc.muted,
+                font: { family: "'Inter', sans-serif", size: 11, weight: '600' },
+                callback: v => v.toLocaleString('pt-BR') + 'k'
+              },
+              grid: { color: tc.grid }
+            }
+          }
+        }
+      });
+    }
+  }
+
+  function renderNames() {
+    applyChartDefaults();
+    if (!D.TOP_FIRST_NAMES) return;
+
+    // 1. Render Top 20 Preloaded First Names clickable chips & table
+    const chipsEl = document.getElementById('top-names-chips');
+    if (chipsEl) {
+      chipsEl.innerHTML = D.TOP_FIRST_NAMES.map(n => `
+        <button onclick="window.BR_APP.selectFirstName('${n.name}', '')"
+                class="px-3 py-1.5 rounded-xl text-xs font-bold bg-[#FAF8F5] dark:bg-stone-800 hover:bg-emerald-50 dark:hover:bg-stone-700 text-stone-800 dark:text-stone-200 border border-stone-200 dark:border-stone-700 transition-all">
+          #${n.rank} <strong>${n.name}</strong> <span class="font-mono text-[10px] text-emerald-700 dark:text-emerald-400">(${n.totalK >= 1000 ? (n.totalK / 1000).toFixed(1) + 'M' : n.totalK + 'k'})</span>
+        </button>
+      `).join('');
+    }
+
+    // 2. Render Surnames Chart & Cards
+    const surCtx = document.getElementById('surnames-chart-canvas');
+    if (surCtx && D.TOP_SURNAMES) {
+      if (surnamesChartInstance) surnamesChartInstance.destroy();
+      const tc = getThemeColors();
+      surnamesChartInstance = new Chart(surCtx, {
+        type: 'bar',
+        data: {
+          labels: D.TOP_SURNAMES.map(s => `${s.rank}. ${s.surname}`),
+          datasets: [{
+            label: 'População com o Sobrenome (Milhões)',
+            data: D.TOP_SURNAMES.map(s => s.popM),
+            backgroundColor: '#10b981',
+            borderRadius: 5
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: { display: false },
+            tooltip: {
+              callbacks: {
+                label: c => {
+                  const s = D.TOP_SURNAMES[c.dataIndex];
+                  return `${s.surname}: ${s.popM}M brasileiros (${s.pctPop}% da pop.) — ${s.origin}`;
+                }
+              }
+            }
+          },
+          scales: {
+            x: { ticks: { color: tc.muted, font: { family: "'Inter', sans-serif", size: 11, weight: 'bold' } }, grid: { display: false } },
+            y: {
+              ticks: { color: tc.muted, font: { family: "'Inter', sans-serif", size: 11, weight: '600' }, callback: v => v + 'M' },
+              grid: { color: tc.grid }
+            }
+          }
+        }
+      });
+    }
+
+    const surListEl = document.getElementById('surnames-cards-grid');
+    if (surListEl && D.TOP_SURNAMES) {
+      surListEl.innerHTML = D.TOP_SURNAMES.slice(0, 8).map(s => `
+        <div class="p-3.5 rounded-2xl bg-[#FAF8F5] dark:bg-stone-950 border border-stone-200 dark:border-stone-800">
+          <div class="flex items-center justify-between">
+            <span class="text-sm font-black text-stone-900 dark:text-stone-100">#${s.rank} ${s.surname}</span>
+            <span class="font-mono text-xs font-extrabold text-emerald-700 dark:text-emerald-400">${s.popM}M (${s.pctPop}%)</span>
+          </div>
+          <p class="text-[11px] text-stone-500 dark:text-stone-400 mt-1 leading-snug">${s.origin}</p>
+        </div>
+      `).join('');
+    }
+
+    // 3. Render Baby Names 2024 Grid (Cartórios ARPEN)
+    const babyEl = document.getElementById('baby-names-2024-grid');
+    if (babyEl && D.BABY_NAMES_2024) {
+      babyEl.innerHTML = D.BABY_NAMES_2024.map(b => `
+        <div onclick="window.BR_APP.selectFirstName('${b.name}', '')"
+             class="p-3 rounded-2xl bg-[#FAF8F5] dark:bg-stone-950 border border-stone-200 dark:border-stone-800 hover:border-emerald-500 cursor-pointer transition-all flex items-center justify-between">
+          <div>
+            <span class="text-[10px] font-mono font-bold px-1.5 py-0.5 rounded ${b.gender === 'F' ? 'bg-rose-100 dark:bg-rose-950 text-rose-800 dark:text-rose-300' : 'bg-sky-100 dark:bg-sky-950 text-sky-800 dark:text-sky-300'}">#${b.rank} • ${b.gender === 'F' ? '♀' : '♂'}</span>
+            <div class="text-sm font-black text-stone-900 dark:text-stone-100 mt-1">${b.name}</div>
+          </div>
+          <div class="text-right">
+            <div class="text-xs font-mono font-extrabold text-emerald-700 dark:text-emerald-400">${b.births2024.toLocaleString('pt-BR')}</div>
+            <div class="text-[10px] text-stone-400">nasc. 2024</div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    fetchAndRenderIbgeNames(selectedName1, selectedName2);
+  }
+
+  // ==========================================================================
+  // 7. CORRELATION & OLS REGRESSION LAB (27 UFs)
   // ==========================================================================
   function renderCorrelations() {
     applyChartDefaults();
@@ -724,7 +1405,7 @@
   }
 
   // ==========================================================================
-  // 5. FISCAL DEBT SIMULATOR (DBGG), BUDGET BREAKDOWN & DEMOGRAPHIC PYRAMID
+  // 8. FISCAL DEBT SIMULATOR (DBGG), BUDGET BREAKDOWN & DEMOGRAPHIC PYRAMID
   // ==========================================================================
   function updateSimulator() {
     applyChartDefaults();
@@ -880,7 +1561,7 @@
   }
 
   // ==========================================================================
-  // 6. INCOME DISTRIBUTION & EFFECTIVE TAX BURDEN CALCULATOR
+  // 9. INCOME DISTRIBUTION & EFFECTIVE TAX BURDEN CALCULATOR
   // ==========================================================================
   function updateIncomeCalculator() {
     applyChartDefaults();
@@ -923,7 +1604,6 @@
     const stateAvgHouseholdPerCapita = Math.round((ufObj.gdpPerCapita / 12) * 0.44);
     const ratioState = (income / stateAvgHouseholdPerCapita).toFixed(1);
 
-    // Effective tax burden estimation
     const indPct = matchedBracket.indirectTaxPct || 20.0;
     const dirPct = matchedBracket.directTaxPct || 10.0;
     const totTaxPct = indPct + dirPct;
@@ -970,11 +1650,11 @@
   }
 
   // ==========================================================================
-  // 7. INTERNATIONAL BENCHMARK TABLE
+  // 10. INTERNATIONAL BENCHMARK TABLE & LIVE BCB API CONNECTOR
   // ==========================================================================
   function renderBenchmark() {
     const tbody = document.getElementById('benchmark-table-body');
-    if (!tbody) return;
+    if (!tbody || !D.GLOBAL_BENCHMARKS) return;
     tbody.innerHTML = D.GLOBAL_BENCHMARKS.map(row => `
       <tr class="hover:bg-stone-50 dark:hover:bg-stone-800/60 transition-colors">
         <td class="py-3 px-4 font-bold text-stone-900 dark:text-stone-100">${row.metric[currentLang]}</td>
@@ -989,9 +1669,6 @@
     `).join('');
   }
 
-  // ==========================================================================
-  // 8. LIVE API CONNECTOR (BANCO CENTRAL DO BRASIL SGS LIVE FETCH)
-  // ==========================================================================
   async function fetchLiveBcbSeries(sgsCode) {
     const statusEl = document.getElementById('live-api-status');
     const sObj = (D.LIVE_API_SERIES || []).find(s => s.code === Number(sgsCode)) || D.LIVE_API_SERIES[0];
@@ -1032,13 +1709,13 @@
       }
     } catch (err) {
       if (statusEl) {
-        statusEl.textContent = `⚠️ Modo Offline / Cache Local Ativo (api.bcb.gov.br indisponível ou bloqueada pelo navegador: ${err.message}).`;
+        statusEl.textContent = `⚠️ Modo Offline / Cache Local Ativo (api.bcb.gov.br indisponível: ${err.message}).`;
       }
     }
   }
 
   // ==========================================================================
-  // 9. EXPORT UTILITIES (CSV, JSON, PNG)
+  // 11. EXPORT UTILITIES (CSV, JSON, PNG)
   // ==========================================================================
   function downloadBlob(content, filename, mime) {
     const blob = new Blob([content], { type: mime });
@@ -1078,6 +1755,18 @@
     downloadBlob('\uFEFF' + [cols.join(','), ...rows].join('\n'), 'brasil-em-numeros-atlas-27-ufs.csv', 'text/csv;charset=utf-8;');
   }
 
+  function downloadProfessionsCSV() {
+    const cols = ['name', 'sector', 'median', 'mean', 'p25', 'p90', 'workersK', 'formalPct', 'femalePct', 'edu', 'note'];
+    const rows = (D.PROFESSIONS || []).map(p => cols.map(k => `"${p[k]}"`).join(','));
+    downloadBlob('\uFEFF' + [cols.join(','), ...rows].join('\n'), 'brasil-em-numeros-60-profissoes-salarios.csv', 'text/csv;charset=utf-8;');
+  }
+
+  function downloadCitiesCSV() {
+    const cols = ['city', 'uf', 'region', 'popM', 'lotSizeM2', 'minLotM2', 'aptSizeM2', 'priceM2', 'aptPct', 'housePct', 'favelaPct', 'rentPct', 'vacantPct', 'treesPct', 'rampsPct', 'commuteMin', 'density', 'incomeAvg'];
+    const rows = (D.CITIES_URBAN || []).map(c => cols.map(k => `"${c[k]}"`).join(','));
+    downloadBlob('\uFEFF' + [cols.join(','), ...rows].join('\n'), 'brasil-em-numeros-36-cidades-lotes-imoveis.csv', 'text/csv;charset=utf-8;');
+  }
+
   function downloadAllJSON() {
     const payload = {
       portal: 'Brasil em Números | Brazil by Numbers',
@@ -1085,14 +1774,21 @@
       updated: '2025',
       pillarsCount: D.PILLARS.length,
       seriesCount: D.CHARTS.length,
+      professionsCount: (D.PROFESSIONS || []).length,
+      citiesCount: (D.CITIES_URBAN || []).length,
       pillars: D.PILLARS,
       kpis: D.KPIS,
       series: D.CHARTS,
       states: D.UF_LIST,
+      professions: D.PROFESSIONS,
+      citiesUrban: D.CITIES_URBAN,
+      topFirstNames: D.TOP_FIRST_NAMES,
+      topSurnames: D.TOP_SURNAMES,
+      babyNames2024: D.BABY_NAMES_2024,
       budgetBreakdown: D.BUDGET_BREAKDOWN,
       globalBenchmarks: D.GLOBAL_BENCHMARKS
     };
-    downloadBlob(JSON.stringify(payload, null, 2), 'brasil-em-numeros-dataset-60-series.json', 'application/json;charset=utf-8;');
+    downloadBlob(JSON.stringify(payload, null, 2), 'brasil-em-numeros-dataset-completo-v6.json', 'application/json;charset=utf-8;');
   }
 
   // ==========================================================================
@@ -1127,32 +1823,40 @@
     renderOverview();
     if (!document.getElementById('view-charts').classList.contains('hidden')) renderCharts();
     if (!document.getElementById('view-states').classList.contains('hidden')) renderStates();
+    if (!document.getElementById('view-professions').classList.contains('hidden')) renderProfessions();
+    if (!document.getElementById('view-cities').classList.contains('hidden')) renderCities();
+    if (!document.getElementById('view-names').classList.contains('hidden')) renderNames();
     if (!document.getElementById('view-correlations').classList.contains('hidden')) renderCorrelations();
     if (!document.getElementById('view-simulator').classList.contains('hidden')) updateSimulator();
     if (!document.getElementById('view-income').classList.contains('hidden')) updateIncomeCalculator();
   }
 
   function switchTab(tabId) {
-    const tabs = ['overview', 'charts', 'states', 'correlations', 'simulator', 'income', 'benchmark', 'datahub'];
+    const tabs = ['overview', 'charts', 'states', 'professions', 'cities', 'names', 'correlations', 'simulator', 'income', 'datahub'];
     tabs.forEach(id => {
       const sec = document.getElementById(`view-${id}`);
       if (sec) sec.classList.toggle('hidden', id !== tabId);
       const btn = document.getElementById(`tab-${id}`);
       if (btn) {
         btn.className = id === tabId
-          ? 'min-w-0 overflow-hidden w-full text-center px-2.5 py-2 rounded-xl text-xs sm:text-[13px] font-extrabold bg-emerald-700 text-white shadow-sm transition-all leading-tight flex items-center justify-center'
-          : 'min-w-0 overflow-hidden w-full text-center px-2.5 py-2 rounded-xl text-xs sm:text-[13px] font-bold bg-[#FAF8F5] dark:bg-stone-900/90 text-stone-700 dark:text-stone-300 border border-stone-200/80 dark:border-stone-800 hover:bg-stone-200/70 dark:hover:bg-stone-800 transition-all leading-tight flex items-center justify-center';
+          ? 'min-w-0 overflow-hidden w-full text-center px-2 py-2 rounded-xl text-xs font-extrabold bg-emerald-700 text-white shadow-sm transition-all leading-tight flex items-center justify-center'
+          : 'min-w-0 overflow-hidden w-full text-center px-2 py-2 rounded-xl text-xs font-bold bg-[#FAF8F5] dark:bg-stone-900/90 text-stone-700 dark:text-stone-300 border border-stone-200/80 dark:border-stone-800 hover:bg-stone-200/70 dark:hover:bg-stone-800 transition-all leading-tight flex items-center justify-center';
       }
     });
 
     if (tabId === 'overview') renderOverview();
     if (tabId === 'charts') renderCharts();
     if (tabId === 'states') renderStates();
+    if (tabId === 'professions') renderProfessions();
+    if (tabId === 'cities') renderCities();
+    if (tabId === 'names') renderNames();
     if (tabId === 'correlations') renderCorrelations();
     if (tabId === 'simulator') updateSimulator();
     if (tabId === 'income') updateIncomeCalculator();
-    if (tabId === 'benchmark') renderBenchmark();
-    if (tabId === 'datahub') fetchLiveBcbSeries(432);
+    if (tabId === 'datahub') {
+      renderBenchmark();
+      fetchLiveBcbSeries(432);
+    }
   }
 
   window.BR_APP = {
@@ -1224,9 +1928,13 @@
       renderOverview();
       if (!document.getElementById('view-charts').classList.contains('hidden')) renderCharts();
       if (!document.getElementById('view-states').classList.contains('hidden')) renderStates();
+      if (!document.getElementById('view-professions').classList.contains('hidden')) renderProfessions();
+      if (!document.getElementById('view-cities').classList.contains('hidden')) renderCities();
+      if (!document.getElementById('view-names').classList.contains('hidden')) renderNames();
       if (!document.getElementById('view-correlations').classList.contains('hidden')) renderCorrelations();
-      if (!document.getElementById('view-benchmark').classList.contains('hidden')) renderBenchmark();
+      if (!document.getElementById('view-datahub').classList.contains('hidden')) renderBenchmark();
     },
+    // Map & 27 UFs controllers
     setMapMode(mode) {
       mapMode = mode;
       ['geo', 'grid'].forEach(m => {
@@ -1273,6 +1981,79 @@
       if (sel1) sel1.value = uf;
       renderStates();
     },
+    // Professions controllers (Tab 4)
+    setProfSector(sec) {
+      selectedProfSector = sec;
+      renderProfessions();
+    },
+    handleProfSearch(val) {
+      profSearchTerm = (val || '').toLowerCase().trim();
+      renderProfessions();
+    },
+    sortProfessions(key) {
+      if (profSortKey === key) profSortAsc = !profSortAsc;
+      else { profSortKey = key; profSortAsc = false; }
+      renderProfessions();
+    },
+    updateProfComparison() {
+      const s1 = document.getElementById('prof-comp-1');
+      const s2 = document.getElementById('prof-comp-2');
+      if (s1) compProf1 = s1.value;
+      if (s2) compProf2 = s2.value;
+      renderProfessionComparator();
+    },
+    // Cities & Lot Size controllers (Tab 5)
+    setCityMetric(key) {
+      selectedCityMetric = key;
+      renderCities();
+    },
+    setCityRegionFilter(reg) {
+      selectedCityRegion = reg;
+      ['ALL', 'Norte', 'Nordeste', 'Centro-Oeste', 'Sudeste', 'Sul'].forEach(r => {
+        const b = document.getElementById(`city-reg-btn-${r}`);
+        if (b) {
+          b.className = r === reg
+            ? 'px-3 py-1 rounded-lg text-xs font-bold bg-emerald-700 text-white'
+            : 'px-3 py-1 rounded-lg text-xs font-bold bg-[#FAF8F5] dark:bg-stone-800 text-stone-700 dark:text-stone-300 border border-stone-200 dark:border-stone-700';
+        }
+      });
+      renderCities();
+    },
+    selectCity(name) {
+      inspectedCityName = name;
+      renderCityInspector(name);
+    },
+    updateCityScatterFromUI() {
+      const sx = document.getElementById('city-scatter-x');
+      const sy = document.getElementById('city-scatter-y');
+      if (sx) cityScatterX = sx.value;
+      if (sy) cityScatterY = sy.value;
+      renderCityScatter();
+    },
+    setCityScatterPreset(xKey, yKey) {
+      cityScatterX = xKey;
+      cityScatterY = yKey;
+      const sx = document.getElementById('city-scatter-x');
+      const sy = document.getElementById('city-scatter-y');
+      if (sx) sx.value = xKey;
+      if (sy) sy.value = yKey;
+      renderCityScatter();
+    },
+    sortCities(key) {
+      if (citySortKey === key) citySortAsc = !citySortAsc;
+      else { citySortKey = key; citySortAsc = false; }
+      renderCities();
+    },
+    // Names & Surnames controllers (Tab 6)
+    searchLiveIbgeNamesFromUI() {
+      const in1 = document.getElementById('ibge-name-input-1');
+      const in2 = document.getElementById('ibge-name-input-2');
+      fetchAndRenderIbgeNames(in1 ? in1.value : 'MARIA', in2 ? in2.value : '');
+    },
+    selectFirstName(n1, n2) {
+      fetchAndRenderIbgeNames(n1, n2 !== undefined ? n2 : selectedName2);
+    },
+    // Correlation Lab controllers (Tab 7)
     updateCorrelationsFromUI() {
       corrX = document.getElementById('corr-select-x').value;
       corrY = document.getElementById('corr-select-y').value;
@@ -1306,6 +2087,8 @@
     downloadChartCSV,
     downloadChartPNG,
     downloadAllStatesCSV,
+    downloadProfessionsCSV,
+    downloadCitiesCSV,
     downloadAllJSON
   };
 

@@ -8,78 +8,84 @@ window.BR_DATA = window.BR_DATA || {};
 window.BR_DATA.UI_TEXT = {
   pt: {
     brandTitle: 'Brasil em Números',
-    editionTag: '12 Pilares • 60 Séries • 27 UFs',
-    brandSub: 'Portal Público de Inteligência Estatística, Mapas e Simulação Estrutural',
-    searchPlaceholder: 'Buscar série, estado ou fonte (ex: Gini, Selic, PIX)...',
+    editionTag: '16 Pilares • 80 Séries • 27 UFs • 60 Profissões • 36 Cidades • Nomes IBGE',
+    brandSub: 'Portal Público de Inteligência Estatística, Mapas, Cidades, Carreiras, Nomes e Simulação Estrutural',
+    searchPlaceholder: 'Buscar entre 80 séries, 60 profissões, 36 cidades, 27 estados ou nomes...',
     ukBtnOn: 'UK / OCDE: Ativo',
     ukBtnOff: 'UK / OCDE: Oculto',
     darkBtnOff: '🌙 Escuro',
     darkBtnOn: '☀️ Claro',
     tabs: {
-      overview: '📊 Visão Geral',
-      charts: '📈 60 Séries',
-      states: '🗺️ Mapa & 27 UFs',
-      correlations: '🔬 Correlações',
-      simulator: '🏛️ Simulador Fiscal',
-      income: '💰 Renda & Impostos',
-      benchmark: '🌐 Brasil vs. Mundo',
-      datahub: '⚡ API & Dados'
+      overview: '📊 1. Visão Geral (16 Pilares)',
+      charts: '📈 2. Explorador (80 Séries)',
+      states: '🗺️ 3. Mapa IBGE & 27 UFs',
+      professions: '💼 4. Profissões & Salários',
+      cities: '🏙️ 5. Cidades, Lotes & Imóveis',
+      names: '🪪 6. Nomes & Sobrenomes',
+      correlations: '🔬 7. Correlações (OLS)',
+      simulator: '🏛️ 8. Simulador & Pirâmide',
+      income: '💰 9. Renda & Impostos',
+      datahub: '🌐 10. Mundo & API BCB'
     },
-    heroBadge: 'Portal Público de Inteligência Estatística • Inspirado em UK by Numbers & Our World in Data',
-    heroTitle: 'As grandes questões estruturais do Brasil em dados públicos, mapas e simuladores interativos.',
-    heroDesc: 'Síntese completa de 60 séries históricas oficiais em 12 pilares temáticos (IBGE, Banco Central, Tesouro Nacional, IPEA, DataSUS, INEP, EPE, SEEG, INPE, FBSP, CNJ, TSE, Anatel, Embratur e MDIC), com Mapa Geográfico das 27 UFs, Laboratório de Regressão OLS, Simulador da Dívida Pública (DBGG), Decomposição do Orçamento, Pirâmide Etária (1980–2060), Calculadora de Renda/Impostos e API do Banco Central ao vivo.',
+    heroBadge: 'Edição Completa • 16 Pilares • 80 Séries • 60 Profissões • 36 Cidades (Lotes/m²) • Censo de Nomes IBGE ao Vivo',
+    heroTitle: 'A enciclopédia estatística e interativa definitiva sobre a realidade brasileira.',
+    heroDesc: 'Explore 80 séries históricas oficiais em 16 pilares estruturais, Mapa Vetorial Oficial do IBGE para as 27 UFs, Explorador de Salários para 60 Profissões (RAIS/CAGED/DIRPF), Atlas Urbano de Tamanho de Lotes, Apartamentos e Preço do m² em 36 Cidades (Censo 2022/FipeZap), Distribuição Histórica de Nomes e Sobrenomes (com busca ao vivo na API do IBGE), Laboratório Econométrico OLS, Simuladores Fiscais/Demográficos e API do Banco Central em tempo real.',
     openPillarCharts: 'Explorar as 5 séries deste pilar →',
-    allPillars: 'Todos os 12 Pilares (60)'
+    allPillars: 'Todos os 16 Pilares (80)'
   },
   es: {
     brandTitle: 'Brasil en Números',
-    editionTag: '12 Pilares • 60 Series • 27 UFs',
-    brandSub: 'Portal Público de Inteligencia Estadística, Mapas y Simulación Estructural',
-    searchPlaceholder: 'Buscar serie, estado o fuente (ej: Gini, Selic, PIX)...',
+    editionTag: '16 Pilares • 80 Series • 27 UFs • 60 Profesiones • 36 Ciudades • Nombres IBGE',
+    brandSub: 'Portal Público de Inteligencia Estadística, Mapas, Ciudades, Profesiones, Nombres y Simulación',
+    searchPlaceholder: 'Buscar entre 80 series, 60 profesiones, 36 ciudades, 27 estados o nombres...',
     ukBtnOn: 'UK / OCDE: Activo',
     ukBtnOff: 'UK / OCDE: Oculto',
     darkBtnOff: '🌙 Oscuro',
     darkBtnOn: '☀️ Claro',
     tabs: {
-      overview: '📊 Visión General',
-      charts: '📈 60 Series',
-      states: '🗺️ Mapa y 27 UFs',
-      correlations: '🔬 Correlaciones',
-      simulator: '🏛️ Simulador Fiscal',
-      income: '💰 Renta e Impuestos',
-      benchmark: '🌐 Brasil vs. Mundo',
-      datahub: '⚡ API y Datos'
+      overview: '📊 1. Visión General',
+      charts: '📈 2. 80 Series',
+      states: '🗺️ 3. Mapa y 27 UFs',
+      professions: '💼 4. Profesiones y Sueldos',
+      cities: '🏙️ 5. Ciudades y Lotes (m²)',
+      names: '🪪 6. Nombres y Apellidos',
+      correlations: '🔬 7. Correlaciones',
+      simulator: '🏛️ 8. Simulador Fiscal',
+      income: '💰 9. Renta e Impuestos',
+      datahub: '🌐 10. Mundo y API BCB'
     },
-    heroBadge: 'Portal Público de Inteligencia Estadística • Inspirado en UK by Numbers y Our World in Data',
-    heroTitle: 'Las grandes cuestiones estructurales de Brasil en datos públicos, mapas y simuladores.',
-    heroDesc: 'Síntesis completa de 60 series históricas oficiales en 12 pilares temáticos (IBGE, Banco Central, Tesoro Nacional, IPEA, DataSUS, INEP, EPE, SEEG, INPE, FBSP, CNJ, TSE, Anatel y MDIC), con Mapa Geográfico de las 27 UFs, Laboratorio de Correlación OLS, Simulador de Deuda Pública (DBGG), Pirámide Demográfica, Calculadora de Ingresos y API del Banco Central en vivo.',
+    heroBadge: 'Edición Completa • 16 Pilares • 80 Series • 60 Profesiones • 36 Ciudades (Lotes/m²) • API Nombres IBGE',
+    heroTitle: 'La enciclopedia estadística e interactiva definitiva sobre la realidad brasileña.',
+    heroDesc: 'Síntesis completa de 80 series históricas en 16 pilares, Mapa Vectorial Oficial del IBGE (27 UFs), Sueldos por Profesión (60 carreras), Tamaño de Lotes Urbanos y m² en 36 Ciudades, Distribución de Nombres y Apellidos en el Censo IBGE en vivo, Laboratorio OLS, Simulador Fiscal y API del Banco Central.',
     openPillarCharts: 'Explorar las 5 series de este pilar →',
-    allPillars: 'Todos los 12 Pilares (60)'
+    allPillars: 'Todos los 16 Pilares (80)'
   },
   en: {
     brandTitle: 'Brazil by Numbers',
-    editionTag: '12 Pillars • 60 Series • 27 States',
-    brandSub: 'Public Statistical Intelligence, Geographic Atlas & Structural Simulation Portal',
-    searchPlaceholder: 'Search series, state, or source (e.g., Gini, Selic, PIX)...',
+    editionTag: '16 Pillars • 80 Series • 27 States • 60 Professions • 36 Cities • IBGE Names',
+    brandSub: 'Public Statistical Intelligence, IBGE Vector Atlas, Cities, Professions, Names & Simulation Portal',
+    searchPlaceholder: 'Search 80 series, 60 professions, 36 cities, 27 states, or names...',
     ukBtnOn: 'UK / OECD: On',
     ukBtnOff: 'UK / OECD: Off',
     darkBtnOff: '🌙 Dark',
     darkBtnOn: '☀️ Light',
     tabs: {
-      overview: '📊 Overview',
-      charts: '📈 60 Series',
-      states: '🗺️ Map & 27 States',
-      correlations: '🔬 Correlations',
-      simulator: '🏛️ Fiscal & Age Sim',
-      income: '💰 Income & Tax',
-      benchmark: '🌐 Global Benchmark',
-      datahub: '⚡ Live API & Data'
+      overview: '📊 1. Overview (16 Pillars)',
+      charts: '📈 2. 80 Series Explorer',
+      states: '🗺️ 3. IBGE Map & 27 States',
+      professions: '💼 4. Incomes by Profession',
+      cities: '🏙️ 5. Cities & Lot Sizes',
+      names: '🪪 6. Names & Surnames',
+      correlations: '🔬 7. OLS Correlations',
+      simulator: '🏛️ 8. Fiscal & Age Sim',
+      income: '💰 9. Income & Tax Calc',
+      datahub: '🌐 10. World & Live API'
     },
-    heroBadge: 'Public Statistical Intelligence Portal • Inspired by UK by Numbers & Our World in Data',
-    heroTitle: 'Every major structural question about Brazil answered through auditable data, maps, and simulators.',
-    heroDesc: 'Comprehensive synthesis of 60 official historical series across 12 thematic pillars (IBGE, Central Bank, National Treasury, IPEA, DataSUS, INEP, EPE, SEEG, INPE, FBSP, CNJ, TSE, Anatel, and MDIC), featuring an interactive 27-State Geographic Choropleth Map, OLS Correlation Lab, Public Debt (DBGG) & Budget Simulator, Demographic Pyramid (1980–2060), Income & Tax Calculator, and Live Central Bank API Connector.',
+    heroBadge: 'Flagship Edition • 16 Pillars • 80 Series • 60 Professions • 36 Cities (Lot Size/m²) • Live IBGE Names API',
+    heroTitle: 'The definitive interactive statistical encyclopedia of Brazil.',
+    heroDesc: 'Explore 80 official historical series across 16 structural pillars, Official IBGE 27-State Vector Map, Income by Profession Explorer (60 careers from RAIS/CAGED/Tax Returns), Urban Lot Sizes, Apartment Sizes & Price/m² across 36 Cities (Census 2022/FipeZap), First Name & Surname Distributions (with live IBGE Census API lookup), OLS Econometric Lab, Fiscal/Demographic Simulators, and Live Central Bank API.',
     openPillarCharts: 'Explore all 5 series in this pillar →',
-    allPillars: 'All 12 Pillars (60)'
+    allPillars: 'All 16 Pillars (80)'
   }
 };
 
@@ -179,6 +185,30 @@ window.BR_DATA.KPIS = [
     label: { pt: 'Superávit Comercial', es: 'Superávit Comercial', en: 'Trade Surplus (FOB)' },
     value: 'US$ 74,6B', sub: { pt: '30,7% das exportações destinadas à China', es: '30,7% de las exportaciones van a China', en: '30.7% of exports destined for China (MDIC)' },
     badge: 'Grãos: 312Mt', badgeColor: 'emerald', spark: [-0.7, 44.9, 20.1, -4.0, 46.6, 61.4, 98.9, 74.6]
+  },
+  {
+    id: 'lot_urban', pillar: 'housing_urban', chartId: 'c-lot-apt-size',
+    label: { pt: 'Lote Urbano & Apto', es: 'Lote Urbano y Apto', en: 'Urban Lot & Apt Size' },
+    value: '225 m²', sub: { pt: 'Lote médio nas capitais (Mín. Lei: 125 m² | Apto: 64 m²)', es: 'Lote medio en capitales (Mín. Ley: 125 m² | Apto: 64 m²)', en: 'Mean capital lot (Legal min: 125 m² | New apt: 64 m²)' },
+    badge: 'Santos: 63,5% Apto', badgeColor: 'teal', spark: [360, 320, 290, 265, 250, 240, 230, 225]
+  },
+  {
+    id: 'prof_wage', pillar: 'professions_work', chartId: 'c-top-professions',
+    label: { pt: 'Salário Médio Habitual', es: 'Salario Medio Habitual', en: 'Mean Monthly Earnings' },
+    value: 'R$ 3.215', sub: { pt: 'Mediana: R$ 2.150 (Cartório R$ 105k | Médico R$ 28,5k)', es: 'Mediana: R$ 2.150 (Notario R$ 105k | Médico R$ 28,5k)', en: 'Median: R$ 2,150 (Notary R$ 105k | Doctor R$ 28.5k)' },
+    badge: '60 Carreiras', badgeColor: 'indigo', spark: [2680, 2810, 2750, 2890, 2940, 2780, 3050, 3215]
+  },
+  {
+    id: 'names_top', pillar: 'names_identity', chartId: 'c-top-names',
+    label: { pt: 'Nome & Sobrenome #1', es: 'Nombre y Apellido #1', en: '#1 Name & Surname' },
+    value: 'Maria / Silva', sub: { pt: '11,7M Marias (5,8%) e 34,0M Silvas (16,7% da pop.)', es: '11,7M Marias (5,8%) y 34,0M Silvas (16,7% pob.)', en: '11.7M Marias (5.8%) & 34.0M Silvas (16.7% of pop.)' },
+    badge: '2024: Helena/Miguel', badgeColor: 'amber', spark: [336, 749, 1487, 2476, 2495, 1616, 918, 1111]
+  },
+  {
+    id: 'mei_boom', pillar: 'professions_work', chartId: 'c-mei-clt',
+    label: { pt: 'Microempreendedores', es: 'Microemprendedores', en: 'Registered MEIs' },
+    value: '15,8M MEIs', sub: { pt: 'Salto de +295% em 10 anos (vs. 47,2M vínculos CLT)', es: 'Salto de +295% en 10 años (vs. 47,2M empleos CLT)', en: 'Up +295% in 10 years (alongside 47.2M CLT jobs)' },
+    badge: 'Aluguel: 23% Dom.', badgeColor: 'sky', spark: [1.8, 4.0, 6.6, 9.4, 11.3, 13.8, 15.1, 15.8]
   }
 ];
 
@@ -250,10 +280,34 @@ window.BR_DATA.PILLARS = [
     desc: { pt: 'Escalada das emendas parlamentares (R$ 53 bi/ano), fragmentação partidária (NEP), sub-representação feminina na Câmara (17,7%), percepção de corrupção/governança e dependência fiscal de 5.570 municípios.', es: 'Escalada de enmiendas parlamentarias (R$ 53 mil millones), fragmentación partidaria y dependencia fiscal municipal.', en: 'Surge of congressional budget amendments (R$ 53B/yr), party fragmentation, women in parliament (17.7%), and municipal fiscal dependency.' }
   },
   {
-    id: 'society_culture', num: '12', icon: '🏙️', color: '#0369a1', seriesCount: 5,
+    id: 'society_culture', num: '12', icon: '🎭', color: '#0369a1', seriesCount: 5,
     keyStat: 'Turismo 6,6M • Diáspora 4,6M',
-    title: { pt: 'Cidades, Turismo, Transição Religiosa e Sociedade', es: 'Ciudades, Turismo, Transición Religiosa y Sociedad', en: 'Cities, Tourism, Religious Shift & Digital Society' },
+    title: { pt: 'Turismo, Interiorização, Religião e Sociedade Digital', es: 'Turismo, Interiorización, Religión y Sociedad Digital', en: 'Tourism, Interiorization, Religion & Digital Society' },
     desc: { pt: 'Ascensão das cidades médias do interior vs. metrópoles, paradoxo do turismo internacional estagnado (6,6M visitantes/ano), transição religiosa nos Censos (1970–2022), tempo online (#1 global) e diáspora (4,6M no exterior).', es: 'Ascenso de ciudades medias, paradoja del turismo internacional (6,6M), transición religiosa y diáspora (4,6M).', en: 'Rise of interior agribusiness cities, international tourism stagnation (6.6M visitors/yr), Census religious shift, and 4.6M diaspora.' }
+  },
+  {
+    id: 'housing_urban', num: '13', icon: '🏙️', color: '#0f766e', seriesCount: 5,
+    keyStat: 'Lotes 145–360m² • R$/m² FipeZap',
+    title: { pt: 'Habitação, Tamanho de Lotes, Imóveis e Uso do Solo', es: 'Vivienda, Tamaño de Lotes, Inmuebles y Uso del Suelo', en: 'Housing, Urban Lot Sizes, Real Estate & Land Use' },
+    desc: { pt: 'Redução histórica do tamanho médio dos lotes urbanos (360m² → 165m² nas metrópoles) e dos apartamentos novos, ranking do preço do m² (FipeZap), explosão do aluguel no Censo 2022, MapBiomas (851M ha) e urbanismo das calçadas/árvores.', es: 'Tamaño medio de lotes urbanos y apartamentos, precio del m², auge del alquiler, MapBiomas y urbanismo.', en: 'Historical shrinkage of urban residential lots and new apartments, price/m² rankings, rental boom, MapBiomas land cover, and street quality.' }
+  },
+  {
+    id: 'professions_work', num: '14', icon: '💼', color: '#4338ca', seriesCount: 5,
+    keyStat: '60 Profissões • 15,8M MEIs',
+    title: { pt: 'Profissões, Salários, Carreiras, Escolaridade e MEIs', es: 'Profesiones, Salarios, Carreras, Educación y MEIs', en: 'Professions, Salaries, Careers, Education & MEIs' },
+    desc: { pt: 'Remuneração das 60 principais profissões brasileiras (de Titulares de Cartório e Juízes a Médicos, Engenheiros de IA, Professores e Trabalhadores de App), ocupações que mais empregam, prêmio salarial universitário e boom dos 15,8M de MEIs.', es: 'Remuneración de 60 profesiones en Brasil, ocupaciones más numerosas, premio universitario y auge de los MEIs.', en: 'Earnings across 60 Brazilian professions (from Notaries and Judges to Doctors, Software Engineers, Teachers, and App Workers), and the 15.8M MEI boom.' }
+  },
+  {
+    id: 'names_identity', num: '15', icon: '🪪', color: '#b45309', seriesCount: 5,
+    keyStat: 'Silva 16,7% • Maria 11,7M',
+    title: { pt: 'Nomes, Sobrenomes, Raízes Étnicas e Famílias (IBGE)', es: 'Nombres, Apellidos, Raíces Étnicas y Familias (IBGE)', en: 'First Names, Surnames, Ethnic Roots & Family Structure' },
+    desc: { pt: 'Os nomes próprios mais comuns do Brasil (Maria 11,7M, José 5,7M, Ana 3,1M), distribuição dos sobrenomes (Silva 34M, Santos 21M), revolução dos nomes de bebês nos cartórios (Helena, Miguel, Gael), composição racial e novos arranjos familiares.', es: 'Nombres y apellidos más comunes (Maria, José, Silva, Santos), tendencias en recién nacidos, composición racial y familias.', en: 'Brazil’s most common first names and surnames (Maria, José, Silva, Santos), 2024 baby name shifts (Helena, Miguel, Gael), racial makeup, and household types.' }
+  },
+  {
+    id: 'consumption_life', num: '16', icon: '🛒', color: '#9333ea', seriesCount: 5,
+    keyStat: 'Habitação 36,6% • 92M Pets',
+    title: { pt: 'Consumo das Famílias, Alimentação, Bets, Pets e Esporte', es: 'Consumo Familiar, Alimentación, Apuestas, Mascotas y Deporte', en: 'Household Consumption, Diet, Sports Betting, Pets & Culture' },
+    desc: { pt: 'Como o brasileiro gasta seu dinheiro (POF IBGE), transição alimentar (queda do arroz/feijão vs. ultraprocessados), febre das apostas online ("Bets"), 92 milhões de cães/gatos vs. 40 milhões de crianças e maiores torcidas do país.', es: 'Presupuesto familiar (POF), transición alimentaria, fiebre de apuestas online ("Bets"), 92M de mascotas y deporte.', en: 'Household budget structure (POF), dietary shift (rice/beans vs. ultra-processed foods), online betting surge ("Bets"), 92M pets vs. 40M children, and sports.' }
   }
 ];
 

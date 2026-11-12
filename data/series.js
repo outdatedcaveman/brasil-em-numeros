@@ -1738,10 +1738,578 @@ window.BR_DATA.CHARTS = [
       { label: 'Municípios do Interior (% do PIB Nacional)', data: [63.9, 65.4, 66.2, 67.9, 69.2, 70.8, 71.4], borderColor: '#059669', borderWidth: 3 },
       { label: '27 Capitais Estaduais (% do PIB Nacional)', data: [36.1, 34.6, 33.8, 32.1, 30.8, 29.2, 28.6], borderColor: '#0369a1' }
     ]
+  },
+
+  // ==========================================================================
+  // PILAR 13: HABITAÇÃO, TAMANHO DE LOTES, IMÓVEIS E USO DO SOLO (5 SÉRIES)
+  // ==========================================================================
+  {
+    id: 'c-lot-apt-size',
+    pillar: 'housing_urban',
+    code: '13.1',
+    type: 'line',
+    unit: 'Metros Quadrados (m²)',
+    title: {
+      pt: 'Compressão Imobiliária nas Metrópoles: Tamanho Médio de Lotes Urbanos e Área de Apartamentos Novos (m², 1980–2024)',
+      es: 'Compresión Inmobiliaria: Tamaño Medio de Lotes Urbanos y Área de Apartamentos Nuevos (m², 1980–2024)',
+      en: 'Urban Real Estate Compression: Mean Residential Lot Size & New Apartment Floor Area (m², 1980–2024)'
+    },
+    takeaway: {
+      pt: 'Nos loteamentos urbanos das grandes metrópoles, o lote residencial típico encolheu de 360 m² (12m x 30m nos anos 1970/80) para ~160–225 m² hoje (com o mínimo legal federal da Lei 6.766/79 em 125 m²). Nos lançamentos verticais de São Paulo, a área privativa média caiu de 98 m² para 58 m² com a explosão de studios (<35 m²).',
+      es: 'El lote urbano medio cayó de 360 m² en 1980 a ~225 m² hoy (mínimo legal 125 m²), mientras el área de nuevos apartamentos en SP bajó a 58 m².',
+      en: 'Typical urban residential lots shrank from 360 m² in 1980 to ~225 m² today (125 m² federal legal minimum), while new SP apartments fell from 98 m² to 58 m².'
+    },
+    uk: {
+      pt: 'No Reino Unido (English Housing Survey), a área média de uma moradia é de ~84 m² (casas geminadas/terraced) e ~56 m² para apartamentos (flats).',
+      es: 'En el Reino Unido, la superficie media es de ~84 m² para casas y ~56 m² para apartamentos.',
+      en: 'In the UK (EHS), the average floor area is ~84 m² for houses and ~56 m² for flats.'
+    },
+    source: 'Secovi-SP, CBIC, IBGE (CNEFE / Censo 2022) & Cadastros Municipais de IPTU',
+    labels: ['1980', '1990', '2000', '2010', '2015', '2020', '2024'],
+    datasets: [
+      { label: 'Lote Urbano Residencial Médio nas Capitais (m²)', data: [360, 320, 290, 265, 250, 235, 225], borderColor: '#0f766e', borderWidth: 3 },
+      { label: 'Mínimo Legal Federal — Lei 6.766/79 (125 m²)', data: [125, 125, 125, 125, 125, 125, 125], borderColor: '#94a3b8', borderDash: [5, 5], pointRadius: 0 },
+      { label: 'Área Privativa Média de Apartamento Novo Lançado (m²)', data: [98, 92, 84, 76, 68, 61, 58], borderColor: '#0284c7', borderWidth: 2.5 }
+    ]
+  },
+  {
+    id: 'c-fipezap-m2',
+    pillar: 'housing_urban',
+    code: '13.2',
+    type: 'bar',
+    unit: 'R$ / m²',
+    title: {
+      pt: 'Preço Médio do Metro Quadrado Residencial por Cidade (Índice FipeZap, R$/m², 2024/2025)',
+      es: 'Precio Medio del Metro Cuadrado Residencial por Ciudad (Índice FipeZap, R$/m², 2024/2025)',
+      en: 'Average Residential Real Estate Price per Square Meter by City (FipeZap Index, R$/m²)'
+    },
+    takeaway: {
+      pt: 'Cidades litorâneas de Santa Catarina (Balneário Camboriú a R$ 13.850/m² e Florianópolis a R$ 11.540/m²) e Vitória (R$ 11.620/m²) superaram São Paulo (R$ 11.210/m²) e Rio de Janeiro (R$ 10.280/m²) no valor médio do metro quadrado residencial.',
+      es: 'Balneário Camboriú (R$ 13.850/m²), Vitória y Florianópolis superaron a São Paulo y Río en el precio del m² residencial.',
+      en: 'Santa Catarina coastal cities (Balneário Camboriú at R$ 13,850/m² and Florianópolis) plus Vitória have surpassed São Paulo and Rio in price per m².'
+    },
+    uk: {
+      pt: 'Em Londres, o metro quadrado residencial médio (~£7.400/m² ou ~R$ 54.000/m²) custa quase 5x a média de São Paulo.',
+      es: 'En Londres, el metro cuadrado residencial (~R$ 54.000/m²) cuesta casi 5 veces el promedio de São Paulo.',
+      en: 'In Greater London, average residential prices (~£7,400/m² or ~R$ 54,000/m²) are nearly 5x São Paulo’s average.'
+    },
+    source: 'Índice FipeZap Residencial de Venda (FIPE / DataZAP 2024/2025)',
+    labels: ['Baln. Camboriú', 'Vitória', 'Florianópolis', 'São Paulo', 'Rio de Janeiro', 'Curitiba', 'Brasília', 'Belo Horizonte', 'Recife', 'Salvador'],
+    datasets: [
+      { label: 'Preço Médio de Venda Residencial (R$/m²)', data: [13850, 11620, 11540, 11210, 10280, 10150, 9350, 9120, 7980, 6450], backgroundColor: ['#0f766e', '#0d9488', '#14b8a6', '#0284c7', '#3b82f6', '#6366f1', '#8b5cf6', '#a855f7', '#f59e0b', '#e11d48'] }
+    ]
+  },
+  {
+    id: 'c-housing-tenure',
+    pillar: 'housing_urban',
+    code: '13.3',
+    type: 'line',
+    unit: '% dos Domicílios',
+    title: {
+      pt: 'Transformação na Moradia (Censos IBGE): Queda da Casa Própria Quitada vs. Explosão do Aluguel (1991–2022)',
+      es: 'Transformación Habitacional (Censos IBGE): Caída de Vivienda Propia Pagada vs. Auge del Alquiler (1991–2022)',
+      en: 'Housing Tenure Shift (IBGE Censuses): Falling Outright Ownership vs. Rising Rental Share (1991–2022)'
+    },
+    takeaway: {
+      pt: 'Pela primeira vez em três décadas, a proporção de brasileiros morando de aluguel saltou de 14,3% (2000) e 18,4% (2010) para 23,0% dos domicílios no Censo 2022 (~16,7 milhões de lares), impulsionada por juros imobiliários elevados, custo do solo urbano e famílias menores.',
+      es: 'La proporción de hogares en alquiler saltó del 14,3% en 2000 al 23,0% en el Censo 2022 (~16,7 millones de viviendas).',
+      en: 'Households living in rented homes surged from 14.3% in 2000 to 23.0% in the 2022 Census (~16.7M homes), as high mortgage rates curbed ownership.'
+    },
+    uk: {
+      pt: 'No Reino Unido, 64% dos domicílios são próprios (32% quitados + 32% financiados) e 36% são alugados (privados ou sociais).',
+      es: 'En el Reino Unido, el 64% de los hogares son propietarios y el 36% vive en alquiler.',
+      en: 'In the UK, 64% of households are owner-occupied (32% outright + 32% with a mortgage) and 36% rent.'
+    },
+    source: 'IBGE (Série Histórica dos Censos Demográficos 1991–2022 e PNAD Contínua)',
+    labels: ['1991', '2000', '2010', '2016', '2019', '2022/24'],
+    datasets: [
+      { label: 'Domicílio Próprio (Quitado + Financiado, %)', data: [74.2, 74.8, 73.6, 72.8, 70.9, 68.4], borderColor: '#059669', borderWidth: 3 },
+      { label: 'Domicílio Alugado (%)', data: [15.4, 14.3, 18.4, 18.9, 20.4, 23.0], borderColor: '#e11d48', borderWidth: 3 },
+      { label: 'Domicílio Cedido / Outra Condição (%)', data: [10.4, 10.9, 8.0, 8.3, 8.7, 8.6], borderColor: '#64748b' }
+    ]
+  },
+  {
+    id: 'c-mapbiomas-land',
+    pillar: 'housing_urban',
+    code: '13.4',
+    type: 'bar',
+    unit: '% do Território (851M ha)',
+    title: {
+      pt: 'Como o Território do Brasil é Ocupado? Uso e Cobertura da Terra (MapBiomas Coleção 9 — 851 Milhões de Hectares)',
+      es: '¿Cómo se Ocupa el Territorio de Brasil? Uso y Cobertura del Suelo (MapBiomas — 851 Millones de Hectáreas)',
+      en: 'How Brazil’s Land is Used: National Land Cover Breakdown (MapBiomas Collection 9 — 851 Million Hectares)'
+    },
+    takeaway: {
+      pt: 'De todo o território nacional (851 milhões de hectares), 64,5% permanecem cobertos por vegetação nativa (florestas e campos naturais), 19,3% são pastagens (164M ha, muitas degradadas), 8,6% são lavouras agrícolas (73M ha) e todas as cidades e rodovias ocupam apenas 0,5% do país.',
+      es: 'El 64,5% del territorio brasileño mantiene vegetación nativa, el 19,3% son pasturas, el 8,6% agricultura y solo el 0,5% áreas urbanas.',
+      en: '64.5% of Brazil’s territory retains native vegetation, 19.3% is pastureland (164M ha), 8.6% is cropland (73M ha), and all cities occupy just 0.5%.'
+    },
+    uk: {
+      pt: 'No Reino Unido, 71% do território é ocupado por agricultura/pastagens, ~13% por florestas e ~8% por áreas construídas.',
+      es: 'En el Reino Unido, el 71% del territorio es agrícola/pastura y solo el 13% bosque.',
+      en: 'By contrast, in the UK ~71% of land is agricultural/grassland, ~13% is woodland, and ~8% is built-up.'
+    },
+    source: 'Projeto MapBiomas (Coleção 9 — Mapeamento Anual de Cobertura e Uso da Terra no Brasil)',
+    labels: ['Florestas Nativas', 'Pastagens (Pecuária)', 'Vegetação Nativa Não-Florestal', 'Agricultura / Lavouras', 'Água / Rios / Lagos', 'Cidades, Infra e Mineração'],
+    datasets: [
+      { label: 'Participação no Território Brasileiro (%)', data: [53.2, 19.3, 11.3, 8.6, 2.1, 0.5], backgroundColor: ['#15803d', '#f59e0b', '#65a30d', '#0284c7', '#0ea5e9', '#64748b'] }
+    ]
+  },
+  {
+    id: 'c-urban-entorno',
+    pillar: 'housing_urban',
+    code: '13.5',
+    type: 'bar',
+    unit: '% dos Moradores Urbanos',
+    title: {
+      pt: 'Infraestrutura das Ruas Brasileiras no Censo 2022: Iluminação e Pavimentação vs. Calçadas e Acessibilidade (%)',
+      es: 'Infraestructura de las Calles Brasileñas en el Censo 2022: Pavimentación vs. Aceras y Accesibilidad (%)',
+      en: 'Brazilian Street Infrastructure in the 2022 Census: Lighting & Paving vs. Sidewalk Accessibility (%)'
+    },
+    takeaway: {
+      pt: 'Enquanto 97,5% dos moradores urbanos têm iluminação pública e 88,5% têm rua pavimentada, apenas 66,0% possuem arborização na via, 51,8% têm bueiro/boca de lobo para drenagem pluvial e míseros 18,9% contam com rampa de acessibilidade para cadeirantes na calçada.',
+      es: 'El 97,5% tiene alumbrado y el 88,5% calle pavimentada, pero solo el 51,8% tiene drenaje pluvial y el 18,9% rampa de accesibilidad.',
+      en: 'While 97.5% of urban residents have street lighting and 88.5% have paved roads, only 51.8% have storm drains and just 18.9% have wheelchair-accessible sidewalks.'
+    },
+    uk: {
+      pt: 'A falta de bueiros em 48,2% das ruas urbanas agrava diretamente as inundações e alagamentos nas cidades brasileiras.',
+      es: 'La falta de drenaje pluvial en el 48,2% de las calles agrava las inundaciones urbanas.',
+      en: 'The absence of storm drains on 48.2% of urban streets directly compounds flash-flooding across Brazilian cities.'
+    },
+    source: 'IBGE (Censo Demográfico 2022 — Características Urbanísticas do Entorno dos Domicílios)',
+    labels: ['Iluminação Pública', 'Via Pavimentada', 'Calçada na Frente', 'Arborização na Via', 'Calçada Livre de Obstáculos', 'Bueiro / Drenagem Pluvial', 'Rampa p/ Cadeirante', 'Ciclovia na Rua'],
+    datasets: [
+      { label: 'Moradores Urbanos Atendidos (%)', data: [97.5, 88.5, 84.1, 66.0, 56.4, 51.8, 18.9, 1.9], backgroundColor: ['#10b981', '#0d9488', '#0284c7', '#16a34a', '#6366f1', '#f59e0b', '#e11d48', '#94a3b8'] }
+    ]
+  },
+
+  // ==========================================================================
+  // PILAR 14: PROFISSÕES, SALÁRIOS, CARREIRAS, ESCOLARIDADE E MEIs (5 SÉRIES)
+  // ==========================================================================
+  {
+    id: 'c-top-professions',
+    pillar: 'professions_work',
+    code: '14.1',
+    type: 'bar',
+    unit: 'R$ / Mês (Mediana)',
+    title: {
+      pt: 'As Carreiras Mais Bem Pagas do Brasil vs. Profissões Essenciais (Remuneração Mensal Mediana em R$)',
+      es: 'Las Carreras Mejor Pagadas de Brasil vs. Profesiones Esenciales (Ingreso Mensual Mediano en R$)',
+      en: 'Brazil’s Highest-Paid Careers vs. Essential Professions (Median Monthly Earnings in R$)'
+    },
+    takeaway: {
+      pt: 'Os dados da Receita Federal (DIRPF) e da RAIS revelam que as maiores rendas médias/medianas do país concentram-se em concessões cartoriais (R$ 88,5k mediana / R$ 105k média), cúpula do Judiciário/MP (R$ 41,8k) e Medicina Especializada (R$ 28,5k) — até 20x o piso de professores e enfermeiros.',
+      es: 'Los mayores ingresos se concentran en titulares de notarías (R$ 88,5k), jueces/fiscales (R$ 41,8k) y médicos especialistas (R$ 28,5k).',
+      en: 'Tax return (DIRPF) and RAIS records show top earnings concentrated among Notary Publics (R$ 88.5k median), Judges (R$ 41.8k), and Specialist Physicians (R$ 28.5k).'
+    },
+    uk: {
+      pt: 'Na aba "4. Profissões & Salários" deste portal, você pode filtrar e comparar interativamente 60 carreiras brasileiras com P25, Mediana e P90.',
+      es: 'En la pestaña "4. Profesiones y Sueldos" puede explorar interactivamente 60 carreras brasileñas.',
+      en: 'In Tab "4. Incomes by Profession", you can interactively search and compare 60 Brazilian careers with P25, Median, and P90 bands.'
+    },
+    source: 'Receita Federal (Grandes Números DIRPF), MTE (RAIS/CAGED) & IBGE (PNAD Contínua)',
+    labels: ['Titular de Cartório', 'Juiz / Promotor', 'Diretor Executivo', 'Médico Especialista', 'Auditor Fiscal', 'Eng. Software Sênior', 'Engenheiro Civil', 'Enfermeiro', 'Professor Ed. Básica', 'Vendedor Comércio'],
+    datasets: [
+      { label: 'Remuneração Mensal Mediana (R$)', data: [88500, 41800, 32000, 28500, 27900, 16800, 9800, 4950, 4580, 2120], backgroundColor: ['#be123c', '#e11d48', '#4338ca', '#6366f1', '#0284c7', '#0ea5e9', '#10b981', '#14b8a6', '#f59e0b', '#94a3b8'] }
+    ]
+  },
+  {
+    id: 'c-largest-jobs',
+    pillar: 'professions_work',
+    code: '14.2',
+    type: 'bar',
+    unit: 'Milhões de Trabalhadores',
+    title: {
+      pt: 'As 10 Ocupações que Mais Empregam no Brasil (Volume de Trabalhadores em Milhões — PNAD / RAIS)',
+      es: 'Las 10 Ocupaciones con Más Trabajadores en Brasil (Millones de Ocupados — PNAD / RAIS)',
+      en: 'Brazil’s 10 Largest Occupations by Workforce Size (Millions of Employed Workers — PNAD / RAIS)'
+    },
+    takeaway: {
+      pt: 'As 10 maiores ocupações do Brasil somam mais de 38 milhões de pessoas (~37% de toda a força de trabalho) e concentram-se em serviços presenciais, agricultura, comércio varejista, construção civil, trabalho doméstico e transporte — quase todas com salário mediano entre R$ 1.480 e R$ 3.100/mês.',
+      es: 'Las 10 mayores ocupaciones suman 38 millones de trabajadores, casi todas con salarios medianos entre R$ 1.480 y R$ 3.100/mes.',
+      en: 'Brazil’s 10 largest occupations employ over 38 million people (~37% of the workforce), predominantly earning between R$ 1,480 and R$ 3,100/month.'
+    },
+    uk: {
+      pt: 'O Brasil possui 5,8 milhões de trabalhadoras domésticas (maior contingente do mundo ocidental, sendo 75% diaristas sem carteira).',
+      es: 'Brasil cuenta con 5,8 millones de trabajadoras domésticas, el mayor contingente del mundo occidental.',
+      en: 'Brazil has 5.8 million domestic workers — the largest domestic workforce in the Western world (75% informal day workers).'
+    },
+    source: 'IBGE (PNAD Contínua Anual por Grupamentos Ocupacionais CBO) & MTE (RAIS)',
+    labels: ['Trab. Agropecuário', 'Trab. Doméstica', 'Vendedor de Loja', 'Aux. Escritório/Adm.', 'Operário Industrial', 'Cozinheiro / Garçom', 'Servidor Municipal', 'Pedreiro / Construção', 'Auxiliar de Limpeza', 'Prof. Educação Básica'],
+    datasets: [
+      { label: 'Trabalhadores Ocupados no Brasil (Milhões)', data: [7.80, 5.80, 5.20, 3.85, 3.60, 3.40, 3.42, 2.95, 2.65, 2.35], backgroundColor: ['#10b981', '#e11d48', '#0ea5e9', '#6366f1', '#8b5cf6', '#f59e0b', '#0284c7', '#d97706', '#14b8a6', '#4338ca'] }
+    ]
+  },
+  {
+    id: 'c-edu-wage-premium',
+    pillar: 'professions_work',
+    code: '14.3',
+    type: 'bar',
+    unit: 'R$ / Mês (Rendimento Médio)',
+    title: {
+      pt: 'O Prêmio do Diploma no Brasil: Rendimento Médio Mensal por Nível de Escolaridade (R$, PNAD 2024)',
+      es: 'El Premio al Diploma en Brasil: Ingreso Mensual Promedio por Nivel Educativo (R$, PNAD 2024)',
+      en: 'The Higher Education Wage Premium in Brazil: Mean Monthly Earnings by Education Level (R$, PNAD 2024)'
+    },
+    takeaway: {
+      pt: 'Um profissional com pós-graduação (mestrado/doutorado/especialização, R$ 11.420) ou ensino superior completo (R$ 7.180) ganha no Brasil 2,8x a 4,4x mais que quem possui apenas o Ensino Médio (R$ 2.580) — o maior prêmio relativo de diploma universitário entre os países pesquisados pela OCDE.',
+      es: 'Un graduado universitario en Brasil gana 2,8 veces más que quien solo tiene secundaria (el mayor premio relativo en la OCDE).',
+      en: 'A Brazilian worker with a bachelor’s degree (R$ 7,180) earns 2.8x more than a high-school graduate (R$ 2,580) — the highest relative college premium in the OECD.'
+    },
+    uk: {
+      pt: 'Na média da OCDE e no Reino Unido, o prêmio salarial de um diploma universitário frente ao Ensino Médio é de +44% a +54% (vs. +178% no Brasil).',
+      es: 'En el Reino Unido y la OCDE, el premio salarial universitario frente a secundaria es de +44% a +54% (vs. +178% en Brasil).',
+      en: 'Across the UK and OECD, the average earnings premium for tertiary education over upper-secondary is +44% to +54% (vs. +178% in Brazil).'
+    },
+    source: 'IBGE (PNAD Contínua Educação e Rendimento 2024) & OCDE Education at a Glance',
+    labels: ['Pós-Graduação (Mestr./Dout./Esp.)', 'Superior Completo', 'Superior Incompleto / Técnico', 'Ensino Médio Completo', 'Fundamental Completo', 'Sem Instrução / Fund. Incomp.'],
+    datasets: [
+      { label: 'Rendimento Médio Habitual Mensal (R$)', data: [11420, 7180, 3490, 2580, 1940, 1410], backgroundColor: ['#4338ca', '#6366f1', '#0ea5e9', '#10b981', '#f59e0b', '#e11d48'] }
+    ]
+  },
+  {
+    id: 'c-mei-clt',
+    pillar: 'professions_work',
+    code: '14.4',
+    type: 'line',
+    unit: 'Milhões de Registros',
+    title: {
+      pt: 'A Revolução do Trabalho Autônomo: Explosão dos MEIs (15,8M) vs. Emprego Formal CLT (2010–2024)',
+      es: 'La Revolución del Trabajo Autónomo: Explosión de los MEIs (15,8M) vs. Empleo Formal CLT (2010–2024)',
+      en: 'Self-Employment Shift: Explosion of Micro-Entrepreneurs (15.8M MEIs) vs. Formal CLT Jobs (2010–2024)'
+    },
+    takeaway: {
+      pt: 'Criado em 2009 para formalizar autônomos com alíquota simplificada de 5% do salário mínimo, o registro de Microempreendedor Individual (MEI) saltou de 0,8 milhão (2010) para 15,8 milhões em 2024, enquanto o estoque de carteiras assinadas CLT subiu de 44,1M para 47,2M.',
+      es: 'Los registros de Microemprendedor Individual (MEI) saltaron de 0,8 millones en 2010 a 15,8 millones en 2024.',
+      en: 'Registered Individual Micro-Entrepreneurs (MEIs) surged from 0.8M in 2010 to 15.8M in 2024, reshaping Brazil’s labor formalization.'
+    },
+    uk: {
+      pt: 'No Reino Unido, os trabalhadores autônomos (self-employed / sole traders) somam 4,25 milhões (~13% dos ocupados).',
+      es: 'En el Reino Unido, los trabajadores autónomos (self-employed) suman 4,25 millones (~13% de los ocupados).',
+      en: 'In the UK, self-employed sole traders number 4.25 million (~13% of the employed workforce).'
+    },
+    source: 'Receita Federal (Estatísticas do Simples Nacional / MEI) & MTE (Novo CAGED / RAIS)',
+    labels: ['2010', '2012', '2014', '2016', '2018', '2020', '2022', '2024'],
+    datasets: [
+      { label: 'Vínculos Formais CLT Privados (Milhões)', data: [44.1, 47.5, 49.6, 46.1, 46.6, 46.2, 42.8, 47.2], borderColor: '#0284c7', borderWidth: 3 },
+      { label: 'Microempreendedores Individuais — MEIs Ativos (Milhões)', data: [0.8, 2.6, 4.6, 6.6, 7.8, 11.3, 14.8, 15.8], borderColor: '#f59e0b', borderWidth: 3 }
+    ]
+  },
+  {
+    id: 'c-work-hours-scale',
+    pillar: 'professions_work',
+    code: '14.5',
+    type: 'bar',
+    unit: 'Horas Semanais / % Ocupados',
+    title: {
+      pt: 'Jornada de Trabalho e Produtividade: Horas Trabalhadas por Semana e Debate da Escala 6x1 (Brasil vs. OCDE)',
+      es: 'Jornada Laboral y Productividad: Horas Trabajadas por Semana en Brasil vs. OCDE',
+      en: 'Weekly Working Hours & The 6x1 Workweek Debate: Brazil vs. European & OECD Peers'
+    },
+    takeaway: {
+      pt: 'O limite constitucional brasileiro de 44 horas semanais (frequentemente operado na escala 6 dias de trabalho por 1 de descanso no comércio e serviços) supera a jornada legal do Reino Unido/França (35h–37,5h) e do Chile (que aprovou redução gradual de 45h para 40h semanais).',
+      es: 'La jornada constitucional de 44 horas semanales en Brasil supera a Francia (35h), Reino Unido (37,5h) y Chile (40h).',
+      en: 'Brazil’s 44-hour constitutional workweek (often run on a 6-days-on, 1-day-off schedule in retail) exceeds peers like the UK (36.4h), France (35h), and Chile (40h).'
+    },
+    uk: {
+      pt: 'Média efetiva de horas trabalhadas por semana em tempo integral: Brasil 41,8h vs. Reino Unido 36,4h e Alemanha 34,2h.',
+      es: 'Promedio efectivo semanal: Brasil 41,8h vs. Reino Unido 36,4h y Alemania 34,2h.',
+      en: 'Effective weekly hours worked: Brazil 41.8h (44h statutory cap) vs. UK 36.4h and Germany 34.2h.'
+    },
+    source: 'OIT (ILOSTAT), OCDE Employment Outlook & IBGE (PNAD Contínua)',
+    labels: ['Colômbia', 'México', 'Brasil (Teto Legal 44h)', 'Chile (Transição p/ 40h)', 'Estados Unidos', 'Média OCDE', 'Reino Unido', 'Alemanha'],
+    datasets: [
+      { label: 'Jornada Semanal Média Efetiva / Teto Padrão (Horas)', data: [46.0, 45.2, 44.0, 40.0, 38.7, 37.5, 36.4, 34.2], backgroundColor: ['#e11d48', '#f59e0b', '#4338ca', '#0ea5e9', '#6366f1', '#94a3b8', '#10b981', '#14b8a6'] }
+    ]
+  },
+
+  // ==========================================================================
+  // PILAR 15: NOMES, SOBRENOMES, RAÍZES ÉTNICAS E FAMÍLIAS (5 SÉRIES)
+  // ==========================================================================
+  {
+    id: 'c-top-names',
+    pillar: 'names_identity',
+    code: '15.1',
+    type: 'bar',
+    unit: 'Milhões de Brasileiros',
+    title: {
+      pt: 'Os 12 Nomes Próprios Mais Comuns do Brasil (Censo Demográfico IBGE — Milhões de Portadores)',
+      es: 'Los 12 Nombres de Pila Más Comunes de Brasil (Censo Demográfico IBGE — Millones de Personas)',
+      en: 'Brazil’s 12 Most Common First Names (IBGE Demographic Census — Millions of Bearers)'
+    },
+    takeaway: {
+      pt: 'Maria (11,73 milhões — 5,8% de toda a população brasileira) e José (5,75 milhões — 2,8%) lideram com folga histórica o Censo de Nomes do IBGE, seguidos por Ana (3,09M), João (2,98M) e Antonio (2,58M). Somados, os 10 primeiros nomes batizam 32,5 milhões de brasileiros.',
+      es: 'Maria (11,73 millones) y José (5,75 millones) lideran el Censo de Nombres del IBGE; los 10 primeros suman 32,5 millones de personas.',
+      en: 'Maria (11.73M — 5.8% of all Brazilians) and José (5.75M — 2.8%) lead IBGE’s Census of Names, followed by Ana (3.09M), João (2.98M), and Antonio (2.58M).'
+    },
+    uk: {
+      pt: 'Na aba "6. Nomes & Sobrenomes", você pode pesquisar qualquer nome ao vivo na API do IBGE para ver sua curva de nascimento desde 1930.',
+      es: 'En la pestaña "6. Nombres y Apellidos" puede buscar cualquier nombre en vivo en la API del IBGE.',
+      en: 'In Tab "6. Names & Surnames", you can query any name live via IBGE’s API to plot its birth curve since 1930.'
+    },
+    source: 'IBGE (Projeto Nomes no Brasil — Censo Demográfico / API v2)',
+    labels: ['Maria', 'José', 'Ana', 'João', 'Antonio', 'Francisco', 'Carlos', 'Paulo', 'Pedro', 'Lucas', 'Luiz', 'Marcos'],
+    datasets: [
+      { label: 'Total de Brasileiros com o Nome (Milhões)', data: [11.73, 5.75, 3.09, 2.98, 2.58, 1.77, 1.49, 1.42, 1.22, 1.13, 1.11, 1.11], backgroundColor: ['#e11d48', '#0284c7', '#db2777', '#2563eb', '#4f46e5', '#059669', '#0d9488', '#d97706', '#7c3aed', '#0ea5e9', '#6366f1', '#64748b'] }
+    ]
+  },
+  {
+    id: 'c-top-surnames',
+    pillar: 'names_identity',
+    code: '15.2',
+    type: 'bar',
+    unit: 'Milhões de Portadores',
+    title: {
+      pt: 'Os 12 Sobrenomes Mais Frequentes do Brasil (Silva, Santos, Oliveira, Souza — Milhões de Pessoas)',
+      es: 'Los 12 Apellidos Más Frecuentes de Brasil (Silva, Santos, Oliveira, Souza — Millones de Personas)',
+      en: 'Brazil’s 12 Most Common Surnames (Silva, Santos, Oliveira, Souza — Millions of Bearers)'
+    },
+    takeaway: {
+      pt: 'Apenas quatro sobrenomes de matriz luso-brasileira — Silva (~34,0 milhões, 16,7% da população), Santos (~21,3M, 10,5%), Oliveira (~11,7M, 5,8%) e Souza/Sousa (~9,2M, 4,5%) — estão presentes nos documentos de mais de um terço dos brasileiros.',
+      es: 'Cuatro apellidos (Silva con 34M, Santos con 21,3M, Oliveira con 11,7M y Souza con 9,2M) están presentes en más de un tercio de la población.',
+      en: 'Just four Luso-Brazilian surnames — Silva (~34.0M, 16.7% of the population), Santos (~21.3M), Oliveira (~11.7M), and Souza (~9.2M) — cover over a third of Brazil.'
+    },
+    uk: {
+      pt: 'No Reino Unido, o sobrenome líder (Smith) é portado por apenas ~1,2% da população (vs. 16,7% de Silva no Brasil).',
+      es: 'En el Reino Unido, el apellido más común (Smith) lo lleva solo el ~1,2% de la población (vs. 16,7% de Silva en Brasil).',
+      en: 'In the UK, the #1 surname (Smith) is held by ~1.2% of the population, compared with 16.7% for Silva in Brazil.'
+    },
+    source: 'IBGE, ARPEN Brasil (Registro Civil) & Forebears / IPEA',
+    labels: ['Silva', 'Santos', 'Oliveira', 'Souza / Sousa', 'Rodrigues', 'Ferreira', 'Alves', 'Pereira', 'Lima', 'Gomes', 'Costa', 'Ribeiro'],
+    datasets: [
+      { label: 'Brasileiros com o Sobrenome (Milhões)', data: [34.0, 21.3, 11.7, 9.2, 8.4, 6.2, 5.8, 5.6, 5.3, 4.1, 3.7, 3.1], backgroundColor: ['#b45309', '#d97706', '#f59e0b', '#10b981', '#0d9488', '#0284c7', '#6366f1', '#8b5cf6', '#e11d48', '#db2777', '#64748b', '#94a3b8'] }
+    ]
+  },
+  {
+    id: 'c-baby-names-shift',
+    pillar: 'names_identity',
+    code: '15.3',
+    type: 'bar',
+    unit: 'Mil Registros em Cartório / Ano',
+    title: {
+      pt: 'A Nova Geração nos Cartórios: Os 12 Nomes de Bebês Mais Registrados no Brasil em 2023/2024 (ARPEN)',
+      es: 'La Nueva Generación: Los 12 Nombres de Bebés Más Registrados en Brasil en 2023/2024 (ARPEN)',
+      en: 'The New Generation: Top 12 Baby Names Registered in Brazilian Civil Offices in 2023/2024 (ARPEN)'
+    },
+    takeaway: {
+      pt: 'Nos cartórios de registro civil (ARPEN 2024), os nomes curtos e sonoros dominaram os nascimentos: Helena (23,9 mil bebês/ano) ultrapassou Miguel (23,2 mil) no 1º lugar geral, seguida por Gael (20,6 mil), Theo (19,5 mil), Arthur, Heitor, Maria Alice, Alice, Davi, Laura, Cecília e Maitê.',
+      es: 'En los registros civiles de 2024 (ARPEN), Helena (23,9 mil) superó a Miguel (23,2 mil), seguida por Gael, Theo, Arthur y Heitor.',
+      en: 'In 2024 civil birth registries (ARPEN), Helena (23.9k births) overtook Miguel (23.2k) for #1 overall, followed by short names Gael, Theo, Arthur, Heitor, and Maria Alice.'
+    },
+    uk: {
+      pt: 'No Reino Unido (ONS), Noah, Muhammad e Oliver lideram entre meninos, e Olivia, Amelia e Isla entre meninas — compartilhando a tendência global de nomes curtos.',
+      es: 'En el Reino Unido (ONS), Noah, Oliver, Olivia y Amelia lideran los registros de recién nacidos.',
+      en: 'In the UK (ONS), Noah, Muhammad, Oliver, Olivia, and Amelia top birth registrations, sharing the global preference for short vowel-rich names.'
+    },
+    source: 'ARPEN Brasil (Portal da Transparência do Registro Civil — Nascimentos 2023/2024)',
+    labels: ['Helena', 'Miguel', 'Gael', 'Theo', 'Arthur', 'Heitor', 'Maria Alice', 'Alice', 'Davi', 'Laura', 'Cecília', 'Maitê'],
+    datasets: [
+      { label: 'Recém-Nascidos Registrados por Ano (Mil)', data: [23.92, 23.18, 20.64, 19.45, 18.12, 17.89, 17.42, 16.25, 15.98, 15.12, 14.68, 13.95], backgroundColor: ['#e11d48', '#0284c7', '#0ea5e9', '#6366f1', '#4f46e5', '#10b981', '#db2777', '#ec4899', '#0d9488', '#f43f5e', '#f59e0b', '#a855f7'] }
+    ]
+  },
+  {
+    id: 'c-race-census',
+    pillar: 'names_identity',
+    code: '15.4',
+    type: 'line',
+    unit: '% da População',
+    title: {
+      pt: 'Retrato Étnico-Racial do Brasil nos Censos do IBGE: Pardos Tornam-se o Maior Grupo (1991–2022, %)',
+      es: 'Retrato Étnico-Racial de Brasil en los Censos del IBGE: Pardos Pasan a Ser Mayoría Relativa (1991–2022, %)',
+      en: 'Racial & Ethnic Composition Across IBGE Censuses: Brown/Mixed-Race (Pardos) Become Plurality (1991–2022, %)'
+    },
+    takeaway: {
+      pt: 'Pela primeira vez desde o Censo de 1991, a população que se autodeclara parda (45,3% — 92,1 milhões) superou a branca (43,5% — 88,2 milhões) no Censo 2022, enquanto a população autodeclarada preta dobrou de 5,0% para 10,2% (20,6 milhões) e a indígena chegou a 1,69 milhão (0,83%).',
+      es: 'Por primera vez en el Censo 2022, la población parda (45,3%) superó a la blanca (43,5%), mientras la población negra subió al 10,2%.',
+      en: 'In the 2022 Census, self-declared Pardo (mixed-race, 45.3%) surpassed White (43.5%) for the first time, while Black doubled since 1991 to 10.2%.'
+    },
+    uk: {
+      pt: 'No Censo 2021 da Inglaterra e País de Gales (ONS), 81,7% declararam-se brancos, 9,3% asiáticos, 4,0% negros e 2,9% mestiços (mixed).',
+      es: 'En el Censo 2021 de Inglaterra y Gales, el 81,7% se declaró blanco, el 9,3% asiático y el 4,0% negro.',
+      en: 'In the 2021 England & Wales Census (ONS), 81.7% identified as White, 9.3% Asian, 4.0% Black, and 2.9% Mixed.'
+    },
+    source: 'IBGE (Censos Demográficos 1991, 2000, 2010 e 2022 — Identificação Étnico-Racial)',
+    labels: ['1991', '2000', '2010', '2022'],
+    datasets: [
+      { label: 'Parda (%)', data: [42.5, 38.5, 43.1, 45.3], borderColor: '#d97706', borderWidth: 3 },
+      { label: 'Branca (%)', data: [51.6, 53.7, 47.7, 43.5], borderColor: '#0284c7', borderWidth: 3 },
+      { label: 'Preta (%)', data: [5.0, 6.2, 7.6, 10.2], borderColor: '#e11d48', borderWidth: 3 },
+      { label: 'Indígena + Amarela (%)', data: [0.6, 0.9, 1.5, 1.2], borderColor: '#10b981' }
+    ]
+  },
+  {
+    id: 'c-single-households',
+    pillar: 'names_identity',
+    code: '15.5',
+    type: 'line',
+    unit: '% dos Domicílios / Pessoas por Lar',
+    title: {
+      pt: 'Revolução nas Famílias: Explosão de Pessoas Morando Sozinhas (18,9%) e Encolhimento dos Lares (1991–2022)',
+      es: 'Revolución Familiar: Explosión de Hogares Unipersonales (18,9%) y Reducción del Tamaño Familiar (1991–2022)',
+      en: 'Household Transformation: Surge of Solo Living (18.9% Single-Person Homes) & Shrinking Household Size (1991–2022)'
+    },
+    takeaway: {
+      pt: 'No Censo 2022, o número médio de moradores por domicílio caiu para 2,79 pessoas (contra 4,18 em 1991), enquanto os domicílios unipessoais (pessoas morando sozinhas) triplicaram para 18,9% do total (~13,7 milhões de brasileiros morando sós) e mulheres já chefiam 50,8% dos lares.',
+      es: 'El promedio de habitantes por hogar cayó a 2,79 en el Censo 2022 y los hogares de una sola persona subieron al 18,9% (~13,7 millones).',
+      en: 'Average household size fell to 2.79 persons in the 2022 Census as single-person households tripled since 1991 to 18.9% (~13.7M people living alone).'
+    },
+    uk: {
+      pt: 'No Reino Unido (ONS), 30,1% dos domicílios são unipessoais e a média é de 2,36 moradores por lar.',
+      es: 'En el Reino Unido, el 30,1% de los hogares son unipersonales (2,36 personas por hogar).',
+      en: 'In the UK (ONS), 30.1% of households are single-person and average household size is 2.36.'
+    },
+    source: 'IBGE (Censo Demográfico 2022 — Composição Domiciliar e Registro Civil)',
+    labels: ['1991', '2000', '2010', '2016', '2022'],
+    datasets: [
+      { label: 'Domicílios Unipessoais — Morando Sozinho (%)', data: [6.5, 8.6, 12.1, 14.4, 18.9], borderColor: '#b45309', borderWidth: 3 },
+      { label: 'Média de Moradores por Domicílio (Pessoas)', data: [4.18, 3.79, 3.31, 3.01, 2.79], borderColor: '#0284c7', borderWidth: 3 }
+    ]
+  },
+
+  // ==========================================================================
+  // PILAR 16: CONSUMO DAS FAMÍLIAS, ALIMENTAÇÃO, BETS, PETS E ESPORTE (5 SÉRIES)
+  // ==========================================================================
+  {
+    id: 'c-household-budget-pof',
+    pillar: 'consumption_life',
+    code: '16.1',
+    type: 'bar',
+    unit: '% da Despesa de Consumo',
+    title: {
+      pt: 'Para Onde Vai o Dinheiro das Famílias Brasileiras? Estrutura de Despesas na POF IBGE (%)',
+      es: '¿A Dónde Va el Dinero de los Hogares Brasileños? Estructura del Gasto Familiar (POF IBGE, %)',
+      en: 'How Brazilian Households Spend Their Money: Consumption Budget Shares (IBGE POF Survey, %)'
+    },
+    takeaway: {
+      pt: 'Segundo a Pesquisa de Orçamentos Familiares (POF/IBGE), três despesas básicas absorvem 72,2% de todo o consumo das famílias brasileiras: Habitação/Contas (36,6%), Transporte (18,1%) e Alimentação (17,5%). Entre os 10% mais pobres, habitação e comida consomem sozinhas 61,2% da renda.',
+      es: 'Vivienda (36,6%), Transporte (18,1%) y Alimentación (17,5%) absorben el 72,2% del presupuesto de consumo familiar en Brasil.',
+      en: 'Housing & utilities (36.6%), Transport (18.1%), and Food (17.5%) absorb 72.2% of Brazilian household consumption (and 61.2% on housing+food alone for the poorest).'
+    },
+    uk: {
+      pt: 'No Reino Unido (ONS Family Spending), Alimentação consome apenas 11,8% do orçamento familiar e Recreação/Cultura chega a 13,4% (vs. 2,6% no Brasil).',
+      es: 'En el Reino Unido, la alimentación absorbe solo el 11,8% del presupuesto familiar y recreación/cultura el 13,4%.',
+      en: 'In the UK (ONS), food accounts for just 11.8% of household budgets while recreation & culture reaches 13.4% (vs. 2.6% in Brazil).'
+    },
+    source: 'IBGE (Pesquisa de Orçamentos Familiares - POF)',
+    labels: ['Habitação, Água e Energia', 'Transporte e Combustível', 'Alimentação (Casa + Fora)', 'Saúde e Farmácia', 'Educação e Vestuário', 'Higiene e Serviços Pessoais', 'Recreação e Cultura'],
+    datasets: [
+      { label: 'Média das Famílias Brasileiras (%)', data: [36.6, 18.1, 17.5, 8.0, 8.9, 6.2, 2.6], backgroundColor: '#9333ea' },
+      { label: 'Famílias de Baixa Renda (Até 2 Sal. Mín., %)', data: [39.2, 9.4, 22.0, 6.2, 5.8, 6.8, 1.4], backgroundColor: '#f59e0b' }
+    ]
+  },
+  {
+    id: 'c-diet-shift',
+    pillar: 'consumption_life',
+    code: '16.2',
+    type: 'line',
+    unit: 'Índice (1987=100) / % Calorias',
+    title: {
+      pt: 'Transição no Prato do Brasileiro: Queda do Arroz e Feijão (-48%) vs. Explosão de Ultraprocessados (+210%)',
+      es: 'Transición Alimentaria: Caída de Arroz y Frijoles (-48%) vs. Explosión de Ultraprocesados (+210%)',
+      en: 'Dietary Transition: Decline of Traditional Rice & Beans (-48%) vs. Ultra-Processed Food Surge (+210%)'
+    },
+    takeaway: {
+      pt: 'Em três décadas, a compra domiciliar per capita de arroz (-46%) e feijão (-52%) caiu à metade nas regiões metropolitanas, enquanto alimentos ultraprocessados (biscoitos, refrigerantes, refeições prontas e embutidos) mais que triplicaram (+210%), explicando a escalada da obesidade adulta para 24,3%.',
+      es: 'El consumo per cápita de arroz y frijoles cayó a la mitad en 30 años mientras los ultraprocesados se triplicaron (+210%).',
+      en: 'Over three decades, per-capita household purchases of staple rice and beans fell by half while ultra-processed foods more than tripled (+210%).'
+    },
+    uk: {
+      pt: 'Apesar da alta, os ultraprocessados ainda representam ~20% das calorias no Brasil (NUPENS/USP), bem abaixo do Reino Unido (57%) e dos EUA (58%).',
+      es: 'Pese al aumento, los ultraprocesados representan el ~20% de las calorías en Brasil, frente al 57% en el Reino Unido.',
+      en: 'Despite rising fast, ultra-processed foods still account for ~20% of calories in Brazil (USP), far below the UK (57%) and US (58%).'
+    },
+    source: 'IBGE (Série Histórica POF 1987–2018), CONAB & NUPENS/USP (Classificação NOVA)',
+    labels: ['1987', '1996', '2003', '2009', '2018', '2024 (Est.)'],
+    datasets: [
+      { label: 'Alimentos Ultraprocessados e Prontos (Índice 1987=100)', data: [100, 134, 168, 215, 268, 310], borderColor: '#e11d48', borderWidth: 3 },
+      { label: 'Carnes, Aves e Ovos per Capita (Índice 1987=100)', data: [100, 114, 121, 132, 138, 142], borderColor: '#f59e0b', borderWidth: 2.5 },
+      { label: 'Arroz e Feijão Tradicionais per Capita (Índice 1987=100)', data: [100, 88, 79, 68, 56, 52], borderColor: '#10b981', borderWidth: 3 }
+    ]
+  },
+  {
+    id: 'c-bets-gambling',
+    pillar: 'consumption_life',
+    code: '16.3',
+    type: 'bar',
+    unit: 'R$ Bilhões / Ano (Transferências Brutas)',
+    title: {
+      pt: 'A Febre das Apostas Online ("Bets" — Nota Técnica Banco Central 2024): Pix para Bets vs. Loterias e Investimentos',
+      es: 'La Fiebre de las Apuestas Online ("Bets" — Banco Central 2024): Flujo Pix vs. Loterías Oficiales',
+      en: 'The Online Sports Betting Surge ("Bets" — Central Bank 2024 Study): Annual Pix Flows vs. Official Lotteries'
+    },
+    takeaway: {
+      pt: 'Estudo técnico do Banco Central em 2024 revelou que 24 milhões de brasileiros transferiram entre R$ 20 bilhões e R$ 30 bilhões por mês via Pix (~R$ 240 bi/ano brutos; perda líquida estimada em R$ 36 bi/ano) para plataformas de apostas ("Bets") — 10x toda a arrecadação das Loterias da Caixa (R$ 23,4 bi/ano).',
+      es: 'Según el Banco Central (2024), 24 millones de brasileños transfirieron ~R$ 20 mil millones al mes por Pix a casas de apuestas ("Bets").',
+      en: 'A 2024 Central Bank study found 24 million Brazilians transferred R$ 20–30B/month via Pix (~R$ 240B/year gross) to online betting sites — 10x official Caixa lotteries.'
+    },
+    uk: {
+      pt: 'No Reino Unido (UK Gambling Commission), a perda líquida dos apostadores (Gross Gambling Yield) é de £15,1 bilhões/ano (~0,6% do PIB britânico).',
+      es: 'En el Reino Unido, la pérdida neta anual de los apostadores (GGY) es de £15,1 mil millones (~0,6% del PIB).',
+      en: 'In the UK (Gambling Commission), total Gross Gambling Yield (net player losses) is £15.1B/year (~0.6% of UK GDP).'
+    },
+    source: 'Banco Central do Brasil (Nota Técnica sobre Mercado de Apostas Online — Set/2024) & Caixa Econômica Federal',
+    labels: ['Pix Bruto Enviado às "Bets" (Anualizado)', 'Perda Líquida Estimada das Famílias nas Bets', 'Loterias Oficiais da Caixa (Mega-Sena etc.)', 'Captação Líquida Anual do Tesouro Direto'],
+    datasets: [
+      { label: 'Volume Financeiro Anual (R$ Bilhões)', data: [240.0, 36.0, 23.4, 18.5], backgroundColor: ['#e11d48', '#f59e0b', '#0284c7', '#10b981'] }
+    ]
+  },
+  {
+    id: 'c-pets-vs-kids',
+    pillar: 'consumption_life',
+    code: '16.4',
+    type: 'bar',
+    unit: 'Milhões nos Domicílios Brasileiros',
+    title: {
+      pt: 'Mais Pets do que Crianças: População de Cães, Gatos e Animais de Estimação vs. Crianças de 0 a 14 Anos (Milhões)',
+      es: 'Más Mascotas que Niños: Población de Perros y Gatos vs. Niños de 0 a 14 Años en Brasil (Millones)',
+      en: 'More Pets than Children: Brazil’s Dog & Cat Population vs. Children Aged 0–14 (Millions)'
+    },
+    takeaway: {
+      pt: 'Com a queda da fecundidade e verticalização urbana, o Brasil tornou-se o 3º maior mercado pet do mundo: os domicílios brasileiros abrigam ~62,2 milhões de cães e ~30,8 milhões de gatos (93 milhões de cães e gatos), superando com folga toda a população de crianças de 0 a 14 anos (40,1 milhões no Censo 2022).',
+      es: 'Los hogares brasileños albergan 62,2 millones de perros y 30,8 millones de gatos (93M), más del doble que los niños de 0 a 14 años (40,1M).',
+      en: 'Brazilian homes now house 62.2 million dogs and 30.8 million cats (93M combined) — more than double the entire population of children aged 0–14 (40.1M).'
+    },
+    uk: {
+      pt: 'No Reino Unido (PFMA), existem ~12 milhões de cães e ~11 milhões de gatos (para 11,4 milhões de crianças de 0 a 14 anos).',
+      es: 'En el Reino Unido existen ~12 millones de perros y ~11 millones de gatos para 11,4 millones de niños.',
+      en: 'In the UK (PFMA), households keep ~12M dogs and ~11M cats alongside 11.4M children aged 0–14.'
+    },
+    source: 'IBGE (PNS / Censo Demográfico 2022) & Instituto Pet Brasil (IPB / Abinpet 2024)',
+    labels: ['Cães + Gatos Combinados', 'Cães Domésticos', 'Crianças de 0 a 14 Anos (IBGE)', 'Aves Canoras e Ornamentais', 'Gatos Domésticos'],
+    datasets: [
+      { label: 'População nos Domicílios Brasileiros (Milhões)', data: [93.0, 62.2, 40.1, 41.3, 30.8], backgroundColor: ['#9333ea', '#6366f1', '#10b981', '#0ea5e9', '#f59e0b'] }
+    ]
+  },
+  {
+    id: 'c-football-culture',
+    pillar: 'consumption_life',
+    code: '16.5',
+    type: 'bar',
+    unit: '% da População Brasileira',
+    title: {
+      pt: 'Paixão Nacional e Cultura: Maiores Torcidas de Futebol do Brasil (% da População — Datafolha / Atlas / IPEC)',
+      es: 'Pasión Nacional y Cultura: Mayores Hinchadas de Fútbol de Brasil (% de la Población — Datafolha / IPEC)',
+      en: 'National Passion & Culture: Largest Football Club Fanbases in Brazil (% of Population — Datafolha / IPEC)'
+    },
+    takeaway: {
+      pt: 'O Flamengo (20,1% da população, ~42 milhões de pessoas) e o Corinthians (14,5%, ~30 milhões) concentram mais de um terço dos torcedores brasileiros, seguidos por Palmeiras (7,7%), São Paulo (7,6%), Vasco (4,2%), Grêmio (4,0%), Cruzeiro (3,9%) e Atlético-MG (3,2%), enquanto 21% declaram não torcer para nenhum clube.',
+      es: 'Flamengo (20,1%) y Corinthians (14,5%) concentran más de un tercio de la afición brasileña, mientras el 21% no sigue ningún club.',
+      en: 'Flamengo (20.1% of Brazilians, ~42M fans) and Corinthians (14.5%, ~30M) command over a third of national support, while 21% support no club.'
+    },
+    uk: {
+      pt: 'A média de público pagante da Série A do Brasileirão em 2023/2024 (~26.500 torcedores/jogo) atingiu o maior patamar da história, ficando atrás apenas da Premier League (40k), Bundesliga (39k) e LaLiga/Serie A (30k).',
+      es: 'La asistencia media del Brasileirão (~26.500 espectadores/partido) alcanzó su récord histórico, solo detrás de las grandes ligas europeas.',
+      en: 'Average Brasileirão Série A attendance (~26,500 fans/match) hit an all-time high, trailing only the Premier League (40k), Bundesliga (39k), and Serie A/LaLiga (30k).'
+    },
+    source: 'Pesquisas Consolidadas Datafolha, IPEC e AtlasIntel (2023/2024)',
+    labels: ['Nenhum Clube', 'Flamengo', 'Corinthians', 'Palmeiras', 'São Paulo', 'Vasco', 'Grêmio', 'Cruzeiro', 'Atlético-MG', 'Bahia / Sport / Outros'],
+    datasets: [
+      { label: 'Proporção da População Brasileira (%)', data: [21.0, 20.1, 14.5, 7.7, 7.6, 4.2, 4.0, 3.9, 3.2, 13.8], backgroundColor: ['#94a3b8', '#e11d48', '#475569', '#16a34a', '#dc2626', '#0284c7', '#0ea5e9', '#2563eb', '#6366f1', '#f59e0b'] }
+    ]
   }
 ];
 
-// Ordenar as 60 séries automaticamente pelo código numérico (1.1 .. 12.5)
+// Ordenar as 80 séries automaticamente pelo código numérico (1.1 .. 16.5)
 window.BR_DATA.CHARTS.sort((a, b) => {
   const [pa, sa] = a.code.split('.').map(Number);
   const [pb, sb] = b.code.split('.').map(Number);
